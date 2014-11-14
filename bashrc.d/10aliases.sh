@@ -1,6 +1,6 @@
 # Convenience
 alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
-alias lsh="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
+alias lsv="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
 alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
