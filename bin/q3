@@ -1,0 +1,7 @@
+#!/bin/bash
+X :2 -ac -terminate &
+
+sleep 3
+
+#DISPLAY=:2 nice -20 quake3-excessiveplus -noforcemspd -noforcemparms -noforcemaccel
+DISPLAY=:2 nice -20 quake3-excessiveplus

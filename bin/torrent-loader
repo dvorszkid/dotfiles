@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo " * Loading the following torrents into rtorrent watch directory:"
+echo
+ls -1 ~/Downloads/*.torrent
+
+mv ~/Downloads/*.torrent ~/Torrent/watch-100/
+
+echo
+echo " * Done"

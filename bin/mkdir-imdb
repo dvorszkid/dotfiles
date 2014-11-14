@@ -1,0 +1,179 @@
+#!/usr/bin/php
+<?php
+
+class Show
+{
+	private $options = Array();
+	private $url = "http://imdbapi.poromenos.org/json/?";
+	private $episodes = Array();
+	private $directories = Array();
+	public function __construct($options)
+	{
+		$this->options = $options;
+	}
+
+	private function createUrl($title)
+	{
+		$title = urlencode($title);
+		if ($this->options['year'] != 0)
+			$title .= '&year=' . $this->options['year'];
+		return $this->url . 'name=' . $title;
+	}
+
+	public function fetchEpisodes()
+	{
+		$url = $this->createUrl($this->options['title']);
+		echo " * Fetching from " . $url . " ...\n";
+		$jsonData = file_get_contents($url);
+		$json = json_decode($jsonData);
+		foreach ($json->{$this->options['title']}->episodes as $i => $episode)
+		{
+			if ($episode->{'season'} == $this->options['season'])
+				$this->episodes[$episode->{'number'}] = $episode->{'name'};
+		}
+
+		foreach ($this->episodes as $number => $title)
+		{
+			$seasonFormatted = sprintf("%0". $this->options['seasonDigits'] ."d", $this->options['season']);
+			$episodeFormatted = sprintf("%0". $this->options['episodeDigits'] ."d", $number);
+			$this->directories[$number] = $this->options['customTitle'] . $this->options['prefix'] . $seasonFormatted .
+				$this->options['separator'] . $episodeFormatted . $this->options['postfix'] . $title;
+		}
+	}
+
+	public function printDirectories()
+	{
+		foreach ($this->directories as $dir)
+			print $dir . "\n";
+	}
+
+	public function createDirectories()
+	{
+		$directoryCount = 0;
+		foreach ($this->directories as $dir)
+		{
+			$directory = $this->options['rootDir'] . "/" . $dir;
+			if (file_exists($directory))
+				print " * Exists: " . $dir . "\n";
+			else
+			{
+				print " * Creating: " . $dir . "\n";
+				if (mkdir($directory, 0755))
+					$directoryCount++;
+			}
+		}
+		print $directoryCount . " directories have been created.\n";
+	}
+};
+
+class Program
+{
+	private static $optionPrefix = "--";
+	private $defaultOptions = Array();
+	private $options = Array();
+
+	public static function main($argc, $argv)
+	{
+		try
+		{
+			$program = new Program();
+			$program->parseOptions($argc, $argv);
+			if ($program->options['help'] || $argc == 1)
+			{
+				$program->printHelp();
+				exit(0);
+			}
+
+			if ($program->defaultOptions['customTitle'] == $program->options['customTitle'])
+				$program->options['customTitle'] = $program->options['title'];
+			$show = new Show($program->options);
+			$show->fetchEpisodes();
+			if ($program->options['printOnly'])
+				$show->printDirectories();
+			else
+				$show->createDirectories();
+		}
+		catch (Exception $e)
+		{
+			print "[ERROR] " . $e->getMessage();
+		}
+	}
+
+	private function __construct()
+	{
+		$opts['title']         = "Show title that exactly matches the title on IMDB.";
+		$opts['customTitle']   = "Show title that you wish to use in directory names (by default the IMDB title is used).";
+		$opts['season']        = 1;
+		$opts['year']          = 0;
+		$opts['prefix']        = " [";
+		$opts['separator']     = "x";
+		$opts['postfix']       = "] ";
+		$opts['seasonDigits']  = 1;
+		$opts['episodeDigits'] = 2;
+		$opts['rootDir']       = ".";
+		$opts['help']          = false;
+		$opts['printOnly']     = false;
+		$this->options = $opts;
+		$this->defaultOptions = $opts;
+	}
+
+	public function parseOptions($argc, $argv)
+	{
+		for ($i = 1; $i < $argc; $i++)
+		{
+			$optionName = $this->getOptionArrayKey($argv[$i]);
+			if ($this->optionExists($optionName))
+			{
+				if ($this->optionIsBoolean($optionName))
+					$this->setOption($optionName, true);
+				else
+				{
+					if (!array_key_exists($i+1, $argv))
+						throw new Exception("Missing value for option: " . $optionName);
+					$this->setOption($optionName, $argv[$i+1]);
+					$i++;
+				}
+			}
+			else
+				throw new Exception("Invalid option: " . $argv[$i]);
+		}
+	}
+
+	private function getOptionArrayKey($option)
+	{
+		if (substr($option, 0, strlen(self::$optionPrefix)) != self::$optionPrefix)
+			return null;
+
+		return substr($option, strlen(self::$optionPrefix));
+	}
+
+	private function optionExists($option)
+	{
+		return array_key_exists($option, $this->options);
+	}
+	private function optionIsBoolean($option)
+	{
+		return (gettype($this->options[$option]) == 'boolean');
+	}
+
+	private function setOption($name, $value)
+	{
+		$this->options[$name] = $value;
+	}
+
+	public function printHelp()
+	{
+		print "Available options:\n";
+		foreach ($this->defaultOptions as $option => $value)
+		{
+			if ($this->optionIsBoolean($option))
+				print self::$optionPrefix . $option . "\n";
+			else
+				print self::$optionPrefix . $option . " (default: \"". $value ."\")\n";
+		}
+		print "\nThanks to http://imdbapi.poromenos.org/\n";
+	}
+};
+
+Program::main($argc, $argv);
+?>

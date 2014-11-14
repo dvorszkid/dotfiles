@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ls -1 > ./.kiirva.txt
+cat ./.kiirva.txt
+echo Done.

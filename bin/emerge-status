@@ -1,0 +1,48 @@
+#!/bin/bash
+EMERGE_LOG="/var/log/emerge.log"
+#PORTAGE_TMPDIR="/var/tmp"
+
+function get_pkg_percent() {
+    PKG_NAME=$(tail -n 50 $EMERGE_LOG | grep Compiling | \
+   sed "s/\(.*\)Compiling\/Merging \(.*\)::.*/\2/" | \
+   sed "s/(\([a-zA-Z].*\)\/\(.*\)/\1\/\2/" | \
+   sed "s/\(.*\)\/\(.*\)/\2/")
+    PKG_TOTAL=$(find ${PORTAGE_TMPDIR}/${PKG_NAME} -iname "*.c*" | wc -l)
+    PKG_PROGRESS=$(find ${PORTAGE_TMPDIR}/${PKG_NAME} -iname "*.o*" | wc -l)
+    ((${PKG_TOTAL} != 0)) && PKG_PERCENT=$(echo $(bc -l <<< ${PKG_PROGRESS}/${PKG_TOTAL}*100) / 1 | bc)
+    ((${PKG_PERCENT} > 100)) && PKG_PERCENT="100"
+    ((${PKG_NAME} == 0)) && PKG_NAME="none" && PKG_PERCENT="0"
+} 2>/dev/null
+
+function print_pkg_status() {
+    if [[ -d $PORTAGE_TMPDIR ]] && [[ -r $PORTAGE_TMPDIR ]]; then
+        get_pkg_percent
+        echo $PKG_NAME
+if [ $PKG_NAME != '' ]; then
+echo "${PKG_PERCENT} % (${PKG_NAME})"
+fi
+fi
+} 2>/dev/null
+
+function get_total_percent() {
+TOTAL_DONE="$(tail -n 50 ${EMERGE_LOG} |\
+   tac |\
+   grep -v "Starting retry" | \
+   grep -iE '([0-9]* of [0-9]*)' -o -m 1)"
+
+#TOTAL_PERCENT="$(echo $PKG_TOTAL | sed -e 's/\(.*\) of \(.*\)/\ \22/' | awk '{print int(100*($1/$2))}')"
+TOTAL_PERCENT="$(echo $TOTAL_DONE | awk '{print int(100*($1/$3))}')"
+} 2>/dev/null
+
+function print_total_status() {
+get_total_percent
+echo "Emerge: ${TOTAL_PERCENT}% (${TOTAL_DONE})"
+} 2>/dev/null
+
+while getopts "ct" OPTIONS; do
+case $OPTIONS in
+c ) print_pkg_status;;
+t ) print_total_status;;
+* ) exit 1;;
+esac
+done

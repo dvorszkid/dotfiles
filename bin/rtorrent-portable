@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rtorrent -n -o import=~/Torrent/rtorrent.rc
