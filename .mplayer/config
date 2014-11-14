@@ -1,0 +1,41 @@
+# Global options
+font='DejaVu Sans'
+subcp=latin2
+subfont-text-scale=3.5
+ao=alsa
+vo=xv
+framedrop=0
+heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
+
+[expanded]
+profile-desc="Expands video window to screen aspect ratio (16:10)"
+vf=expand=:::::16/10
+
+[expanded43]
+profile-desc="Expands video window to screen aspect ratio (4:3)"
+vf=expand=:::::4/3
+
+[vdpau]
+profile-desc="Uses nVidia VDPAU for decoding"
+cache=32768
+vo=vdpau
+vc=ffh264vdpau
+
+[low]
+profile-desc="Lower quality but faster HD decoding"
+lavdopts=fast=1:skiploopfilter=all
+
+#[tv]
+#profile-desc="Watch TV (4:3)"
+#title="mplayertv"
+#tv=driver=v4l2:freq=567.3
+#vf=pp=ci,screenshot
+#aspect=4:3
+#xy=0.6
+
+#[widetv]
+#profile-desc="Watch TV (16:9)"
+#profile=tv
+#title="mplayerwidetv"
+#aspect=16:9
+#xy=0.5

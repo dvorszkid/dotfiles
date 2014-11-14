@@ -1,0 +1,43 @@
+[user]
+	email = dvorszkid@users.noreply.github.com
+	name = David Dvorszki
+[alias]
+	graph = log --graph --oneline --decorate
+	k = !gitk --date-order
+	su = submodule update --init --recursive
+	st = status
+	cam = commit -a -m
+	b = branch
+	ignored = !git ls-files -v | grep "^[a-z]"
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
+[core]
+	editor = mcedit
+	filemode = false
+	autocrlf = input
+[branch]
+	autosetuprebase = always
+[push]
+	default = simple
+[pull]
+	rebase = preserve
+[credential]
+	helper = store
+[color]
+	ui = always
+
+[diff]
+	tool = bc4
+[difftool]
+	prompt = false
+[difftool "bc4"]
+	cmd = /opt/bin/bcompare \"$LOCAL\" \"$REMOTE\"
+
+[merge]
+	tool = bc4
+[mergetool]
+	prompt = false
+	keepBackup = false
+	trustExitCode = true
+[mergetool "bc4"]
+	cmd = /opt/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
