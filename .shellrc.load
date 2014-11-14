@@ -3,10 +3,11 @@
 
 ####
 
-
 # Git repository
-DOTFILES=$HOME"/.dotfiles"
-
+if [ -z "$DOTFILES" ]
+then
+	DOTFILES=$HOME"/.dotfiles"
+fi
 
 # Load bashrc.d files
 for sh in "$DOTFILES/bashrc.d/"* ; do
