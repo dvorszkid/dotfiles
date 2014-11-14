@@ -1,0 +1,39 @@
+# misc
+startup_message off
+altscreen on
+vbell off
+defutf8 on
+defnonblock on
+shell bash
+
+# scrollback
+defscrollback 10000
+
+# terminal title
+termcapinfo xterm* ti@:te@
+defhstatus "screen ^E (^Et) | $USER@^EH"
+hardstatus off
+
+# status line at the bottom
+caption always '%{= kG}[ %{R}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c:%s %{g}]'
+
+# tab switch alternatives
+# alt left right
+#bindkey ^[[1;3D prev
+#bindkey ^[[1;3C next
+# ctrl left right
+#bindkey ^[[1;5D prev
+#bindkey ^[[1;5C next
+# alt , .
+#bindkey ^[, prev
+#bindkey ^[. next
+# meta left right
+bindkey ^[[1;1D prev
+bindkey ^[[1;1C next
+
+# common key bindings
+bindkey ^a^t screen
+bindkey ^a^r title
+bindkey ^a^w kill
+
+# default tabs
