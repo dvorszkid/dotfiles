@@ -1,6 +1,3 @@
-[user]
-	email = dvorszkid@users.noreply.github.com
-	name = David Dvorszki
 [alias]
 	graph = log --graph --oneline --decorate
 	k = !gitk --date-order
