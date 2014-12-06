@@ -129,7 +129,7 @@ function prompt_command() {
   # misc: [cmd#:hist#]
   #PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
   # path: [user@host:path]
-  PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c3\w$c1]$c9"
+  PS1="$PS1$c0\u@\h$c1:$c3\w$c9"
   #PS1="$PS1\n"
   
   # date: [HH:MM:SS]

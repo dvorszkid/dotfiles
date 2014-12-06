@@ -1,3 +1,4 @@
 #!/bin/bash
 
-tmux attach-session -d -t home || tmux new-session -s home
+tmux -2u attach-session -d -t home || tmux new-session -s home
+
