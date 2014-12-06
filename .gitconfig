@@ -9,7 +9,7 @@
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
 [core]
-	editor = mcedit
+	editor = vim
 	filemode = false
 	autocrlf = input
 [branch]
@@ -29,6 +29,8 @@
 	prompt = false
 [difftool "bc4"]
 	cmd = /opt/bin/bcompare \"$LOCAL\" \"$REMOTE\"
+[difftool "vimdiff"]
+	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 
 [merge]
 	tool = bc4

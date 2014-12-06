@@ -120,6 +120,9 @@ set laststatus=2
 " Have modified buffers in the background
 set hidden
 
+" trim whitespaces
+autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
+
 " Buffer switching
 noremap <C-h> :bprevious<CR>
 noremap <C-l> :bnext<CR>
