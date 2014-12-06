@@ -1,3 +1,32 @@
+*background: #0C0C0C
+*foreground: #EEEEEC
+! Default
+! 0: black
+*color0: #1C1C1C
+*color8: #333333
+! 1: red
+*color1: #C14242
+*color9: #EF2929
+! 2: green
+*color2: #6AA037
+*color10: #9DCF70
+! 3: yellow
+*color3: #CFAB2F
+*color11: #FCDA4F
+! 4: blue
+*color4: #2D578A
+*color12: #729FCF
+! 5: magenta
+*color5: #A85EB4
+*color13: #AD7FA8
+! 6: cyan
+*color6: #2F8D8F
+*color14: #34E2E2
+! 7: white
+*color7: #D3D7CF
+*color15: #EEEEEC
+
+
 xterm*VT100.geometry:	140x40
 xterm*faceName:		DejaVu Sans Mono:style=Regular:size=9
 !xterm*font:		-*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
