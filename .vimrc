@@ -18,12 +18,17 @@ Plugin 'gmarik/Vundle.vim'
 "
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
 Plugin 'bling/vim-airline'
 Plugin 'jaxbot/semantic-highlight.vim'
 Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'bbchung/clighter'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 " 	Plugin 'L9'
@@ -64,7 +69,8 @@ filetype plugin indent on    " required
 let g:unite_prompt='» '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nnoremap <C-p> :Unite file_mru file_rec/async -start-insert<cr>
+nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
+nnoremap <C-P> :Unite file_mru -start-insert<cr>
 if executable('ag')
 	let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 endif
@@ -75,12 +81,36 @@ nnoremap <space>s :Unite -quick-match buffer<cr>
 
 " Semantic highlight
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9]
-nnoremap <Leader>s :SemanticHighlightToggle<cr>
+nnoremap <Leader>S :SemanticHighlightToggle<cr>
 
 " AirLine
 let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+
+" EasyMotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+" YouCompleteMe
+let g:ycm_extra_conf_globlist = ['~/Projects/*','!~/*']
+nnoremap <leader>g :YcmCompleter GoTo<CR>
+
+" Clighter
+let g:clighter_libclang_file = '/usr/lib64/libclang.so'
+let g:clighter_autostart = 1
+let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
 
 "
 " Put your non-Plugin stuff after this line
@@ -99,20 +129,22 @@ set incsearch
 
 " line numbers
 set number
-set relativenumber
+"set relativenumber
 set cursorline
 
 " show matching parens
 set showmatch
 
 " dark color scheme
+syntax on
 set background=dark
 colorscheme molokai
-let g:molokai_original = 1
+"let g:molokai_original = 1
 let g:rehash256 = 1
 
-" completion
-set wildmenu
+" Per project vimrc
+set exrc            " enable per-directory .vimrc files
+set secure          " disable unsafe commands in local .vimrc files
 
 " Status line
 set laststatus=2
@@ -120,7 +152,7 @@ set laststatus=2
 " Have modified buffers in the background
 set hidden
 
-" trim whitespaces
+" Trim whitespaces
 autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Buffer switching
@@ -128,7 +160,6 @@ noremap <C-h> :bprevious<CR>
 noremap <C-l> :bnext<CR>
 inoremap <C-h> <Esc>:bprevious<CR>
 inoremap <C-l> <Esc>:bnext<CR>
-
 
 " Remap space to clear highlight
 nmap <SPACE> <SPACE>:noh<CR>
