@@ -18,6 +18,9 @@ Plugin 'gmarik/Vundle.vim'
 "
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-dispatch'
+"Plugin 'tpope/vim-commentary'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'gregsexton/gitv'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
@@ -25,10 +28,14 @@ Plugin 'Shougo/neomru.vim'
 Plugin 'bling/vim-airline'
 Plugin 'jaxbot/semantic-highlight.vim'
 Plugin 'tmux-plugins/vim-tmux'
-Plugin 'tomtom/tcomment_vim'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'bbchung/clighter'
+Plugin 'Kris2k/A.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 " 	Plugin 'L9'
@@ -77,7 +84,7 @@ endif
 nnoremap <space>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
-nnoremap <space>s :Unite -quick-match buffer<cr>
+nnoremap <space>b :Unite -quick-match buffer<cr>
 
 " Semantic highlight
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9]
@@ -112,6 +119,18 @@ let g:clighter_libclang_file = '/usr/lib64/libclang.so'
 let g:clighter_autostart = 1
 let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
 
+" GUndo
+nnoremap \u :GundoToggle<CR>
+
+" A.vim
+nnoremap <F4> :A<CR>
+
+" UltiSnip
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-y>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 "
 " Put your non-Plugin stuff after this line
 "
@@ -121,16 +140,30 @@ set autoindent smartindent
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 set smarttab
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
 " searching
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
+set ignorecase	" ignore case when searching
+set smartcase	" ignore case if search pattern is all lowercase, case-sensitive otherwise
+set hlsearch	" highlight search terms
+set incsearch	" show search matches as you type
 
 " line numbers
 set number
-"set relativenumber
+" set relativenumber
 set cursorline
+
+set wildmenu	" for better completion
+set ch=1		" command line height
+set mouse=a		" enable mouse scrolling
+
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many muchos levels of undo
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set title                " change the terminal's title
+set visualbell           " don't beep
+set noerrorbells         " don't beep
 
 " show matching parens
 set showmatch
@@ -156,10 +189,14 @@ set hidden
 autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Buffer switching
-noremap <C-h> :bprevious<CR>
-noremap <C-l> :bnext<CR>
-inoremap <C-h> <Esc>:bprevious<CR>
-inoremap <C-l> <Esc>:bnext<CR>
+" noremap <C-[> :bprevious<CR>
+" noremap <C-]> :bnext<CR>
+" inoremap <C-[> <Esc>:bprevious<CR>
+" inoremap <C-]> <Esc>:bnext<CR>
+
+" More natural line positioning on wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " Remap space to clear highlight
 nmap <SPACE> <SPACE>:noh<CR>
@@ -168,3 +205,21 @@ nmap <SPACE> <SPACE>:noh<CR>
 " This replicates the idea of closing a tab
 nmap <C-w>w :bp <BAR> bd #<CR>
 
+" Edit/Reload the vimrc file
+nmap <silent> <Leader>ve :e $MYVIMRC<CR>
+nmap <silent> <Leader>vr :so $MYVIMRC<CR>
+
+" Shorter commands
+nnoremap ; :
+
+" Build solution
+map <F7> :wa<CR>:Make -j8<CR>
+
+" Save as root
+cmap w!! w !sudo tee % >/dev/null
+
+" If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
