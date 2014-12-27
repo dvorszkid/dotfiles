@@ -164,6 +164,7 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
+set noshowmode			 " hide default mode text
 
 " show matching parens
 set showmatch
@@ -217,6 +218,9 @@ map <F7> :wa<CR>:Make -j8<CR>
 
 " Save as root
 cmap w!! w !sudo tee % >/dev/null
+
+" Paste mode
+set pastetoggle=<F2>
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
 "map <up> <nop>
