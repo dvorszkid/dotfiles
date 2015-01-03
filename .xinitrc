@@ -1,3 +1,4 @@
 #!/bin/sh
 
-startfluxbox
+/etc/X11/Sessions/awesome
+

@@ -199,8 +199,11 @@ autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//
 nnoremap j gj
 nnoremap k gk
 
-" Remap space to clear highlight
-nmap <SPACE> <SPACE>:noh<CR>
+" Insert newlines without entering normal mode
+nmap <CR> o<Esc>
+
+" Clear highlight
+nmap <Space> <Space>:noh<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab

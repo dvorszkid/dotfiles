@@ -60,10 +60,18 @@
 ! bright_white
 *color15: #ffffff
 
+! ------------------------------------------------------------------------------
+! --- Xft settings
+!  
+Xft.dpi:		96
+Xft.antialias:	true
+Xft.rgba:		none
+Xft.autohint:	false
+Xft.hinting:	true
+Xft.hintstyle:	hintmedium
 
 ! ------------------------------------------------------------------------------
 ! --- XTerm
-! ------------------------------------------------------------------------------
 
 xterm.faceName:			DejaVu Sans Mono:style=Regular:size=8
 xterm.utf8:				2
@@ -83,6 +91,7 @@ xterm.toolBar:			false
 ! ------------------------------------------------------------------------------
 
 ! size and look
+! URxvt.termName:				screen-256color
 URxvt.geometry:				120x35
 URxvt.font:					xft:DejaVu Sans Mono:style=Regular:size=9:antialias=false,xft:DejaVu Sans Mono for Powerline:style=Bold:size=9:antialias=false
 
@@ -93,6 +102,7 @@ URxvt.scrollBar_floating:	true
 URxvt.scrollstyle:			plain
 URxvt.thickness:			1
 URxvt.scrollColor:			#333333
+URxvt.highlightColor:		#222222
 
 ! behavior
 URxvt.saveLines:			5000
