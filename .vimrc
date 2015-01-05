@@ -17,25 +17,7 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 "
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-dispatch'
-"Plugin 'tpope/vim-commentary'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'gregsexton/gitv'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neomru.vim'
-Plugin 'bling/vim-airline'
-Plugin 'jaxbot/semantic-highlight.vim'
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'bbchung/clighter'
-Plugin 'Kris2k/A.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+"	Plugin 'asdf/asdf'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 " 	Plugin 'L9'
@@ -53,6 +35,35 @@ Plugin 'honza/vim-snippets'
 " Avoid a name conflict with L9
 " 	Plugin 'user/L9', {'name': 'newL9'}
 "
+
+" For Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
+
+" Misc
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'mbbill/undotree'
+Plugin 'bling/vim-airline'
+
+" For file opening
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
+
+" Tmux
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'christoomey/vim-tmux-navigator'
+
+" General programming
+Plugin 'tomtom/tcomment_vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-dispatch'
+
+" C++ programming
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'bbchung/clighter'
+Plugin 'Kris2k/A.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -86,10 +97,6 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
 nnoremap <space>b :Unite -quick-match buffer<cr>
 
-" Semantic highlight
-let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9]
-nnoremap <Leader>S :SemanticHighlightToggle<cr>
-
 " AirLine
 let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
@@ -119,8 +126,8 @@ let g:clighter_libclang_file = '/usr/lib64/libclang.so'
 let g:clighter_autostart = 1
 let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
 
-" GUndo
-nnoremap \u :GundoToggle<CR>
+" UndoTree
+nnoremap \u :UndotreeToggle<CR>
 
 " A.vim
 nnoremap <F4> :A<CR>
@@ -164,17 +171,20 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep
-set noshowmode			 " hide default mode text
 
 " show matching parens
 set showmatch
+
+" save undo history
+set undodir=~/.vim/undohistory
+set undofile
 
 " dark color scheme
 syntax on
 set background=dark
 colorscheme molokai
 "let g:molokai_original = 1
-let g:rehash256 = 1
+" let g:rehash256 = 1
 
 " Per project vimrc
 set exrc            " enable per-directory .vimrc files
@@ -182,6 +192,7 @@ set secure          " disable unsafe commands in local .vimrc files
 
 " Status line
 set laststatus=2
+set noshowmode		" hide default mode text
 
 " Have modified buffers in the background
 set hidden
@@ -203,15 +214,11 @@ nnoremap k gk
 nmap <CR> o<Esc>
 
 " Clear highlight
-nmap <Space> <Space>:noh<CR>
+nmap <silent> <Space> <Space>:noh<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <C-w>w :bp <BAR> bd #<CR>
-
-" Edit/Reload the vimrc file
-nmap <silent> <Leader>ve :e $MYVIMRC<CR>
-nmap <silent> <Leader>vr :so $MYVIMRC<CR>
 
 " Shorter commands
 nnoremap ; :
