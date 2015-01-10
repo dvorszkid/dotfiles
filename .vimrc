@@ -44,6 +44,7 @@ Plugin 'gregsexton/gitv'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'mbbill/undotree'
 Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -98,7 +99,7 @@ nnoremap <space>y :Unite history/yank<cr>
 nnoremap <space>b :Unite -quick-match buffer<cr>
 
 " AirLine
-let g:airline_theme = 'murmur'
+let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -128,6 +129,10 @@ let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
 
 " UndoTree
 nnoremap \u :UndotreeToggle<CR>
+
+" Solarized
+" let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 
 " A.vim
 nnoremap <F4> :A<CR>
@@ -164,7 +169,7 @@ set cursorline
 set wildmenu	" for better completion
 set ch=1		" command line height
 set mouse=a		" enable mouse scrolling
-
+set t_Co=256	" colorful
 set so=7
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
@@ -183,9 +188,7 @@ set undofile
 " dark color scheme
 syntax on
 set background=dark
-colorscheme molokai
-"let g:molokai_original = 1
-" let g:rehash256 = 1
+colorscheme solarized
 
 " Per project vimrc
 set exrc            " enable per-directory .vimrc files
