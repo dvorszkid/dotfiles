@@ -54,6 +54,7 @@ Plugin 'Shougo/neomru.vim'
 " Tmux
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'edkolev/tmuxline.vim'
 
 " General programming
 Plugin 'tomtom/tcomment_vim'
