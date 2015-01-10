@@ -165,6 +165,7 @@ set wildmenu	" for better completion
 set ch=1		" command line height
 set mouse=a		" enable mouse scrolling
 
+set so=7
 set history=1000         " remember more commands and search history
 set undolevels=1000      " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
