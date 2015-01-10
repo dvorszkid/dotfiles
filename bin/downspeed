@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 RXB=0
 for rxbytes in /sys/class/net/*/statistics/rx_bytes ; do
   let RXB+=$(<$rxbytes)

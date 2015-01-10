@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 X :2 -ac -terminate &
 
 sleep 3

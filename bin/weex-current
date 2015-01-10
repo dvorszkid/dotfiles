@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Weex script to use working dir as a weex dir.
 # You will need a ./.weex/weexrc file that contains the configuration,

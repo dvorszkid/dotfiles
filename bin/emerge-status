@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 EMERGE_LOG="/var/log/emerge.log"
 #PORTAGE_TMPDIR="/var/tmp"
 

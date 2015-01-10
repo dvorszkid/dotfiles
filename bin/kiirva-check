@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ls -1 > ./.kiirva-test.txt
 diff ./.kiirva.txt ./.kiirva-test.txt -s | grep '>'

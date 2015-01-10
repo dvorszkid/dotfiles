@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # A tool to simulate ALT+NUMPAD ascii code entering functionality for numbers 0-9
 # created by d347h
 

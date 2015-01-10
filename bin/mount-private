@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SRC_PATH="/home/d347h/Dropbox/Private"
 DST_PATH="/home/d347h/Private"

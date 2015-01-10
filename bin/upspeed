@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 TXB=0
 for txbytes in /sys/class/net/*/statistics/tx_bytes ; do
   let TXB+=$(<$txbytes)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo " * Loading the following torrents into rtorrent watch directory:"
 echo

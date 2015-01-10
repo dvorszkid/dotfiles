@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # d347h's Directory Creator Script for series.
 
 DIR=$1
