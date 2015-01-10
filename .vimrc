@@ -62,7 +62,7 @@ Plugin 'tpope/vim-dispatch'
 
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'bbchung/clighter'
+" Plugin 'bbchung/clighter'
 Plugin 'Kris2k/A.vim'
 
 " All of your Plugins must be added before the following line
@@ -131,7 +131,7 @@ let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
 nnoremap \u :UndotreeToggle<CR>
 
 " Solarized
-" let g:solarized_termcolors=256
+let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
 " A.vim

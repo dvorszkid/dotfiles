@@ -22,6 +22,7 @@ bindkey '^R'      history-incremental-pattern-search-backward
 ##
 autoload -U colors
 colors          # colors
+eval `dircolors $HOME/.dotfiles/dircolors-solarized/dircolors.256dark`
 
 
 ##
@@ -107,6 +108,12 @@ if [ "$USER" = "root" ]; then
 fi;
 prompt="%B%{$fg[$usercolor]%}%n@%u%m%{$fg[blue]%}%u %B%~%b "
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
+
+
+##
+# Own bin directory
+##
+export PATH="$HOME/bin:$PATH"
 
 
 ##
