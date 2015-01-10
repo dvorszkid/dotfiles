@@ -23,6 +23,7 @@ bindkey '^R'      history-incremental-pattern-search-backward
 autoload -U colors
 colors          # colors
 eval `dircolors $HOME/.dotfiles/dircolors-solarized/dircolors.256dark`
+export MC_SKIN="$HOME/.mc/solarized.ini"
 
 
 ##
