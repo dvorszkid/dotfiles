@@ -58,8 +58,6 @@ zstyle ':completion:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=29=34"
 zstyle ':completion:*:*:killall:*' menu yes select
 zstyle ':completion:*:killall:*' force-list always
-# users=(d347h root)           # because I don't care about others
-zstyle ':completion:*' users $users
 
 # generic completion with --help
 compdef _gnu_generic gcc
@@ -101,7 +99,7 @@ precmd() {  # run before each prompt
 # Prompt
 ##
 setopt PROMPT_SUBST         # allow funky stuff in prompt
-usercolor="green"           # user is blue
+usercolor="green"           # user is green
 if [ "$USER" = "root" ]; then
     usercolor="red"         # root is red
 fi;
