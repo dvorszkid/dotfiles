@@ -22,8 +22,6 @@ bindkey '^R'      history-incremental-pattern-search-backward
 ##
 autoload -U colors
 colors          # colors
-eval `dircolors $HOME/.dotfiles/dircolors-solarized/dircolors.256dark`
-export MC_SKIN="$HOME/.mc/solarized.ini"
 
 
 ##
@@ -112,12 +110,6 @@ RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
 
 ##
-# Own bin directory
-##
-export PATH="$HOME/bin:$PATH"
-
-
-##
 # Open files
 ##
 autoload -U zsh-mime-setup
@@ -168,7 +160,13 @@ unsetopt ignore_eof             # do not exit on end-of-file
 unsetopt list_beep              # no bell on ambiguous completion
 unsetopt rm_star_silent         # ask for confirmation for `rm *' or `rm path/*'
 print -Pn "\e]0; %n@%M: %~\a"   # terminal title
-source ~/.alias                 # aliases
+
+
+##
+# Shared resources
+##
+source "$HOME/.alias"
+source "$HOME/.env"
 
 
 ##

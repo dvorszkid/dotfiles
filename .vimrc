@@ -63,7 +63,6 @@ Plugin 'tpope/vim-dispatch'
 
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'bbchung/clighter'
 Plugin 'Kris2k/A.vim'
 
 " All of your Plugins must be added before the following line
@@ -100,7 +99,7 @@ nnoremap <space>y :Unite history/yank<cr>
 nnoremap <space>b :Unite -quick-match buffer<cr>
 
 " AirLine
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -148,59 +147,69 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Put your non-Plugin stuff after this line
 "
 
-" indent and tab settings
+""
+" Indent and tab settings
+""
 set autoindent smartindent
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 set smarttab
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
 
-" searching
+""
+" Searching
+""
 set ignorecase	" ignore case when searching
 set smartcase	" ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch	" highlight search terms
 set incsearch	" show search matches as you type
 
-" line numbers
-set number
-" set relativenumber
-set cursorline
 
-set wildmenu	" for better completion
-set ch=1		" command line height
-set mouse=a		" enable mouse scrolling
-set t_Co=256	" colorful
-set so=7
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
+""
+" Misc
+""
+set backspace=indent,eol,start	" allow backspacing over everything in insert mode
+set number				" line numbers
+" set relativenumber	" relative line numbers
+set cursorline			" highlight cursor line
+set wildmenu			" for better completion
+set ch=1				" command line height
+set mouse=a				" enable mouse scrolling
+set so=7				" show more lines before and after cursor
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
+set title				" change the terminal's title
+set visualbell			" don't beep
+set noerrorbells		" don't beep
+set showmatch			" show matching parens
+set laststatus=2		" always show status line
+set noshowmode			" hide default mode text
+set hidden				" dave modified buffers in the background
 
-" show matching parens
-set showmatch
 
-" save undo history
+""
+" Undo and history
+""
+set history=1000		" remember more commands and search history
+set undolevels=1000		" use many muchos levels of undo
 set undodir=~/.vim/undohistory
 set undofile
 
-" dark color scheme
+
+""
+" Color scheme
+""
 syntax on
+set t_Co=256
 set background=dark
 colorscheme solarized
 
+
+""
 " Per project vimrc
+""
 set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
 
-" Status line
-set laststatus=2
-set noshowmode		" hide default mode text
 
-" Have modified buffers in the background
-set hidden
 
 " Trim whitespaces
 autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -216,7 +225,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Insert newlines without entering normal mode
-nmap <CR> o<Esc>
+nmap <CR> i<Esc>
 
 " Clear highlight
 nmap <silent> <Space> <Space>:noh<CR>
@@ -238,7 +247,8 @@ cmap w!! w !sudo tee % >/dev/null
 set pastetoggle=<F2>
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
