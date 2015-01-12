@@ -1,63 +1,40 @@
 ! ------------------------------------------------------------------------------
-! --- Solarized color scheme for the X Window System
-!
-! http://ethanschoonover.com/solarized
-
-! Common
-#define S_yellow #b58900
-#define S_orange #cb4b16
-#define S_red #dc322f
-#define S_magenta #d33682
-#define S_violet #6c71c4
-#define S_blue #268bd2
-#define S_cyan #2aa198
-#define S_green #859900
-
-! Dark
-#define S_base04 #101010
-#define S_base03 #002b36
-#define S_base02 #073642
-#define S_base01 #586e75
-#define S_base00 #657b83
-#define S_base0 #839496
-#define S_base1 #93a1a1
-#define S_base2 #eee8d5
-#define S_base3 #fdf6e3
-
-! Light
-! #define S_base03 #fdf6e3
-! #define S_base02 #eee8d5
-! #define S_base01 #93a1a1
-! #define S_base00 #839496
-! #define S_base0 #657b83
-! #define S_base1 #586e75
-! #define S_base2 #073642
-! #define S_base3 #002b36
-
-*background: S_base04
-*foreground: S_base0
-*fading: 40
-*fadeColor: S_base04
-*cursorColor: S_base1
-*pointerColorBackground: S_base01
-*pointerColorForeground: S_base1
-
-*color0: S_base02
-*color1: S_red
-*color2: S_green
-*color3: S_yellow
-*color4: S_blue
-*color5: S_magenta
-*color6: S_cyan
-*color7: S_base2
-*color8: S_base03
-*color9: S_orange
-*color10: S_base01
-*color11: S_base00
-*color12: S_base0
-*color13: S_violet
-*color14: S_base1
-*color15: S_base3
+! --- terminal colors
+!  
+*background: #151515
+*foreground: #888888
+! black
+*color0: #292929
+*color8: #292929
+! *color8: #525252
+! red
+*color1: #cf6a4c
+*color9: #cf6a4c
+! *color9: #ff9d80
+! green
+*color2: #99ad6a
+*color10:#99ad6a
+! *color10: #c3e6ad
+! yellow
+*color3: #fad07a
+*color11:#fad07a
+! *color11: #ffefbf
+! blue
+*color4: #8197bf
+*color12:#8197bf
+! *color12: #accaff
+! magenta
+*color5: #8787af
+*color13:#8787af
+! *color13: #c4c4ff
+! cyan
+*color6: #668799
+*color14:#668799
+! *color14: #80bfaf
+! white
+*color7: #888888
+*color15:#888888
+! *color15: #e8e8d3
 
 
 ! ------------------------------------------------------------------------------
@@ -70,9 +47,10 @@ Xft.autohint:	false
 Xft.hinting:	true
 Xft.hintstyle:	hintslight
 
+
 ! ------------------------------------------------------------------------------
 ! --- XTerm
-
+!
 xterm.faceName:			DejaVu Sans Mono:style=Regular:size=8
 xterm.utf8:				2
 xterm.dynamicColors:	true
@@ -86,14 +64,15 @@ xterm.jumpScroll:		true
 xterm.multiScroll:		true
 xterm.toolBar:			false
 
+
 ! ------------------------------------------------------------------------------
 ! --- URxvt
-! ------------------------------------------------------------------------------
+!
 
 ! size and look
-! URxvt.termName:				screen-256color
 URxvt.geometry:				120x35
 URxvt.font:					xft:DejaVu Sans Mono for Powerline:style=Book:size=9,xft:DejaVu Sans Mono:style=Regular:size=9
+URxvt.fading:				40
 
 ! scrollbar
 URxvt.scrollBar:			true
@@ -116,8 +95,9 @@ URxvt.perl-ext-common:		default,matcher
 URxvt.url-launcher:			/usr/bin/xdg-open
 URxvt.matcher.button:		1
 
-! xscreensaver ---------------------------------------------------------------
-
+! ------------------------------------------------------------------------------
+! --- xscreensaver
+!
 !font settings
 xscreensaver.Dialog.headingFont:        -*-fixed-bold-r-*-*-*-100-*-*-*-*-iso8859-1
 xscreensaver.Dialog.bodyFont:           -*-fixed-bold-r-*-*-*-100-*-*-*-*-iso8859-1
