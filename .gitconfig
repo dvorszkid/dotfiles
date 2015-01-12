@@ -28,7 +28,7 @@
 [difftool]
 	prompt = false
 [difftool "bc4"]
-	cmd = /opt/bin/bcompare \"$LOCAL\" \"$REMOTE\"
+	cmd = /usr/local/bin/bcompare \"$LOCAL\" \"$REMOTE\"
 [difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 
@@ -39,4 +39,4 @@
 	keepBackup = false
 	trustExitCode = true
 [mergetool "bc4"]
-	cmd = /opt/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	cmd = /usr/local/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"

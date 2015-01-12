@@ -68,7 +68,7 @@ Xft.antialias:	true
 Xft.rgba:		none
 Xft.autohint:	false
 Xft.hinting:	true
-Xft.hintstyle:	hintmedium
+Xft.hintstyle:	hintslight
 
 ! ------------------------------------------------------------------------------
 ! --- XTerm
@@ -93,7 +93,7 @@ xterm.toolBar:			false
 ! size and look
 ! URxvt.termName:				screen-256color
 URxvt.geometry:				120x35
-URxvt.font:					xft:DejaVu Sans Mono for Powerline:style=Book:size=9:antialias=false,xft:DejaVu Sans Mono:style=Regular:size=9:antialias=false
+URxvt.font:					xft:DejaVu Sans Mono for Powerline:style=Book:size=9,xft:DejaVu Sans Mono:style=Regular:size=9
 
 ! scrollbar
 URxvt.scrollBar:			true

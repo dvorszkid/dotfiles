@@ -1,3 +1,4 @@
 #!/bin/sh
 
-/tmp/tresout/linux/x86_64/debug/ExampleCLI --working-directory ~/.tresorit ~/.tresorit/startup.script
+/usr/local/bin/ExampleCLI --working-directory ~/.tresorit ~/.tresorit/tresoritrc
+
