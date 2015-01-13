@@ -60,10 +60,12 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-dispatch'
+Plugin 'Chiel92/vim-autoformat'
 
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
+Plugin 'vim-scripts/Conque-GDB'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -89,14 +91,17 @@ let g:unite_prompt='» '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
-nnoremap <C-P> :Unite file_mru -start-insert<cr>
+nnoremap <leader> <C-p> :Unite file_mru -start-insert<cr>
 if executable('ag')
-	let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+	"let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 endif
-nnoremap <space>/ :Unite grep:.<cr>
+nnoremap <silent> <leader>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
-nnoremap <space>y :Unite history/yank<cr>
-nnoremap <space>b :Unite -quick-match buffer<cr>
+nnoremap <silent> <leader>y :Unite history/yank<cr>
+nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
 " AirLine
 let g:airline_theme = 'murmur'
@@ -119,29 +124,30 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 " YouCompleteMe
-let g:ycm_extra_conf_globlist = ['~/Projects/*','!~/*']
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-
-" Clighter
-let g:clighter_libclang_file = '/usr/lib64/libclang.so'
-let g:clighter_autostart = 1
-let g:ClighterCompileArgs = '["-x", "c++", "-std=c++11", "-I."]'
+let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
+nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
 " UndoTree
-nnoremap \u :UndotreeToggle<CR>
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 " Solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
 " A.vim
-nnoremap <F4> :A<CR>
+nnoremap <silent> <F4> :A<CR>
+
+" vim-autoformat
+noremap <silent> <leader>f :Autoformat<CR>
 
 " UltiSnip
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-y>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" ConqueGDB
+let g:ConqueGdb_Leader = '<Leader><Leader>'
 
 "
 " Put your non-Plugin stuff after this line
@@ -210,7 +216,6 @@ set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
 
 
-
 " Trim whitespaces
 autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
 
@@ -225,20 +230,23 @@ nnoremap j gj
 nnoremap k gk
 
 " Insert newlines without entering normal mode
-nmap <CR> i<Esc>
+nmap <silent> <CR> i<Esc>
 
 " Clear highlight
 nmap <silent> <Space> <Space>:noh<CR>
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
-nmap <C-w>w :bp <BAR> bd #<CR>
+nmap <silent> <C-w>w :bp <BAR> bd #<CR>
+nmap <silent> <C-w>h :bp<CR>
+nmap <silent> <C-w>l :bn<CR>
 
 " Shorter commands
 nnoremap ; :
 
 " Build solution
-map <F7> :wa<CR>:Make -j8<CR>
+map <silent> <F7> :wa<CR>:Make -j8<CR>
+map <silent> <leader><F7> :wa<CR>:Make! -j8<CR>
 
 " Save as root
 cmap w!! w !sudo tee % >/dev/null

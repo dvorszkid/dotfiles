@@ -72,7 +72,7 @@ xterm.toolBar:			false
 ! size and look
 URxvt.geometry:				120x35
 URxvt.font:					xft:DejaVu Sans Mono for Powerline:style=Book:size=9,xft:DejaVu Sans Mono:style=Regular:size=9
-URxvt.fading:				40
+URxvt.fading:				20
 
 ! scrollbar
 URxvt.scrollBar:			true
