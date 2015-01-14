@@ -10,7 +10,7 @@
 	unignore = update-index --no-assume-unchanged
 [core]
 	editor = vim
-	filemode = false
+	filemode = true
 	autocrlf = input
 [branch]
 	autosetuprebase = always
