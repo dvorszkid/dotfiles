@@ -194,7 +194,7 @@ set cursorline			" highlight cursor line
 set wildmenu			" for better completion
 set ch=1				" command line height
 set mouse=a				" enable mouse scrolling
-set so=8				" show more lines before and after cursor
+set scrolloff=8			" show more lines before and after cursor
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title				" change the terminal's title
 set visualbell			" don't beep
@@ -271,6 +271,12 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Paste mode
 set pastetoggle=<F2>
+
+
+" Share X windows clipboard
+if has('unnamedplus')
+	set clipboard=unnamedplus
+endif
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
