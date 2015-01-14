@@ -203,6 +203,12 @@ set showmatch			" show matching parens
 set laststatus=2		" always show status line
 set noshowmode			" hide default mode text
 set hidden				" dave modified buffers in the background
+set autoread			" auto-reload modified files (with no local changes)
+set lazyredraw			" no redraws in macros
+set confirm				" dialog when :q, :w, :x, :wq fails
+set nostartofline		" don't move cursor when switching buffers/files
+set nobackup			" that's what git is for
+set ttyfast				" smoother changes
 
 
 ""
@@ -257,6 +263,18 @@ imap <silent> <F5> <Esc>:bp<CR>
 imap <silent> <F6> <Esc>:bn<CR>
 
 
+" Scroll slightly faster
+noremap <c-e> <c-e><c-e><c-e>
+noremap <c-y> <c-y><c-y><c-y>
+
+
+" Indent with tab, unindent with shift-tab
+nnoremap <tab> >>
+vnoremap <tab> >
+nnoremap <s-tab> <<
+vnoremap <s-tab> <
+
+
 " Shorter commands
 nnoremap ; :
 
@@ -284,4 +302,8 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+
+
+" Re-adjust windows on window resize
+autocmd VimResized * wincmd =
 
