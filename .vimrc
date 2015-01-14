@@ -104,42 +104,46 @@ let g:unite_source_history_yank_enable = 1
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
+
 " AirLine
 let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+
 " EasyMotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
 " Bi-directional find motion
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
+" `s{char}{char}{label}` (need one more keystroke, but on average, it may be more comfortable)
 nmap s <Plug>(easymotion-s2)
-
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
-
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
 
 " YouCompleteMe
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
 nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
+
 " UndoTree
-nnoremap <silent> <leader>u :UndotreeToggle<CR>
+nnoremap <silent> <F3> :UndotreeToggle<CR>
+
 
 " Solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
+
 " A.vim
 nnoremap <silent> <F4> :A<CR>
 
+
 " vim-autoformat
 noremap <silent> <leader>f :Autoformat<CR>
+
 
 " UltiSnip
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -147,10 +151,12 @@ let g:UltiSnipsExpandTrigger="<c-y>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+
 " ConqueGDB
 let g:ConqueGdb_Leader = '<Leader><Leader>'
 
-" vim-tresorit
+
+" VimTresorit
 nnoremap <silent> <leader>mh :ToggleMakeHost<CR>
 nnoremap <silent> <leader>mc :ToggleMakeCompiler<CR>
 nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
@@ -188,7 +194,7 @@ set cursorline			" highlight cursor line
 set wildmenu			" for better completion
 set ch=1				" command line height
 set mouse=a				" enable mouse scrolling
-set so=7				" show more lines before and after cursor
+set so=8				" show more lines before and after cursor
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title				" change the terminal's title
 set visualbell			" don't beep
@@ -227,39 +233,45 @@ set secure          " disable unsafe commands in local .vimrc files
 " Trim whitespaces
 autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-" Buffer switching
-" noremap <C-[> :bprevious<CR>
-" noremap <C-]> :bnext<CR>
-" inoremap <C-[> <Esc>:bprevious<CR>
-" inoremap <C-]> <Esc>:bnext<CR>
 
 " More natural line positioning on wrapped lines
 nnoremap j gj
 nnoremap k gk
 
-" Insert newlines without entering normal mode
-nmap <silent> <CR> i<Esc>
+
+" Insert whitespaces without entering insert mode
+nmap <silent> <leader>o o<Esc>
+nmap <silent> <leader>O O<Esc>
+nmap <silent> <leader><Space> i<Space><Esc>
+
 
 " Clear highlight
 nmap <silent> <Space> <Space>:noh<CR>
 
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <silent> <C-w>w :bp <BAR> bd #<CR>
-nmap <silent> <C-w>h :bp<CR>
-nmap <silent> <C-w>l :bn<CR>
+
+" Buffer switching
+nmap <silent> <leader><F5> :bp <BAR> bd #<CR>
+nmap <silent> <F5> :bp<CR>
+nmap <silent> <F6> :bn<CR>
+imap <silent> <F5> <Esc>:bp<CR>
+imap <silent> <F6> <Esc>:bn<CR>
+
 
 " Shorter commands
 nnoremap ; :
 
+
 " Build solution
 map <silent> <F7> :wa<CR>:Make -j8<CR>
+
 
 " Save as root
 cmap w!! w !sudo tee % >/dev/null
 
+
 " Paste mode
 set pastetoggle=<F2>
+
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
 map <up> <nop>
