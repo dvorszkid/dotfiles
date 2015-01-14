@@ -66,6 +66,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -148,6 +149,13 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ConqueGDB
 let g:ConqueGdb_Leader = '<Leader><Leader>'
+
+" vim-tresorit
+nnoremap <silent> <leader>mh :ToggleMakeHost<CR>
+nnoremap <silent> <leader>mc :ToggleMakeCompiler<CR>
+nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
+nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
+
 
 "
 " Put your non-Plugin stuff after this line
@@ -246,7 +254,6 @@ nnoremap ; :
 
 " Build solution
 map <silent> <F7> :wa<CR>:Make -j8<CR>
-map <silent> <leader><F7> :wa<CR>:Make! -j8<CR>
 
 " Save as root
 cmap w!! w !sudo tee % >/dev/null
