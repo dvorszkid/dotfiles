@@ -1,40 +1,39 @@
-! ------------------------------------------------------------------------------
-! --- terminal colors
-!  
-*background: #151515
-*foreground: #888888
+! special
+*.foreground:   #b4aea7
+*.background:   #151515
+*.cursorColor:  #d7d0c7
+
 ! black
-*color0: #292929
-*color8: #292929
-! *color8: #525252
+*.color0:       #101010
+*.color8:       #404040
+
 ! red
-*color1: #cf6a4c
-*color9: #cf6a4c
-! *color9: #ff9d80
+*.color1:       #e84f4f
+*.color9:       #d23d3d
+
 ! green
-*color2: #99ad6a
-*color10:#99ad6a
-! *color10: #c3e6ad
+*.color2:       #b8d68c
+*.color10:      #a0cf5d
+
 ! yellow
-*color3: #fad07a
-*color11:#fad07a
-! *color11: #ffefbf
+*.color3:       #e1aa5d
+*.color11:      #f39d21
+
 ! blue
-*color4: #8197bf
-*color12:#8197bf
-! *color12: #accaff
+*.color4:       #7dc1cf
+*.color12:      #4e9fb1
+
 ! magenta
-*color5: #8787af
-*color13:#8787af
-! *color13: #c4c4ff
+*.color5:       #9b64fb
+*.color13:      #8542ff
+
 ! cyan
-*color6: #668799
-*color14:#668799
-! *color14: #80bfaf
+*.color6:       #6d878d
+*.color14:      #42717b
+
 ! white
-*color7: #888888
-*color15:#888888
-! *color15: #e8e8d3
+*.color7:       #dddddd
+*.color15:      #dddddd
 
 
 ! ------------------------------------------------------------------------------
