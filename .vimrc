@@ -45,6 +45,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'mbbill/undotree'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'kien/tabman.vim'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -92,7 +93,7 @@ let g:unite_prompt='» '
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
-nnoremap <leader> <C-p> :Unite file_mru -start-insert<cr>
+nnoremap <leader>p :Unite file_mru -start-insert<cr>
 if executable('ag')
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
@@ -109,6 +110,8 @@ nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 let g:airline_theme = 'murmur'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
 
 
 " EasyMotion
@@ -129,7 +132,11 @@ nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
 
 " UndoTree
-nnoremap <silent> <F3> :UndotreeToggle<CR>
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
+
+
+" TabMan
+let g:tabman_toggle = '<F3>'
 
 
 " Solarized
