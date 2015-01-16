@@ -176,7 +176,7 @@ nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
 nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
 nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
 " Building the source
-let g:buildcmd = ":make -j5 "
+let g:buildcmd = ":Make -j5 "
 let g:buildbackgroundcmd = ":Make! -j5 "
 nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
