@@ -160,15 +160,30 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 " ConqueGDB
-let g:ConqueGdb_Leader = '<Leader><Leader>'
+let g:ConqueGdb_Leader = '<Leader>d'
+let g:ConqueGdb_Continue = '<F8>'
+let g:ConqueGdb_ToggleBreak = '<F9>'
+let g:ConqueGdb_Next = '<F10>'
 
 
+"
 " VimTresorit
+"
+" Makefile variables
 nnoremap <silent> <leader>mh :ToggleMakeHost<CR>
 nnoremap <silent> <leader>mc :ToggleMakeCompiler<CR>
 nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
 nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
-
+nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
+" Building the source
+let g:buildcmd = ":make -j5 "
+let g:buildbackgroundcmd = ":Make! -j5 "
+nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>ba :exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bfb :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bpb :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>bab :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 
 "
 " Put your non-Plugin stuff after this line
