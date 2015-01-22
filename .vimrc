@@ -195,6 +195,7 @@ nnoremap <silent> <leader>bab :exec g:buildbackgroundcmd . g:GetBuildAllParams(@
 set autoindent smartindent
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 set smarttab
+let g:leave_my_textwidth_alone = 1
 
 
 ""
