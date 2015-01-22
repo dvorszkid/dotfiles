@@ -292,9 +292,8 @@ noremap <c-y> <c-y><c-y><c-y>
 
 
 " Indent with tab, unindent with shift-tab
-nnoremap <tab> >>
+" (do not nmap them, they mess up cursor history jumps)
 vnoremap <tab> >
-nnoremap <s-tab> <<
 vnoremap <s-tab> <
 
 
