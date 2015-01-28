@@ -28,6 +28,7 @@ alias clamupdate="freshclam -v"
 # Make sudo use aliases
 ##
 alias sudo="sudo "
+alias justfucking="sudo "
 
 
 ##
