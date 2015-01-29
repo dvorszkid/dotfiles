@@ -41,11 +41,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
 
 " Misc
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mbbill/undotree'
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'mbbill/undotree'
 Plugin 'kien/tabman.vim'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-unimpaired'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
