@@ -325,10 +325,10 @@ endif
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+" map <up> <nop>
+" map <down> <nop>
+" map <left> <nop>
+" map <right> <nop>
 
 
 " Re-adjust windows on window resize
