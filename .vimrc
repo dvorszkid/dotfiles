@@ -49,6 +49,8 @@ Plugin 'kien/tabman.vim'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'godlygeek/tabular'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
