@@ -5,15 +5,17 @@
 # by typing ^v and then type the key or key combination you want to use.
 # "man zshzle" for the list of available actions
 bindkey -v
-bindkey '\e[1;5C' forward-word            # C-Right
-bindkey '\e[1;5D' backward-word           # C-Left
-bindkey '\e[2~'   overwrite-mode          # Insert
-bindkey '\e[3~'   delete-char             # Del
-bindkey '\e[5~'   history-search-backward # PgUp
-bindkey '\e[6~'   history-search-forward  # PgDn
-bindkey '^A'      beginning-of-line       # Home
-bindkey '^D'      delete-char             # Del
-bindkey '^E'      end-of-line             # End
+bindkey '\e[1;5C' forward-word                      # C-Right
+bindkey '\e[1;5D' backward-word                     # C-Left
+bindkey '\e[1~'   beginning-of-line                 # Home
+bindkey '\e[2~'   overwrite-mode                    # Insert
+bindkey '\e[3~'   delete-char                       # Del
+bindkey '\e[4~'   end-of-line                       # End
+bindkey '\e[5~'   history-beginning-search-backward # PgUp
+bindkey '\e[6~'   history-beginning-search-forward  # PgDn
+bindkey '^A'      beginning-of-line                 # Home
+bindkey '^D'      delete-char                       # Del
+bindkey '^E'      end-of-line                       # End
 bindkey '^R'      history-incremental-pattern-search-backward
 
 
