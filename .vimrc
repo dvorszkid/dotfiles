@@ -71,7 +71,6 @@ Plugin 'Chiel92/vim-autoformat'
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
-Plugin 'gilligan/vim-lldb'
 Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 
 " All of your Plugins must be added before the following line
@@ -132,8 +131,6 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
 
 
 " YouCompleteMe
