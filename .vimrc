@@ -45,6 +45,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " For Git
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
 Plugin 'gregsexton/gitv'
 
 " Misc
@@ -113,9 +114,8 @@ nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
 nnoremap <leader>p :Unite file_mru -start-insert<cr>
 if executable('ag')
 	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden'
 	let g:unite_source_grep_recursive_opt = ''
-	"let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 endif
 nnoremap <silent> <leader>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
@@ -170,6 +170,16 @@ let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
 
+" looks at the current line and the lines above and below it and aligns all the
+" equals signs; useful for when we have several lines of declarations
+nnoremap <Leader>a= :Tabularize /=<CR>
+vnoremap <Leader>a= :Tabularize /=<CR>
+nnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
+vnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
+nnoremap <Leader>a, :Tabularize /,/l0r1<CR>
+vnoremap <Leader>a, :Tabularize /,/l0r1<CR>
+
+
 "
 " ListToggle
 "
@@ -188,6 +198,7 @@ noremap <silent> <leader>f :Autoformat<CR>
 
 " UltiSnip
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"TODO: let g:UltiSnipsSnippetsDir = $HOME . '/dotfiles/vim/UltiSnips'
 let g:UltiSnipsExpandTrigger="<c-y>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -281,6 +292,9 @@ set nostartofline		" don't move cursor when switching buffers/files
 set nobackup			" that's what git is for
 set ttyfast				" smoother changes
 set diffopt+=vertical	" vertical diff
+set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR chars in list mode
+set nobackup			" no tilde backup files
+set noswapfile			" no .swp files
 
 
 ""
@@ -318,10 +332,6 @@ if has('unnamedplus')
 endif
 
 
-" Save as root
-cmap w!! w !sudo tee % >/dev/null
-
-
 " More natural line positioning on wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -336,7 +346,7 @@ nmap <silent> <Space> <Space>:noh<CR>
 
 
 " Closing buffers
-nnoremap <silent> <leader>w :bp <BAR> bd #<CR>
+nnoremap <silent> <leader>c :bp <BAR> bd #<CR>
 
 
 " Scroll slightly faster
@@ -350,7 +360,36 @@ vnoremap <tab> >
 vnoremap <s-tab> <
 
 
-" Shorter commands
+" With this map, we can select some text in visual mode and by invoking the map,
+" have the selection automatically filled in as the search text and the cursor
+" placed in the position for typing the replacement text. Also, this will ask
+" for confirmation before it replaces any instance of the search text in the
+" file.
+vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
+
+
+" <leader>v brings up .vimrc
+" <leader>V reloads it and makes all changes active (file has to be saved first)
+noremap <leader>v :e! $MYVIMRC<CR>
+noremap <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+
+" Save as root
+cmap w!! w !sudo tee % >/dev/null
+
+
+" Now we don't have to move our fingers so far when we want to scroll through
+" the command history; also, don't forget the q: command (see :h q: for more
+" info)
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+
+
+" In normal mode, we use : much more often than ; so lets swap them.
+" WARNING: this will cause any "ordinary" map command without the "nore" prefix
+" that uses ":" to fail. For instance, "map <f2> :w" would fail, since vim will
+" read ":w" as ";w" because of the below remappings. Use "noremap"s in such
+" situations and you'll be fine.
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
