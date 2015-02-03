@@ -295,6 +295,7 @@ set diffopt+=vertical	" vertical diff
 set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR chars in list mode
 set nobackup			" no tilde backup files
 set noswapfile			" no .swp files
+set foldlevelstart=99	" all folds open by default
 
 
 ""
