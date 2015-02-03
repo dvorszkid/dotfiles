@@ -4,18 +4,24 @@
 # Lookup in /etc/termcap or /etc/terminfo else, you can get the right keycode
 # by typing ^v and then type the key or key combination you want to use.
 # "man zshzle" for the list of available actions
+autoload zkbd
+[[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
+[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
+source  ~/.zkbd/$TERM-$VENDOR-$OSTYPE
+
 bindkey -v
+[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   history-beginning-search-backward
+[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" history-beginning-search-forward
+[[ -n "${key[Home]}"     ]]  && bindkey  "${key[Home]}"     beginning-of-line
+[[ -n "${key[End]}"      ]]  && bindkey  "${key[End]}"      end-of-line
+[[ -n "${key[Insert]}"   ]]  && bindkey  "${key[Insert]}"   overwrite-mode
+[[ -n "${key[Delete]}"   ]]  && bindkey  "${key[Delete]}"   delete-char
+[[ -n "${key[Up]}"       ]]  && bindkey  "${key[Up]}"       up-line-or-history
+[[ -n "${key[Down]}"     ]]  && bindkey  "${key[Down]}"     down-line-or-history
+[[ -n "${key[Left]}"     ]]  && bindkey  "${key[Left]}"     backward-char
+[[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
 bindkey '\e[1;5C' forward-word                      # C-Right
 bindkey '\e[1;5D' backward-word                     # C-Left
-bindkey '\e[1~'   beginning-of-line                 # Home
-bindkey '\e[2~'   overwrite-mode                    # Insert
-bindkey '\e[3~'   delete-char                       # Del
-bindkey '\e[4~'   end-of-line                       # End
-bindkey '\e[5~'   history-beginning-search-backward # PgUp
-bindkey '\e[6~'   history-beginning-search-forward  # PgDn
-bindkey '^A'      beginning-of-line                 # Home
-bindkey '^D'      delete-char                       # Del
-bindkey '^E'      end-of-line                       # End
 bindkey '^R'      history-incremental-pattern-search-backward
 
 
