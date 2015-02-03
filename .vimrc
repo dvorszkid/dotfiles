@@ -4,6 +4,13 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+
+"
+" Hostname for host specific configuration
+"
+let s:hostname = substitute(system('hostname'), '\n', '', '')
+
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -17,21 +24,21 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 "
 " plugin on GitHub repo
-"	Plugin 'asdf/asdf'
+" 	Plugin 'asdf/asdf'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 " 	Plugin 'L9'
-" 
+"
 " Git plugin not hosted on GitHub
 " 	Plugin 'git://git.wincent.com/command-t.git'
 "
 " git repos on your local machine (i.e. when working on your own plugin)
 " 	Plugin 'file:///home/gmarik/path/to/plugin'
-" 
+"
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 " 	Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" 
+"
 " Avoid a name conflict with L9
 " 	Plugin 'user/L9', {'name': 'newL9'}
 "
@@ -51,6 +58,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'godlygeek/tabular'
+Plugin 'Valloric/ListToggle'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -67,12 +75,16 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-dispatch'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'Valloric/YouCompleteMe'
 
 " C++ programming
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
-Plugin 'https://bitbucket.org/tresorit/vim-lldb.git'
-Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
+
+" Work related
+if (s:hostname =~ "bp1-dsklin")
+	Plugin 'https://bitbucket.org/tresorit/vim-lldb.git'
+	Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
+endif
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -156,6 +168,14 @@ let g:tabman_toggle = '<F3>'
 " Solarized
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
+
+
+"
+" ListToggle
+"
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 15
 
 
 " A.vim
