@@ -71,6 +71,7 @@ Plugin 'Chiel92/vim-autoformat'
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
+Plugin 'https://bitbucket.org/tresorit/vim-lldb.git'
 Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 
 " All of your Plugins must be added before the following line
@@ -120,17 +121,17 @@ let g:airline#extensions#tabline#show_tabs = 1
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" Bi-directional find motion
-" `s{char}{char}{label}` (need one more keystroke, but on average, it may be more comfortable)
+let g:EasyMotion_smartcase = 1
 nmap s <Plug>(easymotion-s2)
 omap t <Plug>(easymotion-t)
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
+omap / <Plug>(easymotion-tn)
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" Disabled searching
+" map / <Plug>(easymotion-sn)
+" map n <Plug>(easymotion-next)
+" map N <Plug>(easymotion-prev)
 
 
 " YouCompleteMe
@@ -172,11 +173,25 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
-" ConqueGDB
-let g:ConqueGdb_Leader = '<Leader>d'
-let g:ConqueGdb_Continue = '<F8>'
-let g:ConqueGdb_ToggleBreak = '<F9>'
-let g:ConqueGdb_Next = '<F10>'
+"
+" LLDB
+"
+" Common commands
+nnoremap <silent> <F8> :Lcontinue<CR>
+nnoremap <silent> <F9> :Lbreakpoint<CR>
+nnoremap <silent> <F10> :Lnext<CR>
+nnoremap <silent> <F11> :Lstep<CR>
+nnoremap <silent> <leader><F11> :Lfinish<CR>
+" Start debugging
+function! g:StartDebug(program, args)
+	exec "Ltarget " . a:program
+	exec "Lbreakpoint set --name main"
+	exec "Lhide disassembly"
+	exec "Lhide registers"
+	exec "Lstart " . a:args
+endfunction
+nnoremap <F5> :call StartDebug(g:GetTresoritCLIPath(), "")<Left><Left>
+nnoremap <leader><F5> :call StartDebug(g:GetTresoritTestPath(), "-t " . expand("<cword>" . ""))<Left><Left><Left>
 
 
 "
