@@ -71,6 +71,7 @@ Plugin 'Chiel92/vim-autoformat'
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
+Plugin 'gilligan/vim-lldb'
 Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 
 " All of your Plugins must be added before the following line
@@ -191,14 +192,14 @@ nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
 nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
 nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
 " Building the source
-let s:buildcmd = ":Make -j5 "
-let s:buildbackgroundcmd = ":Make! -j5 "
-nnoremap <silent> <leader>bf :exec s:buildcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bp :exec s:buildcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>ba :exec s:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <leader>bfb :exec s:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bpb :exec s:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>bab :exec s:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
+let g:buildcmd = ":Make -j5 "
+let g:buildbackgroundcmd = ":Make! -j5 "
+nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>ba :exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bfb :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bpb :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>bab :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 
 "
 " Put your non-Plugin stuff after this line
