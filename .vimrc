@@ -71,7 +71,6 @@ Plugin 'Chiel92/vim-autoformat'
 " C++ programming
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Kris2k/A.vim'
-Plugin 'vim-scripts/Conque-GDB'
 Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 
 " All of your Plugins must be added before the following line
@@ -124,15 +123,26 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 " Bi-directional find motion
 " `s{char}{char}{label}` (need one more keystroke, but on average, it may be more comfortable)
 nmap s <Plug>(easymotion-s2)
+omap t <Plug>(easymotion-t)
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 
 
 " YouCompleteMe
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_error_symbol = 'E>'
+let g:ycm_warning_symbol = 'W>'
+let g:ycm_complete_in_comments = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
 
@@ -181,14 +191,14 @@ nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
 nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
 nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
 " Building the source
-let g:buildcmd = ":Make -j5 "
-let g:buildbackgroundcmd = ":Make! -j5 "
-nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>ba :exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <leader>bfb :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bpb :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>bab :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
+let s:buildcmd = ":Make -j5 "
+let s:buildbackgroundcmd = ":Make! -j5 "
+nnoremap <silent> <leader>bf :exec s:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bp :exec s:buildcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>ba :exec s:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bfb :exec s:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bpb :exec s:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>bab :exec s:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 
 "
 " Put your non-Plugin stuff after this line
@@ -237,6 +247,7 @@ set confirm				" dialog when :q, :w, :x, :wq fails
 set nostartofline		" don't move cursor when switching buffers/files
 set nobackup			" that's what git is for
 set ttyfast				" smoother changes
+set diffopt+=vertical	" vertical diff
 
 
 ""
@@ -264,8 +275,18 @@ set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
 
 
-" Trim whitespaces
-autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
+" Paste mode
+set pastetoggle=<F2>
+
+
+" Share X windows clipboard
+if has('unnamedplus')
+	set clipboard=unnamedplus
+endif
+
+
+" Save as root
+cmap w!! w !sudo tee % >/dev/null
 
 
 " More natural line positioning on wrapped lines
@@ -274,8 +295,6 @@ nnoremap k gk
 
 
 " Insert whitespaces without entering insert mode
-nmap <silent> <leader>o o<Esc>
-nmap <silent> <leader>O O<Esc>
 nmap <silent> <leader><Space> i<Space><Esc>
 
 
@@ -283,12 +302,8 @@ nmap <silent> <leader><Space> i<Space><Esc>
 nmap <silent> <Space> <Space>:noh<CR>
 
 
-" Buffer switching
-nmap <silent> <leader><F5> :bp <BAR> bd #<CR>
-nmap <silent> <F5> :bp<CR>
-nmap <silent> <F6> :bn<CR>
-imap <silent> <F5> <Esc>:bp<CR>
-imap <silent> <F6> <Esc>:bn<CR>
+" Closing buffers
+nnoremap <silent> <leader>w :bp <BAR> bd #<CR>
 
 
 " Scroll slightly faster
@@ -304,24 +319,9 @@ vnoremap <s-tab> <
 
 " Shorter commands
 nnoremap ; :
-
-
-" Build solution
-map <silent> <F7> :wa<CR>:Make -j8<CR>
-
-
-" Save as root
-cmap w!! w !sudo tee % >/dev/null
-
-
-" Paste mode
-set pastetoggle=<F2>
-
-
-" Share X windows clipboard
-if has('unnamedplus')
-	set clipboard=unnamedplus
-endif
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
@@ -331,6 +331,19 @@ endif
 " map <right> <nop>
 
 
+" Trim whitespaces
+autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+
 " Re-adjust windows on window resize
 autocmd VimResized * wincmd =
+
+
+" Search and Replace
+if executable('ag')
+	function! s:ReplaceInFiles(search, replace)
+		exec "!ag -l " . a:search . " | xargs sed -i 's@" . a:search . "@" . a:replace . "@g'"
+	endfunction
+	command! -nargs=+ ReplaceInFiles call s:ReplaceInFiles(<f-args>)
+endif
 
