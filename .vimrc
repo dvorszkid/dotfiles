@@ -108,17 +108,18 @@ filetype plugin indent on    " required
 
 " Unite
 let g:unite_prompt='» '
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_grep_max_candidates = 1000
+if executable('ag')
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ''Resources/'' --ignore ''out/'' --ignore ''work/'''
+	let g:unite_source_grep_recursive_opt = ''
+endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
 nnoremap <leader>p :Unite file_mru -start-insert<cr>
-if executable('ag')
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden'
-	let g:unite_source_grep_recursive_opt = ''
-endif
 nnoremap <silent> <leader>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable = 1
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
@@ -314,6 +315,7 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme solarized
+let g:load_doxygen_syntax=1
 
 
 ""
@@ -348,6 +350,7 @@ nnoremap <silent> <Space> <Space>:noh<CR>
 
 " Closing buffers
 nnoremap <silent> <leader>c :bp <BAR> bd #<CR>
+nnoremap <silent> <leader>C :1,1000bd<CR>
 
 
 " Scroll slightly faster
@@ -355,10 +358,9 @@ noremap <c-e> <c-e><c-e><c-e>
 noremap <c-y> <c-y><c-y><c-y>
 
 
-" Indent with tab, unindent with shift-tab
-" (do not nmap them, they mess up cursor history jumps)
-vnoremap <tab> >
-vnoremap <s-tab> <
+" Keep visual selection after indenting
+vnoremap > >gv
+vnoremap < <gv
 
 
 " With this map, we can select some text in visual mode and by invoking the map,
