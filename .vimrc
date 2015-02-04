@@ -240,9 +240,9 @@ let g:buildbackgroundcmd = ":Make! -j5 "
 nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> <leader>ba :exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <leader>bfb :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bpb :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>bab :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bbf :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bbp :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>bba :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 
 "
 " Put your non-Plugin stuff after this line
@@ -339,11 +339,11 @@ nnoremap k gk
 
 
 " Insert whitespaces without entering insert mode
-nmap <silent> <leader><Space> i<Space><Esc>
+nnoremap <silent> <leader><Space> i<Space><Esc>
 
 
 " Clear highlight
-nmap <silent> <Space> <Space>:noh<CR>
+nnoremap <silent> <Space> <Space>:noh<CR>
 
 
 " Closing buffers
