@@ -280,6 +280,8 @@ set mouse=a				" enable mouse scrolling
 set scrolloff=8			" show more lines before and after cursor
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title				" change the terminal's title
+set t_ts=]0;			" title string begin for rxvt-unicode + tmux
+set t_fs=				" title string end for rxvt-unicode + tmux
 set visualbell			" don't beep
 set noerrorbells		" don't beep
 set showmatch			" show matching parens
