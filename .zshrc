@@ -37,8 +37,7 @@ colors          # colors
 ##
 # Completion
 ##
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 zmodload -i zsh/complist
 setopt hash_list_all            # hash everything before completion
 setopt completealiases          # complete aliases
@@ -54,6 +53,10 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # ignore case
 zstyle ':completion:*' menu select=2                        # menu if nb items > 2
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # colorz !
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate # list of completers to use
+
+# Bash completion
+autoload -Uz bashcompinit && bashcompinit
+[[ -f /etc/profile.d/bash-completion.sh ]] && source /etc/profile.d/bash-completion.sh
 
 # sections completion !
 zstyle ':completion:*' verbose yes
