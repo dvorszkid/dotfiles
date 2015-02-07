@@ -265,6 +265,7 @@ set ignorecase	" ignore case when searching
 set smartcase	" ignore case if search pattern is all lowercase, case-sensitive otherwise
 set hlsearch	" highlight search terms
 set incsearch	" show search matches as you type
+set gdefault	" use /g by default search and replace
 
 
 ""
@@ -314,7 +315,6 @@ set undofile
 " Color scheme
 ""
 syntax on
-set t_Co=256
 set background=dark
 colorscheme solarized
 let g:load_doxygen_syntax=1
@@ -371,6 +371,15 @@ vnoremap < <gv
 " for confirmation before it replaces any instance of the search text in the
 " file.
 vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
+
+
+" Better regex syntax
+nnoremap / /\v
+vnoremap / /\v
+
+
+" Faster Escape
+inoremap jj <ESC>
 
 
 " <leader>v brings up .vimrc
