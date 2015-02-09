@@ -53,6 +53,7 @@ Xft.hintstyle:	hintmedium
 xterm*faceName:			Terminus (TTF)
 xterm*faceSize:			12
 xterm*utf8:				2
+xterm*termName:			xterm-256color
 xterm*dynamicColors:	true
 xterm*eightBitInput:	true
 xterm*saveLines:		5000
