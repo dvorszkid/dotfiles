@@ -117,6 +117,7 @@ if executable('ag')
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\(work\|out\|Resources\)')
 nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
 nnoremap <leader>p :Unite file_mru -start-insert<cr>
 nnoremap <silent> <leader>/ :Unite grep:.<cr>
