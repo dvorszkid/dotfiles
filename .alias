@@ -2,16 +2,32 @@
 # Convenience
 ##
 alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
-alias lsv="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
+alias l="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
 alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
 
 
 ##
+# Shortcuts for common Git commands
+##
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add --all'
+alias gpl='git pull'
+alias gp='git push'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gdt='git difftool -d'
+alias gc='git commit -v'
+alias gg='git graph'
+
+
+##
 # Create a new directory and enter it
 ##
-function md() {
+function mkdircd() {
 	mkdir -p "$@" && cd "$@"
 }
 
