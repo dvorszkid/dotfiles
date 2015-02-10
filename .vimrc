@@ -302,6 +302,8 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set nobackup			" no tilde backup files
 set noswapfile			" no .swp files
 set foldlevelstart=99	" all folds open by default
+set spelllang=en		" mostly the only needed
+set spell				" and its on
 
 
 ""
