@@ -156,6 +156,7 @@ let g:ycm_error_symbol = 'E>'
 let g:ycm_warning_symbol = 'W>'
 let g:ycm_complete_in_comments = 1
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
 nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
 
