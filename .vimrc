@@ -335,7 +335,8 @@ syntax on
 set background=dark
 let g:load_doxygen_syntax=1
 let g:solarized_termcolors=16
-let g:solarized_termtrans=1
+let g:solarized_termtrans=0
+call togglebg#map("<Leader>bg")
 colorscheme solarized
 
 
