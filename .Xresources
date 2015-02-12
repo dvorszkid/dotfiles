@@ -62,16 +62,18 @@ Xft.antialias:	true
 Xft.rgba:		none
 Xft.autohint:	false
 Xft.hinting:	true
-Xft.hintstyle:	hintmedium
+Xft.hintstyle:	hintfull
+Xft.lcdfilter:	lcddefault
 
 
 ! ------------------------------------------------------------------------------
 ! --- XTerm
 !
-xterm*faceName:			Terminus (TTF)
-xterm*faceSize:			12
+xterm*faceName:			Source Code Pro for Powerline
+xterm*faceSize:			10
 xterm*utf8:				2
 xterm*termName:			xterm-256color
+xterm*boldColors:		false
 xterm*dynamicColors:	true
 xterm*eightBitInput:	true
 xterm*saveLines:		5000
@@ -90,8 +92,9 @@ xterm*toolBar:			false
 
 ! size and look
 URxvt.geometry:				120x35
-URxvt.font:					xft:Terminus (TTF):pixelsize=14,xft:Envy Code R:size=10,xft:DejaVu Sans Mono for Powerline:style=Book:size=9
-URxvt.letterSpace:			1
+URxvt.font:					xft:Source Code Pro for Powerline:style=Regular:pixelsize=13
+URxvt.boldFont:				xft:Source Code Pro for Powerline:style=SemiBold:pixelsize=13
+URxvt.letterSpace:			0
 URxvt.fading:				20
 URxvt.intensityStyles:		false
 
@@ -102,7 +105,6 @@ URxvt.scrollBar_floating:	true
 URxvt.scrollstyle:			plain
 URxvt.thickness:			1
 URxvt.scrollColor:			#333333
-URxvt.highlightColor:		#222222
 
 ! behavior
 URxvt.saveLines:			5000

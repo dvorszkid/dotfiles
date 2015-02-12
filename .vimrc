@@ -126,7 +126,7 @@ nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
 
 " AirLine
-let g:airline_theme = 'murmur'
+let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
@@ -320,8 +320,10 @@ set undofile
 ""
 syntax on
 set background=dark
-colorscheme solarized
 let g:load_doxygen_syntax=1
+let g:solarized_termcolors=16
+let g:solarized_termtrans=1
+colorscheme solarized
 
 
 ""
