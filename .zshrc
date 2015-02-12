@@ -24,7 +24,7 @@ bindkey '\e[1;5C' forward-word                      # C-Right
 bindkey '\e[1;5D' backward-word                     # C-Left
 bindkey '^U'      backward-kill-line
 bindkey '^Y'      yank
-bindkey '^R'      history-incremental-pattern-search-backward
+bindkey '^F'      history-incremental-pattern-search-backward
 
 
 ##
