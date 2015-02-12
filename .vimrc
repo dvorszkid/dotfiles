@@ -155,6 +155,7 @@ map <Leader>k <Plug>(easymotion-k)
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_always_populate_location_list = 1
 let g:ycm_error_symbol = 'E>'
 let g:ycm_warning_symbol = 'W>'
 let g:ycm_complete_in_comments = 1
@@ -200,6 +201,16 @@ nnoremap <silent> <F4> :A<CR>
 
 " vim-autoformat
 noremap <silent> <leader>f :Autoformat<CR>
+
+
+" TmuxLine
+let g:tmuxline_preset={
+		\'a':'#S',
+		\'win':['#I', '#W'],
+		\'cwin':['#I', '#W'],
+		\'z':'#H',
+		\'options':{'status-justify':'left'}
+	\}
 
 
 " UltiSnip
