@@ -92,7 +92,7 @@ xterm*toolBar:			false
 
 ! size and look
 URxvt.geometry:				120x35
-URxvt.font:					xft:Source Code Pro for Powerline:style=Regular:pixelsize=13
+URxvt.font:					xft:Source Code Pro for Powerline:style=Medium:pixelsize=13
 URxvt.boldFont:				xft:Source Code Pro for Powerline:style=SemiBold:pixelsize=13
 URxvt.letterSpace:			0
 URxvt.fading:				20
