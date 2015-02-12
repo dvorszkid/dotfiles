@@ -51,11 +51,12 @@ alias justfucking="sudo "
 ##
 # Gentoo commands
 ##
-alias esync='eix-sync'
-alias eupdate='emerge -uDN --keep-going @world'
+alias esync='sudo eix-sync'
+alias emerge='sudo emerge'
+alias eupdate='sudo emerge -uDN --keep-going @world'
 alias eupdate_time='emerge -uDNp world | genlop -p'
-alias edep='emerge --depclean'
-alias eremove='CONFIG_PROTECT="-*" emerge -C'
+alias edep='sudo emerge --depclean'
+alias eremove='CONFIG_PROTECT="-*" sudo emerge -C'
 alias esets="echo '*** Available Sets ***'; emerge --list-sets; echo; echo '*** Installed Custom Sets ***'; eix --print-world-sets"
 
 
@@ -63,6 +64,7 @@ alias esets="echo '*** Available Sets ***'; emerge --list-sets; echo; echo '*** 
 # Debian commands
 ##
 # edep for packages (invoke multiple times)
-alias adep='apt-get purge `deborphan`'
+alias adep='sudo apt-get purge `deborphan`'
 # edep for config files
-alias adepconfig='dpkg --purge `dpkg -l | egrep "^rc" | cut -d" " -f3`'
+alias adepconfig='sudo dpkg --purge `dpkg -l | egrep "^rc" | cut -d" " -f3`'
+
