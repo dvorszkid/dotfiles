@@ -60,6 +60,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'godlygeek/tabular'
 Plugin 'Valloric/ListToggle'
+Plugin 'terryma/vim-multiple-cursors'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -80,6 +81,7 @@ Plugin 'Valloric/YouCompleteMe'
 
 " C++ programming
 Plugin 'Kris2k/A.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
 if (s:hostname =~ "bp1-dsklin")
@@ -120,7 +122,8 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite -start-insert -no-split -auto-preview file_rec/async<cr>
 nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
-nnoremap <silent> <leader>/ :Unite grep:.<cr>
+nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
+nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
