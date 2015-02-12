@@ -112,14 +112,14 @@ let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_max_candidates = 1000
 if executable('ag')
 	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore ''Resources/'' --ignore ''out/'' --ignore ''work/'''
+	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden'
 	let g:unite_source_grep_recursive_opt = ''
+	let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\(work\|out\|Resources\)')
-nnoremap <C-p> :Unite file_rec/async -start-insert<cr>
-nnoremap <leader>p :Unite file_mru -start-insert<cr>
+nnoremap <C-p> :Unite -start-insert -no-split -auto-preview file_rec/async<cr>
+nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
 nnoremap <silent> <leader>/ :Unite grep:.<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
@@ -257,7 +257,7 @@ nnoremap <silent> <leader>bba :exec g:buildbackgroundcmd . g:GetBuildAllParams(@
 set autoindent smartindent
 set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 set smarttab
-let g:leave_my_textwidth_alone = 1
+let g:leave_my_textwidth_alone = 1 " to ignore gentoo specific global vimrc
 
 
 ""
@@ -296,11 +296,10 @@ set lazyredraw			" no redraws in macros
 set confirm				" dialog when :q, :w, :x, :wq fails
 set nostartofline		" don't move cursor when switching buffers/files
 set nobackup			" that's what git is for
+set noswapfile			" no .swp files
 set ttyfast				" smoother changes
 set diffopt+=vertical	" vertical diff
 set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR chars in list mode
-set nobackup			" no tilde backup files
-set noswapfile			" no .swp files
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set spell				" and its on
