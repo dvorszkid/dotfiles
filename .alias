@@ -28,7 +28,7 @@ alias gg='git graph'
 ##
 # Create a new directory and enter it
 ##
-function mkdircd() {
+function md() {
 	mkdir -p "$@" && cd "$@"
 }
 

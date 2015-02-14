@@ -1,7 +1,0 @@
-bg_color=#ffffff
-browser=xdg-open
-fg_color=#000000
-font=Lucida ConsoleP,monospace 9
-icon=gnome-status
-url_color=#0000ff
-vurl_color=#ff00ff

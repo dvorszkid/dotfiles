@@ -1,6 +1,12 @@
-[submodule "dircolors-solarized"]
-	path = dircolors-solarized
-	url = https://github.com/seebi/dircolors-solarized
-[submodule ".fonts/powerline"]
-	path = .fonts/powerline
+[submodule ".local/share/fonts/powerline"]
+	path = .local/share/fonts/powerline
 	url = https://github.com/powerline/fonts
+[submodule ".local/share/dircolors/solarized"]
+	path = .local/share/dircolors/solarized
+	url = https://github.com/seebi/dircolors-solarized
+[submodule ".local/share/mc/mc-solarized-skin"]
+	path = .local/share/mc/mc-solarized-skin
+	url = https://github.com/nkulikov/mc-solarized-skin
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim

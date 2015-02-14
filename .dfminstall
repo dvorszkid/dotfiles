@@ -1,3 +1,6 @@
 README.md skip
-dircolors-solarized skip
+.gitmodules skip
+.config recurse
+.local recurse
+.vim recurse
 
