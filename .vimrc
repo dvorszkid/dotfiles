@@ -173,7 +173,7 @@ let g:tabman_toggle = '<F3>'
 
 
 " Solarized
-let g:solarized_termcolors=256
+let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 
 
