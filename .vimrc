@@ -128,6 +128,10 @@ nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
 
+" Fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+
 " AirLine
 let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
@@ -385,6 +389,10 @@ vnoremap > >gv
 vnoremap < <gv
 
 
+" Visually select the text that was last edited/pasted
+nmap gV `[v`]
+
+
 " With this map, we can select some text in visual mode and by invoking the map,
 " have the selection automatically filled in as the search text and the cursor
 " placed in the position for typing the replacement text. Also, this will ask
@@ -404,7 +412,7 @@ inoremap jj <ESC>
 
 " <leader>v brings up .vimrc
 " <leader>V reloads it and makes all changes active (file has to be saved first)
-noremap <leader>v :e! $MYVIMRC<CR>
+noremap <leader>v :tabedit $MYVIMRC<CR>
 noremap <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 
