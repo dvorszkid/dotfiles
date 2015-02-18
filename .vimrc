@@ -173,7 +173,7 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 
 " TabMan
-let g:tabman_toggle = '<F3>'
+let g:tabman_toggle = '<leader>t'
 
 
 " Solarized
@@ -352,13 +352,20 @@ set secure          " disable unsafe commands in local .vimrc files
 
 
 " Paste mode
-set pastetoggle=<F2>
+set pastetoggle=<F3>
 
 
 " Share X windows clipboard
 if has('unnamedplus')
 	set clipboard=unnamedplus
 endif
+
+
+" Buffer switching
+nnoremap <F1> :bp<CR>
+nnoremap <F2> :bn<CR>
+inoremap <F1> <Esc>:bp<CR>
+inoremap <F2> <Esc>:bn<CR>
 
 
 " More natural line positioning on wrapped lines
