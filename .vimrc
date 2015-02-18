@@ -320,7 +320,7 @@ set diffopt+=vertical	" vertical diff
 set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR chars in list mode
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
-set spell				" and its on
+set nospell				" and its on
 
 
 ""
