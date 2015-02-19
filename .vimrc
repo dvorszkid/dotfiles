@@ -129,7 +129,10 @@ nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
 
 " Fugitive
-autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup fugitive
+	autocmd!
+	autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup end
 
 
 " AirLine
@@ -452,12 +455,20 @@ vnoremap : ;
 " map <right> <nop>
 
 
-" Trim whitespaces
-autocmd FileType c,cpp,python,ruby,java autocmd BufWritePre <buffer> :%s/\s\+$//e
+" My custom autocmds
+augroup my_commands
+	" Clear commands first for multiple vimrc reloads
+	autocmd!
 
+	" Trim whitespaces
+	autocmd FileType c,cpp,python,ruby,java,proto autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-" Re-adjust windows on window resize
-autocmd VimResized * wincmd =
+	" Fix tab settings for python
+	autocmd FileType python setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+
+	" Re-adjust windows on window resize
+	autocmd VimResized * wincmd =
+augroup end
 
 
 " Search and Replace
