@@ -1,10 +1,20 @@
 [alias]
-	graph = log --graph --oneline --decorate
-	k = !gitk --date-order
-	su = submodule update --init --recursive
 	st = status
+	graph = log --graph --oneline --decorate
+
+	amend = commit --amend --no-edit
+	squash = commit --squash
+
+	ci = commit -v
+	unci = reset HEAD^
+	uncommit = reset HEAD^
+	unstage = reset HEAD --
 	cam = commit -a -m
-	b = branch
+
+	br = branch
+	co = checkout
+	su = submodule update --init --recursive
+
 	ignored = !git ls-files -v | grep "^[a-z]"
 	ignore = update-index --assume-unchanged
 	unignore = update-index --no-assume-unchanged
@@ -40,3 +50,6 @@
 	trustExitCode = true
 [mergetool "bc4"]
 	cmd = /usr/local/bin/bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+[mergetool "vimdiff3"]
+	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
