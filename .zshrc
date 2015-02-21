@@ -6,8 +6,9 @@
 # "man zshzle" for the list of available actions
 autoload zkbd
 [[ ! -d ~/.zkbd ]] && mkdir ~/.zkbd
-[[ ! -f ~/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
-source  ~/.zkbd/$TERM-$VENDOR-$OSTYPE
+ZKBD_FILE=~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+[[ ! -f $ZKBD_FILE ]] && zkbd
+source $ZKBD_FILE
 
 bindkey -v
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   history-beginning-search-backward
