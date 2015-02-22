@@ -10,3 +10,9 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim
+[submodule ".config/awesome/tyrannical"]
+	path = .config/awesome/tyrannical
+	url = https://github.com/Elv13/tyrannical
+[submodule ".config/awesome/lain"]
+	path = .config/awesome/lain
+	url = https://github.com/copycat-killer/lain
