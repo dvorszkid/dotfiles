@@ -1,7 +1,6 @@
 local awful        = require("awful")
 local beautiful    = require("beautiful")
 local tools        = require("tools")
-local lain         = require("lain")
 local drop         = require("scratch.drop")
 local apps         = require("apps")
 
