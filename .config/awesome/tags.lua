@@ -12,21 +12,7 @@ tyrannical.settings.tag.mwfact = 0.6
 tyrannical.tags = {
 	-- Primary screen
 	{
-		name        = "Term",
-		init        = true,
-		exclusive   = true,
-		screen      = {config.scr.pri, config.scr.sec},
-		layout      = awful.layout.suit.tile.left,
-		focus_new   = true,
-		selected    = true,
-		index       = 1,
-		class       = {
-			"xterm",
-			"urxvt",
-		},
-	},
-	{
-		name        = "Internet",
+		name        = "www",
 		init        = true,
 		exclusive   = true,
 		screen      = config.scr.pri,
@@ -46,7 +32,7 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "Files",
+		name        = "files",
 		init        = true,
 		exclusive   = false,
 		screen      = config.scr.pri,
@@ -61,7 +47,7 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "Develop",
+		name        = "dev",
 		init        = true,
 		exclusive   = false,
 		screen      = config.scr.pri,
@@ -77,7 +63,7 @@ tyrannical.tags = {
 	},
 	-- Secondary screen
 	{
-		name        = "Mail",
+		name        = "mail",
 		init        = true,
 		position    = 2,
 		exclusive   = true,
@@ -90,10 +76,10 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "Chat",
+		name        = "chat",
 		init        = true,
 		position    = 3,
-		exclusive   = true,
+		exclusive   = false,
 		screen      = config.scr.sec,
 		force_screen= true,
 		layout      = awful.layout.suit.tile.left,
@@ -102,15 +88,26 @@ tyrannical.tags = {
 			"Kopete",
 			"Skype",
 			"Skype-bin",
-			"Konversation",
 			"Botch",
+		}
+	},
+	{
+		name        = "irc",
+		init        = true,
+		position    = 3,
+		exclusive   = false,
+		screen      = config.scr.sec,
+		force_screen= true,
+		layout      = awful.layout.suit.tile.left,
+		class       = {
+			"Konversation",
 			"WeeChat",
 			"weechat",
 			"irssi",
 		}
 	},
 	{
-		name        = "Music",
+		name        = "music",
 		init        = true,
 		position    = 4,
 		exclusive   = true,
@@ -126,7 +123,7 @@ tyrannical.tags = {
 	},
 	-- Any screen
 	{
-		name        = "Doc",
+		name        = "doc",
 		init        = false,
 		volatile    = true,
 		exclusive   = true,

@@ -174,7 +174,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey }, "b", function () tools.run_or_raise(apps.cmd.browser, { class = "Firefox" }) end),
 	awful.key({ modkey, altkey }, "f", function () tools.run_or_raise(apps.cmd.filemanager, { name = "Krusader" }) end),
 	awful.key({ modkey, altkey }, "s", function () tools.run_or_raise(apps.cmd.music, { class = "Spotify" }) end),
-	awful.key({ modkey, altkey }, "i", function () tools.run_or_raise(apps.tmux.irc, { name = "WeeChat 0.4.3" }) end),
+	awful.key({ modkey, altkey }, "i", function () tools.run_or_raise(apps.tmux.irc, { name = "WeeChat" }) end),
 	awful.key({ modkey, altkey }, "c", function () awful.util.spawn(apps.cmd.calculator) end),
 	awful.key({ modkey, altkey }, "h", function () awful.util.spawn(apps.term.procmon) end),
 
