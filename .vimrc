@@ -66,6 +66,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
+Plugin 'scrooloose/nerdtree'
 
 " Tmux
 Plugin 'tmux-plugins/vim-tmux'
@@ -192,6 +193,10 @@ nnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
 vnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
 nnoremap <Leader>a, :Tabularize /,/l0r1<CR>
 vnoremap <Leader>a, :Tabularize /,/l0r1<CR>
+
+
+" NERDTree
+noremap <Leader>n :NERDTreeToggle<CR>
 
 
 "
