@@ -154,7 +154,7 @@ local netupwidget = lain.widgets.net({
 
 -- ALSA volume bar
 local volumeicon = wibox.widget.imagebox(beautiful.vol)
-volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%",
+volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%", card = "1",
 	settings = function()
 		if volume_now.status == "off" then
 			volumeicon:set_image(beautiful.vol_mute)
