@@ -69,6 +69,12 @@ config.scr           = {
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
 
+if hostname == "basestar" then
+	config.alsacard = "0"
+else
+	config.alsacard = "1"
+end
+
 -- lain
 lain.layout.termfair.nmaster   = 3
 lain.layout.termfair.ncol      = 1
@@ -152,7 +158,7 @@ local netupwidget = lain.widgets.net({
 
 -- ALSA volume bar
 local volumeicon = wibox.widget.imagebox(beautiful.vol)
-volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%", card = "1",
+volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%", card = config.alsacard,
 	settings = function()
 		if volume_now.status == "off" then
 			volumeicon:set_image(beautiful.vol_mute)
