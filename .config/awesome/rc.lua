@@ -106,8 +106,10 @@ end
 for _, app in pairs(apps.autostart["common"]) do
 	tools.run_once(app)
 end
-for _, app in pairs(apps.autostart[hostname]) do
-	tools.run_once(app)
+if apps.autostart[hostname] ~= nil then
+	for _, app in pairs(apps.autostart[hostname]) do
+		tools.run_once(app)
+	end
 end
 -- }}}
 
