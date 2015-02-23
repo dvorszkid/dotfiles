@@ -133,11 +133,9 @@ local cpuwidget = lain.widgets.cpu({
 })
 
 -- MEM widget
-local swapwidget = wibox.widget.textbox()
 local memwidget = lain.widgets.mem({
 	settings = function()
 		widget:set_markup(markup.fg.color(beautiful.fg_dark, " RAM ") .. mem_now.used .. " MB ")
-		swapwidget:set_markup(markup.fg.color(beautiful.fg_dark, " SWP ") .. mem_now.swapused .. " MB ")
 	end
 })
 
@@ -147,8 +145,8 @@ local netupicon = wibox.widget.imagebox(beautiful.net_up)
 local netdownwidget = wibox.widget.textbox()
 local netupwidget = lain.widgets.net({
 	settings = function()
-		netdownwidget:set_markup(markup(beautiful.c_green, net_now.received .. " "))
-		widget:set_markup(markup(beautiful.c_red, net_now.sent .. " "))
+		netdownwidget:set_markup(markup(beautiful.c_green, net_now.received .. " kB "))
+		widget:set_markup(markup(beautiful.c_red, net_now.sent .. " kB "))
 	end
 })
 
@@ -226,8 +224,6 @@ for s = 1, screen.count() do
     right_layout:add(cpuwidget)
     right_layout:add(bar_spr)
     right_layout:add(memwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(swapwidget)
     right_layout:add(bar_spr)
     right_layout:add(netdownicon)
     right_layout:add(netdownwidget)
