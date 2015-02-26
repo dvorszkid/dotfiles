@@ -165,8 +165,8 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end),
 	awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end),
 	awful.key({ modkey, "Control" }, "n",      awful.client.restore),
-	-- awful.key({ modkey, "Control" }, "space",  function () awful.layout.inc(layouts,  1)  end),
-	-- awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(layouts, -1)  end),
+	awful.key({ modkey, "Control" }, "space",  function () awful.layout.inc(layouts,  1)  end),
+	awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(layouts, -1)  end),
 
 	-- User programs
 	awful.key({ modkey,           }, "Return", function () awful.util.spawn(apps.term.tmux) end),
@@ -178,43 +178,13 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey }, "c", function () awful.util.spawn(apps.cmd.calculator) end),
 	awful.key({ modkey, altkey }, "h", function () awful.util.spawn(apps.term.procmon) end),
 
-	-- Prompt
-	awful.key({ modkey }, "d",
+	-- Prompts
+	awful.key({ modkey }, "r",
 		function () awful.util.spawn(apps.cmd.dmenu ..
 			" -nb '" ..  beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. "'" ..
 			" -sb '" .. beautiful.bg_focus .. "' -sf '" .. beautiful.fg_focus .. "'")
 		end),
-	awful.key({ modkey }, "r",
-		function ()
-			awful.prompt.run({ prompt = "Run: ", hooks = {
-				{{         },"Return",function(command)
-					local result = awful.util.spawn(command)
-					mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-					return true
-				end},
-				{{altkey   },"Return",function(command)
-					local result = awful.util.spawn(command,{intrusive=true})
-					mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-					return true
-				end},
-				{{"Shift"  },"Return",function(command)
-					local result = awful.util.spawn(command,{intrusive=true,ontop=true,floating=true})
-					mypromptbox[mouse.screen].widget:set_text(type(result) == "string" and result or "")
-					return true
-				end}
-			}},
-			mypromptbox[mouse.screen].widget,
-			function (com)
-					local result = awful.util.spawn(com)
-					if type(result) == "string" then
-						mypromptbox[mouse.screen].widget:set_text(result)
-					end
-					return true
-			end, awful.completion.shell,
-			awful.util.getdir("cache") .. "/history")
-		end
-	),
-	awful.key({ modkey, "Shift" }, "r",
+	awful.key({ modkey, altkey }, "r",
 		function ()
 			awful.prompt.run({prompt = "Run Lua code: "}, mypromptbox[mouse.screen].widget, awful.util.eval, nil, awful.util.getdir("cache") .. "/history_eval")
 		end

@@ -9,6 +9,7 @@ local naughty    = require("naughty")
 -- plugins
 local lain       = require("lain")
 local tyrannical = require("tyrannical")
+require("tyrannical.shortcut")
 -- configs
 local tools      = require("tools")
 local apps       = require("apps")
@@ -82,7 +83,7 @@ lain.layout.centerfair.nmaster = 3
 lain.layout.centerfair.ncol    = 1
 
 -- layout setup
-local layouts = {
+layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.fair,
     awful.layout.suit.tile,
