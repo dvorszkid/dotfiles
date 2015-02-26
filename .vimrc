@@ -61,6 +61,7 @@ Plugin 'tommcdo/vim-exchange'
 Plugin 'godlygeek/tabular'
 Plugin 'Valloric/ListToggle'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'dkprice/vim-easygrep'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -174,6 +175,10 @@ nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
 
 " UndoTree
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
+
+
+" EasyGrep
+let g:EasyGrepCommand=1
 
 
 " TabMan
@@ -478,9 +483,6 @@ augroup end
 
 " Search and Replace
 if executable('ag')
-	function! s:ReplaceInFiles(search, replace)
-		exec "!ag -l " . a:search . " | xargs sed -i 's@" . a:search . "@" . a:replace . "@g'"
-	endfunction
-	command! -nargs=+ ReplaceInFiles call s:ReplaceInFiles(<f-args>)
+	set grepprg=ag\ --nogroup\ --nocolor
 endif
 
