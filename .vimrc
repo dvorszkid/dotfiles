@@ -124,8 +124,8 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite -start-insert -no-split -auto-preview file_rec/async<cr>
 nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
-nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
-nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
+" nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
+" nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
@@ -179,6 +179,7 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 " EasyGrep
 let g:EasyGrepCommand=1
+nnoremap <leader>/ :Grep<space>
 
 
 " TabMan

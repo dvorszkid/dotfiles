@@ -117,13 +117,13 @@ usercolor="green"           # user is green
 if [ "$USER" = "root" ]; then
     usercolor="red"         # root is red
 fi;
-if [[ $+MC_SID = 1 ]]; then
-	PROMPT=">%(#/#/) "
-	RPROMPT=""
-else
+# if [[ $+MC_SID = 1 ]]; then
+# 	PROMPT=">%(#/#/) "
+# 	RPROMPT=""
+# else
 	PROMPT="%B%{$fg[$usercolor]%}%n@%u%m%{$fg[blue]%}%u %B%~%b "
 	RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
-fi
+# fi
 
 ##
 # Open files
