@@ -61,20 +61,6 @@ tyrannical.tags = {
 			"kate4",
 		}
 	},
-	-- Secondary screen
-	{
-		name        = "mail",
-		init        = true,
-		position    = 2,
-		exclusive   = true,
-		screen      = config.scr.sec,
-		layout      = awful.layout.suit.max,
-		class       = {
-			"Thunderbird",
-			"kmail",
-			"evolution",
-		}
-	},
 	{
 		name        = "chat",
 		init        = true,
@@ -84,11 +70,8 @@ tyrannical.tags = {
 		force_screen= true,
 		layout      = awful.layout.suit.tile.left,
 		class       = {
-			"Pidgin",
-			"Kopete",
 			"Skype",
 			"Skype-bin",
-			"Botch",
 		}
 	},
 	{
@@ -101,7 +84,6 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.tile.left,
 		class       = {
 			"Konversation",
-			"WeeChat",
 			"weechat",
 			"irssi",
 		}
@@ -116,8 +98,6 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.tile.left,
 		class       = {
 			"Amarok",
-			"SongBird",
-			"last.fm",
 			"spotify",
 		}
 	},
@@ -136,10 +116,6 @@ tyrannical.tags = {
 			"OOMath",
 			"OOImpress",
 			"OOBase",
-			"KWord",
-			"KSpread",
-			"KPres",
-			"Basket",
 			"openoffice.org",
 			"OpenOffice.*",
 		}
@@ -181,8 +157,6 @@ tyrannical.properties.floating = {
 	"plasmoidviewer",
 	"xev",
 	"conky",
-	["amarok"] = false,
-	["spotify"] = false,
 }
 
 tyrannical.properties.ontop = {
