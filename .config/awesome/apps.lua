@@ -13,6 +13,9 @@ autostart["common"] = {
 autostart["basestar"] = {
 	"skype",
 }
+autostart["bp1-dsklin"] = {
+	"sleep 1 && tresorit-control-panel",
+}
 
 -- app collection for shortcuts and widgets
 local apps_cmd = {

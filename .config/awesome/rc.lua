@@ -69,10 +69,10 @@ config.scr           = {
 	sec = screen.count() > 1 and 2 or 1,
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
+config.alsacard = "0"
 
-if hostname == "basestar" then
-	config.alsacard = "0"
-else
+if (hostname ~= "bp1-dsklin") then
+	hostname = "bp1-dsklin"
 	config.alsacard = "1"
 end
 
