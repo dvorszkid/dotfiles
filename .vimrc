@@ -62,6 +62,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'Valloric/ListToggle'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dkprice/vim-easygrep'
+Plugin 'tpope/vim-surround'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -122,7 +123,7 @@ if executable('ag')
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nnoremap <C-p> :Unite -start-insert -no-split -auto-preview file_rec/async<cr>
+nnoremap <C-p> :Unite -start-insert -no-split file_rec/async<cr>
 nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
 " nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
 " nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
@@ -272,12 +273,12 @@ nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
 " Building the source
 let g:buildcmd = ":Make -j5 "
 let g:buildbackgroundcmd = ":Make! -j5 "
-nnoremap <silent> <leader>bf :exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bp :exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>ba :exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <leader>bbf :exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bbp :exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>bba :exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bf :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bp :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> <leader>ba :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <F7> :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> <leader>bbf :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> <leader>bba :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 
 "
 " Put your non-Plugin stuff after this line
@@ -457,6 +458,11 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+
+
+" C++ shortcuts
+nmap <leader>sm ysiw(istd::move<Esc><leader>f
+nmap <leader>st ithis->
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
