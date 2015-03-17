@@ -25,8 +25,8 @@ bindkey '\e[1;5C' forward-word                      # C-Right
 bindkey '\e[1;5D' backward-word                     # C-Left
 bindkey '^W'      backward-kill-word
 bindkey '^E'      kill-word
-bindkey '^I'      backward-kill-line
-bindkey '^O'      kill-line
+bindkey '^Y'      backward-kill-line
+bindkey '^U'      kill-line
 bindkey '^P'      yank
 bindkey '^F'      history-incremental-pattern-search-backward
 
