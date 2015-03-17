@@ -23,8 +23,11 @@ bindkey -v
 [[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
 bindkey '\e[1;5C' forward-word                      # C-Right
 bindkey '\e[1;5D' backward-word                     # C-Left
-bindkey '^U'      backward-kill-line
-bindkey '^Y'      yank
+bindkey '^W'      backward-kill-word
+bindkey '^E'      kill-word
+bindkey '^I'      backward-kill-line
+bindkey '^O'      kill-line
+bindkey '^P'      yank
 bindkey '^F'      history-incremental-pattern-search-backward
 
 
