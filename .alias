@@ -23,6 +23,7 @@ alias gds='git diff --cached'
 alias gdt='git difftool -d'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
+alias gco='git checkout'
 alias gg='git graph'
 
 
