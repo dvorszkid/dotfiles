@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+ACCEPT=(
+	61881:61885	# torrent
+)
+ACCEPT_TCP=("${ACCEPT[@]}"
+	22			# ssh
+	80			# http
+#	443			# https
+	5900:5901	# vnc
+#	6891:6900	# msn
+	9512		# unified remote
+)
+ACCEPT_UDP=("${ACCEPT[@]}"
+	9511:9512	# unified remote
+)
+BURST_LIMITED=(
+	22			# ssh
+)
+ACCEPT_LOCAL=(
+#	631			# cups
+#	111			# nfs
+#	2049		# nfs
+#	32767		# nfs
+)
+#LOCAL_SUBNET='192.168.2.1/24'
+
