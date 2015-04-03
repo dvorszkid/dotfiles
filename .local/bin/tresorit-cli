@@ -1,4 +1,0 @@
-#!/bin/sh
-
-/usr/local/bin/ExampleCLI --working-directory ~/.tresorit ~/.tresorit/tresoritrc
-
