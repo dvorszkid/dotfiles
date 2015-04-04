@@ -1,1 +1,3 @@
+bin recurse
+etc recurse
 share recurse
