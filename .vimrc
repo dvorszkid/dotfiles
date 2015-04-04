@@ -73,7 +73,9 @@ Plugin 'scrooloose/nerdtree'
 " Tmux
 Plugin 'tmux-plugins/vim-tmux'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'edkolev/tmuxline.vim'
+if !has("gui_running")
+	Plugin 'edkolev/tmuxline.vim'
+endif
 
 " General programming
 Plugin 'tomtom/tcomment_vim'
