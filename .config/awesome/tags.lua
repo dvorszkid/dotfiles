@@ -201,7 +201,6 @@ tyrannical.properties.maximized_vertical = {
 tyrannical.properties.size_hints_honor = {
 	["xterm"] = false,
 	["urxvt"] = false,
-	"krusader",
 	["spotify"] = false,
 }
 
