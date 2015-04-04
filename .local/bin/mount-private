@@ -1,8 +1,0 @@
-#!/bin/sh
-
-SRC_PATH="/home/d347h/Dropbox/Private"
-DST_PATH="/home/d347h/Private"
-
-if [ -z "$(mount | grep $DST_PATH)" ]; then
-    encfs "$SRC_PATH" "$DST_PATH" --extpass=~/.dbppw
-fi

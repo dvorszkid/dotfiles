@@ -1,3 +1,0 @@
-#!/bin/sh
-
-weex-current -t | grep -e '^[RS]'
