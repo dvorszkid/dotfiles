@@ -69,11 +69,9 @@ config.scr           = {
 	sec = screen.count() > 1 and 2 or 1,
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
-config.alsacard = "0"
 
 if (hostname ~= "bp1-dsklin") then
 	hostname = "bp1-dsklin"
-	config.alsacard = "1"
 end
 
 -- lain
@@ -159,7 +157,7 @@ local netupwidget = lain.widgets.net({
 
 -- ALSA volume bar
 local volumeicon = wibox.widget.imagebox(beautiful.vol)
-volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%", card = config.alsacard,
+volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%",
 	settings = function()
 		if volume_now.status == "off" then
 			volumeicon:set_image(beautiful.vol_mute)
