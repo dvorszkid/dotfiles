@@ -424,8 +424,8 @@ vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
 
 
 " Better regex syntax
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 
 
 " Faster Escape
