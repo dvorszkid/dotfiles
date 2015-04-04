@@ -190,6 +190,14 @@ tyrannical.properties.hidden = {
 	"yakuake",
 }
 
+tyrannical.properties.maximized_horizontal = {
+	"bcompare",
+}
+
+tyrannical.properties.maximized_vertical = {
+	"bcompare",
+}
+
 tyrannical.properties.size_hints_honor = {
 	["xterm"] = false,
 	["urxvt"] = false,
