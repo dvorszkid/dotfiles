@@ -362,6 +362,15 @@ colorscheme solarized
 
 
 ""
+" GUI settings
+""
+if has('gui_running')
+	set guioptions-=T  " no toolbar
+	set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+endif
+
+
+""
 " Per project vimrc
 ""
 set exrc            " enable per-directory .vimrc files
