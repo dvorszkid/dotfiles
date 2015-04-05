@@ -82,7 +82,9 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-dispatch'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'Valloric/YouCompleteMe'
+if !(s:hostname =~ "raider")
+	Plugin 'Valloric/YouCompleteMe'
+endif
 
 " C++ programming
 Plugin 'Kris2k/A.vim'
