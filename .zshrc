@@ -89,13 +89,13 @@ vim_cmd_mode="%{$fg[cyan]%}[CMD]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
-	vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-	zle reset-prompt
+vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+zle reset-prompt
 }
 zle -N zle-keymap-select
 
 function zle-line-finish {
-	vim_mode=$vim_ins_mode
+vim_mode=$vim_ins_mode
 }
 zle -N zle-line-finish
 
@@ -118,14 +118,14 @@ precmd() {  # run before each prompt
 setopt PROMPT_SUBST         # allow funky stuff in prompt
 usercolor="green"           # user is green
 if [ "$USER" = "root" ]; then
-    usercolor="red"         # root is red
+	usercolor="red"         # root is red
 fi;
 # if [[ $+MC_SID = 1 ]]; then
 # 	PROMPT=">%(#/#/) "
 # 	RPROMPT=""
 # else
-	PROMPT="%B%{$fg[$usercolor]%}%n@%u%m%{$fg[blue]%}%u %B%~%b "
-	RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
+PROMPT="%B%{$fg[$usercolor]%}%n@%u%m%{$fg[blue]%}%u %B%~%b "
+RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 # fi
 
 ##
@@ -195,4 +195,29 @@ source "$HOME/.env"
 watch=all                       # watch all logins
 logcheck=30                     # every 30 seconds
 WATCHFMT="%n from %M has %a tty%l at %T %W"
+
+
+##
+# Last command execution time if it exceeds a limit
+##
+REPORTTIME_TOTAL=5 # seconds
+
+# Displays the execution time of the last command if set threshold was exceeded
+cmd_execution_time() {
+	local stop=$((`date "+%s + %N / 1_000_000_000.0"`))
+	let local "elapsed = ${stop} - ${cmd_start_time}"
+	(( $elapsed > $REPORTTIME_TOTAL )) && print -P "Command took %F{yellow}${elapsed}s%f"
+}
+
+# Get the start time of the command
+preexec() {
+	cmd_start_time=$((`date "+%s + %N / 1.0e9"`))
+}
+
+# Output total execution
+precmd() {
+	if (($+cmd_start_time)); then
+		cmd_execution_time
+	fi
+}
 
