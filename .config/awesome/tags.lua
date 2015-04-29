@@ -37,7 +37,7 @@ tyrannical.tags = {
 		exclusive   = false,
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.tile.top,
-		exec_once   = {"krusader"}
+		exec_once   = {"krusader"},
 		class  = {
 			"Thunar",
 			"Konqueror",
