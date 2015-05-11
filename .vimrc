@@ -474,8 +474,7 @@ vnoremap : ;
 
 
 " C++ shortcuts
-nmap <leader>sm ysiw(istd::move<Esc><leader>f
-nmap <leader>st ithis->
+nmap <leader>sm ysiw)istd::move<Esc>
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
