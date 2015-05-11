@@ -107,9 +107,6 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn hg
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats "%{$fg[yellow]%}%c%{$fg[green]%}%u%{$reset_color%} [%{$fg[blue]%}%b%{$reset_color%}] %{$fg[yellow]%}%s%{$reset_color%}:%r"
-precmd() {  # run before each prompt
-	vcs_info
-}
 
 
 ##
@@ -216,6 +213,7 @@ preexec() {
 
 # Output total execution
 precmd() {
+	vcs_info
 	if (($+cmd_start_time)); then
 		cmd_execution_time
 	fi
