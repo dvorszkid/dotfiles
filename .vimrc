@@ -47,6 +47,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'gregsexton/gitv'
+Plugin 'airblade/vim-gitgutter'
 
 " Misc
 Plugin 'bling/vim-airline'
