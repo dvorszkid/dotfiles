@@ -83,6 +83,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-dispatch'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
 	Plugin 'Valloric/YouCompleteMe'
 endif
@@ -129,6 +130,7 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite -start-insert -no-split file_rec/async<cr>
+nnoremap <C-m> :Unite -start-insert outline<cr>
 nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
 " nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
 " nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
