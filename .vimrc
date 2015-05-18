@@ -272,7 +272,6 @@ nnoremap <leader><F5> :call StartDebug(g:GetTresoritTestPath(), "-t " . expand("
 " VimTresorit
 "
 " Makefile variables
-nnoremap <silent> <leader>mh :ToggleMakeHost<CR>
 nnoremap <silent> <leader>mc :ToggleMakeCompiler<CR>
 nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
 nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
