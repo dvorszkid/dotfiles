@@ -130,7 +130,7 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <C-m> :Unite -start-insert outline<cr>
+nnoremap <C-t> :Unite -start-insert outline<cr>
 nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
 " nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
 " nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
@@ -143,6 +143,15 @@ augroup fugitive
 	autocmd!
 	autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup end
+
+
+" gitgutter
+let g:gitgutter_map_keys = 0
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <leader>hs <Plug>GitGutterStageHunk
+nmap <leader>hr <Plug>GitGutterRevertHunk
+nmap <leader>hp <Plug>GitGutterPreviewHunk
 
 
 " AirLine
