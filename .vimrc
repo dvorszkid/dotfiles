@@ -129,9 +129,9 @@ if executable('ag')
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-nnoremap <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <C-t> :Unite -start-insert outline<cr>
-nnoremap <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
+nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
+nnoremap <silent> <C-t> :Unite -start-insert outline<cr>
+nnoremap <silent> <leader>p :Unite -start-insert -no-split -auto-preview file_mru<cr>
 " nnoremap <silent> <leader>/ :Unite -toggle -auto-resize -silent -buffer-name=ag grep:.<cr>
 " nnoremap <silent> <leader><leader>/ :Unite -resume -buffer-name=ag grep:.<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
@@ -281,19 +281,20 @@ nnoremap <leader><F5> :call StartDebug(g:GetTresoritTestPath(), "-t " . expand("
 " VimTresorit
 "
 " Makefile variables
-nnoremap <silent> <leader>mc :ToggleMakeCompiler<CR>
-nnoremap <silent> <leader>md :ToggleMakeDebug<CR>
-nnoremap <silent> <leader>mt :ToggleMakeTests<CR>
-nnoremap <silent> <leader>mi :PrintMakeInformation<CR>
+nnoremap [tmake] <Nop>
+nmap <leader>m [tmake]
+nnoremap <silent> [tmake]c :ToggleMakeCompiler<CR>
+nnoremap <silent> [tmake]d :ToggleMakeDebug<CR>
+nnoremap <silent> [tmake]t :ToggleMakeTests<CR>
+nnoremap <silent> [tmake]i :PrintMakeInformation<CR>
 " Building the source
 let g:buildcmd = ":Make -j5 "
 let g:buildbackgroundcmd = ":Make! -j5 "
-nnoremap <silent> <leader>bf :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bp :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
-nnoremap <silent> <leader>ba :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <F7> :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
-nnoremap <silent> <leader>bbf :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
-nnoremap <silent> <leader>bba :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap [tbuild] <Nop>
+nmap <leader>b [tbuild]
+nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nmap <silent> <F7> [tbuild]a
 
 "
 " Put your non-Plugin stuff after this line
@@ -401,10 +402,10 @@ endif
 
 
 " Buffer switching
-nnoremap <F1> :bp<CR>
-nnoremap <F2> :bn<CR>
-inoremap <F1> <Esc>:bp<CR>
-inoremap <F2> <Esc>:bn<CR>
+nnoremap <silent> <F1> :bp<CR>
+nnoremap <silent> <F2> :bn<CR>
+inoremap <silent> <F1> <Esc>:bp<CR>
+inoremap <silent> <F2> <Esc>:bn<CR>
 
 
 " More natural line positioning on wrapped lines
