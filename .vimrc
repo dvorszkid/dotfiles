@@ -93,8 +93,7 @@ Plugin 'Kris2k/A.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
-if (s:hostname =~ "bp1-dsklin")
-	Plugin 'https://bitbucket.org/tresorit/vim-lldb.git'
+if !(s:hostname =~ "raider")
 	Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
 endif
 
@@ -254,27 +253,6 @@ let g:tmuxline_preset={
 let g:UltiSnipsExpandTrigger="<c-y>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-
-"
-" LLDB
-"
-" Common commands
-nnoremap <silent> <F8> :Lcontinue<CR>
-nnoremap <silent> <F9> :Lbreakpoint<CR>
-nnoremap <silent> <F10> :Lnext<CR>
-nnoremap <silent> <F11> :Lstep<CR>
-nnoremap <silent> <leader><F11> :Lfinish<CR>
-" Start debugging
-function! g:StartDebug(program, args)
-	exec "Ltarget " . a:program
-	exec "Lbreakpoint set --name main"
-	exec "Lhide disassembly"
-	exec "Lhide registers"
-	exec "Lstart " . a:args
-endfunction
-nnoremap <F5> :call StartDebug(g:GetTresoritCLIPath(), "")<Left><Left>
-nnoremap <leader><F5> :call StartDebug(g:GetTresoritTestPath(), "-t " . expand("<cword>" . ""))<Left><Left><Left>
 
 
 "
