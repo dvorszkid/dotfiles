@@ -24,7 +24,7 @@ local apps_cmd = {
 	tmux_session	= "tmux -2 new-session -A -D -s ",
 	editor			= os.getenv("EDITOR") or "vi" or "mcedit",
 
-	browser			= "firefox-bin",
+	browser			= "opera-developer",
 	filemanager		= "krusader",
 	calculator		= "qalculate-gtk",
 	irc				= "weechat",
