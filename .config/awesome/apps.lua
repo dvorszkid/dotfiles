@@ -8,10 +8,10 @@ autostart["common"] = {
 	"urxvtd",
 	"unclutter",
 	"xscreensaver -no-splash",
-	"parcellite",
+	"klipper",
+	"skype",
 }
 autostart["basestar"] = {
-	"skype",
 }
 autostart["bp1-dsklin"] = {
 	"sleep 1 && tresorit-control-panel",
@@ -22,7 +22,7 @@ local apps_cmd = {
 	terminal		= "urxvtc",
 	tmux			= "tmux",
 	tmux_session	= "tmux -2 new-session -A -D -s ",
-	editor			= os.getenv("EDITOR") or "vim" or "mcedit",
+	editor			= os.getenv("EDITOR") or "vi" or "mcedit",
 
 	browser			= "firefox-bin",
 	filemanager		= "krusader",
