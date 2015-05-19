@@ -19,6 +19,7 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.tile.left,
 		class = {
 			"Opera",
+			"Opera developer",
 			"Firefox",
 			"Rekonq",
 			"Dillo",
