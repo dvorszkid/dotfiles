@@ -239,8 +239,8 @@ noremap <silent> <leader>f :Autoformat<CR>
 
 
 " nextval
-nmap <silent> <unique> + <Plug>nextvalInc
-nmap <silent> <unique> - <Plug>nextvalDec
+nmap <silent> + <Plug>nextvalInc
+nmap <silent> - <Plug>nextvalDec
 
 
 " TmuxLine
