@@ -319,6 +319,7 @@ set laststatus=2		" always show status line
 set noshowmode			" hide default mode text
 set hidden				" dave modified buffers in the background
 set autoread			" auto-reload modified files (with no local changes)
+set updatetime=1000		" check for changes in every second
 set lazyredraw			" no redraws in macros
 set confirm				" dialog when :q, :w, :x, :wq fails
 set nostartofline		" don't move cursor when switching buffers/files
@@ -487,6 +488,9 @@ augroup my_commands
 
 	" Re-adjust windows on window resize
 	autocmd VimResized * wincmd =
+
+	" Auto-detect file changes
+	autocmd CursorHold,CursorHoldI,WinEnter,BufWinEnter * silent! checktime
 augroup end
 
 
