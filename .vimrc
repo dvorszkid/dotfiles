@@ -64,6 +64,7 @@ Plugin 'Valloric/ListToggle'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'tpope/vim-surround'
+Plugin 'qwertologe/nextval.vim'
 
 " For file opening
 Plugin 'Shougo/vimproc.vim'
@@ -235,6 +236,11 @@ nnoremap <silent> <F4> :A<CR>
 
 " vim-autoformat
 noremap <silent> <leader>f :Autoformat<CR>
+
+
+" nextval
+nmap <silent> <unique> + <Plug>nextvalInc
+nmap <silent> <unique> - <Plug>nextvalDec
 
 
 " TmuxLine
