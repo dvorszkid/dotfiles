@@ -14,7 +14,7 @@ autostart["common"] = {
 autostart["basestar"] = {
 }
 autostart["bp1-dsklin"] = {
-	"sleep 1 && tresorit-control-panel",
+	"tresorit-control-panel",
 }
 
 -- app collection for shortcuts and widgets
