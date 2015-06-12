@@ -279,6 +279,7 @@ nmap <leader>b [tbuild]
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
 nmap <silent> <F7> [tbuild]a
+nmap <silent> <F8> [tbuild]f
 
 "
 " Put your non-Plugin stuff after this line

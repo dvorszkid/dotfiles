@@ -45,7 +45,7 @@ local apps_cmd = {
 	lock			= "xscreensaver-command -lock",
 	shutdown		= "sudo /sbin/poweroff",
 	reboot			= "sudo /sbin/reboot",
-	suspend			= "xscreensaver-command -lock && sudo /usr/sbin/pm-suspend",
+	suspend			= "xscreensaver-command -lock && sleep 3 && sudo /usr/sbin/pm-suspend",
 }
 
 -- combined commands
