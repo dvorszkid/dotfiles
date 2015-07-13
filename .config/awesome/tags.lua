@@ -17,6 +17,7 @@ tyrannical.tags = {
 		exclusive   = true,
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.tile.left,
+		exec_once   = {"firefox-bin"},
 		class = {
 			"Opera",
 			"Opera developer",
@@ -98,6 +99,7 @@ tyrannical.tags = {
 		screen      = config.scr.sec,
 		force_screen= true,
 		layout      = awful.layout.suit.tile.left,
+		exec_once   = {"spotify"},
 		class       = {
 			"Amarok",
 			"spotify",
