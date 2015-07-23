@@ -80,51 +80,6 @@ zstyle ':completion:*:killall:*' force-list always
 compdef _gnu_generic gcc
 compdef _gnu_generic gdb
 
-
-##
-# Vi mode info
-##
-vim_ins_mode="%{$fg[yellow]%}[INS]%{$reset_color%}"
-vim_cmd_mode="%{$fg[cyan]%}[CMD]%{$reset_color%}"
-vim_mode=$vim_ins_mode
-
-function zle-keymap-select {
-vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-zle reset-prompt
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
-vim_mode=$vim_ins_mode
-}
-zle -N zle-line-finish
-
-
-##
-# Vcs info
-##
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats "%{$fg[yellow]%}%c%{$fg[green]%}%u%{$reset_color%} [%{$fg[blue]%}%b%{$reset_color%}] %{$fg[yellow]%}%s%{$reset_color%}:%r"
-
-
-##
-# Prompt
-##
-setopt PROMPT_SUBST         # allow funky stuff in prompt
-usercolor="green"           # user is green
-if [ "$USER" = "root" ]; then
-	usercolor="red"         # root is red
-fi;
-# if [[ $+MC_SID = 1 ]]; then
-# 	PROMPT=">%(#/#/) "
-# 	RPROMPT=""
-# else
-PROMPT="%B%{$fg[$usercolor]%}%n@%u%m%{$fg[blue]%}%u %B%~%b "
-RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
-# fi
-
 ##
 # Open files
 ##
@@ -193,29 +148,21 @@ watch=all                       # watch all logins
 logcheck=30                     # every 30 seconds
 WATCHFMT="%n from %M has %a tty%l at %T %W"
 
-
+## 
+# Antigen (oh-my-zsh)
 ##
-# Last command execution time if it exceeds a limit
-##
-REPORTTIME_TOTAL=5 # seconds
-
-# Displays the execution time of the last command if set threshold was exceeded
-cmd_execution_time() {
-	local stop=$((`date "+%s + %N / 1_000_000_000.0"`))
-	let local "elapsed = ${stop} - ${cmd_start_time}"
-	(( $elapsed > $REPORTTIME_TOTAL )) && print -P "Command took %F{yellow}${elapsed}s%f"
-}
-
-# Get the start time of the command
-preexec() {
-	cmd_start_time=$((`date "+%s + %N / 1.0e9"`))
-}
-
-# Output total execution
-precmd() {
-	vcs_info
-	if (($+cmd_start_time)); then
-		cmd_execution_time
-	fi
-}
+DISABLE_AUTO_UPDATE=true
+source $HOME/.local/share/antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen bundles <<EOBUNDLES
+git
+screen
+vi-mode
+z
+systemadmin
+zsh_reload
+zsh-users/zsh-syntax-highlighting
+EOBUNDLES
+antigen theme $HOME/.local/share ngg --no-local-clone
+antigen apply
 

@@ -16,3 +16,6 @@
 [submodule ".config/awesome/lain"]
 	path = .config/awesome/lain
 	url = https://github.com/copycat-killer/lain
+[submodule ".local/share/antigen"]
+	path = .local/share/antigen
+	url = https://github.com/zsh-users/antigen.git
