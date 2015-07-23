@@ -17,7 +17,6 @@ tyrannical.tags = {
 		exclusive   = true,
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.tile.left,
-		exec_once   = {"firefox-bin"},
 		class = {
 			"Opera",
 			"Opera developer",
