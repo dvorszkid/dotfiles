@@ -157,9 +157,11 @@ antigen use oh-my-zsh
 antigen bundles <<EOBUNDLES
 git
 screen
+tmux
 vi-mode
 z
 systemadmin
+sudo
 zsh_reload
 zsh-users/zsh-syntax-highlighting
 EOBUNDLES
