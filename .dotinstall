@@ -1,5 +1,6 @@
 README.md skip
 .gitmodules skip
+.gitignore skip
 .config recurse
 .local recurse
 .vim recurse
