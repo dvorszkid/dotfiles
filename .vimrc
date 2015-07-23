@@ -147,6 +147,7 @@ augroup end
 
 " gitgutter
 let g:gitgutter_map_keys = 0
+let g:gitgutter_max_signs = 5000
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap <leader>hs <Plug>GitGutterStageHunk
@@ -277,6 +278,7 @@ let g:buildbackgroundcmd = ":Make! -j5 "
 nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
 nmap <silent> <F7> [tbuild]a
 nmap <silent> <F8> [tbuild]f
