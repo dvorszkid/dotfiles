@@ -117,6 +117,7 @@ git
 screen
 tmux
 vi-mode
+z
 systemadmin
 sudo
 zsh_reload
