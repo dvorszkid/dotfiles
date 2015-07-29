@@ -25,6 +25,13 @@ fi
 
 
 ##
+# Custom keys
+##
+bindkey "$terminfo[kpp]" history-substring-search-up
+bindkey "$terminfo[knp]" history-substring-search-down
+
+
+##
 # Shared resources
 ##
 source "$HOME/.alias"
