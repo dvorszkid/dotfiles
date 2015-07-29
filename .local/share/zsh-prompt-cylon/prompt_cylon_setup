@@ -40,8 +40,8 @@ get_user_host() {
 	fi
 	echo -n "%{%F{default}%}@"
 	echo -n "%{%F{blue}%}%M"
-	if [[ ! -z "$SSH_CLIENT" ]]; then
-		echo -n " (%{%F{yellow}%}SSH %{%F{cyan}%}from ${SSH_CLIENT%% *})"
+	if [[ ! -z "$SSH_CONNECTION" ]]; then
+		echo -n " (%{%F{yellow}%}SSH %{%F{cyan}%}from ${SSH_CONNECTION%% *})"
 	fi
 }
 
