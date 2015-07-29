@@ -27,8 +27,10 @@ fi
 ##
 # Custom keys
 ##
-bindkey "$terminfo[kpp]" history-substring-search-up
-bindkey "$terminfo[knp]" history-substring-search-down
+bindkey "$terminfo[kpp]" history-substring-search-up    # Page Up
+bindkey "$terminfo[knp]" history-substring-search-down  # Page Down
+bindkey '\e[1;5C' forward-word                          # C-Right
+bindkey '\e[1;5D' backward-word                         # C-Left
 
 
 ##
