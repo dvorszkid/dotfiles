@@ -15,6 +15,7 @@ EOPLUGINS
     zgen save
 fi
 
+
 ##
 # Prezto
 ##

@@ -4,5 +4,4 @@ README.md skip
 .config recurse
 .local recurse
 .vim recurse
-.zprezto recurse
 
