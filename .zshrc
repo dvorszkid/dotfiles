@@ -39,10 +39,19 @@ fi
 ##
 # Custom keys
 ##
-bindkey "$terminfo[kpp]" history-substring-search-up    # Page Up
-bindkey "$terminfo[knp]" history-substring-search-down  # Page Down
-bindkey '\e[1;5C' forward-word                          # C-Right
-bindkey '\e[1;5D' backward-word                         # C-Left
+
+# History search
+bindkey "$key_info[PageUp]" history-substring-search-up
+bindkey "$key_info[PageDown]" history-substring-search-down
+
+# Open man page for current command
+bindkey "^Xm" run-help
+
+# Control + arrows to navigate words
+for key in "${(s: :)key_info[ControlLeft]}"
+	bindkey -M viins "$key" backward-word
+for key in "${(s: :)key_info[ControlRight]}"
+	bindkey -M viins "$key" forward-word
 
 
 ##
