@@ -3,16 +3,28 @@
 ##
 source "${HOME}/.local/share/zgen/zgen.zsh"
 
-if ! zgen saved; then
-    echo "Creating .zgen/init.zsh ..."
-
-    # bulk load
-    zgen loadall <<EOPLUGINS
+# Load zsh plugins
+load-zgen-plugins()
+{
+	# bulk load
+	zgen loadall <<EOPLUGINS
 		radhermit/gentoo-zsh-completions src
 EOPLUGINS
 
-    # save all to init script
-    zgen save
+	# save all to init script
+	zgen save
+}
+
+# Load zgen if it was never loaded
+if ! zgen saved; then
+	echo "Initializing zgen ..."
+	load-zgen-plugins
+fi
+
+# Reload zgen if .zshrc is newer than init.zsh
+if [ $(stat -c %Y "${HOME}/$(readlink ~/.zshrc)") -gt $(stat -c %Y "${HOME}/.zgen/init.zsh") ]; then
+	echo "Refreshing zgen due to .zshrc update ..."
+	load-zgen-plugins
 fi
 
 
