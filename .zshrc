@@ -9,6 +9,7 @@ load-zgen-plugins()
 	# bulk load
 	zgen loadall <<EOPLUGINS
 		radhermit/gentoo-zsh-completions src
+		t413/zsh-background-notify
 EOPLUGINS
 
 	# save all to init script
