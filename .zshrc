@@ -38,6 +38,12 @@ fi
 
 
 ##
+# Custom options
+##
+setopt nonomatch # pass the unevaluated argument like bash
+
+
+##
 # Custom keys
 ##
 
