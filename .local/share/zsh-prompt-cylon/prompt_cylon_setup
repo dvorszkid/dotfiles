@@ -48,9 +48,9 @@ get_user_host() {
 function build_prompt {
 	echo -n "%{%B%}" # bold prompt
 	get_user_host
-	prompt_segment black yellow '%~'
+	prompt_segment default yellow '%~'
 	if $git_status; then
-		prompt_segment black blue '%{%F{green}%}[%{%F{blue}%}${(e)git_info[prompt]}${git_info[status]}%{%F{green}%}]'
+		prompt_segment default blue '%{%F{green}%}[%{%F{blue}%}${(e)git_info[prompt]}${git_info[status]}%{%F{green}%}]'
 	fi
 	prompt_end
 }
@@ -126,10 +126,10 @@ function prompt_cylon_setup {
 	linedown=$'\e[1B'
 
 	PROMPT='
-%{%K{black}%}$(build_prompt)%{%K{black}%}%E
+$(build_prompt)%E
  ${editor_info[keymap]} %{%k%b%f%}'
-	RPROMPT='%{${lineup}%}%{%b%K{black}%}%D{%a %Y-%m-%d | %H:%M:%S}%{${linedown}%k%}'
-	PROMPT2="%{%B%K{black}%F{green}%}  %_>%{%f%k%b%} "
+	RPROMPT='%{${lineup}%}%{%b%}%D{%a %Y-%m-%d | %H:%M:%S}%{${linedown}%k%}'
+	PROMPT2="%{%B%F{green}%}  %_>%{%f%k%b%} "
 	SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
