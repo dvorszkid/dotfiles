@@ -41,6 +41,9 @@ fi
 # Custom options
 ##
 setopt nonomatch # pass the unevaluated argument like bash
+setopt print_exit_value
+unsetopt rm_star_silent
+unsetopt share_history
 
 
 ##
