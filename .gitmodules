@@ -22,3 +22,6 @@
 [submodule ".zprezto"]
 	path = .zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
+[submodule ".local/share/zgen"]
+	path = .local/share/zgen
+	url = https://github.com/m42e/zgen
