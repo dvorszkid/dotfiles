@@ -59,7 +59,7 @@ alias justfucking="sudo "
 ##
 # Gentoo commands
 ##
-alias esync='sudo eix-sync -H'
+alias esync='sudo eix-sync -H -C --ask -C n'
 alias emerge='sudo emerge'
 alias eupdate='sudo emerge -uDN --keep-going @world'
 alias eupdate_time='sudo emerge -uDNp world | genlop -p'
