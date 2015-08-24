@@ -337,6 +337,7 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
+set makeprg=make_and_notify " notify-send after make
 
 
 ""

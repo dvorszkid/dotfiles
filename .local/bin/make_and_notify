@@ -1,0 +1,5 @@
+#!/bin/sh
+
+make "$@"
+notify-send "Make finished" "\"make $@\" returned $?"
+
