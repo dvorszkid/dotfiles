@@ -4,7 +4,7 @@
 source "${HOME}/.local/share/zgen/zgen.zsh"
 
 # Autoreload if .zshrc has changed
-ZGEN_RESET_ON_CHANGE=("${HOME}/$(readlink ~/.zshrc)")
+ZGEN_RESET_ON_CHANGE=("$(realpath ~/.zshrc)")
 
 # Load zgen
 if ! zgen saved; then
