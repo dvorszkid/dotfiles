@@ -23,9 +23,6 @@ if ! zgen saved; then
 	# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'
 	zgen prezto git:status:ignore submodules 'all'
 
-	# Custom theme
-	zgen prezto prompt theme 'cylon'
-
 	# Auto set the tab and window titles
 	zgen prezto terminal auto-title 'yes'
 
@@ -49,7 +46,10 @@ if ! zgen saved; then
 	# Other plugins
 	zgen load radhermit/gentoo-zsh-completions src
 	zgen load t413/zsh-background-notify
-	zgen load ${HOME}/.local/share/zsh-prompt-cylon
+	zgen load ngg/zsh-prompt-cylon
+
+	# Custom theme
+	zgen prezto prompt theme 'cylon'
 
 	# Save all to init script
 	zgen save
@@ -63,6 +63,10 @@ setopt nonomatch # pass the unevaluated argument like bash
 setopt print_exit_value
 unsetopt rm_star_silent
 unsetopt share_history
+setopt glob_dots                # include dotfiles in globbing
+unsetopt list_beep              # no bell on ambiguous completion
+unsetopt hist_beep              # no bell on error in history
+unsetopt beep                   # no bell on error
 
 
 ##
