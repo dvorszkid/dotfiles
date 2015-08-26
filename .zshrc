@@ -39,7 +39,6 @@ if ! zgen saved; then
 	zgen prezto completion
 	zgen prezto prompt
 	zgen prezto git
-	zgen prezto tmux
 	zgen prezto syntax-highlighting
 	zgen prezto history-substring-search
 
