@@ -35,7 +35,6 @@ if ! zgen saved; then
 	zgen prezto editor
 	zgen prezto history
 	zgen prezto directory
-	zgen prezto utility
 	zgen prezto completion
 	zgen prezto prompt
 	zgen prezto git
