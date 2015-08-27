@@ -9,7 +9,9 @@ autostart["common"] = {
 	"unclutter",
 	"xscreensaver -no-splash",
 	"klipper",
+	"kmix",
 	"skype",
+	"tresorit",
 }
 autostart["basestar"] = {
 }

@@ -155,33 +155,6 @@ local netupwidget = lain.widgets.net({
 	end
 })
 
--- ALSA volume bar
-local volumeicon = wibox.widget.imagebox(beautiful.vol)
-volume = lain.widgets.alsabar({width = 55, ticks = true, ticks_size = 6, step = "4%", card = "PCH",
-	settings = function()
-		if volume_now.status == "off" then
-			volumeicon:set_image(beautiful.vol_mute)
-		elseif volume_now.level <= 20 then
-			volumeicon:set_image(beautiful.vol_no)
-		elseif volume_now.level <= 50 then
-			volumeicon:set_image(beautiful.vol_low)
-		else
-			volumeicon:set_image(beautiful.vol)
-		end
-	end,
-	colors =
-	{
-		background = beautiful.bg_normal,
-		mute = beautiful.bg_urgent,
-		unmute = beautiful.fg_normal
-	}
-})
-local volmargin = wibox.layout.margin(volume.bar, 2, 7)
-volmargin:set_top(6)
-volmargin:set_bottom(6)
-local volumewidget = wibox.widget.background(volmargin)
-volumewidget:set_bgimage(beautiful.widget_bg)
-
 -- Separators
 bar_spr = wibox.widget.textbox(' ' .. markup(beautiful.fg_dark, "|") .. ' ')
 
@@ -222,10 +195,6 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(bar_spr)
-    if s == 1 then
-		right_layout:add(wibox.widget.systray())
-		right_layout:add(bar_spr)
-	end
     right_layout:add(cpuwidget)
     right_layout:add(bar_spr)
     right_layout:add(memwidget)
@@ -236,9 +205,10 @@ for s = 1, screen.count() do
     right_layout:add(netupicon)
     right_layout:add(netupwidget)
     right_layout:add(bar_spr)
-    right_layout:add(volumeicon)
-    right_layout:add(volumewidget)
-    right_layout:add(bar_spr)
+    if s == 1 then
+		right_layout:add(wibox.widget.systray())
+		right_layout:add(bar_spr)
+	end
     right_layout:add(mytextclock)
 
     -- Now bring it all together (with the tasklist in the middle)

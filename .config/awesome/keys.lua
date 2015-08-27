@@ -203,26 +203,6 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "r",      awesome.restart),
 	awful.key({ modkey, "Control" }, "q",      awesome.quit),
 
-	-- ALSA volume control
-	awful.key({ }, "XF86AudioRaiseVolume", function ()
-		awful.util.spawn(apps.cmd.volume_inc)
-		if (volume ~= nil) then
-			volume.update()
-		end
-	end),
-	awful.key({ }, "XF86AudioLowerVolume", function ()
-		awful.util.spawn(apps.cmd.volume_dec)
-		if (volume ~= nil) then
-			volume.update()
-		end
-	end),
-	awful.key({ }, "XF86AudioMute",        function ()
-		awful.util.spawn(apps.cmd.volume_mute)
-		if (volume ~= nil) then
-			volume.update()
-		end
-	end),
-
 	-- Spotify control
 	awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell(apps.cmd.music_play) end),
 	awful.key({ }, "XF86AudioStop", function () awful.util.spawn_with_shell(apps.cmd.music_stop) end),
