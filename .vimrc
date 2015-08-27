@@ -95,7 +95,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
 if !(s:hostname =~ "raider")
-	Plugin 'https://bitbucket.org/tresorit/vimtresorit.git'
+	Plugin 'git@bitbucket.org:tresorit/vimtresorit.git'
 endif
 
 " All of your Plugins must be added before the following line
