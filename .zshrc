@@ -9,10 +9,10 @@ ZGEN_RESET_ON_CHANGE=("$(realpath ~/.zshrc)")
 # Load zgen
 if ! zgen saved; then
 	# Set case-sensitivity for completion, history lookup, etc.
-	zgen prezto "*" case-sensitive 'no'
+	zgen prezto '*:*' case-sensitive 'no'
 
 	# Color output (auto set to 'no' on dumb terminals)
-	zgen prezto "*" color 'yes'
+	zgen prezto '*:*' color 'yes'
 
 	# Set the key mapping style to 'emacs' or 'vi'
 	zgen prezto editor key-bindings 'vi'
