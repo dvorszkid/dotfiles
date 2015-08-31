@@ -127,7 +127,8 @@ mytextclock = awful.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock, {
-	font = "DejaVu Sans Mono"
+	font = "DejaVu Sans Mono",
+	followmouse = true
 })
 
 -- CPU widget
