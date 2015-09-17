@@ -76,7 +76,7 @@ bindkey "$key_info[PageUp]" history-substring-search-up
 bindkey "$key_info[PageDown]" history-substring-search-down
 
 # Open man page for current command
-bindkey "^Xm" run-help
+bindkey "^X^M" run-help
 
 # Control + arrows to navigate words
 for key in "${(s: :)key_info[ControlLeft]}"
