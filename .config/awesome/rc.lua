@@ -123,7 +123,7 @@ end
 markup = lain.util.markup
 
 -- Textclock
-mytextclock = awful.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M ')))
+mytextclock = awful.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock, {

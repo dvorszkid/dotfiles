@@ -177,6 +177,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey }, "i", function () tools.run_or_raise(apps.tmux.irc, { name = "WeeChat" }) end),
 	awful.key({ modkey, altkey }, "c", function () awful.util.spawn(apps.cmd.calculator) end),
 	awful.key({ modkey, altkey }, "h", function () awful.util.spawn(apps.term.procmon) end),
+	awful.key({                }, "Print", function () awful.util.spawn(apps.cmd.screenshot) end),
 
 	-- Prompts
 	awful.key({ modkey }, "r",
