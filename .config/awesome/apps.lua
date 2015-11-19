@@ -11,7 +11,7 @@ autostart["common"] = {
 	"klipper",
 	"kmix",
 	"skype",
-	"tresorit",
+	"tresorit --hidden",
 }
 autostart["basestar"] = {
 }
