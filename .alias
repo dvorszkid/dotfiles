@@ -1,8 +1,14 @@
 ##
 # Convenience
 ##
-alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
-alias l="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
+if [[ `uname` == "Darwin" ]]
+then
+	alias ls="ls -G -F -h"
+	alias l="ls -G -F -h -a -l"
+else
+	alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
+	alias l="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
+fi
 alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -75,4 +81,13 @@ alias esets="echo '*** Available Sets ***'; emerge --list-sets; echo; echo '*** 
 alias adep='apt-get purge `deborphan`'
 # edep for config files
 alias adepconfig='dpkg --purge `dpkg -l | egrep "^rc" | cut -d" " -f3`'
+
+
+##
+# Local .alias
+##
+if [ -f "$HOME/.alias.local" ]
+then
+	source "$HOME/.alias.local"
+fi
 

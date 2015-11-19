@@ -6,7 +6,6 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-
 ##
 # Bash completion
 ##
