@@ -106,7 +106,6 @@ URxvt.thickness:			1
 URxvt.scrollColor:			#333333
 
 ! behavior
-URxvt.termName:				screen-256color
 URxvt.saveLines:			5000
 URxvt.urgentOnBell:			true
 URxvt.scrollWithBuffer:		false
