@@ -3,5 +3,6 @@ README.md skip
 .gitignore skip
 .config recurse
 .local recurse
+.tmux recurse
 .vim recurse
 

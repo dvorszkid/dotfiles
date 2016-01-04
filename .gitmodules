@@ -22,3 +22,6 @@
 [submodule ".local/share/zgen"]
 	path = .local/share/zgen
 	url = https://github.com/tarjoilija/zgen.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
