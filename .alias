@@ -36,6 +36,10 @@ alias gco='git checkout'
 alias gg='git graph'
 alias gga='git graph --all'
 
+function gcot() {
+	git tag | grep "$@" | xargs git checkout
+}
+
 
 ##
 # Create a new directory and enter it
