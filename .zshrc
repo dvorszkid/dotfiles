@@ -65,6 +65,9 @@ setopt glob_dots                # include dotfiles in globbing
 unsetopt list_beep              # no bell on ambiguous completion
 unsetopt hist_beep              # no bell on error in history
 unsetopt beep                   # no bell on error
+if [ ${TMUX} ]; then
+	unset zle_bracketed_paste   # tmux does not support bracketed paste
+fi
 
 
 ##
