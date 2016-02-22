@@ -8,4 +8,5 @@ set print static-members on
 set print vtbl on
 set print demangle on
 set print elements 0
+set follow-fork-mode parent
 
