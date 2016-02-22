@@ -51,6 +51,7 @@ Plugin 'airblade/vim-gitgutter'
 
 " Misc
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'mbbill/undotree'
@@ -284,6 +285,13 @@ nmap <silent> <F8> [tbuild]f
 "
 " Put your non-Plugin stuff after this line
 "
+
+""
+" Unicode support
+""
+scriptencoding utf-8
+set encoding=utf-8
+
 
 ""
 " Indent and tab settings
