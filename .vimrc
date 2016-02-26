@@ -235,7 +235,7 @@ nnoremap <silent> <F4> :A<CR>
 
 
 " vim-autoformat
-noremap <silent> <leader>f :Autoformat<CR>
+noremap <silent> <leader>ff :Autoformat<CR>
 
 
 " nextval
@@ -264,6 +264,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "
 " VimTresorit
 "
+
 " Makefile variables
 nnoremap [tmake] <Nop>
 nmap <leader>m [tmake]
@@ -271,6 +272,7 @@ nnoremap <silent> [tmake]c :ToggleMakeCompiler<CR>
 nnoremap <silent> [tmake]d :ToggleMakeDebug<CR>
 nnoremap <silent> [tmake]t :ToggleMakeTests<CR>
 nnoremap <silent> [tmake]i :PrintMakeInformation<CR>
+
 " Building the source
 let g:buildcmd = ":Make -j5 "
 let g:buildbackgroundcmd = ":Make! -j5 "
@@ -281,6 +283,10 @@ nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
 nmap <silent> <F7> [tbuild]a
 nmap <silent> <F8> [tbuild]f
+
+" Code formatting
+noremap <silent> <leader>ft :ToggleAutoFormatCode <CR>
+
 
 "
 " Put your non-Plugin stuff after this line
