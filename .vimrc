@@ -70,7 +70,7 @@ Plugin 'qwertologe/nextval.vim'
 " For file opening
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neomru.vim'
+Plugin 'Shougo/neoyank.vim'
 Plugin 'scrooloose/nerdtree'
 
 " Tmux
@@ -96,6 +96,8 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
 if !(s:hostname =~ "raider")
+	Plugin 'ngg/vim-gn'
+	Plugin 'ngg/vim-protobuf'
 	Plugin 'git@bitbucket.org:tresorit/vimtresorit.git'
 endif
 
