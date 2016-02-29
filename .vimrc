@@ -267,7 +267,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " VimTresorit
 "
 
-" Makefile variables
+" Makefile variables (for legacy build system)
 nnoremap [tmake] <Nop>
 nmap <leader>m [tmake]
 nnoremap <silent> [tmake]c :ToggleMakeCompiler<CR>
@@ -276,13 +276,19 @@ nnoremap <silent> [tmake]t :ToggleMakeTests<CR>
 nnoremap <silent> [tmake]i :PrintMakeInformation<CR>
 
 " Building the source
-let g:buildcmd = ":Make -j5 "
-let g:buildbackgroundcmd = ":Make! -j5 "
+let g:buildcmd = ":Make "
+let g:buildbackgroundcmd = ":Make! -k 0 "
 nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
+nnoremap [tbuild]c :CreateOutDir<space>
+nnoremap [tbuild]e :EditCurrentOutDir<CR>
+nnoremap <silent> [tbuild]s :Unite -start-insert -no-split gn<CR>
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
+nnoremap <silent> [tbuild]bf :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>
+nnoremap <silent> [tbuild]bp :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>
+nnoremap <silent> [tbuild]ba :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 nmap <silent> <F7> [tbuild]a
 nmap <silent> <F8> [tbuild]f
 
@@ -354,7 +360,6 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
-set makeprg=make_and_notify " notify-send after make
 
 
 ""

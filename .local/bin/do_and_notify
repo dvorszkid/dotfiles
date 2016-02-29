@@ -1,0 +1,12 @@
+#!/bin/sh
+
+PRG=$1
+shift
+
+start=$SECONDS
+$PRG "$@"
+res=$?
+timer_result=$((SECONDS-start))
+
+notify-send "$(echo $PRG "$@")" "Returned $res<br/>Took $timer_result seconds"
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+do_and_notify /usr/bin/ninja "$@"
