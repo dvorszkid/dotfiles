@@ -8,5 +8,7 @@ $PRG "$@"
 res=$?
 timer_result=$((SECONDS-start))
 
-notify-send "$(echo $PRG "$@")" "Returned $res<br/>Took $timer_result seconds"
+if command -v notify-send; then
+	! notify-send "$(echo $PRG "$@")" "Returned $res<br/>Took $timer_result seconds"
+fi
 
