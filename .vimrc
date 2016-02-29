@@ -282,7 +282,8 @@ nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
 nnoremap [tbuild]c :CreateOutDir<space>
 nnoremap [tbuild]e :EditCurrentOutDir<CR>
-nnoremap <silent> [tbuild]s :Unite -start-insert -no-split gn<CR>
+nnoremap [tbuild]o :Unite -start-insert -no-split gn_out<CR>
+nnoremap [tbuild]t :Unite -start-insert -no-split gn_target<CR>
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
