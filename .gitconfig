@@ -33,6 +33,10 @@
 	default = simple
 [pull]
 	rebase = preserve
+[rebase]
+	autostash = true
+[stash]
+	showPatch = true
 [credential]
 	helper = store
 [color]
