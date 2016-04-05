@@ -39,8 +39,6 @@
 	showPatch = true
 [credential]
 	helper = store
-[color]
-	ui = always
 
 [diff]
 	tool = bc4

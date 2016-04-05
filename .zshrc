@@ -17,8 +17,8 @@ if ! zgen saved; then
 	# Set the key mapping style to 'emacs' or 'vi'
 	zgen prezto editor key-bindings 'vi'
 
-	# Auto convert .... to ../..
-	zgen prezto editor dot-expansion 'yes'
+	# Do not auto convert .... to ../..
+	zgen prezto editor dot-expansion 'no'
 
 	# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'
 	zgen prezto git:status:ignore submodules 'all'
