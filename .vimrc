@@ -475,7 +475,7 @@ noremap <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc rel
 
 
 " Save as root
-cmap w!! w !sudo /usr/bin/tee % >/dev/null
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 
 " Now we don't have to move our fingers so far when we want to scroll through
