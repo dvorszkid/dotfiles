@@ -134,7 +134,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
 nnoremap <silent> <C-g> :Unite -start-insert -no-split file_rec/git<cr>
-nnoremap <silent> <C-t> :Unite -start-insert outline -auto-preview<cr>
+nnoremap <silent> <C-t> :Unite -start-insert -no-split outline -auto-preview<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
