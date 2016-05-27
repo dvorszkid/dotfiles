@@ -181,7 +181,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 " YouCompleteMe
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_error_symbol = 'E>'
