@@ -37,10 +37,15 @@
 	autostash = true
 [stash]
 	showPatch = true
+[submodule]
+	fetchJobs = 4
 [credential]
 	helper = store
+[interactive]
+	diffFilter = "diff-highlight"
 
 [diff]
+	compactionHeuristic = true
 	tool = bc4
 [difftool]
 	prompt = false
