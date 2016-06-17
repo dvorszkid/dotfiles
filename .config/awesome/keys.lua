@@ -208,7 +208,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell(apps.cmd.music_play) end),
 	awful.key({ }, "XF86AudioStop", function () awful.util.spawn_with_shell(apps.cmd.music_stop) end),
 	awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell(apps.cmd.music_next) end),
-	awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell(apps.cmd.music_prev) end)
+	awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell(apps.cmd.music_prev) end),
 	awful.key({ }, "XF86HomePage", function () awful.util.spawn_with_shell(apps.cmd.music_next) end),
 	awful.key({ }, "XF86Mail", function () awful.util.spawn_with_shell(apps.cmd.music_prev) end)
 )
