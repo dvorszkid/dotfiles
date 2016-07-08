@@ -152,7 +152,7 @@ let g:gitgutter_max_signs = 5000
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap <leader>hs <Plug>GitGutterStageHunk
-nmap <leader>hr <Plug>GitGutterRevertHunk
+nmap <leader>hr <Plug>GitGutterUndoHunk
 nmap <leader>hp <Plug>GitGutterPreviewHunk
 
 
