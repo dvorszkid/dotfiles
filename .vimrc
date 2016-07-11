@@ -525,6 +525,9 @@ augroup my_commands
 
 	" Auto-detect file changes
 	autocmd CursorHold,CursorHoldI,WinEnter,BufWinEnter * silent! checktime
+
+	" Handle '//' comments better
+	autocmd FileType c,cpp,objc,objcpp setlocal comments-=:// comments+=f://
 augroup end
 
 
