@@ -32,7 +32,7 @@ local apps_cmd = {
 	irc				= "weechat",
 	procmon			= "htop",
 	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
-	screenshot		= "ksnapshot" ,
+	screenshot		= "spectacle" ,
 
 	volume			= "alsamixer",
 	volume_inc		= "amixer -q set Master 4%+",

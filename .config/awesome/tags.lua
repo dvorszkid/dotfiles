@@ -130,6 +130,7 @@ tyrannical.tags = {
 
 tyrannical.properties.intrusive = {
 	"ksnapshot",
+	"spectacle",
 	"kcalc",
 	"Qalculate-gtk",
 	"Gradient editor",
@@ -150,6 +151,7 @@ tyrannical.properties.floating = {
 	"mplayer2",
 	"smplayer",
 	"ksnapshot",
+	"spectacle",
 	"kmix",
 	"kcalc",
 	"Qalculate-gtk",
@@ -168,6 +170,7 @@ tyrannical.properties.floating = {
 tyrannical.properties.ontop = {
 	"xephyr",
 	"ksnapshot",
+	"spectacle",
 	"kruler",
 }
 
