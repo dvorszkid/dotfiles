@@ -294,7 +294,11 @@ nmap <silent> <F7> [tbuild]a
 nmap <silent> <F8> [tbuild]f
 
 " Code formatting
-noremap <silent> <leader>ft :ToggleAutoFormatCode <CR>
+noremap <silent> <leader>ft :ToggleAutoFormatCode<CR>
+
+" Compile output
+nmap <silent> <leader>fe <leader>q<leader>q/error:<CR>
+nmap <silent> <leader>fw <leader>q<leader>q/warning:<CR>
 
 
 "
