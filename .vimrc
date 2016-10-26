@@ -91,7 +91,7 @@ if !(s:hostname =~ "raider")
 endif
 
 " C++ programming
-Plugin 'Kris2k/A.vim'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
@@ -232,8 +232,8 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 let g:lt_height = 15
 
 
-" A.vim
-nnoremap <silent> <F4> :A<CR>
+" FSwitch
+noremap <silent> <F4> :FSHere<CR>
 
 
 " vim-autoformat
