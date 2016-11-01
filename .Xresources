@@ -152,5 +152,5 @@ xscreensaver.passwd.thermometer.width:       8
 !datestamp format--see the strftime(3) manual page for details
 xscreensaver.dateFormat:%Y. %B %d. %a
 !login with kdm
-xscreensaver.newLoginCommand: kdmctl reserve
+xscreensaver.newLoginCommand: dm-tool switch-to-greeter
 
