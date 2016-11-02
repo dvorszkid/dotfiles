@@ -131,7 +131,7 @@ if executable('ag')
 	let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
 nnoremap <silent> <C-g> :Unite -start-insert -no-split file_rec/git<cr>
 nnoremap <silent> <C-t> :Unite -start-insert -no-split outline -auto-preview<cr>
@@ -296,10 +296,6 @@ nmap <silent> <F8> [tbuild]f
 " Code formatting
 noremap <silent> <leader>ft :ToggleAutoFormatCode<CR>
 
-" Compile output
-nmap <silent> <leader>fe <leader>q<leader>q/error:<CR>
-nmap <silent> <leader>fw <leader>q<leader>q/warning:<CR>
-
 
 "
 " Put your non-Plugin stuff after this line
@@ -441,6 +437,10 @@ nnoremap <silent> <leader>c :bp <BAR> bd #<CR>
 nnoremap <silent> <leader>C :1,1000bd<CR>
 
 
+" Closing tabs
+cnoremap qt tabclose
+
+
 " Scroll slightly faster
 noremap <c-e> <c-e><c-e><c-e>
 noremap <c-y> <c-y><c-y><c-y>
@@ -504,6 +504,8 @@ vnoremap : ;
 
 " C++ shortcuts
 nmap <leader>sm ysiw)istd::move<Esc>
+nmap <silent> <leader>fe <leader>q<leader>q/error:<CR>
+nmap <silent> <leader>fw <leader>q<leader>q/warning:<CR>
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
