@@ -65,3 +65,6 @@
 [mergetool "vimdiff3"]
 	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
+[merge "releasenotesmerger"]
+    name = release notes merger
+    driver = python \"$HOME/projects/coretools/merge_release_notes.py\" %O %A %B
