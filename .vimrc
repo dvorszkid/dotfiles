@@ -82,7 +82,6 @@ endif
 
 " General programming
 Plugin 'tomtom/tcomment_vim'
-Plugin 'SirVer/ultisnips'
 Plugin 'tpope/vim-dispatch'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'Shougo/unite-outline'
@@ -253,14 +252,6 @@ let g:tmuxline_preset={
 		\'z':'#H',
 		\'options':{'status-justify':'left'}
 	\}
-
-
-" UltiSnip
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"TODO: let g:UltiSnipsSnippetsDir = $HOME . '/dotfiles/vim/UltiSnips'
-let g:UltiSnipsExpandTrigger="<c-y>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 "
