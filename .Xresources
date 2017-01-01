@@ -110,6 +110,7 @@ URxvt.saveLines:			5000
 URxvt.urgentOnBell:			true
 URxvt.scrollWithBuffer:		false
 URxvt.scrollTtyKeypress:	true
+URxvt*secondaryWheel:		true
 URxvt.jumpScroll:			true
 URxvt.keysym.Control-Up:	\033[1;5A
 URxvt.keysym.Control-Down:	\033[1;5B
@@ -152,5 +153,5 @@ xscreensaver.passwd.thermometer.width:       8
 !datestamp format--see the strftime(3) manual page for details
 xscreensaver.dateFormat:%Y. %B %d. %a
 !login with kdm
-xscreensaver.newLoginCommand: dm-tool switch-to-greeter
+xscreensaver.newLoginCommand: qdbus --system org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
 
