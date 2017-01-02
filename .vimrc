@@ -428,10 +428,6 @@ nnoremap <silent> <leader>c :bp <BAR> bd #<CR>
 nnoremap <silent> <leader>C :1,1000bd<CR>
 
 
-" Closing tabs
-cnoremap qt tabclose
-
-
 " Scroll slightly faster
 noremap <c-e> <c-e><c-e><c-e>
 noremap <c-y> <c-y><c-y><c-y>
