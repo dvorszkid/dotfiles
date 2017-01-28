@@ -1,5 +1,5 @@
 "
-" Vundle package manager
+" Required for package manager
 "
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -11,109 +11,70 @@ filetype off                  " required
 let s:hostname = substitute(system('hostname'), '\n', '', '')
 
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
 "
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Plugin list (using VimPlug)
 "
-" plugin on GitHub repo
-" 	Plugin 'asdf/asdf'
-"
-" plugin from http://vim-scripts.org/vim/scripts.html
-" 	Plugin 'L9'
-"
-" Git plugin not hosted on GitHub
-" 	Plugin 'git://git.wincent.com/command-t.git'
-"
-" git repos on your local machine (i.e. when working on your own plugin)
-" 	Plugin 'file:///home/gmarik/path/to/plugin'
-"
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" 	Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"
-" Avoid a name conflict with L9
-" 	Plugin 'user/L9', {'name': 'newL9'}
-"
+call plug#begin('~/.vim/plugged')
 
 " For Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'gregsexton/gitv'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'gregsexton/gitv'
+Plug 'airblade/vim-gitgutter'
 
 " Misc
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'mbbill/undotree'
-Plugin 'kien/tabman.vim'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'godlygeek/tabular'
-Plugin 'Valloric/ListToggle'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dkprice/vim-easygrep'
-Plugin 'tpope/vim-surround'
-Plugin 'qwertologe/nextval.vim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'mbbill/undotree'
+Plug 'kien/tabman.vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tommcdo/vim-exchange'
+Plug 'Valloric/ListToggle'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'dkprice/vim-easygrep', {'on': ['Grep', 'Replace']}
+Plug 'tpope/vim-surround'
+Plug 'qwertologe/nextval.vim'
 
 " For file opening
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/neoyank.vim'
-Plugin 'scrooloose/nerdtree'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
 " Tmux
-Plugin 'tmux-plugins/vim-tmux'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'christoomey/vim-tmux-navigator'
 if !has("gui_running")
-	Plugin 'edkolev/tmuxline.vim'
+	Plug 'edkolev/tmuxline.vim'
 endif
 
 " General programming
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-dispatch'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'Shougo/unite-outline'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-dispatch'
+Plug 'Chiel92/vim-autoformat'
+Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
-	Plugin 'Valloric/YouCompleteMe'
+	Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
 " C++ programming
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
 if !(s:hostname =~ "raider")
-	Plugin 'ngg/vim-gn'
-	Plugin 'ngg/vim-protobuf'
-	Plugin 'git@bitbucket.org:tresorit/vimtresorit.git'
+	Plug 'ngg/vim-gn'
+	Plug 'ngg/vim-protobuf'
+	Plug 'git@bitbucket.org:tresorit/vimtresorit.git'
 endif
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
+" Automatically executes 'filetype plugin indent on' and 'syntax enable'
+call plug#end()
+
 
 "
 " Plugin configurations
@@ -209,16 +170,6 @@ let g:solarized_termcolors=16
 let g:solarized_termtrans=1
 
 
-" looks at the current line and the lines above and below it and aligns all the
-" equals signs; useful for when we have several lines of declarations
-nnoremap <Leader>a= :Tabularize /=<CR>
-vnoremap <Leader>a= :Tabularize /=<CR>
-nnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
-vnoremap <Leader>a/ :Tabularize /\/\//l2c1l0<CR>
-nnoremap <Leader>a, :Tabularize /,/l0r1<CR>
-vnoremap <Leader>a, :Tabularize /,/l0r1<CR>
-
-
 " NERDTree
 noremap <Leader>n :NERDTreeToggle<CR>
 
@@ -289,7 +240,7 @@ noremap <silent> <leader>ft :ToggleAutoFormatCode<CR>
 
 
 "
-" Put your non-Plugin stuff after this line
+" Put your non-plugin stuff after this line
 "
 
 ""
