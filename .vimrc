@@ -38,6 +38,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'dkprice/vim-easygrep', {'on': ['Grep', 'Replace']}
 Plug 'tpope/vim-surround'
 Plug 'qwertologe/nextval.vim'
+Plug 'osyo-manga/vim-anzu'
 
 " For file opening
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -79,6 +80,9 @@ call plug#end()
 "
 " Plugin configurations
 "
+
+" VimPlug
+nnoremap <silent> <leader><leader>p :PlugStatus<CR>
 
 " Unite
 let g:unite_prompt='» '
@@ -194,6 +198,11 @@ noremap <silent> <leader>ff :Autoformat<CR>
 nmap <silent> + <Plug>nextvalInc
 nmap <silent> - <Plug>nextvalDec
 
+" anzu
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
 
 " TmuxLine
 let g:tmuxline_preset={
