@@ -35,7 +35,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tommcdo/vim-exchange'
 Plug 'Valloric/ListToggle'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'dkprice/vim-easygrep', {'on': ['Grep', 'Replace']}
+Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround'
 Plug 'qwertologe/nextval.vim'
 Plug 'osyo-manga/vim-anzu'
