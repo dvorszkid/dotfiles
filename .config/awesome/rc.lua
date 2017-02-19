@@ -77,20 +77,20 @@ end
 -- lain
 lain.layout.termfair.nmaster   = 3
 lain.layout.termfair.ncol      = 1
-lain.layout.centerfair.nmaster = 3
-lain.layout.centerfair.ncol    = 1
+-- lain.layout.centerfair.nmaster = 3
+-- lain.layout.centerfair.ncol    = 1
 
 -- layout setup
 layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.fair,
     awful.layout.suit.tile,
-    lain.layout.uselessfair.horizontal,
-    lain.layout.uselesstile,
-    lain.layout.uselessfair,
+    -- lain.layout.uselessfair.horizontal,
+    -- lain.layout.uselesstile,
+    -- lain.layout.uselessfair,
     lain.layout.termfair,
-    lain.layout.centerfair,
-    lain.layout.uselesspiral.dwindle
+    -- lain.layout.centerfair,
+    -- lain.layout.uselesspiral.dwindle
 }
 
 -- tyrannical init
@@ -126,20 +126,21 @@ markup = lain.util.markup
 mytextclock = awful.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
 
 -- Calendar
-lain.widgets.calendar:attach(mytextclock, {
+local calendar = lain.widget.calendar({
 	font = "DejaVu Sans Mono",
+	attach_to = { mytextclock },
 	followmouse = true
 })
 
 -- CPU widget
-local cpuwidget = lain.widgets.cpu({
+local cpuwidget = lain.widget.cpu({
 	settings = function()
 		widget:set_markup(markup.fg.color(beautiful.fg_dark, " CPU ") .. cpu_now.usage .. "% ")
 	end
 })
 
 -- MEM widget
-local memwidget = lain.widgets.mem({
+local memwidget = lain.widget.mem({
 	settings = function()
 		widget:set_markup(markup.fg.color(beautiful.fg_dark, " RAM ") .. mem_now.used .. " MB ")
 	end
@@ -149,7 +150,7 @@ local memwidget = lain.widgets.mem({
 local netdownicon = wibox.widget.imagebox(beautiful.net_down)
 local netupicon = wibox.widget.imagebox(beautiful.net_up)
 local netdownwidget = wibox.widget.textbox()
-local netupwidget = lain.widgets.net({
+local netupwidget = lain.widget.net({
 	settings = function()
 		netdownwidget:set_markup(markup(beautiful.c_green, net_now.received .. " kB "))
 		widget:set_markup(markup(beautiful.c_red, net_now.sent .. " kB "))
@@ -196,15 +197,15 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     right_layout:add(bar_spr)
-    right_layout:add(cpuwidget)
+    -- right_layout:add(cpuwidget)
     right_layout:add(bar_spr)
-    right_layout:add(memwidget)
+    -- right_layout:add(memwidget)
     right_layout:add(bar_spr)
     right_layout:add(netdownicon)
-    right_layout:add(netdownwidget)
+    -- right_layout:add(netdownwidget)
     right_layout:add(bar_spr)
     right_layout:add(netupicon)
-    right_layout:add(netupwidget)
+    -- right_layout:add(netupwidget)
     right_layout:add(bar_spr)
     if s == 1 then
 		right_layout:add(wibox.widget.systray())
