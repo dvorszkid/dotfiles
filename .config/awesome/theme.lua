@@ -24,6 +24,7 @@ theme.c_green   = "#859900"
 theme.fg_normal  = "#839496"
 theme.fg_focus                                  = "#78A4FF"
 theme.fg_dark                                   = "#2c3238"
+theme.bg_systray                                = "#111111"
 theme.bg_normal                                 = "#111111"
 theme.bg_focus                                  = "#0d1f3c"
 theme.fg_urgent                                 = "#000000"
@@ -103,17 +104,14 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 
 -- lain related
 theme.useless_gap_width                         = 5
-theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
-theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
-theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
-theme.layout_uselessfair                        = theme.dir .. "/icons/fairv.png"
-theme.layout_uselessfairh                       = theme.dir .. "/icons/fairh.png"
-theme.layout_uselessdwindle                     = theme.dir .. "/icons/dwindle.png"
-theme.layout_uselesstile                        = theme.dir .. "/icons/tile.png"
-theme.layout_uselesstiletop                     = theme.dir .. "/icons/tiletop.png"
-theme.layout_uselesstileleft                    = theme.dir .. "/icons/tileleft.png"
-theme.layout_uselesstilebottom                  = theme.dir .. "/icons/tilebottom.png"
-theme.layout_uselesspiral                       = theme.dir .. "/icons/spiral.png"
+theme.lain_icons         = os.getenv("HOME") ..
+                           "/.config/awesome/lain/icons/layout/default/"
+theme.layout_termfair    = theme.lain_icons .. "termfair.png"
+theme.layout_centerfair  = theme.lain_icons .. "centerfair.png"  -- termfair.center
+theme.layout_cascade     = theme.lain_icons .. "cascade.png"
+theme.layout_cascadetile = theme.lain_icons .. "cascadetile.png" -- cascade.tile
+theme.layout_centerwork  = theme.lain_icons .. "centerwork.png"
+theme.layout_centerhwork = theme.lain_icons .. "centerworkh.png" -- centerwork.horizontal
 
 return theme
 

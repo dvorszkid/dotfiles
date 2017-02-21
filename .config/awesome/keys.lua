@@ -3,6 +3,7 @@ local beautiful    = require("beautiful")
 local tools        = require("tools")
 local drop         = require("scratch.drop")
 local apps         = require("apps")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 modkey = "Mod4"
 local altkey = "Mod1"
@@ -20,14 +21,21 @@ local rootButtons = awful.util.table.join(
 	awful.button({ }, 5, awful.tag.viewprev)
 )
 
+-- Layout buttons
+local layoutButtons = awful.util.table.join(
+	awful.button({ }, 1, function () awful.layout.inc( 1) end),
+    awful.button({ }, 3, function () awful.layout.inc(-1) end),
+    awful.button({ }, 4, function () awful.layout.inc( 1) end),
+    awful.button({ }, 5, function () awful.layout.inc(-1) end))
+
 -- Taglist buttons
 local taglistButtons = awful.util.table.join(
 	awful.button({        }, 1, awful.tag.viewonly),
 	awful.button({        }, 3, awful.tag.viewtoggle),
 	awful.button({ modkey }, 1, awful.client.movetotag),
 	awful.button({ modkey }, 3, awful.client.toggletag),
-	awful.button({        }, 4, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end),
-	awful.button({        }, 5, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end)
+	awful.button({        }, 4, function(t) awful.tag.viewprev(t.screen) end),
+	awful.button({        }, 5, function(t) awful.tag.viewnext(t.screen) end)
 )
 
 -- Tasklist buttons
@@ -40,8 +48,8 @@ local tasklistButtons = awful.util.table.join(
 			-- Without this, the following
 			-- :isvisible() makes no sense
 				c.minimized = false
-				if not c:isvisible() then
-					awful.tag.viewonly(c:tags()[1])
+				if not c:isvisible() and c.first_tag then
+					c.first_tag:view_only()
 				end
 				-- This will also un-minimize
 				-- the client, if needed
@@ -72,10 +80,10 @@ local tasklistButtons = awful.util.table.join(
 
 -- Client keys
 local clientKeys = awful.util.table.join(
-	awful.key({ modkey,           }, "f"     , function (c) c.fullscreen = not c.fullscreen end),
+	awful.key({ modkey,  altkey   }, "f"     , function (c) c.fullscreen = not c.fullscreen end),
 	awful.key({ modkey, "Control" }, "c"     , function (c) c:kill() end),
-	awful.key({ modkey,           }, "space" , awful.client.floating.toggle),
-	awful.key({ modkey,           }, "o"     , awful.client.movetoscreen),
+	awful.key({ modkey,           }, "f"     , awful.client.floating.toggle),
+	awful.key({ modkey,           }, "o"     , function (c) c:move_to_screen() end),
 	awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
 	awful.key({ modkey,           }, "t"     , function (c) c.ontop = not c.ontop end),
 	awful.key({ modkey,  altkey   }, "t"     , awful.titlebar.toggle),
@@ -110,6 +118,7 @@ local titlebarButtons = awful.util.table.join(
 
 -- Global keys
 local globalKeys = awful.util.table.join(
+	awful.key({ modkey, "Control" }, "h" , hotkeys_popup.show_help),
 	awful.key({ modkey, "Control" }, "[" , function () awful.screen.focus_relative(-1) end),
 	awful.key({ modkey, "Control" }, "]" , function () awful.screen.focus_relative( 1) end),
 
@@ -118,7 +127,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey }, "]" , awful.tag.viewnext),
 	awful.key({ modkey }, "\\", awful.tag.history.restore),
 
-	awful.key({  "Control"         }, "Escape", function () awful.util.spawn("xkill") end),
+	awful.key({ modkey         }, "Escape", function () awful.util.spawn("xkill") end),
 
 	-- Default client focus
 	awful.key({ altkey }, "Tab",
@@ -171,13 +180,9 @@ local globalKeys = awful.util.table.join(
 	-- User programs
 	awful.key({ modkey,           }, "Return", function () awful.util.spawn(apps.term.tmux) end),
 	awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(apps.cmd.terminal) end),
-	awful.key({ modkey, altkey }, "b", function () tools.run_or_raise(apps.cmd.browser, { class = "Firefox" }) end),
-	awful.key({ modkey, altkey }, "f", function () tools.run_or_raise(apps.cmd.filemanager, { name = "Krusader" }) end),
-	awful.key({ modkey, altkey }, "s", function () tools.run_or_raise(apps.cmd.music, { class = "Spotify" }) end),
-	awful.key({ modkey, altkey }, "i", function () tools.run_or_raise(apps.tmux.irc, { name = "WeeChat" }) end),
-	awful.key({ modkey, altkey }, "c", function () awful.util.spawn(apps.cmd.calculator) end),
-	awful.key({ modkey, altkey }, "h", function () awful.util.spawn(apps.term.procmon) end),
-	awful.key({                }, "Print", function () awful.util.spawn(apps.cmd.screenshot) end),
+	awful.key({ },                   "XF86Calculator", function () awful.util.spawn(apps.cmd.calculator) end),
+	awful.key({ "Control" },         "Escape", function () awful.util.spawn(apps.term.procmon) end),
+	awful.key({ },                   "Print", function () awful.util.spawn(apps.cmd.screenshot) end),
 
 	-- Prompts
 	awful.key({ modkey }, "r",
@@ -218,36 +223,39 @@ for i = 1, 9 do
 	globalKeys = awful.util.table.join(globalKeys,
 		awful.key({ modkey            }, "#" .. i + 9,
 			function ()
-				local tag = awful.tag.gettags(mouse.screen)[i]
+				local screen = awful.screen.focused()
+				local tag = screen.tags[i]
 				if tag then
-					awful.tag.viewonly(tag)
+					tag:view_only()
 				end
 			end),
 		awful.key({ modkey, "Control" }, "#" .. i + 9,
 			function ()
-				local tag = awful.tag.gettags(mouse.screen)[i]
+				local screen = awful.screen.focused()
+				local tag = screen.tags[i]
 				if tag then
 					awful.tag.viewtoggle(tag)
 				end
 			end),
 		awful.key({ modkey, "Shift"   }, "#" .. i + 9,
 			function ()
-				local tag = awful.tag.gettags(client.focus.screen)[i]
-				if client.focus and tag then
-					awful.client.movetotag(tag)
+				local tag = client.focus.screen.tags[i]
+				if tag then
+					client.focus:move_to_tag(tag)
 				end
 			end),
 		awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
 			function ()
-				local tag = awful.tag.gettags(client.focus.screen)[i]
-				if client.focus and tag then
-					awful.client.toggletag(tag)
+				local tag = client.focus.screen.tags[i]
+				if tag then
+					client.focus:toggle_tag(tag)
 				end
 			end))
 end
 
 return {
 	rootButtons = rootButtons,
+	layoutButtons = layoutButtons,
 	taglistButtons = taglistButtons,
 	tasklistButtons = tasklistButtons,
 	clientKeys = clientKeys,

@@ -1,16 +1,20 @@
 -- {{{ Required libraries
+-- Standard awesome libraries
 local gears      = require("gears")
 local awful      = require("awful")
 awful.rules      = require("awful.rules")
 require("awful.autofocus")
+-- Widget and layout library
 local wibox      = require("wibox")
+-- Theme handling library
 local beautiful  = require("beautiful")
+-- Notification library
 local naughty    = require("naughty")
--- plugins
+-- Plugins
 local lain       = require("lain")
 local tyrannical = require("tyrannical")
 require("tyrannical.shortcut")
--- configs
+-- Configs
 local tools      = require("tools")
 local apps       = require("apps")
 local keys       = require("keys")
@@ -77,20 +81,19 @@ end
 -- lain
 lain.layout.termfair.nmaster   = 3
 lain.layout.termfair.ncol      = 1
--- lain.layout.centerfair.nmaster = 3
--- lain.layout.centerfair.ncol    = 1
+lain.layout.termfair.center.nmaster = 3
+lain.layout.termfair.center.ncol    = 1
 
 -- layout setup
-layouts = {
+awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.fair,
     awful.layout.suit.tile,
-    -- lain.layout.uselessfair.horizontal,
-    -- lain.layout.uselesstile,
-    -- lain.layout.uselessfair,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.max,
     lain.layout.termfair,
-    -- lain.layout.centerfair,
-    -- lain.layout.uselesspiral.dwindle
+    lain.layout.termfair.center,
 }
 
 -- tyrannical init
@@ -101,9 +104,17 @@ beautiful.init(conf_dir .. "/theme.lua")
 local titlebars_enabled = beautiful.titlebar_enabled == nil and (config.titlebars == true) or beautiful.titlebar_enabled
 
 -- wallpaper
-for s = 1, screen.count() do
-	gears.wallpaper.maximized(config.wallpaperPath .. s, s, true)
+local function set_wallpaper(s)
+	local wallpaper = config.wallpaperPath .. s.index
+	-- If wallpaper is a function, call it with the screen
+	if type(wallpaper) == "function" then
+		wallpaper = wallpaper(s)
+	end
+	gears.wallpaper.maximized(wallpaper, s, true)
 end
+
+-- re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", set_wallpaper)
 -- }}}
 
 
@@ -123,7 +134,7 @@ end
 markup = lain.util.markup
 
 -- Textclock
-mytextclock = awful.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
+mytextclock = wibox.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
 
 -- Calendar
 local calendar = lain.widget.calendar({
@@ -160,67 +171,61 @@ local netupwidget = lain.widget.net({
 -- Separators
 bar_spr = wibox.widget.textbox(' ' .. markup(beautiful.fg_dark, "|") .. ' ')
 
--- Create a wibox for each screen and add it
-local mywibox = {}
-mypromptbox = {}
-local mylayoutbox = {}
-local mytaglist = {}
-mytaglist.buttons = keys.taglistButtons
-local mytasklist = {}
-mytasklist.buttons = keys.tasklistButtons
+-- Screen widgets
+awful.screen.connect_for_each_screen(function(s)
+    -- Wallpaper
+    set_wallpaper(s)
 
-for s = 1, screen.count() do
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt()
+    s.mypromptbox = awful.widget.prompt()
 
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(keys.layoutButtons)
 
     -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, keys.taglistButtons)
 
     -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
+    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, keys.tasklistButtons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 18 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
 
-    -- Widgets that are aligned to the left
-    local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylayoutbox[s])
-    left_layout:add(bar_spr)
-    left_layout:add(mytaglist[s])
-    left_layout:add(bar_spr)
-    left_layout:add(mypromptbox[s])
-
-    -- Widgets that are aligned to the right
-    local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(bar_spr)
-    -- right_layout:add(cpuwidget)
-    right_layout:add(bar_spr)
-    -- right_layout:add(memwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(netdownicon)
-    -- right_layout:add(netdownwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(netupicon)
-    -- right_layout:add(netupwidget)
-    right_layout:add(bar_spr)
-    if s == 1 then
-		right_layout:add(wibox.widget.systray())
-		right_layout:add(bar_spr)
-	end
-    right_layout:add(mytextclock)
-
-    -- Now bring it all together (with the tasklist in the middle)
-    local layout = wibox.layout.align.horizontal()
-    layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
-    layout:set_right(right_layout)
-
-    mywibox[s]:set_widget(layout)
-end
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        -- Left widgets
+		{
+			layout = wibox.layout.fixed.horizontal,
+			s.mylayoutbox,
+			bar_spr,
+			s.mytaglist,
+			bar_spr,
+			s.mypromptbox,
+        },
+		-- Middle widget
+        s.mytasklist,
+        -- Right widgets
+		{
+			layout = wibox.layout.fixed.horizontal,
+			bar_spr,
+			cpuwidget.widget,
+			bar_spr,
+			memwidget.widget,
+			bar_spr,
+			netdownicon,
+			netdownwidget,
+			bar_spr,
+			netupicon,
+			netupwidget.widget,
+			bar_spr,
+			wibox.widget.systray(),
+			mytextclock,
+        },
+    }
+end)
 -- }}}
 
 
@@ -237,97 +242,101 @@ awful.rules.rules = {
       properties = { border_width = beautiful.border_width,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
+                     raise = true,
                      keys = keys.clientKeys,
                      buttons = keys.clientButtons,
-	                 size_hints_honor = false } },
+                     screen = awful.screen.preferred,
+					 size_hints_honor = true,
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+       }
+      },
+
+    -- Add titlebars to normal clients and dialogs
+    { rule_any = {type = { "normal", "dialog" }
+      }, properties = { titlebars_enabled = true }
+    },
 }
 -- }}}
 
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
-	if config.sloppyFocus == true then
-		c:connect_signal("mouse::enter", function(c)
-			if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-				and awful.client.focus.filter(c) then
-				client.focus = c
-			end
-		end)
-	end
-
-    if not startup and not c.size_hints.user_position
-       and not c.size_hints.program_position then
+client.connect_signal("manage", function (c)
+    if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         awful.placement.no_overlap(c)
+	-- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+end)
 
+client.connect_signal("request::titlebars", function(c)
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.stickybutton(c))
-        left_layout:add(awful.titlebar.widget.ontopbutton(c))
-
-        local middle_layout = wibox.layout.flex.horizontal()
-        local title = awful.titlebar.widget.titlewidget(c)
-        title:set_align("center")
-        middle_layout:add(title)
-        middle_layout:buttons(keys.titlebarButtons)
-
-        local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.closebutton(c))
-
-        local layout = wibox.layout.align.horizontal()
-        layout:set_left(left_layout)
-        layout:set_middle(middle_layout)
-        layout:set_right(right_layout)
-
-        awful.titlebar(c,{size=14}):set_widget(layout)
-		if awful.layout.get(c.screen) ~= awful.layout.suit.floating then
-			awful.titlebar.hide(c);
+        awful.titlebar(c) : setup {
+            -- Left
+            {
+                awful.titlebar.widget.iconwidget(c),
+                awful.titlebar.widget.stickybutton   (c),
+                awful.titlebar.widget.ontopbutton    (c),
+                buttons = buttons,
+                layout  = wibox.layout.fixed.horizontal
+            },
+            -- Middle
+            {
+                { -- Title
+                    align  = "center",
+                    widget = awful.titlebar.widget.titlewidget(c)
+                },
+                buttons = keys.titlebarButtons,
+                layout  = wibox.layout.flex.horizontal
+            },
+            -- Right
+            {
+                awful.titlebar.widget.floatingbutton (c),
+                awful.titlebar.widget.maximizedbutton(c),
+                awful.titlebar.widget.closebutton    (c),
+                layout = wibox.layout.fixed.horizontal()
+            },
+            layout = wibox.layout.align.horizontal
+        }
+		awful.titlebar(c, {size=16})
+		if not c.floating then
+			awful.titlebar.hide(c)
 		end
     end
 end)
 
-client.connect_signal("focus", function(c)
-	c.border_color = beautiful.border_focus
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+        and awful.client.focus.filter(c) then
+        client.focus = c
+    end
 end)
 
-client.connect_signal("unfocus", function(c)
-	c.border_color = beautiful.border_normal
-end)
-
-client.connect_signal("property::floating", function(c)
-	if awful.client.floating.get(c) then
-		   awful.titlebar.show(c)
-	else
-		   awful.titlebar.hide(c)
-	end
-end)
+-- Focused border colors
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 
 -- {{{ Arrange signal handler
-for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
-        local clients = awful.client.visible(s)
-        local layout  = awful.layout.getname(awful.layout.get(s))
-
-        if #clients > 0 then -- Fine grained borders and floaters control
-            for _, c in pairs(clients) do -- Floaters always have borders
-                if awful.client.floating.get(c) or layout == "floating" then
-                    c.border_width = beautiful.border_width
-
-                -- No borders with only one visible client
-                elseif #clients == 1 or layout == "max" then
-                    clients[1].border_width = 0
-                else
-                    c.border_width = beautiful.border_width
-                end
-            end
-        end
-      end)
-end
+-- for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
+--         local clients = awful.client.visible(s)
+--         local layout  = awful.layout.getname(awful.layout.get(s))
+--
+--         if #clients > 0 then -- Fine grained borders and floaters control
+--             for _, c in pairs(clients) do -- Floaters always have borders
+--                 if awful.client.floating.get(c) or layout == "floating" then
+--                     c.border_width = beautiful.border_width
+--
+--                 -- No borders with only one visible client
+--                 elseif #clients == 1 or layout == "max" then
+--                     clients[1].border_width = 0
+--                 else
+--                     c.border_width = beautiful.border_width
+--                 end
+--             end
+--         end
+--       end)
+-- end
 -- }}}
-

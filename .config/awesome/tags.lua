@@ -132,7 +132,7 @@ tyrannical.properties.intrusive = {
 	"ksnapshot",
 	"spectacle",
 	"kcalc",
-	"Qalculate-gtk",
+	"qalculate-gtk",
 	"Gradient editor",
 	"About KDE",
 	"Paste Special",
@@ -154,7 +154,7 @@ tyrannical.properties.floating = {
 	"spectacle",
 	"kmix",
 	"kcalc",
-	"Qalculate-gtk",
+	"qalculate-gtk",
 	"yakuake",
 	"Select Color$",
 	"kruler",
@@ -186,9 +186,9 @@ tyrannical.properties.below = {
 	"conky",
 }
 
-tyrannical.properties.centered = {
+tyrannical.properties.placement = {
 	"kcalc",
-	"qalculate-gtk",
+	["qalculate-gtk"] = awful.placement.centered,
 }
 
 tyrannical.properties.skip_taskbar = {

@@ -8,9 +8,9 @@ autostart["common"] = {
 	"urxvtd",
 	"unclutter",
 	"xscreensaver -no-splash",
-	"klipper",
+	"parcellite",
 	"kmix",
-	"skype",
+	"skypeforlinux",
 	"tresorit --hidden",
 }
 autostart["basestar"] = {
