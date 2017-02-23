@@ -17,6 +17,7 @@ autostart["basestar"] = {
 }
 autostart["bp1-dsklin"] = {
 	"tresorit-control-panel",
+	"linconnect_server.py",
 }
 
 -- app collection for shortcuts and widgets
