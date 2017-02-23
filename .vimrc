@@ -59,7 +59,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
-	Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-libclang', 'for': ['c', 'cpp', 'python']}
+	Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
 " C++ programming
@@ -82,7 +82,10 @@ call plug#end()
 "
 
 " VimPlug
-nnoremap <silent> <leader><leader>p :PlugStatus<CR>
+nnoremap <silent> <leader><leader>ps :PlugStatus<CR>
+nnoremap <silent> <leader><leader>pu :PlugUpdate<CR>
+nnoremap <silent> <leader><leader>pU :PlugUpgrade<CR>
+nnoremap <silent> <leader><leader>pc :PlugClean<CR>
 
 " Unite
 let g:unite_prompt='» '
