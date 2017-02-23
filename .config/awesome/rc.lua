@@ -246,7 +246,7 @@ awful.rules.rules = {
                      keys = keys.clientKeys,
                      buttons = keys.clientButtons,
                      screen = awful.screen.preferred,
-					 size_hints_honor = true,
+					 size_hints_honor = false,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
        }
       },
