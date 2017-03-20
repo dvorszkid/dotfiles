@@ -10,7 +10,6 @@ autostart["common"] = {
 	"xscreensaver -no-splash",
 	"parcellite",
 	"kmix",
-	"skypeforlinux",
 	"tresorit --hidden",
 }
 autostart["basestar"] = {
