@@ -1,4 +1,3 @@
 #!/bin/sh
-X :2 -ac -terminate &
-
-DISPLAY=:2 nice -20 xterm -e "quake3 -noforcemspd -noforcemparms -noforcemaccel"
+X :2 -terminate &
+DISPLAY=:2 nice -20 xterm -e quake3
