@@ -73,7 +73,7 @@ firewall_start()
 	for i in "${ACCEPT_UDP[@]}";
 	do
 		echo -n " $i"
-		iptables -A openports -p udp --dport $i -m conntrack --ctstate NEW -j ACCEPT
+		iptables -A openports -p udp --dport $i -j ACCEPT
 	done
 	echo
 	echo -n " - TCP and UDP ports (from $LOCAL_SUBNET):"
@@ -81,7 +81,7 @@ firewall_start()
 	do
 		echo -n " $i"
 		iptables -A openports -p tcp --dport $i -s $LOCAL_SUBNET -m conntrack --ctstate NEW -j ACCEPT
-		iptables -A openports -p udp --dport $i -s $LOCAL_SUBNET -m conntrack --ctstate NEW -j ACCEPT
+		iptables -A openports -p udp --dport $i -s $LOCAL_SUBNET -j ACCEPT
 	done
 	echo
 
