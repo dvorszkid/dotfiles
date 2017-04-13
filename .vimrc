@@ -59,7 +59,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
-	Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
+	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/4/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
 " C++ programming
