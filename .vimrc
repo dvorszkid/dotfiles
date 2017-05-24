@@ -191,6 +191,7 @@ let g:lt_height = 15
 
 " FSwitch
 noremap <silent> <F4> :FSHere<CR>
+inoremap <silent> <F4> <Esc>:FSHere<CR>
 
 
 " vim-autoformat
@@ -315,6 +316,7 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
+set ttimeoutlen=0       " timeout of keycode sequences - faster Esc in insert mode
 
 
 ""
@@ -378,10 +380,6 @@ nnoremap j gj
 nnoremap k gk
 
 
-" Insert whitespaces without entering insert mode
-nnoremap <silent> <leader><Space> i<Space><Esc>
-
-
 " Clear highlight
 nnoremap <silent> <Space> <Space>:noh<CR>
 
@@ -416,10 +414,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
 " Better regex syntax
 " nnoremap / /\v
 " vnoremap / /\v
-
-
-" Faster Escape
-inoremap jj <ESC>
 
 
 " <leader>v brings up .vimrc
