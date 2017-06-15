@@ -91,7 +91,12 @@ nnoremap <silent> <leader><leader>pc :PlugClean<CR>
 let g:unite_prompt='» '
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_grep_max_candidates = 1000
-if executable('ag')
+if executable('rg')
+	let g:unite_source_grep_command = 'rg'
+	let g:unite_source_grep_default_opts = '--hidden --no-heading --vimgrep -S'
+	let g:unite_source_grep_recursive_opt = ''
+	let g:unite_source_rec_async_command = ['rg', '--files', '--follow', '--hidden']
+elseif executable('ag')
 	let g:unite_source_grep_command = 'ag'
 	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden'
 	let g:unite_source_grep_recursive_opt = ''
@@ -100,7 +105,7 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <silent> <C-g> :Unite -start-insert -no-split file_rec/git<cr>
+nnoremap <silent> <C-g> :Unite -start-insert -no-split -buffer-name=grep -auto-preview grep<cr><cr>
 nnoremap <silent> <C-t> :Unite -start-insert -no-split outline -auto-preview<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
@@ -482,7 +487,10 @@ augroup end
 
 
 " Search and Replace
-if executable('ag')
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 endif
 
