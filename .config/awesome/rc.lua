@@ -13,9 +13,7 @@ local naughty    = require("naughty")
 -- Plugins
 local lain       = require("lain")
 local tyrannical = require("tyrannical")
-require("tyrannical.shortcut")
 -- Configs
-local tools      = require("tools")
 local apps       = require("apps")
 local keys       = require("keys")
 -- }}}
@@ -117,19 +115,6 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 -- }}}
 
-
--- {{{ Autostart apps
-for _, app in pairs(apps.autostart["common"]) do
-	tools.run_once(app)
-end
-if apps.autostart[hostname] ~= nil then
-	for _, app in pairs(apps.autostart[hostname]) do
-		tools.run_once(app)
-	end
-end
--- }}}
-
-
 -- {{{ Wibox
 markup = lain.util.markup
 
@@ -167,6 +152,45 @@ local netupwidget = lain.widget.net({
 		widget:set_markup(markup(beautiful.c_red, net_now.sent .. " kB "))
 	end
 })
+
+-- ALSA widget
+local volume = lain.widget.alsabar({
+	timeout = 5,
+	ticks = true,
+	ticks_size = 5,
+	height = 5,
+	width = 50,
+	colors = {
+		background = beautiful.bg_normal,
+		mute       = beautiful.fg_dark,
+		unmute     = beautiful.fg_normal
+	}
+})
+volume.bar:buttons(awful.util.table.join(
+    awful.button({}, 1, function() -- left click
+        awful.spawn(string.format("%s -e alsamixer", terminal))
+    end),
+    awful.button({}, 3, function() -- right click
+        awful.spawn(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
+        volume.update()
+    end),
+    awful.button({}, 4, function() -- scroll up
+        awful.spawn(string.format("%s set %s 2%%+", volume.cmd, volume.channel))
+        volume.update()
+    end),
+    awful.button({}, 5, function() -- scroll down
+        awful.spawn(string.format("%s set %s 2%%-", volume.cmd, volume.channel))
+        volume.update()
+    end)
+))
+keys.globalKeys = awful.util.table.join(awful.util.table.join(
+	awful.key({ }, "XF86AudioRaiseVolume", function () volume.update() end),
+	awful.key({ }, "XF86AudioLowerVolume", function () volume.update() end),
+	awful.key({ }, "XF86AudioMute", function ()
+		os.execute("sleep 0.1")
+		volume.update()
+	end)
+), keys.globalKeys)
 
 -- Separators
 bar_spr = wibox.widget.textbox(' ' .. markup(beautiful.fg_dark, "|") .. ' ')
@@ -220,6 +244,8 @@ awful.screen.connect_for_each_screen(function(s)
 			bar_spr,
 			netupicon,
 			netupwidget.widget,
+			bar_spr,
+			volume.bar,
 			bar_spr,
 			wibox.widget.systray(),
 			mytextclock,

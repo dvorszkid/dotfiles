@@ -6,7 +6,7 @@ tyrannical.settings.block_children_focus_stealing = true
 tyrannical.settings.group_children = true
 
 tyrannical.settings.tag.layout = awful.layout.suit.tile
-tyrannical.settings.tag.mwfact = 0.6
+tyrannical.settings.tag.master_width_factor = 0.6
 
 
 tyrannical.tags = {

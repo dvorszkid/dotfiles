@@ -2,23 +2,6 @@
 -- Apps used in Awesome WM
 --
 
--- autostart
-local autostart = {}
-autostart["common"] = {
-	"urxvtd",
-	"unclutter",
-	"xscreensaver -no-splash",
-	"parcellite",
-	"kmix",
-	"tresorit --hidden",
-}
-autostart["basestar"] = {
-}
-autostart["bp1-dsklin"] = {
-	"tresorit-control-panel",
-	"linconnect_server.py",
-}
-
 -- app collection for shortcuts and widgets
 local apps_cmd = {
 	terminal		= "urxvtc",
@@ -34,10 +17,9 @@ local apps_cmd = {
 	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
 	screenshot		= "spectacle" ,
 
-	volume			= "alsamixer",
-	volume_inc		= "amixer -q set Master 4%+",
-	volume_dec		= "amixer -q set Master 4%-",
-	volume_mute		= "amixer -q set Master playback toggle",
+	volume_inc		= "amixer set Master 2%+",
+	volume_dec		= "amixer set Master 2%-",
+	volume_mute		= "amixer set Master toggle",
 
 	music			= "spotify",
 	music_play		= "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
@@ -62,6 +44,5 @@ return {
 	cmd = apps_cmd,
 	term = apps_term,
 	tmux = apps_tmux,
-	autostart = autostart,
 }
 

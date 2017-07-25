@@ -1,7 +1,6 @@
 local awful        = require("awful")
 local beautiful    = require("beautiful")
-local tools        = require("tools")
-local drop         = require("scratch.drop")
+local lain         = require("lain")
 local apps         = require("apps")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
@@ -116,6 +115,15 @@ local titlebarButtons = awful.util.table.join(
 	end)
 )
 
+-- Dropdown terminal
+local quake = lain.util.quake({
+	app = "urxvtc",
+	extra = "-e " .. apps.cmd.tmux_session .. "dropdown",
+	onlyone = true,
+	followtag = true,
+	height = 0.7,
+})
+
 -- Global keys
 local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "h" , hotkeys_popup.show_help),
@@ -123,9 +131,14 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "]" , function () awful.screen.focus_relative( 1) end),
 
 	-- Tag browsing
+	awful.key({ modkey }, "\\", awful.tag.history.restore),
 	awful.key({ modkey, altkey }, "[" , awful.tag.viewprev),
 	awful.key({ modkey, altkey }, "]" , awful.tag.viewnext),
-	awful.key({ modkey }, "\\", awful.tag.history.restore),
+	awful.key({ modkey, altkey }, "n", function () lain.util.add_tag() end),
+	awful.key({ modkey, altkey }, "r", function () lain.util.rename_tag() end),
+	awful.key({ modkey, altkey }, "d", function () lain.util.delete_tag() end),
+	awful.key({ modkey, altkey, "Shift" }, "[", function () lain.util.move_tag(-1) end),
+	awful.key({ modkey, altkey, "Shift" }, "]", function () lain.util.move_tag(1) end),
 
 	awful.key({ modkey         }, "Escape", function () awful.util.spawn("xkill") end),
 
@@ -190,14 +203,14 @@ local globalKeys = awful.util.table.join(
 			" -nb '" ..  beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. "'" ..
 			" -sb '" .. beautiful.bg_focus .. "' -sf '" .. beautiful.fg_focus .. "'")
 		end),
-	awful.key({ modkey, altkey }, "r",
+	awful.key({ modkey, altkey, "Control" }, "r",
 		function ()
-			awful.prompt.run({prompt = "Run Lua code: "}, mypromptbox[mouse.screen].widget, awful.util.eval, nil, awful.util.getdir("cache") .. "/history_eval")
+			awful.prompt.run({prompt = "Run Lua code: "}, awful.screen.focused().mypromptbox.widget, awful.util.eval, nil, awful.util.getdir("cache") .. "/history_eval")
 		end
 	),
 
 	-- Dropdown terminal
-	awful.key({                            }, "F12",      function () drop(apps.term.tmux_session .. "dropdown", top, center, 0.9, 0.75, true, config.scr.pri) end),
+	awful.key({ }, "F12",      function () quake:toggle() end),
 
 	-- Lock and shutdown
 	awful.key({ modkey, "Control"          }, "l",      function () awful.util.spawn(apps.cmd.lock) end),
@@ -208,6 +221,11 @@ local globalKeys = awful.util.table.join(
 	-- Awesome control
 	awful.key({ modkey, "Control" }, "r",      awesome.restart),
 	awful.key({ modkey, "Control" }, "q",      awesome.quit),
+
+	-- ALSA control
+	awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn(apps.cmd.volume_inc) end),
+	awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn(apps.cmd.volume_dec) end),
+	awful.key({ }, "XF86AudioMute", function () awful.spawn(apps.cmd.volume_mute) end),
 
 	-- Spotify control
 	awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell(apps.cmd.music_play) end),

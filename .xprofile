@@ -2,4 +2,13 @@
 
 . ~/.env
 xset r rate 200 40 &
+
+# Autostart
+urxvtd &
 unclutter &
+xscreensaver -no-splash &
+parcellite &
+tresorit --hidden &
+
+# Machine specific
+[ -f ~/.xprofile.local ] && source ~/.xprofile.local
