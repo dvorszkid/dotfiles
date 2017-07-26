@@ -1,7 +1,8 @@
 #!/bin/sh
 
 . ~/.env
-xset r rate 200 40 &
+xset r rate 200 40
+xrdb ~/.Xresources
 
 # Autostart
 urxvtd &

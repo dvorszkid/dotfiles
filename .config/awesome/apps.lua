@@ -7,7 +7,7 @@ local apps_cmd = {
 	terminal		= "urxvtc",
 	tmux			= "tmux",
 	tmux_session	= "tmux -2 new-session -A -D -s ",
-	editor			= os.getenv("EDITOR") or "vi" or "mcedit",
+	editor			= os.getenv("EDITOR") or "vi",
 
 	browser			= "firefox-bin",
 	filemanager		= "krusader",
@@ -30,7 +30,7 @@ local apps_cmd = {
 	lock			= "xscreensaver-command -lock",
 	shutdown		= "sudo /sbin/poweroff",
 	reboot			= "sudo /sbin/reboot",
-	suspend			= "xscreensaver-command -lock && sleep 3 && sudo /usr/sbin/pm-suspend",
+	suspend			= "xscreensaver-command -lock && sleep 1 && sudo /usr/sbin/pm-suspend",
 }
 
 -- combined commands
