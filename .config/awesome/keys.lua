@@ -124,6 +124,18 @@ local quake = lain.util.quake({
 	height = 0.7,
 })
 
+local move_tag_to_screen = function(dir)
+	local tag = awful.screen.focused().selected_tag
+	local s = awful.screen.focused():get_next_in_direction(dir)
+	if s then
+		for _, t in pairs(s.selected_tags) do
+			t.selected = false
+		end
+		tag.screen =  s
+		mouse.screen = s
+	end
+end
+
 -- Global keys
 local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "h" , hotkeys_popup.show_help),
@@ -139,8 +151,10 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey }, "d", function () lain.util.delete_tag() end),
 	awful.key({ modkey, altkey, "Shift" }, "[", function () lain.util.move_tag(-1) end),
 	awful.key({ modkey, altkey, "Shift" }, "]", function () lain.util.move_tag(1) end),
-
-	awful.key({ modkey         }, "Escape", function () awful.util.spawn("xkill") end),
+	awful.key({ modkey, altkey }, "l", function () move_tag_to_screen("right") end),
+	awful.key({ modkey, altkey }, "h", function () move_tag_to_screen("left") end),
+	awful.key({ modkey, altkey }, "j", function () move_tag_to_screen("down") end),
+	awful.key({ modkey, altkey }, "k", function () move_tag_to_screen("up") end),
 
 	-- Default client focus
 	awful.key({ altkey }, "Tab",
@@ -201,6 +215,8 @@ local globalKeys = awful.util.table.join(
 	awful.key({ },                   "XF86Calculator", function () awful.util.spawn(apps.cmd.calculator) end),
 	awful.key({ "Control" },         "Escape", function () awful.util.spawn(apps.term.procmon) end),
 	awful.key({ },                   "Print", function () awful.util.spawn(apps.cmd.screenshot) end),
+	awful.key({ modkey             }, "Escape", function () awful.util.spawn("xkill") end),
+
 
 	-- Prompts
 	awful.key({ modkey }, "r",
