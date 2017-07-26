@@ -145,10 +145,15 @@ local globalKeys = awful.util.table.join(
 	-- Default client focus
 	awful.key({ altkey }, "Tab",
 		function ()
+			awful.client.focus.history.previous ()
+			if client.focus then client.focus:raise() end
+		end),
+	awful.key({ modkey }, "Tab",
+		function ()
 			awful.client.focus.byidx(1)
 			if client.focus then client.focus:raise() end
 		end),
-	awful.key({ altkey , "Shift"}, "Tab",
+	awful.key({ modkey , "Shift"}, "Tab",
 		function ()
 			awful.client.focus.byidx(-1)
 			if client.focus then client.focus:raise() end
