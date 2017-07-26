@@ -62,6 +62,9 @@ if !(s:hostname =~ "raider")
 	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/4/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
+" Lua programming
+Plug 'tbastos/vim-lua', {'for': ['lua']}
+
 " C++ programming
 Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
