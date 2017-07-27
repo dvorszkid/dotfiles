@@ -16,7 +16,7 @@ tyrannical.tags = {
 		init        = true,
 		exclusive   = true,
 		screen      = config.scr.pri,
-		layout      = awful.layout.suit.tile.left,
+		layout      = awful.layout.suit.floating,
 		class = {
 			"Opera",
 			"Opera developer",
@@ -52,7 +52,7 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "dev",
+		name        = "term",
 		init        = true,
 		exclusive   = false,
 		screen      = config.scr.pri,
@@ -64,33 +64,20 @@ tyrannical.tags = {
 			"Code::Blocks",
 			"DDD",
 			"kate4",
+			"URxvt",
 		}
 	},
 	{
-		name        = "chat",
+		name        = "www",
 		init        = true,
 		position    = 3,
 		exclusive   = false,
 		screen      = config.scr.sec,
 		force_screen= true,
-		layout      = awful.layout.suit.tile.left,
+		layout      = awful.layout.suit.floating,
 		class       = {
 			"Skype",
 			"Skype-bin",
-		}
-	},
-	{
-		name        = "irc",
-		init        = true,
-		position    = 3,
-		exclusive   = false,
-		screen      = config.scr.sec,
-		force_screen= true,
-		layout      = awful.layout.suit.tile.left,
-		class       = {
-			"Konversation",
-			"weechat",
-			"irssi",
 		}
 	},
 	{
@@ -113,7 +100,7 @@ tyrannical.tags = {
 		init        = false,
 		volatile    = true,
 		exclusive   = true,
-		layout      = awful.layout.suit.max,
+		layout      = awful.layout.suit.tile.right,
 		class       = {
 			"Okular",
 			"Xpdf",
@@ -212,4 +199,15 @@ tyrannical.properties.size_hints_honor = {
 	["urxvt"] = false,
 	["spotify"] = false,
 }
+
+-- Hack for making Spotify run on 'music' tag
+-- (it sets the WM_CLASS property after displaying the application window)
+client.connect_signal("property::class", function(c)
+	if c.class == "Spotify" then
+		local t = awful.tag.find_by_name(awful.screen.focused(), "music")
+		if t then
+			c:move_to_tag(t)
+		end
+	end
+end)
 
