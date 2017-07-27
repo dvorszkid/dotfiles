@@ -5,4 +5,3 @@
 
 # Preferred session
 /etc/X11/Sessions/awesome
-

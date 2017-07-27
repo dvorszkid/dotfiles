@@ -14,6 +14,7 @@ local naughty    = require("naughty")
 local lain       = require("lain")
 local tyrannical = require("tyrannical")
 -- Configs
+local autostart  = require("autostart")
 local apps       = require("apps")
 local keys       = require("keys")
 -- }}}
@@ -27,6 +28,11 @@ if awesome.startup_errors then
 		title = "Oops, there were errors during startup!",
 		text = awesome.startup_errors
 	})
+end
+
+-- Autostart
+for _, cmd in pairs(autostart) do
+	awful.util.spawn_with_shell("pgrep -u $USER -f \"" .. cmd .. "\"$ || (sleep 1 && " .. cmd .. ")")
 end
 
 

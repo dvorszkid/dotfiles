@@ -1,15 +1,7 @@
 #!/bin/sh
 
-. ~/.env
+[ -f ~/.env ] && source ~/.env
 xset r rate 200 40
-xrdb ~/.Xresources
-
-# Autostart
-urxvtd &
-unclutter &
-xscreensaver -no-splash &
-parcellite &
-tresorit --hidden &
 
 # Machine specific
 [ -f ~/.xprofile.local ] && source ~/.xprofile.local
