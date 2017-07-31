@@ -102,18 +102,20 @@ local clientButtons = awful.util.table.join(
 )
 
 -- Titlebar buttons
-local titlebarButtons = awful.util.table.join(
-	awful.button({ }, 1, function()
-		client.focus = c
-		c:raise()
-		awful.mouse.client.move(c)
-	end),
-	awful.button({ }, 3, function()
-		client.focus = c
-		c:raise()
-		awful.mouse.client.resize(c)
-	end)
-)
+local getTitlebarButtons = function (c)
+	return awful.util.table.join(
+		awful.button({ }, 1, function()
+			client.focus = c
+			c:raise()
+			awful.mouse.client.move(c)
+		end),
+		awful.button({ }, 3, function()
+			client.focus = c
+			c:raise()
+			awful.mouse.client.resize(c)
+		end)
+	)
+end
 
 -- Dropdown terminal
 local quake = lain.util.quake({
@@ -298,7 +300,7 @@ return {
 	tasklistButtons = tasklistButtons,
 	clientKeys = clientKeys,
 	clientButtons = clientButtons,
-	titlebarButtons = titlebarButtons,
+	getTitlebarButtons = getTitlebarButtons,
 	globalKeys = globalKeys,
 }
 

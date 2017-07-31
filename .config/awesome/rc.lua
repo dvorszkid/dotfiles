@@ -326,7 +326,7 @@ client.connect_signal("request::titlebars", function(c)
                     align  = "center",
                     widget = awful.titlebar.widget.titlewidget(c)
                 },
-                buttons = keys.titlebarButtons,
+                buttons = keys.getTitlebarButtons(c),
                 layout  = wibox.layout.flex.horizontal
             },
             -- Right
