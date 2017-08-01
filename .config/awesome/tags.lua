@@ -69,7 +69,7 @@ tyrannical.tags = {
 	},
 	{
 		name        = "www",
-		init        = true,
+		init        = config.scr.pri ~= config.scr.sec,
 		position    = 3,
 		exclusive   = false,
 		screen      = config.scr.sec,
