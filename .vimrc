@@ -230,14 +230,6 @@ let g:tmuxline_preset={
 " VimTresorit
 "
 
-" Makefile variables (for legacy build system)
-nnoremap [tmake] <Nop>
-nmap <leader>m [tmake]
-nnoremap <silent> [tmake]c :ToggleMakeCompiler<CR>
-nnoremap <silent> [tmake]d :ToggleMakeDebug<CR>
-nnoremap <silent> [tmake]t :ToggleMakeTests<CR>
-nnoremap <silent> [tmake]i :PrintMakeInformation<CR>
-
 " Building the source
 let g:buildcmd = ":Make "
 let g:buildbackgroundcmd = ":Make! -k 0 "
