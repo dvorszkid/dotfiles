@@ -55,7 +55,7 @@ endif
 
 " General programming
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
@@ -225,6 +225,11 @@ let g:tmuxline_preset={
 		\'options':{'status-justify':'left'}
 	\}
 
+" AsyncRun
+let g:asyncrun_bell = 1
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:asyncrun_exit = "silent call system(\"notify-send \\\"vim asyncrun\\\" \\\"Returned \" . g:asyncrun_code . \" (\" . g:asyncrun_status . \")\\\"\")"
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 "
 " VimTresorit
@@ -232,9 +237,10 @@ let g:tmuxline_preset={
 
 " Building the source
 let g:buildcmd = ":Make "
-let g:buildbackgroundcmd = ":Make! -k 0 "
+let g:buildbackgroundcmd = ":Make -k 0 "
 nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
+nnoremap [tbuild]s :AsyncStop<CR>
 nnoremap [tbuild]c :CreateOutDir<space>
 nnoremap [tbuild]e :EditCurrentOutDir<CR>
 nnoremap [tbuild]o :Unite -start-insert -no-split gn_out<CR>
@@ -448,8 +454,8 @@ vnoremap : ;
 
 " C++ shortcuts
 nmap <leader>sm ysiw)istd::move<Esc>
-nmap <silent> <leader>fe <leader>q<leader>q/error:<CR>
-nmap <silent> <leader>fw <leader>q<leader>q/warning:<CR>
+nnoremap <silent> <leader>fe :botright copen 15<CR>/error:<CR>
+nnoremap <silent> <leader>fw :botright copen 15<CR>/warning:<CR>
 
 
 " If you are still getting used to Vim and want to force yourself to stop using the arrow keys, add this
