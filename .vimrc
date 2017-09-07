@@ -133,10 +133,29 @@ nmap <leader>hp <Plug>GitGutterPreviewHunk
 
 " AirLine
 let g:airline_theme = 'solarized'
+let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs = 1
+" AirLine - custom functions
+function! AirlineCustomInit()
+	function! GetGnTarget()
+		return "[" . g:gn_target . "]"
+	endfunction
+	call airline#parts#define_function('gn_target', 'GetGnTarget')
+	call airline#parts#define_condition('gn_target', 'g:in_tresorit_source == 1')
+	function! GetAsyncrunStatus()
+		return g:asyncrun_status
+	endfunction
+	call airline#parts#define_function('asyncrun_status', 'GetAsyncrunStatus')
+	call airline#parts#define_condition('asyncrun_status', 'strlen(g:asyncrun_status) > 0')
+	let g:airline_section_b = g:airline_section_b . airline#section#create_left(['gn_target'])
+	let g:airline_section_error = g:airline_section_error . airline#section#create_right(['asyncrun_status'])
+endfunction
+augroup airline_init
+	autocmd User AirlineAfterInit call AirlineCustomInit()
+augroup END
 
 
 " EasyMotion
@@ -227,9 +246,13 @@ let g:tmuxline_preset={
 
 " AsyncRun
 let g:asyncrun_bell = 1
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:asyncrun_exit = "silent call system(\"notify-send \\\"vim asyncrun\\\" \\\"Returned \" . g:asyncrun_code . \" (\" . g:asyncrun_status . \")\\\"\")"
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+augroup asyncrun
+	autocmd User AsyncRunStart call asyncrun#quickfix_toggle(5, 1)
+	autocmd User AsyncRunStop if (g:asyncrun_code == 0) | call asyncrun#quickfix_toggle(5, 0) | AirlineRefresh | endif
+augroup END
+nnoremap <silent> <F9> :call asyncrun#quickfix_toggle(15)<CR>
 
 "
 " VimTresorit
@@ -489,8 +512,8 @@ augroup end
 
 " Search and Replace
 if executable("rg")
-    set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+	set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+	set grepformat=%f:%l:%c:%m,%f:%l:%m
 elseif executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 endif
