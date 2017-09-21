@@ -17,8 +17,8 @@ local apps_cmd = {
 	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
 	screenshot		= "spectacle" ,
 
-	volume_inc		= "amixer set Master 2%+",
-	volume_dec		= "amixer set Master 2%-",
+	volume_inc		= "amixer set Master 4%+",
+	volume_dec		= "amixer set Master 4%-",
 	volume_mute		= "amixer set Master toggle",
 
 	music			= "spotify",
