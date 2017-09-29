@@ -43,6 +43,7 @@ Plug 'osyo-manga/vim-anzu'
 " For file opening
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 
@@ -108,8 +109,10 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
+nnoremap <silent> <leader>f :Unite -start-insert -no-split file_rec/async<cr>
+nnoremap <silent> <leader>m :Unite -start-insert -no-split neomru/file<cr>
 nnoremap <silent> <C-g> :Unite -start-insert -no-split -buffer-name=grep -auto-preview grep<cr><cr>
-nnoremap <silent> <C-t> :Unite -start-insert -no-split outline -auto-preview<cr>
+nnoremap <silent> <leader>o :Unite -start-insert -no-split outline -auto-preview<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
@@ -193,6 +196,7 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR>
 " EasyGrep
 let g:EasyGrepCommand=1
 nnoremap <leader>/ :Grep<space>
+nnoremap <leader>r :Replace<space>
 
 
 " TabMan
