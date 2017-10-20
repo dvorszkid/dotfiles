@@ -109,10 +109,9 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <silent> <leader>f :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <silent> <leader>m :Unite -start-insert -no-split neomru/file<cr>
-nnoremap <silent> <C-g> :Unite -start-insert -no-split -buffer-name=grep -auto-preview grep<cr><cr>
-nnoremap <silent> <leader>o :Unite -start-insert -no-split outline -auto-preview<cr>
+nnoremap <silent> <leader><C-p> :Unite -start-insert -no-split neomru/file<cr>
+nnoremap <silent> <C-g> :Unite -start-insert -no-split -auto-preview line<cr>
+nnoremap <silent> <C-t> :Unite -start-insert -no-split -auto-preview outline<cr>
 nnoremap <silent> <leader>y :Unite history/yank<cr>
 nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
 
@@ -267,11 +266,11 @@ let g:buildcmd = ":Make "
 let g:buildbackgroundcmd = ":Make -k 0 "
 nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
-nnoremap [tbuild]s :AsyncStop<CR>
+nnoremap <silent> [tbuild]s :AsyncStop<CR>
 nnoremap [tbuild]c :CreateOutDir<space>
 nnoremap [tbuild]e :EditCurrentOutDir<CR>
-nnoremap [tbuild]o :Unite -start-insert -no-split gn_out<CR>
-nnoremap [tbuild]t :Unite -start-insert -no-split gn_target<CR>
+nnoremap <silent> [tbuild]o :Unite -start-insert -no-split gn_out<CR>
+nnoremap <silent> [tbuild]t :Unite -start-insert -no-split gn_target<CR>
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
