@@ -109,11 +109,11 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <silent> <leader><C-p> :Unite -start-insert -no-split neomru/file<cr>
+nnoremap <silent> <leader><leader>m :Unite -start-insert -no-split neomru/file<cr>
 nnoremap <silent> <C-g> :Unite -start-insert -no-split -auto-preview line<cr>
 nnoremap <silent> <C-t> :Unite -start-insert -no-split -auto-preview outline<cr>
-nnoremap <silent> <leader>y :Unite history/yank<cr>
-nnoremap <silent> <leader>b :Unite -quick-match buffer<cr>
+nnoremap <silent> <leader><leader>y :Unite history/yank<cr>
+nnoremap <silent> <leader><leader>b :Unite -quick-match buffer<cr>
 
 
 " Fugitive
@@ -185,7 +185,8 @@ let g:ycm_warning_symbol = 'W>'
 let g:ycm_complete_in_comments = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
-nnoremap <silent> <leader>g :YcmCompleter GoTo<CR>
+nnoremap <silent> <leader>yg :YcmCompleter GoTo<CR>
+nnoremap <silent> <leader>yf :YcmCompleter FixIt<CR>
 
 
 " UndoTree
