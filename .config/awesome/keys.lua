@@ -258,6 +258,14 @@ local globalKeys = awful.util.table.join(
 	awful.key({ }, "XF86Mail", function () awful.util.spawn_with_shell(apps.cmd.music_next) end, {description="next", group="spotify"})
 )
 
+-- Xrandr setups
+for i = 1, 9 do
+	globalKeys = awful.util.table.join(globalKeys,
+		awful.key({ modkey, "Control" }, "F" .. i , function ()
+			awful.util.spawn(apps.cmd.xrandr_setup .. " " .. i)
+		end, {description="switch to xrandr setup", group="screen handling"}))
+end
+
 -- Tag manipulation
 for i = 1, 9 do
 	globalKeys = awful.util.table.join(globalKeys,

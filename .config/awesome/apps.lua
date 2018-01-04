@@ -16,6 +16,7 @@ local apps_cmd = {
 	procmon			= "htop",
 	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
 	screenshot		= "spectacle" ,
+	xrandr_setup	= "xrandr-setup.sh",
 
 	volume_inc		= "amixer set Master 4%+",
 	volume_dec		= "amixer set Master 4%-",
