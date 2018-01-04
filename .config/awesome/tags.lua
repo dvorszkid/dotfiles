@@ -55,6 +55,7 @@ tyrannical.tags = {
 		name        = "term",
 		init        = true,
 		exclusive   = false,
+		selected    = true,
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.tile.left,
 		class = {
@@ -70,6 +71,7 @@ tyrannical.tags = {
 	{
 		name        = "www",
 		init        = config.scr.pri ~= config.scr.sec,
+		selected    = true,
 		position    = 3,
 		exclusive   = false,
 		screen      = config.scr.sec,
@@ -188,10 +190,12 @@ tyrannical.properties.hidden = {
 
 tyrannical.properties.maximized_horizontal = {
 	"bcompare",
+	"firefox",
 }
 
 tyrannical.properties.maximized_vertical = {
 	"bcompare",
+	"firefox",
 }
 
 tyrannical.properties.size_hints_honor = {
