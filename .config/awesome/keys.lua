@@ -236,7 +236,8 @@ local globalKeys = awful.util.table.join(
 	awful.key({ },                   "XF86Calculator", function () awful.util.spawn(apps.cmd.calculator) end, {description="calculator", group="programs"}),
 	awful.key({ "Control" },         "Escape", function () awful.util.spawn(apps.term.procmon) end, {description="process monitor", group="programs"}),
 	awful.key({ },                   "Print", function () awful.util.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
-	awful.key({ modkey             }, "Escape", function () awful.util.spawn("xkill") end, {description="xkill", group="programs"}),
+	awful.key({ modkey            }, "Escape", function () awful.util.spawn("xkill") end, {description="xkill", group="programs"}),
+	awful.key({ modkey, altkey    }, "j", function () awful.util.spawn(apps.cmd.jira) end, {description="jira work logger", group="programs"}),
 
 	-- Lock and shutdown
 	awful.key({ modkey, "Control"          }, "l",      function () awful.util.spawn(apps.cmd.lock) end, {description="lock", group="session"}),

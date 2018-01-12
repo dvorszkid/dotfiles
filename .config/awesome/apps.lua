@@ -17,6 +17,7 @@ local apps_cmd = {
 	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
 	screenshot		= "spectacle" ,
 	xrandr_setup	= "xrandr-setup.sh",
+	jira			= "jira.py",
 
 	volume_inc		= "amixer set Master 4%+",
 	volume_dec		= "amixer set Master 4%-",
