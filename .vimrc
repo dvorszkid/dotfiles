@@ -418,7 +418,7 @@ nnoremap <silent> <Space> <Space>:noh<CR>
 
 
 " Closing buffers
-nnoremap <silent> <leader>c :bp <BAR> bd #<CR>
+nnoremap <silent> <leader>c :bd<CR>
 nnoremap <silent> <leader>C :1,1000bd<CR>
 
 
