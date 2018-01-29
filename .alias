@@ -91,7 +91,7 @@ alias tmd="tmux-session dropdown"
 ##
 alias esync='sudo eix-sync -C --ask -C n'
 alias emerge='sudo emerge'
-alias eupdate='sudo emerge -uDN --keep-going @world'
+alias eupdate='sudo emerge -uDU --keep-going @world'
 alias eupdate_time='sudo emerge -uDNp world | genlop -p'
 alias edep='sudo emerge --depclean'
 alias eremove='sudo CONFIG_PROTECT="-*" sudo emerge -C'
