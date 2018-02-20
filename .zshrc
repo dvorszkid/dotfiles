@@ -81,9 +81,6 @@ bindkey "$key_info[PageDown]" history-substring-search-down
 # Open man page for current command
 bindkey "^X^M" run-help
 
-# Shortcut for "the fuck", one of the most productive scripts ever invented
-bindkey -s "^X^F" fuck
-
 # Control + arrows to navigate words
 for key in "${(s: :)key_info[ControlLeft]}"
 	bindkey -M viins "$key" backward-word

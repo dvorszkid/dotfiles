@@ -81,7 +81,6 @@ alias clamupdate="freshclam -v"
 ##
 # Make me fucking productive
 ##
-alias fuck='$(thefuck $(fc -ln -1))'
 alias sudo="sudo "
 alias justfucking="sudo "
 alias tmd="tmux-session dropdown"
