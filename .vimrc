@@ -60,7 +60,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
-	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/5/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
+	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/6/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
 " Lua programming
@@ -501,7 +501,7 @@ augroup my_commands
 	autocmd FileType c,cpp,python,ruby,java,proto,lua,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 	" Fix tab settings for python
-	autocmd FileType python setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+	autocmd FileType python setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=4
 
 	" Re-adjust windows on window resize
 	autocmd VimResized * wincmd =
