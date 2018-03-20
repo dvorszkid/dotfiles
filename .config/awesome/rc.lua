@@ -125,7 +125,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 markup = lain.util.markup
 
 -- Textclock
-mytextclock = wibox.widget.textclock(' %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
+mytextclock = wibox.widget.textclock(' W%V, %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
 
 -- Calendar
 local calendar = lain.widget.calendar({
