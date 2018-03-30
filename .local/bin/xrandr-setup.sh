@@ -2,9 +2,12 @@
 
 case "$1" in
 	1)
-		xrandr --output HDMI3 --off
+		xrandr --output HDMI-3 --off
 		;;
 	2)
-		xrandr --output HDMI3 --right-of DP1 --mode 1920x1080 --noprimary
+		xrandr --output HDMI-3 --right-of DP-1 --mode 1920x1080 --noprimary
+		;;
+	3)
+		xrandr --output HDMI-3 --right-of DP-1 --mode 4096x2160 --noprimary
 		;;
 esac
