@@ -43,9 +43,10 @@ Plug 'osyo-manga/vim-anzu'
 " For file opening
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/neomru.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'nixprime/cpsm', {'do': 'PY3=ON ./install.sh'}
 
 " Tmux
 Plug 'tmux-plugins/vim-tmux'
@@ -58,7 +59,6 @@ endif
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
-Plug 'Shougo/unite-outline'
 if !(s:hostname =~ "raider")
 	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/6/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
@@ -91,29 +91,41 @@ nnoremap <silent> <leader><leader>pu :PlugUpdate<CR>
 nnoremap <silent> <leader><leader>pU :PlugUpgrade<CR>
 nnoremap <silent> <leader><leader>pc :PlugClean<CR>
 
-" Unite
-let g:unite_prompt='» '
-let g:unite_source_history_yank_enable = 1
-let g:unite_source_grep_max_candidates = 1000
-if executable('rg')
-	let g:unite_source_grep_command = 'rg'
-	let g:unite_source_grep_default_opts = '--hidden --no-heading --vimgrep -S'
-	let g:unite_source_grep_recursive_opt = ''
-	let g:unite_source_rec_async_command = ['rg', '--files', '--follow', '--hidden']
-elseif executable('ag')
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden'
-	let g:unite_source_grep_recursive_opt = ''
-	let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+" Denite
+if executable('ag')
+	call denite#custom#var('grep', 'command', ['ag'])
+	call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'pattern_opt', [])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
 endif
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
-nnoremap <silent> <C-p> :Unite -start-insert -no-split file_rec/async<cr>
-nnoremap <silent> <leader><leader>m :Unite -start-insert -no-split neomru/file<cr>
-nnoremap <silent> <C-g> :Unite -start-insert -no-split -auto-preview line<cr>
-nnoremap <silent> <C-t> :Unite -start-insert -no-split -auto-preview outline<cr>
-nnoremap <silent> <leader><leader>y :Unite history/yank<cr>
-nnoremap <silent> <leader><leader>b :Unite -quick-match buffer<cr>
+call denite#custom#option('default', 'prompt', '»')
+call denite#custom#option('_', 'highlight_matched_char', 'no')
+call denite#custom#option('_', 'smartcase', 'true')
+call denite#custom#option('_', 'reversed', 'true')
+call denite#custom#option('_', 'auto_resize', 'true')
+call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
+call denite#custom#source('_', 'sorters', ['sorter/sublime'])
+call denite#custom#map(
+	  \ 'insert',
+	  \ '<Down>',
+	  \ '<denite:move_to_next_line>',
+	  \ 'noremap'
+	  \)
+call denite#custom#map(
+	  \ 'insert',
+	  \ '<Up>',
+	  \ '<denite:move_to_previous_line>',
+	  \ 'noremap'
+	  \)
+nnoremap <silent> <leader>df :Denite buffer file_rec<cr>
+nnoremap <silent> <leader>do :Denite outline<cr>
+nnoremap <silent> <leader>dy :Denite neoyank<cr>
+nnoremap <silent> <leader>dr :Denite -resume<cr>
+nmap <silent> <C-p> <leader>df
+nmap <silent> <C-t> <leader>do
 
 
 " Fugitive
@@ -270,8 +282,8 @@ nmap <leader>b [tbuild]
 nnoremap <silent> [tbuild]s :AsyncStop<CR>
 nnoremap [tbuild]c :CreateOutDir<space>
 nnoremap [tbuild]e :EditCurrentOutDir<CR>
-nnoremap <silent> [tbuild]o :Unite -start-insert -no-split gn_out<CR>
-nnoremap <silent> [tbuild]t :Unite -start-insert -no-split gn_target<CR>
+nnoremap <silent> [tbuild]o :Denite unite:gn_out<CR>
+nnoremap <silent> [tbuild]t :Denite unite:gn_target<CR>
 nnoremap <silent> [tbuild]f :wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>
 nnoremap <silent> [tbuild]p :wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>
 nnoremap <silent> [tbuild]a :wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>
