@@ -5,6 +5,8 @@
 -- common
 local apps = {
 	"urxvtd",
+	-- vsync fix, test with: https://www.youtube.com/watch?v=5xkNy9gfKOg
+	"compton -b --backend glx --vsync opengl-swc",
 	"unclutter",
 	"xscreensaver -no-splash",
 	"parcellite",
