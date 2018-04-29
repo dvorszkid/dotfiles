@@ -1,0 +1,4 @@
+#!/bin/sh
+
+tmux -2u source-file ~/.tmux/"$@"
+

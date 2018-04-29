@@ -6,7 +6,7 @@
 local apps_cmd = {
 	terminal		= "urxvtc",
 	tmux			= "tmux",
-	tmux_session	= "tmux -2 new-session -A -D -s ",
+	tmuxs			= "tmuxs ",
 	editor			= os.getenv("EDITOR") or "vi",
 
 	browser			= "firefox-bin",

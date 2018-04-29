@@ -16,9 +16,6 @@
 [submodule ".local/share/zgen"]
 	path = .local/share/zgen
 	url = https://github.com/tarjoilija/zgen.git
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
 [submodule ".dotmodules/gentoo-tools"]
 	path = .dotmodules/gentoo-tools
 	url = git@github.com:paneidos/gentoo-tools.git

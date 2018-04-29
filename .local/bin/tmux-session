@@ -1,4 +1,0 @@
-#!/bin/sh
-
-tmux -2u new-session -AD -s "$@"
-
