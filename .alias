@@ -83,7 +83,7 @@ alias clamupdate="freshclam -v"
 ##
 alias sudo="sudo "
 alias justfucking="sudo "
-alias tmd="tmux-session dropdown"
+alias tmd="tmuxs dropdown"
 
 
 ##

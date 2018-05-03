@@ -1,4 +1,4 @@
 #!/bin/sh
 
-tmux -2u source-file ~/.tmux/"$@"
+tmux -2u start-server \; source-file ~/.tmux/"$@"
 
