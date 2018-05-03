@@ -90,13 +90,12 @@ alias tmd="tmux-session dropdown"
 # Gentoo commands
 ##
 alias esync='sudo eix-sync -C --ask -C n'
-alias emerge='sudo emerge'
+alias em='sudo emerge'
 alias eupdate='sudo emerge -uDU --keep-going @world'
-alias eupdate_time='sudo emerge -uDNp world | genlop -p'
+alias eupdate_time='sudo emerge -uDUp world | genlop -p'
 alias edep='sudo emerge --depclean'
 alias eremove='sudo CONFIG_PROTECT="-*" sudo emerge -C'
 alias etc-update='sudo etc-update'
-alias esets="echo '*** Available Sets ***'; emerge --list-sets; echo; echo '*** Installed Custom Sets ***'; eix --print-world-sets"
 
 
 ##
