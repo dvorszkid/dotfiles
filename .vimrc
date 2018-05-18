@@ -108,19 +108,9 @@ call denite#custom#option('_', 'reversed', 'true')
 call denite#custom#option('_', 'auto_resize', 'true')
 call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('_', 'sorters', ['sorter/sublime'])
-call denite#custom#map(
-	  \ 'insert',
-	  \ '<Down>',
-	  \ '<denite:move_to_next_line>',
-	  \ 'noremap'
-	  \)
-call denite#custom#map(
-	  \ 'insert',
-	  \ '<Up>',
-	  \ '<denite:move_to_previous_line>',
-	  \ 'noremap'
-	  \)
-nnoremap <silent> <leader>df :Denite buffer file_rec<cr>
+call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
+nnoremap <silent> <leader>df :Denite file_rec<cr>
 nnoremap <silent> <leader>do :Denite outline<cr>
 nnoremap <silent> <leader>dy :Denite neoyank<cr>
 nnoremap <silent> <leader>dr :Denite -resume<cr>
