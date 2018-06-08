@@ -403,6 +403,53 @@ if has('unnamedplus')
 endif
 
 
+" TermDebug
+if (exists("g:start_termdebug"))
+	packadd termdebug
+	let g:termdebug_wide = 1
+
+	noremap <silent> <leader>p :Evaluate<CR>:messages<CR>
+
+	nnoremap <silent> <leader><F5> :Run<CR>
+	tnoremap <silent> <leader><F5> <C-w>:Run<CR>
+	nnoremap <silent> <F5> :Continue<CR>
+	tnoremap <silent> <F5> <C-w>:Continue<CR>
+
+	nnoremap <silent> <F6> :Gdb<CR>
+	tnoremap <silent> <F6> <C-w>:Gdb<CR>
+	nnoremap <silent> <F7> :Program<CR>
+	tnoremap <silent> <F7> <C-w>:Program<CR>
+	nnoremap <silent> <F8> :Source<CR>
+	tnoremap <silent> <F8> <C-w>:Source<CR>
+
+	nnoremap <silent> <F9> :Break<CR>
+	nnoremap <silent> <leader><F9> :Clear<CR>
+
+	nnoremap <silent> <F10> :Over<CR>
+	tnoremap <silent> <F10> <C-w>:Over<CR>
+	nnoremap <silent> <F11> :Step<CR>
+	tnoremap <silent> <F11> <C-w>:Step<CR>
+	nnoremap <silent> <leader><F11> :Finish<CR>
+	tnoremap <silent> <leader><F11> <C-w>:Finish<CR>
+
+	nnoremap <silent> <leader><F8> :qa!<CR>
+	tnoremap <silent> <leader><F8> <C-w>:qa!<CR>
+else
+	function! s:StartTermdebug(cmd)
+		silent execute "!tmux new-window -n termdebug
+			\ vim " . @% . " +" . line(".") . "
+				\ --cmd 'let g:start_termdebug = 1'
+				\ -c ':cd " . g:gn_out_dir . "'
+				\ -c ':silent TermdebugCommand " . substitute(a:cmd, '*', '\\*', '') . "'
+				\ -c ':cd -'"
+		silent redraw!
+	endfunction
+	command! -nargs=1 Debug call s:StartTermdebug('<args>')
+	noremap <F5> :Debug 
+endif
+
+
+
 " Buffer switching
 nnoremap <silent> <F1> :bp<CR>
 nnoremap <silent> <F2> :bn<CR>
