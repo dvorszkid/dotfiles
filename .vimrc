@@ -469,6 +469,7 @@ function! MaximizeToggle()
 		set hidden
 		exec "mksession! " . s:maximize_session
 		only
+		tabonly
 	endif
 endfunction
 nnoremap <F5> :call MaximizeToggle()<CR>
