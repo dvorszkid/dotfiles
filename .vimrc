@@ -59,6 +59,7 @@ endif
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'luochen1990/rainbow'
 if !(s:hostname =~ "raider")
 	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/6/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
@@ -229,6 +230,11 @@ inoremap <silent> <F4> <Esc>:FSHere<CR>
 
 " vim-autoformat
 noremap <silent> <leader>ff :Autoformat<CR>
+
+
+" rainbow
+let g:rainbow_active = 1
+let g:rainbow_conf = { 'ctermfgs': ['blue', 'yellow', 'cyan', 'magenta'] }
 
 
 " nextval
