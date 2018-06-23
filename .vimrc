@@ -9,6 +9,7 @@ filetype off                  " required
 " Hostname for host specific configuration
 "
 let s:hostname = substitute(system('hostname'), '\n', '', '')
+let s:is_devel = s:hostname =~ "basestar" || s:hostname =~ "bp1-dsklin"
 
 
 "
@@ -60,7 +61,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'luochen1990/rainbow'
-if !(s:hostname =~ "raider")
+if s:is_devel
 	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/6/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
@@ -72,7 +73,7 @@ Plug 'derekwyatt/vim-fswitch'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Work related
-if !(s:hostname =~ "raider")
+if s:is_devel
 	Plug 'ngg/vim-gn'
 	Plug 'ngg/vim-protobuf'
 	Plug 'git@bitbucket.org:tresorit/vimtresorit.git'
@@ -144,23 +145,25 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs = 1
 " AirLine - custom functions
-function! AirlineCustomInit()
-	function! GetGnTarget()
-		return "[" . g:gn_target . "]"
+if s:is_devel
+	function! AirlineCustomInit()
+		function! GetGnTarget()
+			return "[" . g:gn_target . "]"
+		endfunction
+		call airline#parts#define_function('gn_target', 'GetGnTarget')
+		call airline#parts#define_condition('gn_target', 'g:in_tresorit_source == 1')
+		function! GetAsyncrunStatus()
+			return g:asyncrun_status
+		endfunction
+		call airline#parts#define_function('asyncrun_status', 'GetAsyncrunStatus')
+		call airline#parts#define_condition('asyncrun_status', 'strlen(g:asyncrun_status) > 0')
+		let g:airline_section_b = g:airline_section_b . airline#section#create_left(['gn_target'])
+		let g:airline_section_error = g:airline_section_error . airline#section#create_right(['asyncrun_status'])
 	endfunction
-	call airline#parts#define_function('gn_target', 'GetGnTarget')
-	call airline#parts#define_condition('gn_target', 'g:in_tresorit_source == 1')
-	function! GetAsyncrunStatus()
-		return g:asyncrun_status
-	endfunction
-	call airline#parts#define_function('asyncrun_status', 'GetAsyncrunStatus')
-	call airline#parts#define_condition('asyncrun_status', 'strlen(g:asyncrun_status) > 0')
-	let g:airline_section_b = g:airline_section_b . airline#section#create_left(['gn_target'])
-	let g:airline_section_error = g:airline_section_error . airline#section#create_right(['asyncrun_status'])
-endfunction
-augroup airline_init
-	autocmd User AirlineAfterInit call AirlineCustomInit()
-augroup END
+	augroup airline_init
+		autocmd User AirlineAfterInit call AirlineCustomInit()
+	augroup END
+endif
 
 
 " EasyMotion
