@@ -1,4 +1,4 @@
-# source ~/.dotmodules/gdb-dashboard/.gdbinit
+source ~/.dotmodules/gdb-dashboard/.gdbinit
 set disassembly-flavor intel
 set disable-randomization off
 set demangle-style gnu-v3
