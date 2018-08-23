@@ -32,6 +32,7 @@ alias gaa='git add --all'
 alias gf='git fetch'
 alias gl='git pull'
 alias gp='git push'
+alias gpn='gp -u origin `git-branch-current`'
 alias gpf='gp origin :`git-branch-current` && gp'
 alias gd='git diff'
 alias gds='git diff --cached'
@@ -65,7 +66,7 @@ function vimplug() {
 ##
 # Create a new directory and enter it
 ##
-function md() {
+function mkcd() {
 	mkdir -p "$@" && cd "$@"
 }
 

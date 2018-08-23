@@ -79,7 +79,18 @@ bindkey "$key_info[PageUp]" history-substring-search-up
 bindkey "$key_info[PageDown]" history-substring-search-down
 
 # Open man page for current command
-bindkey "^X^M" run-help
+bindkey "^Xm" run-help
+
+# Do not execute, just add to history
+bindkey "^Xp" push-line-or-edit
+
+# Custom widget to store a command line in history without executing it
+commit-to-history() {
+  print -s ${(z)BUFFER}
+  zle send-break
+}
+zle -N commit-to-history
+bindkey "^Xh" commit-to-history
 
 # Control + arrows to navigate words
 for key in "${(s: :)key_info[ControlLeft]}"
