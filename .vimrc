@@ -355,6 +355,7 @@ set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
 set ttimeoutlen=0       " timeout of keycode sequences - faster Esc in insert mode
+set display+=lastline   " try to show as much as possible of the last line in the window (rather than a column of "@")
 
 
 ""
@@ -402,7 +403,7 @@ noremap <silent> <leader>P :set paste<CR>P:set nopaste<CR>
 
 " Share X windows clipboard
 if has('unnamedplus')
-	set clipboard=unnamedplus
+	set clipboard=unnamed,unnamedplus
 endif
 
 
