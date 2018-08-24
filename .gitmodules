@@ -1,6 +1,7 @@
 [submodule ".local/share/fonts/powerline"]
 	path = .local/share/fonts/powerline
 	url = https://github.com/powerline/fonts
+	ignore = dirty
 [submodule ".local/share/dircolors/solarized"]
 	path = .local/share/dircolors/solarized
 	url = https://github.com/seebi/dircolors-solarized
