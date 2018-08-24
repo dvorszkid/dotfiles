@@ -152,6 +152,5 @@ xscreensaver.passwd.thermometer.background:  #848484
 xscreensaver.passwd.thermometer.width:       8
 !datestamp format--see the strftime(3) manual page for details
 xscreensaver.dateFormat:%Y. %B %d. %a
-!login with kdm
-xscreensaver.newLoginCommand: dm-tool switch-to-greeter
-
+!login cmd, write it to /etc/X11/xinit/Xresources
+!xscreensaver.newLoginCommand: dm-tool switch-to-greeter
