@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
 " For Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'gregsexton/gitv'
+Plug 'gregsexton/gitv', {'on': 'Gitv'}
 Plug 'airblade/vim-gitgutter'
 
 " Misc
@@ -74,7 +74,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 " Work related
 if s:is_devel
 	Plug 'ngg/vim-gn'
-	Plug 'ngg/vim-protobuf'
+	Plug 'uarun/vim-protobuf'
 	Plug 'git@bitbucket.org:tresorit/vimtresorit.git'
 endif
 
@@ -206,11 +206,6 @@ nnoremap <leader>r :Replace<space>
 
 " TabMan
 let g:tabman_toggle = '<leader>t'
-
-
-" Solarized
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
 
 
 " NERDTree
@@ -374,7 +369,7 @@ syntax on
 set background=dark
 let g:load_doxygen_syntax=1
 let g:solarized_termcolors=16
-let g:solarized_termtrans=0
+let g:solarized_termtrans=1
 call togglebg#map("<Leader>bg")
 colorscheme solarized
 
