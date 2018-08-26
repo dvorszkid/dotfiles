@@ -23,6 +23,12 @@ alias -g T="| tail"
 
 
 ##
+# Make MC exit to current directory
+##
+alias mc=". /usr/libexec/mc/mc-wrapper.sh"
+
+
+##
 # Shortcuts for common Git commands
 ##
 alias g='git'
