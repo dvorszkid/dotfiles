@@ -30,9 +30,9 @@ local apps_cmd = {
 	music_prev		= "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
 
 	lock			= "xscreensaver-command -lock",
-	shutdown		= "sudo /sbin/poweroff",
-	reboot			= "sudo /sbin/reboot",
-	suspend			= "xscreensaver-command -lock && sleep 1 && sudo /usr/sbin/pm-suspend",
+	shutdown		= "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.PowerOff boolean:true",
+	reboot			= "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Reboot boolean:true",
+	suspend			= "xscreensaver-command -lock && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
 }
 
 -- combined commands
