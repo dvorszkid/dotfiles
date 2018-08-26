@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "`pgrep Xephyr`" ]; then
+	Xephyr :2 -ac -br -noreset -screen 1152x720 &
+	sleep 0.1
+fi
+
+DISPLAY=:2.0 awesome
