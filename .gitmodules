@@ -17,3 +17,6 @@
 [submodule ".dotmodules/gentoo-tools"]
 	path = .dotmodules/gentoo-tools
 	url = git@github.com:paneidos/gentoo-tools.git
+[submodule ".local/share/gdb/gdb-dashboard"]
+	path = .local/share/gdb/gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard.git
