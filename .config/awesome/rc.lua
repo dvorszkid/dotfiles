@@ -32,7 +32,7 @@ end
 
 -- Autostart
 for _, cmd in pairs(autostart) do
-	awful.util.spawn_with_shell("pgrep -u $USER -f \"" .. cmd .. "\"$ || (sleep 1 && " .. cmd .. ")")
+	awful.spawn.with_shell("pgrep -u $USER -f \"" .. cmd .. "\"$ || (sleep 1 && " .. cmd .. ")")
 end
 
 
@@ -124,147 +124,53 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- {{{ Wibox
 markup = lain.util.markup
 
--- Textclock
-mytextclock = wibox.widget.textclock(' W%V, %b %d %a ' .. markup.bold(markup.big('%H:%M:%S ')), 1)
-
--- Calendar
-local calendar = lain.widget.calendar({
-	font = "DejaVu Sans Mono",
-	attach_to = { mytextclock },
-	followmouse = true
-})
-
--- CPU widget
-local cpuwidget = lain.widget.cpu({
-	settings = function()
-		widget:set_markup(markup.fg.color(beautiful.fg_dark, " CPU ") .. cpu_now.usage .. "% ")
-	end
-})
-
--- MEM widget
-local memwidget = lain.widget.mem({
-	settings = function()
-		widget:set_markup(markup.fg.color(beautiful.fg_dark, " RAM ") .. mem_now.used .. " MB ")
-	end
-})
-
--- Net widget
-local netdownicon = wibox.widget.imagebox(beautiful.net_down)
-local netupicon = wibox.widget.imagebox(beautiful.net_up)
-local netdownwidget = wibox.widget.textbox()
-local netupwidget = lain.widget.net({
-	settings = function()
-		netdownwidget:set_markup(markup(beautiful.c_green, net_now.received .. " kB "))
-		widget:set_markup(markup(beautiful.c_red, net_now.sent .. " kB "))
-	end
-})
-
--- ALSA widget
-local volume = lain.widget.alsabar({
-	timeout = 5,
-	ticks = true,
-	ticks_size = 5,
-	height = 5,
-	width = 50,
-	colors = {
-		background = beautiful.bg_normal,
-		mute       = beautiful.fg_dark,
-		unmute     = beautiful.fg_normal
-	}
-})
-volume.bar:buttons(awful.util.table.join(
+-- ALSA widget settings
+beautiful.volume.bar:buttons(awful.util.table.join(
     awful.button({}, 1, function() -- left click
         awful.spawn(string.format("%s -e alsamixer", terminal))
     end),
     awful.button({}, 3, function() -- right click
-        awful.spawn(string.format("%s set %s toggle", volume.cmd, volume.togglechannel or volume.channel))
-        volume.update()
+        awful.spawn(string.format("%s set %s toggle", beautiful.volume.cmd, beautiful.volume.togglechannel or beautiful.volume.channel))
+        beautiful.volume.update()
     end),
     awful.button({}, 4, function() -- scroll up
-        awful.spawn(string.format("%s set %s 2%%+", volume.cmd, volume.channel))
-        volume.update()
+        awful.spawn(string.format("%s set %s 2%%+", beautiful.volume.cmd, beautiful.volume.channel))
+        beautiful.volume.update()
     end),
     awful.button({}, 5, function() -- scroll down
-        awful.spawn(string.format("%s set %s 2%%-", volume.cmd, volume.channel))
-        volume.update()
+        awful.spawn(string.format("%s set %s 2%%-", beautiful.volume.cmd, beautiful.volume.channel))
+        beautiful.volume.update()
     end)
 ))
 keys.globalKeys = awful.util.table.join(awful.util.table.join(
-	awful.key({ }, "XF86AudioRaiseVolume", function () volume.update() end),
-	awful.key({ }, "XF86AudioLowerVolume", function () volume.update() end),
+	awful.key({ }, "XF86AudioRaiseVolume", function () beautiful.volume.update() end),
+	awful.key({ }, "XF86AudioLowerVolume", function () beautiful.volume.update() end),
 	awful.key({ }, "XF86AudioMute", function ()
 		os.execute("sleep 0.1")
-		volume.update()
+		beautiful.volume.update()
 	end)
 ), keys.globalKeys)
 
--- Separators
-bar_spr = wibox.widget.textbox(' ' .. markup(beautiful.fg_dark, "|") .. ' ')
+awful.util.taglist_buttons = keys.taglistButtons
+awful.util.tasklist_buttons = keys.tasklistButtons
+awful.util.layoutbox_buttons = keys.layoutButtons
 
 -- Screen widgets
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    -- Custom taglist func
+    s.mytaglist_func = function (w, buttons, label, data, tags)
+		local function mylabel(c)
+			local text, bg_color, bg_image, icon, other_args = label(c)
+			text = text:gsub(">" .. c.name .. "<", ">" .. c.index .. ": " .. c.name .. "<")
+			return text, bg_color, bg_image, icon, other_args
+		end
+		return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
+	end
 
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(keys.layoutButtons)
-
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, keys.taglistButtons, {},
-		function (w, buttons, label, data, tags)
-			local function mylabel(c)
-				local text, bg_color, bg_image, icon, other_args = label(c)
-				text = text:gsub(">" .. c.name .. "<", ">" .. c.index .. ": " .. c.name .. "<")
-				return text, bg_color, bg_image, icon, other_args
-			end
-			return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
-		end)
-
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, keys.tasklistButtons)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        -- Left widgets
-		{
-			layout = wibox.layout.fixed.horizontal,
-			s.mylayoutbox,
-			bar_spr,
-			s.mytaglist,
-			bar_spr,
-			s.mypromptbox,
-        },
-		-- Middle widget
-        s.mytasklist,
-        -- Right widgets
-		{
-			layout = wibox.layout.fixed.horizontal,
-			bar_spr,
-			cpuwidget.widget,
-			bar_spr,
-			memwidget.widget,
-			bar_spr,
-			netdownicon,
-			netdownwidget,
-			bar_spr,
-			netupicon,
-			netupwidget.widget,
-			bar_spr,
-			volume.bar,
-			bar_spr,
-			wibox.widget.systray(),
-			mytextclock,
-        },
-    }
+	beautiful.at_screen_connect(s)
 end)
 -- }}}
 
@@ -287,7 +193,7 @@ awful.rules.rules = {
                      buttons = keys.clientButtons,
                      screen = awful.screen.preferred,
 					 size_hints_honor = false,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.centered+awful.placement.no_offscreen
        }
       },
 
@@ -342,6 +248,14 @@ client.connect_signal("request::titlebars", function(c)
 		if not c.floating then
 			awful.titlebar.hide(c)
 		end
+    end
+end)
+
+client.connect_signal("property::floating", function (c)
+    if c.floating then
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
     end
 end)
 

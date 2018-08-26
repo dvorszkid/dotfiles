@@ -123,6 +123,22 @@ URxvt.url-launcher:			/usr/bin/xdg-open
 URxvt.matcher.button:		1
 URxvt.print-pipe:			cat > $HOME/$(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
 
+
+! ------------------------------------------------------------------------------
+! --- Rofi
+!
+rofi.font:				Mono 10
+rofi.matching:			normal
+rofi.terminal:			urxvtc
+rofi.separator-style:	solid
+! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
+rofi.color-normal: #242424,  #bbbbbb,  #242424,  #303030,  #dddddd
+rofi.color-urgent: #242424,  S_red,  #242424,  #303030,  #dddddd
+rofi.color-active: #242424,  S_blue,  #242424,  #303030,  #dddddd
+!                  ´background´, ´border´, ´separator´
+rofi.color-window: #242424,      #0099cc,  #0099cc
+
+
 ! ------------------------------------------------------------------------------
 ! --- xscreensaver
 !

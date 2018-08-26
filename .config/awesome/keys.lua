@@ -79,11 +79,10 @@ local tasklistButtons = awful.util.table.join(
 
 -- Client keys
 local clientKeys = awful.util.table.join(
+	awful.key({ modkey,           }, "c"     , function (c) c:kill() end, {description="kill", group="client modifiers"}),
 	awful.key({ modkey,  altkey   }, "f"     , function (c) c.fullscreen = not c.fullscreen end, {description="toggle fullscreen", group="client modifiers"}),
-	awful.key({ modkey, "Control" }, "c"     , function (c) c:kill() end, {description="kill", group="client modifiers"}),
 	awful.key({ modkey,           }, "f"     , awful.client.floating.toggle, {description="toggle floating", group="client modifiers"}),
 	awful.key({ modkey,           }, "o"     , function (c) c:move_to_screen() end, {description="move to next screen", group="client modifiers"}),
-	awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end, {description="set as master", group="client modifiers"}),
 	awful.key({ modkey,           }, "t"     , function (c) c.ontop = not c.ontop end, {description="toggle ontop", group="client modifiers"}),
 	awful.key({ modkey,  altkey   }, "t"     , awful.titlebar.toggle, {description="toggle titlebar", group="client modifiers"}),
 	awful.key({ modkey,           }, "s"     , function (c) c.sticky = not c.sticky end, {description="toggle sticky", group="client modifiers"}),
@@ -91,7 +90,8 @@ local clientKeys = awful.util.table.join(
 	awful.key({ modkey,           }, "m"     , function (c)
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
-	end, {description="toggle maximixed", group="client modifiers"})
+	end, {description="toggle maximixed", group="client modifiers"}),
+	awful.key({ modkey,  altkey  }, "m", function (c) c:swap(awful.client.getmaster()) end, {description="set as master", group="client modifiers"})
 )
 
 -- Client buttons
@@ -147,11 +147,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ }, "F12",      function () quake:toggle() end, {description="dropdown terminal", group="awesome"}),
 
 	-- Prompts
-	awful.key({ modkey }, "r",
-		function () awful.spawn(apps.cmd.dmenu ..
-			" -nb '" ..  beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. "'" ..
-			" -sb '" .. beautiful.bg_focus .. "' -sf '" .. beautiful.fg_focus .. "'")
-		end, {description="run command", group="prompts"}),
+	awful.key({ modkey }, "r", function () awful.spawn(apps.cmd.runcmd) end, {description="run command", group="prompts"}),
 	awful.key({ modkey, altkey, "Control" }, "r",
 		function ()
 			awful.prompt.run({prompt = "Run Lua code: "}, awful.screen.focused().mypromptbox.widget, awful.util.eval, nil, awful.util.getdir("cache") .. "/history_eval")
@@ -181,16 +177,7 @@ local globalKeys = awful.util.table.join(
 			awful.client.focus.history.previous ()
 			if client.focus then client.focus:raise() end
 		end, {description="select previous", group="client handling"}),
-	awful.key({ modkey }, "Tab",
-		function ()
-			awful.client.focus.byidx(1)
-			if client.focus then client.focus:raise() end
-		end, {description="select next", group="client handling"}),
-	awful.key({ modkey , "Shift"}, "Tab",
-		function ()
-			awful.client.focus.byidx(-1)
-			if client.focus then client.focus:raise() end
-		end, {description="select previous", group="client handling"}),
+	awful.key({ modkey }, "Tab", function () awful.spawn(apps.cmd.windowswitch) end, {description="select window", group="client handling"}),
 
 	-- By direction client focus
 	awful.key({ modkey }, "j",
@@ -223,10 +210,10 @@ local globalKeys = awful.util.table.join(
 	-- Layout manipulation
 	-- awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05) end, {description="decrease mwfact", group="layout handling"}),
 	-- awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05) end, {description="increase mwfact", group="layout handling"}),
-	awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1) end, {description="decrease nmaster", group="layout handling"}),
-	awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1) end, {description="increase nmaster", group="layout handling"}),
-	awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end, {description="decrease ncol", group="layout handling"}),
-	awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end, {description="increase ncol", group="layout handling"}),
+	-- awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1) end, {description="decrease nmaster", group="layout handling"}),
+	-- awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1) end, {description="increase nmaster", group="layout handling"}),
+	-- awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end, {description="decrease ncol", group="layout handling"}),
+	-- awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end, {description="increase ncol", group="layout handling"}),
 	awful.key({ modkey, "Control" }, "space",  function () awful.layout.inc(layouts,  1)  end, {description="select next", group="layout handling"}),
 	awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(layouts, -1)  end, {description="select previous", group="layout handling"}),
 
@@ -241,9 +228,9 @@ local globalKeys = awful.util.table.join(
 
 	-- Lock and shutdown
 	awful.key({ modkey, "Control"          }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "Prior", function () awful.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "Next", function () awful.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
+	awful.key({ modkey, "Control" }, "Prior", function () awful.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
+	awful.key({ modkey, "Control" }, "Next", function () awful.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
+	awful.key({ modkey, "Control" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
 
 	-- ALSA control
 	awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn(apps.cmd.volume_inc) end, {description="increase volume", group="alsa"}),

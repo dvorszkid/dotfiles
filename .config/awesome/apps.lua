@@ -7,15 +7,13 @@ local apps_cmd = {
 	terminal		= "urxvtc",
 	tmux			= "tmux",
 	tmuxs			= "tmuxs ",
-	editor			= os.getenv("EDITOR") or "vi",
 
 	browser			= "firefox-bin",
-	filemanager		= "krusader",
 	calculator		= "qalculate-gtk",
-	irc				= "weechat",
 	procmon			= "htop",
-	dmenu			= "dmenu_run -i -l 15 -p 'run:'" ,
-	screenshot		= "spectacle" ,
+	runcmd			= "rofi -show run",
+	windowswitch	= "rofi -show window",
+	screenshot		= "spectacle",
 	xrandr_setup	= "xrandr-setup.sh",
 	jira			= "jira.py",
 
@@ -32,7 +30,7 @@ local apps_cmd = {
 	lock			= "xscreensaver-command -lock",
 	shutdown		= "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.PowerOff boolean:true",
 	reboot			= "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Reboot boolean:true",
-	suspend			= "xscreensaver-command -lock && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
+	suspend			= "xrandr-setup.sh 1 && xscreensaver-command -lock && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
 }
 
 -- combined commands

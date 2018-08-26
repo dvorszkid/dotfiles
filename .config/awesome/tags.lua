@@ -16,7 +16,7 @@ tyrannical.tags = {
 		init        = true,
 		exclusive   = true,
 		screen      = config.scr.pri,
-		layout      = awful.layout.suit.floating,
+		layout      = awful.layout.suit.tile.left,
 		class = {
 			"Opera",
 			"Opera developer",
@@ -48,10 +48,11 @@ tyrannical.tags = {
 			"ark",
 			"Nautilus",
 			"Krusader",
+			"urxvt:files",
 		}
 	},
 	{
-		name        = "term",
+		name        = "dev",
 		init        = true,
 		exclusive   = false,
 		selected    = true,
@@ -64,7 +65,6 @@ tyrannical.tags = {
 			"Code::Blocks",
 			"DDD",
 			"kate4",
-			"URxvt",
 		}
 	},
 	{
@@ -75,11 +75,8 @@ tyrannical.tags = {
 		exclusive   = false,
 		screen      = config.scr.sec,
 		force_screen= true,
-		layout      = awful.layout.suit.floating,
-		class       = {
-			"Skype",
-			"Skype-bin",
-		}
+		layout      = awful.layout.suit.tile.left,
+		class       = {}
 	},
 	{
 		name        = "music",
@@ -112,6 +109,7 @@ tyrannical.tags = {
 			"OOBase",
 			"openoffice.org",
 			"OpenOffice.*",
+			"gimp",
 		}
 	},
 }
@@ -132,6 +130,7 @@ tyrannical.properties.intrusive = {
 	"kruler",
 	"yakuake",
 	"xev",
+	-- "urxvt",
 }
 
 tyrannical.properties.floating = {
@@ -156,7 +155,6 @@ tyrannical.properties.floating = {
 }
 
 tyrannical.properties.ontop = {
-	"xephyr",
 	"ksnapshot",
 	"spectacle",
 	"kruler",
@@ -175,7 +173,6 @@ tyrannical.properties.below = {
 }
 
 tyrannical.properties.placement = {
-	"kcalc",
 	["qalculate-gtk"] = awful.placement.centered,
 }
 
@@ -189,12 +186,10 @@ tyrannical.properties.hidden = {
 
 tyrannical.properties.maximized_horizontal = {
 	"bcompare",
-	"firefox",
 }
 
 tyrannical.properties.maximized_vertical = {
 	"bcompare",
-	"firefox",
 }
 
 tyrannical.properties.size_hints_honor = {
