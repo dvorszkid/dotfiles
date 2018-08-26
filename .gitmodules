@@ -5,9 +5,6 @@
 [submodule ".local/share/dircolors/solarized"]
 	path = .local/share/dircolors/solarized
 	url = https://github.com/seebi/dircolors-solarized
-[submodule ".local/share/mc/mc-solarized-skin"]
-	path = .local/share/mc/mc-solarized-skin
-	url = https://github.com/nkulikov/mc-solarized-skin
 [submodule ".config/awesome/tyrannical"]
 	path = .config/awesome/tyrannical
 	url = https://github.com/Elv13/tyrannical
@@ -20,6 +17,3 @@
 [submodule ".dotmodules/gentoo-tools"]
 	path = .dotmodules/gentoo-tools
 	url = git@github.com:paneidos/gentoo-tools.git
-[submodule ".dotmodules/gdb-dashboard"]
-	path = .dotmodules/gdb-dashboard
-	url = git@github.com:cyrus-and/gdb-dashboard.git
