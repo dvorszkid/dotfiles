@@ -29,7 +29,7 @@ local layoutButtons = awful.util.table.join(
 
 -- Taglist buttons
 local taglistButtons = awful.util.table.join(
-	awful.button({        }, 1, awful.tag.viewonly),
+	awful.button({        }, 1, function(t) t:view_only() end),
 	awful.button({        }, 3, awful.tag.viewtoggle),
 	awful.button({ modkey }, 1, awful.client.movetotag),
 	awful.button({ modkey }, 3, awful.client.toggletag),
@@ -148,7 +148,7 @@ local globalKeys = awful.util.table.join(
 
 	-- Prompts
 	awful.key({ modkey }, "r",
-		function () awful.util.spawn(apps.cmd.dmenu ..
+		function () awful.spawn(apps.cmd.dmenu ..
 			" -nb '" ..  beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. "'" ..
 			" -sb '" .. beautiful.bg_focus .. "' -sf '" .. beautiful.fg_focus .. "'")
 		end, {description="run command", group="prompts"}),
@@ -221,8 +221,8 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Shift"   }, "j",      function () awful.client.swap.byidx(  1) end, {description="move to next", group="client handling"}),
 
 	-- Layout manipulation
-	awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05) end, {description="decrease mwfact", group="layout handling"}),
-	awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05) end, {description="increase mwfact", group="layout handling"}),
+	-- awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05) end, {description="decrease mwfact", group="layout handling"}),
+	-- awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05) end, {description="increase mwfact", group="layout handling"}),
 	awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1) end, {description="decrease nmaster", group="layout handling"}),
 	awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1) end, {description="increase nmaster", group="layout handling"}),
 	awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end, {description="decrease ncol", group="layout handling"}),
@@ -231,19 +231,19 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(layouts, -1)  end, {description="select previous", group="layout handling"}),
 
 	-- User programs
-	awful.key({ modkey,           }, "Return", function () awful.util.spawn(apps.term.tmux) end, {description="terminal with tmux", group="programs"}),
-	awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(apps.cmd.terminal) end, {description="terminal without tmux", group="programs"}),
-	awful.key({ },                   "XF86Calculator", function () awful.util.spawn(apps.cmd.calculator) end, {description="calculator", group="programs"}),
-	awful.key({ "Control" },         "Escape", function () awful.util.spawn(apps.term.procmon) end, {description="process monitor", group="programs"}),
-	awful.key({ },                   "Print", function () awful.util.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
-	awful.key({ modkey            }, "Escape", function () awful.util.spawn("xkill") end, {description="xkill", group="programs"}),
-	awful.key({ modkey, altkey    }, "j", function () awful.util.spawn(apps.cmd.jira) end, {description="jira work logger", group="programs"}),
+	awful.key({ modkey,           }, "Return", function () awful.spawn(apps.term.tmux) end, {description="terminal with tmux", group="programs"}),
+	awful.key({ modkey, "Shift"   }, "Return", function () awful.spawn(apps.cmd.terminal) end, {description="terminal without tmux", group="programs"}),
+	awful.key({ },                   "XF86Calculator", function () awful.spawn(apps.cmd.calculator) end, {description="calculator", group="programs"}),
+	awful.key({ "Control" },         "Escape", function () awful.spawn(apps.term.procmon) end, {description="process monitor", group="programs"}),
+	awful.key({ },                   "Print", function () awful.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
+	awful.key({ modkey            }, "Escape", function () awful.spawn("xkill") end, {description="xkill", group="programs"}),
+	awful.key({ modkey, altkey    }, "j", function () awful.spawn(apps.cmd.jira) end, {description="jira work logger", group="programs"}),
 
 	-- Lock and shutdown
-	awful.key({ modkey, "Control"          }, "l",      function () awful.util.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "Prior", function () awful.util.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "Next", function () awful.util.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
-	awful.key({ altkey, "Control", "Shift" }, "End", function () awful.util.spawn_with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
+	awful.key({ modkey, "Control"          }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
+	awful.key({ altkey, "Control", "Shift" }, "Prior", function () awful.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
+	awful.key({ altkey, "Control", "Shift" }, "Next", function () awful.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
+	awful.key({ altkey, "Control", "Shift" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
 
 	-- ALSA control
 	awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn(apps.cmd.volume_inc) end, {description="increase volume", group="alsa"}),
@@ -251,19 +251,19 @@ local globalKeys = awful.util.table.join(
 	awful.key({ }, "XF86AudioMute", function () awful.spawn(apps.cmd.volume_mute) end, {description="mute / unmute", group="alsa"}),
 
 	-- Spotify control
-	awful.key({ }, "XF86AudioPlay", function () awful.util.spawn_with_shell(apps.cmd.music_play) end, {description="play / pause", group="spotify"}),
-	awful.key({ }, "XF86AudioStop", function () awful.util.spawn_with_shell(apps.cmd.music_stop) end, {description="stop", group="spotify"}),
-	awful.key({ }, "XF86AudioPrev", function () awful.util.spawn_with_shell(apps.cmd.music_prev) end, {description="previous", group="spotify"}),
-	awful.key({ }, "XF86AudioNext", function () awful.util.spawn_with_shell(apps.cmd.music_next) end, {description="next", group="spotify"}),
-	awful.key({ }, "XF86HomePage", function () awful.util.spawn_with_shell(apps.cmd.music_prev) end, {description="previous", group="spotify"}),
-	awful.key({ }, "XF86Mail", function () awful.util.spawn_with_shell(apps.cmd.music_next) end, {description="next", group="spotify"})
+	awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell(apps.cmd.music_play) end, {description="play / pause", group="spotify"}),
+	awful.key({ }, "XF86AudioStop", function () awful.spawn.with_shell(apps.cmd.music_stop) end, {description="stop", group="spotify"}),
+	awful.key({ }, "XF86AudioPrev", function () awful.spawn.with_shell(apps.cmd.music_prev) end, {description="previous", group="spotify"}),
+	awful.key({ }, "XF86AudioNext", function () awful.spawn.with_shell(apps.cmd.music_next) end, {description="next", group="spotify"}),
+	awful.key({ }, "XF86HomePage", function () awful.spawn.with_shell(apps.cmd.music_prev) end, {description="previous", group="spotify"}),
+	awful.key({ }, "XF86Mail", function () awful.spawn.with_shell(apps.cmd.music_next) end, {description="next", group="spotify"})
 )
 
 -- Xrandr setups
 for i = 1, 9 do
 	globalKeys = awful.util.table.join(globalKeys,
 		awful.key({ modkey, "Control" }, "F" .. i , function ()
-			awful.util.spawn(apps.cmd.xrandr_setup .. " " .. i)
+			awful.spawn(apps.cmd.xrandr_setup .. " " .. i)
 		end, {description="switch to xrandr setup", group="screen handling"}))
 end
 
@@ -291,6 +291,7 @@ for i = 1, 9 do
 				local tag = client.focus.screen.tags[i]
 				if tag then
 					client.focus:move_to_tag(tag)
+					tag:view_only()
 				end
 			end, {description="move to tag", group="client handling"}),
 		awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
