@@ -125,7 +125,7 @@ local markup = lain.util.markup
 local blue   = "#80CCE6"
 
 -- Clock
-local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%H:%M:%S   "))
+local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%H:%M:%S   "), 1)
 mytextclock.font = theme.font
 local clock_icon = wibox.widget.imagebox(theme.clock)
 local clockbg = wibox.container.background(mytextclock, theme.bg_focus, gears.shape.rectangle)
