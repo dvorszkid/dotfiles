@@ -18,21 +18,10 @@ tyrannical.tags = {
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.tile.left,
 		class = {
-			"Opera",
-			"Opera developer",
-			"Firefox",
+			"firefox",
 			"google-chrome",
 			"google-chrome-beta",
 			"google-chrome-unstable",
-			"Rekonq",
-			"Dillo",
-			"Arora",
-			"Chromium",
-			"nightly",
-			"Nightly",
-			"minefield",
-			"Minefield",
-			"luakit",
 		}
 	},
 	{
@@ -40,15 +29,12 @@ tyrannical.tags = {
 		init        = true,
 		exclusive   = false,
 		screen      = config.scr.pri,
-		layout      = awful.layout.suit.tile.top,
+		layout      = awful.layout.suit.tile.left,
 		class  = {
-			"Thunar",
-			"Konqueror",
-			"Dolphin",
-			"ark",
-			"Nautilus",
-			"Krusader",
-			"urxvt:files",
+			"thunar",
+			"konqueror",
+			"dolphin",
+			"krusader",
 		}
 	},
 	{
@@ -57,14 +43,9 @@ tyrannical.tags = {
 		exclusive   = false,
 		selected    = true,
 		screen      = config.scr.pri,
-		layout      = awful.layout.suit.tile.left,
+		layout      = awful.layout.suit.max,
 		class = {
-			"Kate",
-			"KDevelop",
-			"Codeblocks",
-			"Code::Blocks",
-			"DDD",
-			"kate4",
+			"bcompare",
 		}
 	},
 	{
@@ -88,8 +69,18 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.tile.left,
 		exec_once   = {"spotify"},
 		class       = {
-			"Amarok",
+			"amarok",
 			"spotify",
+		}
+	},
+	{
+		name        = "email",
+		init        = false,
+		volatile    = true,
+		exclusive   = true,
+		layout      = awful.layout.suit.tile.left,
+		class       = {
+			"hiri",
 		}
 	},
 	-- Any screen
@@ -98,17 +89,16 @@ tyrannical.tags = {
 		init        = false,
 		volatile    = true,
 		exclusive   = true,
-		layout      = awful.layout.suit.tile.right,
+		layout      = awful.layout.suit.tile.left,
 		class       = {
-			"Okular",
-			"Xpdf",
-			"OOWriter",
-			"OOCalc",
-			"OOMath",
-			"OOImpress",
-			"OOBase",
-			"openoffice.org",
-			"OpenOffice.*",
+			"okular",
+			"lowriter",
+			"localc",
+			"lomath",
+			"loimpress",
+			"lobase",
+			"libreoffice.org",
+			"libreoffice.*",
 			"gimp",
 		}
 	},
@@ -130,7 +120,6 @@ tyrannical.properties.intrusive = {
 	"kruler",
 	"yakuake",
 	"xev",
-	-- "urxvt",
 }
 
 tyrannical.properties.floating = {
@@ -185,11 +174,11 @@ tyrannical.properties.hidden = {
 }
 
 tyrannical.properties.maximized_horizontal = {
-	"bcompare",
+	-- "bcompare",
 }
 
 tyrannical.properties.maximized_vertical = {
-	"bcompare",
+	-- "bcompare",
 }
 
 tyrannical.properties.size_hints_honor = {
@@ -197,6 +186,17 @@ tyrannical.properties.size_hints_honor = {
 	["urxvt"] = false,
 	["spotify"] = false,
 }
+
+-- Make URxvt instances run on tag found by WM_NAME
+client.connect_signal("property::class", function (c)
+	if c.class == "URxvt" and c.name ~= "urxvt" then
+		local t = awful.tag.find_by_name(awful.screen.focused(), c.name)
+		if t then
+			c:move_to_tag(t)
+		end
+	end
+end)
+
 
 -- Hack for making Spotify run on 'music' tag
 -- (it sets the WM_CLASS property after displaying the application window)

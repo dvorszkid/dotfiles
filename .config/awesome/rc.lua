@@ -92,12 +92,8 @@ lain.layout.termfair.center.ncol    = 1
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.fair,
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.top,
     awful.layout.suit.max,
-    lain.layout.termfair,
-    lain.layout.termfair.center,
 }
 
 -- tyrannical init
