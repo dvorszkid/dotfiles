@@ -17,8 +17,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.icon_dir                                  = conf_dir .. "/icons"
 theme.titlebar_dir                              = conf_dir .. "/titlebar"
-theme.font                                      = "Roboto Bold 10"
-theme.taglist_font                              = "Roboto Condensed Regular 8"
+theme.font                                      = "Roboto Condensed Medium 10"
+theme.mono_font                                 = "Roboto Mono Medium For Powerline 10"
+theme.taglist_font                              = "Roboto Condensed Medium 7"
 
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = false
@@ -123,21 +124,33 @@ theme.layout_centerhwork = theme.lain_icons .. "centerworkh.png" -- centerwork.h
 
 local markup = lain.util.markup
 local blue   = "#80CCE6"
+local width_scaling = 1.0
+
+function wrap_widget(icon_path, widget)
+	local icon = wibox.widget.imagebox(icon_path)
+	local background = wibox.container.background(widget, theme.bg_focus, gears.shape.rectangle)
+	local margin = wibox.container.margin(background, 0, 0, 5, 5)
+	return wibox.widget {
+		icon,
+		nil,
+		margin,
+		layout = wibox.layout.align.horizontal
+	}
+end
 
 -- Clock
-local mytextclock = wibox.widget.textclock(markup(theme.fg_normal, "%H:%M:%S   "), 1)
+local mytextclock = wibox.widget.textclock(markup.font(theme.mono_font, markup(theme.fg_normal, "%H:%M:%S")), 1)
 mytextclock.font = theme.font
-local clock_icon = wibox.widget.imagebox(theme.clock)
-local clockbg = wibox.container.background(mytextclock, theme.bg_focus, gears.shape.rectangle)
-local clockwidget = wibox.container.margin(clockbg, 0, 0, 5, 5)
+-- mytextclock.forced_width = 60 * width_scaling
+mytextclock.align = 'center'
+local clock_widget = wrap_widget(theme.clock, mytextclock)
 
 -- Calendar
 local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, theme.fg_normal, "W%V, %d %b %a "))
-local calendar_icon = wibox.widget.imagebox(theme.calendar)
-local calbg = wibox.container.background(mytextcalendar, theme.bg_focus, gears.shape.rectangle)
-local calendarwidget = wibox.container.margin(calbg, 0, 0, 5, 5)
+local calendar_widget = wrap_widget(theme.calendar, mytextcalendar)
 lain.widget.calendar({
     attach_to = { mytextclock, mytextcalendar },
+    followtag = true,
     notification_preset = {
         fg = theme.fg_normal,
         bg = theme.bg_normal,
@@ -147,8 +160,7 @@ lain.widget.calendar({
 })
 
 -- ALSA volume bar
-local volume_icon = wibox.widget.imagebox(theme.volume)
-theme.volume = lain.widget.alsabar({
+local myalsabar = lain.widget.alsabar({
     notification_preset = { font = "Monospace 9"},
     --togglechannel = "IEC958,3",
     width = 80, height = 10, border_width = 0,
@@ -158,52 +170,45 @@ theme.volume = lain.widget.alsabar({
         mute       = "#FF9F9F"
     },
 })
-theme.volume.bar.paddings = 0
-theme.volume.bar.margins = 7
-local volumewidget = wibox.container.background(theme.volume.bar, theme.bg_focus, gears.shape.rectangle)
-volumewidget = wibox.container.margin(volumewidget, 0, 0, 5, 5)
+myalsabar.bar.paddings = 0
+myalsabar.bar.margins = 7
+local volume_widget = wrap_widget(theme.volume, myalsabar.bar)
+theme.volume = myalsabar
 
 -- CPU
-local cpu_icon = wibox.widget.imagebox(theme.cpu)
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.font(theme.font, cpu_now.usage .. "% "))
+        widget:set_markup(markup.font(theme.font, cpu_now.usage .. " %"))
     end
 })
-local cpubg = wibox.container.background(cpu.widget, theme.bg_focus, gears.shape.rectangle)
-local cpuwidget = wibox.container.margin(cpubg, 0, 0, 5, 5)
+cpu.widget.align = 'right'
+cpu.widget.forced_width = 40 * width_scaling
+local cpu_widget = wrap_widget(theme.cpu, cpu.widget)
 
 -- MEM
-local mem_icon = wibox.widget.imagebox(theme.memory)
 local mem = lain.widget.mem({
     settings = function()
-        widget:set_markup(markup.font(theme.font, mem_now.used .. " MiB "))
+        widget:set_markup(markup.font(theme.font, mem_now.used .. " MiB"))
     end
 })
-local membg = wibox.container.background(mem.widget, theme.bg_focus, gears.shape.rectangle)
-local memwidget = wibox.container.margin(membg, 0, 0, 5, 5)
+mem.widget.align = 'right'
+mem.widget.forced_width = 65 * width_scaling
+local mem_widget = wrap_widget(theme.mem, mem.widget)
 
 -- Net
-local netdown_icon = wibox.widget.imagebox(theme.net_down)
-local netup_icon = wibox.widget.imagebox(theme.net_up)
-local netdownwidget = wibox.widget.textbox()
-local netupwidget = lain.widget.net({
+local netdown = wibox.widget.textbox()
+netdown.align = 'right'
+netdown.forced_width = 75 * width_scaling
+local netup = lain.widget.net({
 	settings = function()
-		netdownwidget:set_markup(markup.font(theme.font, net_now.received .. " kB/s"))
+		netdown:set_markup(markup.font(theme.font, net_now.received .. " kB/s"))
 		widget:set_markup(markup.font(theme.font, net_now.sent .. " kB/s"))
 	end
 })
-
-local net = lain.widget.net({
-    settings = function()
-        widget:set_markup(markup.font("Roboto 1", " ") .. markup.font(theme.font, net_now.received .. " kB/s - "
-                          .. net_now.sent .. " kB/s ") .. markup.font("Roboto 2", " "))
-    end
-})
-local netdownbg = wibox.container.background(netdownwidget, theme.bg_focus, gears.shape.rectangle)
-local netupbg = wibox.container.background(netupwidget.widget, theme.bg_focus, gears.shape.rectangle)
-local netdownwidgetcontainer = wibox.container.margin(netdownbg, 0, 0, 5, 5)
-local netupwidgetcontainer = wibox.container.margin(netupbg, 0, 0, 5, 5)
+netup.widget.align = 'right'
+netup.widget.forced_width = 75 * width_scaling
+local netdown_widget = wrap_widget(theme.net_up, netdown)
+local netup_widget = wrap_widget(theme.net_up, netup.widget)
 
 -- Separators
 local spr_small = wibox.widget.imagebox(theme.spr_small)
@@ -262,40 +267,19 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_right,
-
-            netdown_icon,
-            netdownwidgetcontainer,
-
+            netdown_widget,
             bottom_bar,
-
-            netup_icon,
-            netupwidgetcontainer,
-
+            netup_widget,
             bottom_bar,
-
-            cpu_icon,
-            cpuwidget,
-
+            cpu_widget,
             bottom_bar,
-
-            mem_icon,
-            memwidget,
-
+            mem_widget,
             bottom_bar,
-
-            volume_icon,
-            volumewidget,
-
+            volume_widget,
             bottom_bar,
-
-            calendar_icon,
-            calendarwidget,
-
+            calendar_widget,
             bottom_bar,
-
-            clock_icon,
-            clockwidget,
-
+            clock_widget,
             spr_left,
         },
     }
