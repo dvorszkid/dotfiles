@@ -92,13 +92,10 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.tile.left,
 		class       = {
 			"okular",
-			"lowriter",
-			"localc",
-			"lomath",
-			"loimpress",
-			"lobase",
-			"libreoffice.org",
-			"libreoffice.*",
+			"libreoffice-writer",
+			"libreoffice-calc",
+			"libreoffice-impress",
+			"Soffice",
 			"gimp",
 		}
 	},
