@@ -25,19 +25,6 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "files",
-		init        = true,
-		exclusive   = false,
-		screen      = config.scr.pri,
-		layout      = awful.layout.suit.tile.left,
-		class  = {
-			"thunar",
-			"konqueror",
-			"dolphin",
-			"krusader",
-		}
-	},
-	{
 		name        = "dev",
 		init        = true,
 		exclusive   = false,
@@ -97,6 +84,8 @@ tyrannical.tags = {
 			"libreoffice-impress",
 			"Soffice",
 			"gimp",
+			"nomacs",
+			"image lounge",
 		}
 	},
 }
