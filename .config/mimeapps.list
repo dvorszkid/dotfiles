@@ -1,0 +1,40 @@
+# Local associations can be added into .local/share/applications/mimeapps.list
+
+[Added Associations]
+
+[Default Applications]
+
+# Default Browser
+text/html=firefox-bin.desktop
+x-scheme-handler/http=firefox-bin.desktop
+x-scheme-handler/https=firefox-bin.desktop
+x-scheme-handler/about=firefox-bin.desktop
+x-scheme-handler/unknown=firefox-bin.desktop
+
+# Docs
+application/pdf=okularApplication_pdf.desktop
+image/pdf=okularApplication_pdf.desktop
+application/x-gzpdf=okularApplication_pdf.desktop
+application/x-bzpdf=okularApplication_pdf.desktop
+application/x-wwf=okularApplication_pdf.desktop
+image/vnd.djvu=okularApplication_djvu.desktop
+application/oxps=okularApplication_xps.desktop
+application/vnd.ms-xpsdocument=okularApplication_xps.desktop
+
+# Video
+video/x-matroska=smplayer.desktop;
+video/x-msvideo=smplayer.desktop;
+
+# Images
+image/png=nomacs.desktop
+image/gif=nomacs.desktop
+image/jpeg=nomacs.desktop
+image/bmp=nomacs.desktop
+image/tiff=nomacs.desktop
+image/x-eps=nomacs.desktop
+image/x-ico=nomacs.desktop
+image/x-portable-bitmap=nomacs.desktop
+image/x-portable-graymap=nomacs.desktop
+image/x-portable-pixmap=nomacs.desktop
+image/x-xbitmap=nomacs.desktop
+image/x-xpixmap=nomacs.desktop
