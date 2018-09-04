@@ -50,9 +50,9 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'nixprime/cpsm', {'do': 'PY3=ON ./install.sh'}
 
 " Tmux
-Plug 'tmux-plugins/vim-tmux'
-Plug 'christoomey/vim-tmux-navigator'
 if !has("gui_running")
+	Plug 'tmux-plugins/vim-tmux'
+	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'edkolev/tmuxline.vim'
 endif
 
@@ -66,10 +66,12 @@ endif
 
 " Lua programming
 Plug 'tbastos/vim-lua', {'for': ['lua']}
+Plug 'xolox/vim-misc', {'for': ['lua']}
+Plug 'xolox/vim-lua-ftplugin', {'for': ['lua']}
 
 " C++ programming
-Plug 'derekwyatt/vim-fswitch'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'derekwyatt/vim-fswitch', {'for': ['c', 'cpp']}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
 
 " Work related
 if s:is_devel
