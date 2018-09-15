@@ -207,7 +207,7 @@ local netup = lain.widget.net({
 })
 netup.widget.align = 'right'
 netup.widget.forced_width = 75 * width_scaling
-local netdown_widget = wrap_widget(theme.net_up, netdown)
+local netdown_widget = wrap_widget(theme.net_down, netdown)
 local netup_widget = wrap_widget(theme.net_up, netup.widget)
 
 -- Separators
