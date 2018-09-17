@@ -15,7 +15,7 @@ local apps_cmd = {
 	windowswitch	= "rofi -show window",
 	screenshot		= "spectacle",
 	xrandr_setup	= "xrandr-setup.sh",
-	jira			= "jira.py",
+	jira			= "jiraworklogger",
 
 	volume_inc		= "amixer set Master 4%+",
 	volume_dec		= "amixer set Master 4%-",
