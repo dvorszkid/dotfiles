@@ -33,6 +33,7 @@ tyrannical.tags = {
 		layout      = awful.layout.suit.max,
 		class = {
 			"bcompare",
+			"urxvt:dev",
 		}
 	},
 	{
@@ -173,11 +174,29 @@ tyrannical.properties.size_hints_honor = {
 	["spotify"] = false,
 }
 
--- Make URxvt instances run on tag found by WM_NAME
+
+-- Make URxvt instances run on tag found by original WM_NAME
+-- awful.client.property.persist("overwrite_class", "string")
+-- client.connect_signal("property::class", function (c)
+-- 	name = c.name or ''
+-- 	if name == '' then
+-- 		return
+-- 	end
+-- 	if c.class == "URxvt" and name ~= "urxvt" and c.overwrite_class == '' then
+-- 		c.overwrite_class = c.class .. ":" .. name
+-- 	end
+-- end)
+awful.client.property.persist("original_name", "string")
 client.connect_signal("property::class", function (c)
-	if c.class == "URxvt" and c.name ~= "urxvt" then
-		local t = awful.tag.find_by_name(awful.screen.focused(), c.name)
+	class = c.class or ''
+	name = c.name or ''
+	if c.original_name ~= '' then
+		name = c.original_name
+	end
+	if c.class == "URxvt" and name ~= "urxvt" then
+		local t = awful.tag.find_by_name(awful.screen.focused(), name)
 		if t then
+			c.original_name = name
 			c:move_to_tag(t)
 		end
 	end
