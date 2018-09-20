@@ -20,6 +20,7 @@ theme.titlebar_dir                              = conf_dir .. "/titlebar"
 theme.font                                      = "Roboto Condensed Medium 10"
 theme.mono_font                                 = "Roboto Mono Medium For Powerline 10"
 theme.taglist_font                              = "Roboto Condensed Medium 7"
+theme.tooltip_font                              = theme.font
 
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = false
@@ -44,7 +45,7 @@ theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#006B8E"
 theme.border_width                              = 1
 theme.border_normal                             = "#252525"
-theme.border_focus                              = "#0099CC"
+theme.border_focus                              = theme.fg_focus
 theme.taglist_fg_focus                          = "#FFFFFF"
 theme.tasklist_bg_normal                        = "#222222"
 theme.tasklist_fg_focus                         = "#4CB7DB"
@@ -52,6 +53,12 @@ theme.bg_systray                                = theme.bg_focus
 theme.menu_height                               = 20
 theme.menu_width                                = 160
 theme.menu_icon_size                            = 32
+
+theme.tooltip_bg                                = theme.bg_normal
+theme.tooltip_fg                                = theme.fg_normal
+theme.tooltip_border_color                      = theme.border_focus
+theme.tooltip_border_width                      = theme.border_width
+
 theme.awesome_icon                              = theme.icon_dir .. "/awesome_icon_white.png"
 theme.awesome_icon_launcher                     = theme.icon_dir .. "/awesome_icon.png"
 theme.taglist_squares_sel                       = theme.icon_dir .. "/square_sel.png"
@@ -77,6 +84,7 @@ theme.mem                                       = theme.icon_dir .. "/mem.png"
 theme.volume                                    = theme.icon_dir .. "/volume.png"
 theme.net_up                                    = theme.icon_dir .. "/net_up.png"
 theme.net_down                                  = theme.icon_dir .. "/net_down.png"
+theme.jira                                      = theme.icon_dir .. "/jira.png"
 
 theme.layout_tile                               = theme.icon_dir .. "/tile.png"
 theme.layout_tileleft                           = theme.icon_dir .. "/tileleft.png"
@@ -126,16 +134,20 @@ local markup = lain.util.markup
 local blue   = "#80CCE6"
 local width_scaling = 1.0
 
+function markup_tooltip(text)
+    return markup.fontfg(theme.tooltip_font, theme.tooltip_fg, text)
+end
+
 function wrap_widget(icon_path, widget)
-	local icon = wibox.widget.imagebox(icon_path)
-	local background = wibox.container.background(widget, theme.bg_focus, gears.shape.rectangle)
-	local margin = wibox.container.margin(background, 0, 0, 5, 5)
-	return wibox.widget {
-		icon,
-		nil,
-		margin,
-		layout = wibox.layout.align.horizontal
-	}
+    local icon = wibox.widget.imagebox(icon_path)
+    local background = wibox.container.background(widget, theme.bg_focus, gears.shape.rectangle)
+    local margin = wibox.container.margin(background, 0, 0, 5, 5)
+    return wibox.widget {
+        icon,
+        nil,
+        margin,
+        layout = wibox.layout.align.horizontal
+    }
 end
 
 -- Clock
@@ -200,15 +212,48 @@ local netdown = wibox.widget.textbox()
 netdown.align = 'right'
 netdown.forced_width = 75 * width_scaling
 local netup = lain.widget.net({
-	settings = function()
-		netdown:set_markup(markup.font(theme.font, net_now.received .. " kB/s"))
-		widget:set_markup(markup.font(theme.font, net_now.sent .. " kB/s"))
-	end
+    settings = function()
+        netdown:set_markup(markup.font(theme.font, net_now.received .. " kB/s"))
+        widget:set_markup(markup.font(theme.font, net_now.sent .. " kB/s"))
+    end
 })
 netup.widget.align = 'right'
 netup.widget.forced_width = 75 * width_scaling
 local netdown_widget = wrap_widget(theme.net_down, netdown)
 local netup_widget = wrap_widget(theme.net_up, netup.widget)
+
+-- JIRA
+local jira_file = home_dir .. '/.local/share/jiraworklogger/current'
+jira_file_handle = io.open(jira_file)
+theme.has_jira = jira_file_handle ~= nil
+if theme.has_jira then
+    jira_file_handle:close()
+    jira = awful.widget.watch('head ' .. jira_file .. ' -n 1', 10,
+        function(widget, stdout, stderr, exitreason, exitcode)
+            widget:set_markup(markup.font(theme.font, stdout))
+        end)
+    jira_widget = wrap_widget(theme.jira, jira)
+    jira_tooltip = awful.tooltip({
+        objects = { jira_widget },
+        timer_function = function()
+            local file = io.open(jira_file)
+            local issueKey = file:read("*l")
+            jira:set_markup(markup.font(theme.font, issueKey))
+            local issueSummary = file:read("*l") or "N/A"
+
+            local f = io.popen("echo \"(`date +%s` - `stat -c %Y " .. jira_file .. "`) / 60\" | bc")
+            local time = tonumber(f:read("*a")) -- minutes
+            f:close()
+            local worklog = (time % 60) .. "m"
+            if time >= 60 then
+                time = math.floor(time / 60) -- hours
+                worklog = time .. "h " .. worklog
+            end
+            return markup_tooltip(worklog  .. " - " .. issueSummary)
+        end,
+        })
+    theme.jira = jira_widget
+end
 
 -- Separators
 local spr_small = wibox.widget.imagebox(theme.spr_small)
@@ -240,8 +285,8 @@ function theme.at_screen_connect(s)
     mytaglistcont = wibox.container.background(s.mytaglist, theme.bg_focus, gears.shape.rectangle)
     s.mytag = wibox.container.margin(mytaglistcont, 0, 0, 5, 5)
 
-	-- Systray with margin
-	s.mysystray = wibox.widget.systray()
+    -- Systray with margin
+    s.mysystray = wibox.widget.systray()
     s.mysystraycont = wibox.container.margin(wibox.container.background(s.mysystray, theme.bg_focus, gears.shape.rectangle), 0, 0, 5, 5)
 
     -- Create a tasklist widget
@@ -267,6 +312,8 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_right,
+            theme.has_jira and jira_widget or nil,
+            theme.has_jira and bottom_bar or nil,
             netdown_widget,
             bottom_bar,
             netup_widget,
@@ -298,7 +345,7 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_right,
-			s.mysystraycont,
+            s.mysystraycont,
             spr_left,
         },
     }

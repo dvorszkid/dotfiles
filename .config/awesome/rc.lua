@@ -138,6 +138,15 @@ beautiful.volume.bar:buttons(awful.util.table.join(
         beautiful.volume.update()
     end)
 ))
+
+-- JIRA widget settings
+if beautiful.has_jira then
+	beautiful.jira:buttons(awful.util.table.join(
+		awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
+		awful.button({}, 3, function() awful.spawn(apps.cmd.jira_reset) end)
+	))
+end
+
 keys.globalKeys = awful.util.table.join(awful.util.table.join(
 	awful.key({ }, "XF86AudioRaiseVolume", function () beautiful.volume.update() end),
 	awful.key({ }, "XF86AudioLowerVolume", function () beautiful.volume.update() end),

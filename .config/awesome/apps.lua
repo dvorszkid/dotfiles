@@ -16,6 +16,8 @@ local apps_cmd = {
 	screenshot		= "spectacle",
 	xrandr_setup	= "xrandr-setup.sh",
 	jira			= "jiraworklogger",
+	jira_current	= "jiraworklogger -c",
+	jira_reset		= "jiraworklogger -r",
 
 	volume_inc		= "amixer set Master 4%+",
 	volume_dec		= "amixer set Master 4%-",
