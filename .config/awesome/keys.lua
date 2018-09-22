@@ -227,10 +227,11 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, altkey    }, "j", function () awful.spawn(apps.cmd.jira) end, {description="jira work logger", group="programs"}),
 
 	-- Lock and shutdown
-	awful.key({ modkey, "Control"          }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
+	awful.key({ modkey, "Control" }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
 	awful.key({ modkey, "Control" }, "Prior", function () awful.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
 	awful.key({ modkey, "Control" }, "Next", function () awful.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
 	awful.key({ modkey, "Control" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
+	awful.key({ modkey, "Control" }, "s", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
 
 	-- ALSA control
 	awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn(apps.cmd.volume_inc) end, {description="increase volume", group="alsa"}),
