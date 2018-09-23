@@ -80,18 +80,18 @@ local tasklistButtons = awful.util.table.join(
 -- Client keys
 local clientKeys = awful.util.table.join(
 	awful.key({ modkey,           }, "c"     , function (c) c:kill() end, {description="kill", group="client modifiers"}),
-	awful.key({ modkey,  altkey   }, "f"     , function (c) c.fullscreen = not c.fullscreen end, {description="toggle fullscreen", group="client modifiers"}),
+	awful.key({ modkey, "Control" }, "f"     , function (c) c.fullscreen = not c.fullscreen end, {description="toggle fullscreen", group="client modifiers"}),
 	awful.key({ modkey,           }, "f"     , awful.client.floating.toggle, {description="toggle floating", group="client modifiers"}),
 	awful.key({ modkey,           }, "o"     , function (c) c:move_to_screen() end, {description="move to next screen", group="client modifiers"}),
 	awful.key({ modkey,           }, "t"     , function (c) c.ontop = not c.ontop end, {description="toggle ontop", group="client modifiers"}),
-	awful.key({ modkey,  altkey   }, "t"     , awful.titlebar.toggle, {description="toggle titlebar", group="client modifiers"}),
+	awful.key({ modkey, "Control" }, "t"     , awful.titlebar.toggle, {description="toggle titlebar", group="client modifiers"}),
 	awful.key({ modkey,           }, "s"     , function (c) c.sticky = not c.sticky end, {description="toggle sticky", group="client modifiers"}),
 	awful.key({ modkey,           }, "n"     , function (c) c.minimized = true end, {description="minimize", group="client modifiers"}),
 	awful.key({ modkey,           }, "m"     , function (c)
 		c.maximized_horizontal = not c.maximized_horizontal
 		c.maximized_vertical   = not c.maximized_vertical
 	end, {description="toggle maximixed", group="client modifiers"}),
-	awful.key({ modkey,  altkey  }, "m", function (c) c:swap(awful.client.getmaster()) end, {description="set as master", group="client modifiers"})
+	awful.key({ modkey, "Control" }, "m", function (c) c:swap(awful.client.getmaster()) end, {description="set as master", group="client modifiers"})
 )
 
 -- Client buttons
@@ -225,6 +225,7 @@ local globalKeys = awful.util.table.join(
 	awful.key({ },                   "Print", function () awful.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
 	awful.key({ modkey            }, "Escape", function () awful.spawn("xkill") end, {description="xkill", group="programs"}),
 	awful.key({ modkey, altkey    }, "j", function () awful.spawn(apps.cmd.jira) end, {description="jira work logger", group="programs"}),
+	awful.key({ modkey, altkey    }, "t", function () awful.spawn(apps.cmd.translate) end, {description="translator", group="programs"}),
 
 	-- Lock and shutdown
 	awful.key({ modkey, "Control" }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),

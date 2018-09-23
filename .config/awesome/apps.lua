@@ -18,6 +18,7 @@ local apps_cmd = {
 	jira			= "jiraworklogger",
 	jira_current	= "jiraworklogger --tracking",
 	jira_reset		= "jiraworklogger --reset-tracking",
+	translate		= "rofi-translate.sh",
 
 	volume_inc		= "amixer set Master 4%+",
 	volume_dec		= "amixer set Master 4%-",
