@@ -62,6 +62,21 @@ tyrannical.tags = {
 		}
 	},
 	{
+		name        = "video",
+		init        = false,
+		position    = 5,
+		exclusive   = true,
+		screen      = config.scr.sec,
+		force_screen= true,
+		layout      = awful.layout.suit.tile.left,
+		class       = {
+			"mplayer",
+			"mpv",
+			"smplayer",
+			"vlc",
+		}
+	},
+	{
 		name        = "email",
 		init        = false,
 		volatile    = true,
@@ -178,13 +193,13 @@ tyrannical.properties.size_hints_honor = {
 -- Make URxvt instances run on tag found by original WM_NAME
 -- awful.client.property.persist("overwrite_class", "string")
 -- client.connect_signal("property::class", function (c)
--- 	name = c.name or ''
--- 	if name == '' then
--- 		return
--- 	end
--- 	if c.class == "URxvt" and name ~= "urxvt" and c.overwrite_class == '' then
--- 		c.overwrite_class = c.class .. ":" .. name
--- 	end
+--	name = c.name or ''
+--	if name == '' then
+--		return
+--	end
+--	if c.class == "URxvt" and name ~= "urxvt" and c.overwrite_class == '' then
+--		c.overwrite_class = c.class .. ":" .. name
+--	end
 -- end)
 awful.client.property.persist("original_name", "string")
 client.connect_signal("property::class", function (c)
