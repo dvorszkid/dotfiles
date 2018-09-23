@@ -160,22 +160,23 @@ local clock_widget = wrap_widget(theme.clock, mytextclock)
 -- Calendar
 local mytextcalendar = wibox.widget.textclock(markup.fontfg(theme.font, theme.fg_normal, "W%V, %d %b %a "))
 local calendar_widget = wrap_widget(theme.calendar, mytextcalendar)
-lain.widget.calendar({
+lain.widget.cal({
     attach_to = { mytextclock, mytextcalendar },
     followtag = true,
     notification_preset = {
-        fg = theme.fg_normal,
-        bg = theme.bg_normal,
+        fg = theme.tooltip_fg,
+        bg = theme.tooltip_bg,
         position = "top_right",
-        font = "Monospace 10"
+        font = theme.mono_font
     }
 })
 
 -- ALSA volume bar
 local myalsabar = lain.widget.alsabar({
-    notification_preset = { font = "Monospace 9"},
+    notification_preset = { font = theme.tooltip_font },
     --togglechannel = "IEC958,3",
     width = 80, height = 10, border_width = 0,
+    followtag = true,
     colors = {
         background = "#383838",
         unmute     = "#80CCE6",

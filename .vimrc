@@ -302,7 +302,7 @@ set encoding=utf-8
 " Indent and tab settings
 ""
 set autoindent smartindent
-set tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set smarttab
 let g:leave_my_textwidth_alone = 1 " to ignore gentoo specific global vimrc
 
