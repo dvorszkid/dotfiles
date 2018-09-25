@@ -154,22 +154,24 @@ local globalKeys = awful.util.table.join(
 		end, {description="run lua code", group="prompts"}),
 
 	-- Screen handling
-	awful.key({ modkey, "Control" }, "[" , function () awful.screen.focus_relative(-1) end, {description="focus previous", group="screen handling"}),
-	awful.key({ modkey, "Control" }, "]" , function () awful.screen.focus_relative( 1) end, {description="focus next", group="screen handling"}),
+	awful.key({ modkey, altkey }, "[" , function () awful.screen.focus_relative(-1) end, {description="focus previous", group="screen handling"}),
+	awful.key({ modkey, altkey }, "]" , function () awful.screen.focus_relative( 1) end, {description="focus next", group="screen handling"}),
 
 	-- Tag browsing
 	awful.key({ modkey }, "\\", awful.tag.history.restore, {description="select last", group="tag handling"}),
-	awful.key({ modkey, altkey }, "[" , awful.tag.viewprev, {description="select previous", group="tag handling"}),
-	awful.key({ modkey, altkey }, "]" , awful.tag.viewnext, {description="select next", group="tag handling"}),
-	awful.key({ modkey, altkey }, "n", function () lain.util.add_tag() end, {description="new", group="tag handling"}),
-	awful.key({ modkey, altkey }, "r", function () lain.util.rename_tag() end, {description="rename", group="tag handling"}),
-	awful.key({ modkey, altkey }, "d", function () lain.util.delete_tag() end, {description="delete", group="tag handling"}),
-	awful.key({ modkey, altkey, "Shift" }, "[", function () lain.util.move_tag(-1) end, {description="move left", group="tag handling"}),
-	awful.key({ modkey, altkey, "Shift" }, "]", function () lain.util.move_tag(1) end, {description="move right", group="tag handling"}),
-	awful.key({ modkey, altkey }, "l", function () move_tag_to_screen("right") end, {description="move to screen right", group="tag handling"}),
-	awful.key({ modkey, altkey }, "h", function () move_tag_to_screen("left") end, {description="move to screen left", group="tag handling"}),
-	awful.key({ modkey, altkey }, "j", function () move_tag_to_screen("down") end, {description="move to screen down", group="tag handling"}),
-	awful.key({ modkey, altkey }, "k", function () move_tag_to_screen("up") end, {description="move to screen up", group="tag handling"}),
+	awful.key({ modkey }, "[" , awful.tag.viewprev, {description="select previous", group="tag handling"}),
+	awful.key({ modkey }, "]" , awful.tag.viewnext, {description="select next", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "[", function () lain.util.move_tag(-1) end, {description="move left", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "]", function () lain.util.move_tag(1) end, {description="move right", group="tag handling"}),
+
+	awful.key({ modkey, "Shift" }, "l", function () move_tag_to_screen("right") end, {description="move to screen right", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "h", function () move_tag_to_screen("left") end, {description="move to screen left", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "j", function () move_tag_to_screen("down") end, {description="move to screen down", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "k", function () move_tag_to_screen("up") end, {description="move to screen up", group="tag handling"}),
+
+	awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end, {description="new", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end, {description="rename", group="tag handling"}),
+	awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end, {description="delete", group="tag handling"}),
 
 	-- Default client focus
 	awful.key({ altkey }, "Tab",

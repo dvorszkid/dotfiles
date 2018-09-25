@@ -37,20 +37,9 @@ tyrannical.tags = {
 		}
 	},
 	{
-		name        = "www",
-		init        = config.scr.pri ~= config.scr.sec,
-		selected    = true,
-		position    = 3,
-		exclusive   = false,
-		screen      = config.scr.sec,
-		force_screen= true,
-		layout      = awful.layout.suit.tile.left,
-		class       = {}
-	},
-	{
 		name        = "music",
 		init        = true,
-		position    = 4,
+		position    = 1,
 		exclusive   = true,
 		screen      = config.scr.sec,
 		force_screen= true,
@@ -64,7 +53,7 @@ tyrannical.tags = {
 	{
 		name        = "video",
 		init        = false,
-		position    = 5,
+		volatile    = true,
 		exclusive   = true,
 		screen      = config.scr.sec,
 		force_screen= true,
@@ -86,12 +75,13 @@ tyrannical.tags = {
 			"hiri",
 		}
 	},
-	-- Any screen
 	{
 		name        = "doc",
 		init        = false,
 		volatile    = true,
 		exclusive   = true,
+		screen      = config.scr.sec,
+		force_screen= true,
 		layout      = awful.layout.suit.tile.left,
 		class       = {
 			"okular",

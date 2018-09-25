@@ -61,7 +61,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat'
 if s:is_devel
-	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/6/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
+	Plug 'Valloric/YouCompleteMe', {'do': 'LD_LIBRARY_PATH=/usr/lib/llvm/7/lib64 ./install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
 endif
 
 " Lua programming
