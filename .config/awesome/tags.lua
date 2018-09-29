@@ -27,13 +27,12 @@ tyrannical.tags = {
 	{
 		name        = "dev",
 		init        = true,
-		exclusive   = false,
+		exclusive   = true,
 		selected    = true,
 		screen      = config.scr.pri,
 		layout      = awful.layout.suit.max,
 		class = {
 			"bcompare",
-			"urxvt:dev",
 		}
 	},
 	{
@@ -181,30 +180,26 @@ tyrannical.properties.size_hints_honor = {
 
 
 -- Make URxvt instances run on tag found by original WM_NAME
--- awful.client.property.persist("overwrite_class", "string")
--- client.connect_signal("property::class", function (c)
---	name = c.name or ''
---	if name == '' then
---		return
---	end
---	if c.class == "URxvt" and name ~= "urxvt" and c.overwrite_class == '' then
---		c.overwrite_class = c.class .. ":" .. name
---	end
--- end)
 awful.client.property.persist("original_name", "string")
 client.connect_signal("property::class", function (c)
-	class = c.class or ''
-	name = c.name or ''
-	if c.original_name ~= '' then
-		name = c.original_name
-	end
-	if c.class == "URxvt" and name ~= "urxvt" then
-		local t = awful.tag.find_by_name(awful.screen.focused(), name)
-		if t then
-			c.original_name = name
-			c:move_to_tag(t)
-		end
-	end
+	if c.class ~= "URxvt" or c.floating then
+        return
+    end
+    if c.original_name == '' then
+        c.original_name = c.name
+    end
+    -- print('[callback] C:' .. c.class .. ', N:' .. c.name .. ', ON:' .. c.original_name)
+
+    local t = awful.tag.find_by_name(awful.screen.focused(), c.original_name)
+    if not t then
+        t = awful.tag.add(c.original_name, {
+            screen = awful.screen.focused(),
+            layout = awful.layout.suit.tile.left,
+            volatile = true
+        })
+    end
+    t:view_only()
+    c:move_to_tag(t)
 end)
 
 
