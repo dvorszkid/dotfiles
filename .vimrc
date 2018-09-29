@@ -66,8 +66,6 @@ endif
 
 " Lua programming
 Plug 'tbastos/vim-lua', {'for': ['lua']}
-Plug 'xolox/vim-misc', {'for': ['lua']}
-Plug 'xolox/vim-lua-ftplugin', {'for': ['lua']}
 
 " C++ programming
 Plug 'derekwyatt/vim-fswitch', {'for': ['c', 'cpp']}
