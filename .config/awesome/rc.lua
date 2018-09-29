@@ -23,35 +23,36 @@ local keys       = require("keys")
 -- {{{ Error handling
 -- Handle startup errors
 if awesome.startup_errors then
-	naughty.notify({
-		preset = naughty.config.presets.critical,
-		title = "Oops, there were errors during startup!",
-		text = awesome.startup_errors
-	})
+    naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = "Oops, there were errors during startup!",
+        text = awesome.startup_errors
+    })
 end
+
 
 -- Autostart
 for _, cmd in pairs(autostart) do
-	awful.spawn.with_shell("pgrep -u $USER -f \"" .. cmd .. "\"$ || (sleep 1 && " .. cmd .. ")")
+    awful.spawn.with_shell("pgrep -u $USER -f \"" .. cmd .. "\"$ || (sleep 1 && " .. cmd .. ")")
 end
 
 
 -- Handle runtime errors after startup
 do
-	local in_error = false
-	awesome.connect_signal("debug::error",
-		function (err)
-			-- Make sure we don't go into an endless error loop
-			if in_error then return end
-			in_error = true
+    local in_error = false
+    awesome.connect_signal("debug::error",
+        function (err)
+            -- Make sure we don't go into an endless error loop
+            if in_error then return end
+            in_error = true
 
-			naughty.notify({
-				preset = naughty.config.presets.critical,
-				title = "Oops, an error happened!",
-				text = err
-			})
-			in_error = false
-		end)
+            naughty.notify({
+                preset = naughty.config.presets.critical,
+                title = "Oops, an error happened!",
+                text = err
+            })
+            in_error = false
+        end)
 end
 -- }}}
 
@@ -61,26 +62,21 @@ end
 os.setlocale(os.getenv("LANG"))
 
 -- common
-modkey		= "Mod4"
-altkey		= "Mod1"
-user		= os.getenv("USER")
-home_dir	= os.getenv("HOME")
-conf_dir	= awful.util.getdir("config")
+modkey      = "Mod4"
+altkey      = "Mod1"
+user        = os.getenv("USER")
+home_dir    = os.getenv("HOME")
+conf_dir    = awful.util.getdir("config")
 terminal    = apps.cmd.terminal
-hostname    = io.lines("/proc/sys/kernel/hostname")()
 
 config = {}
 config.titlebars     = true
 config.sloppyFocus   = true
 config.scr           = {
-	pri = 1,
-	sec = screen.count() > 1 and 2 or 1,
+    pri = 1,
+    sec = screen.count() > 1 and 2 or 1,
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
-
-if (hostname ~= "bp1-dsklin") then
-	hostname = "bp1-dsklin"
-end
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -105,12 +101,12 @@ local titlebars_enabled = beautiful.titlebar_enabled == nil and (config.titlebar
 
 -- wallpaper
 local function set_wallpaper(s)
-	local wallpaper = config.wallpaperPath .. s.index
-	-- If wallpaper is a function, call it with the screen
-	if type(wallpaper) == "function" then
-		wallpaper = wallpaper(s)
-	end
-	gears.wallpaper.maximized(wallpaper, s, true)
+    local wallpaper = config.wallpaperPath .. s.index
+    -- If wallpaper is a function, call it with the screen
+    if type(wallpaper) == "function" then
+        wallpaper = wallpaper(s)
+    end
+    gears.wallpaper.maximized(wallpaper, s, true)
 end
 
 -- re-set wallpaper when a screen's geometry changes (e.g. different resolution)
@@ -141,19 +137,19 @@ beautiful.volume.bar:buttons(awful.util.table.join(
 
 -- JIRA widget settings
 if beautiful.has_jira then
-	beautiful.jira:buttons(awful.util.table.join(
-		awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
-		awful.button({}, 3, function() awful.spawn(apps.cmd.jira_reset) end)
-	))
+    beautiful.jira:buttons(awful.util.table.join(
+        awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
+        awful.button({}, 3, function() awful.spawn(apps.cmd.jira_reset) end)
+    ))
 end
 
 keys.globalKeys = awful.util.table.join(awful.util.table.join(
-	awful.key({ }, "XF86AudioRaiseVolume", function () beautiful.volume.update() end),
-	awful.key({ }, "XF86AudioLowerVolume", function () beautiful.volume.update() end),
-	awful.key({ }, "XF86AudioMute", function ()
-		os.execute("sleep 0.1")
-		beautiful.volume.update()
-	end)
+    awful.key({ }, "XF86AudioRaiseVolume", function () beautiful.volume.update() end),
+    awful.key({ }, "XF86AudioLowerVolume", function () beautiful.volume.update() end),
+    awful.key({ }, "XF86AudioMute", function ()
+        os.execute("sleep 0.1")
+        beautiful.volume.update()
+    end)
 ), keys.globalKeys)
 
 awful.util.taglist_buttons = keys.taglistButtons
@@ -167,15 +163,15 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Custom taglist func
     s.mytaglist_func = function (w, buttons, label, data, tags)
-		local function mylabel(c)
-			local text, bg_color, bg_image, icon, other_args = label(c)
-			text = text:gsub(">" .. c.name .. "<", ">" .. c.index .. ": " .. c.name .. "<")
-			return text, bg_color, bg_image, icon, other_args
-		end
-		return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
-	end
+        local function mylabel(c)
+            local text, bg_color, bg_image, icon, other_args = label(c)
+            text = text:gsub(">" .. c.name .. "<", ">" .. c.index .. ": " .. c.name .. "<")
+            return text, bg_color, bg_image, icon, other_args
+        end
+        return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
+    end
 
-	beautiful.at_screen_connect(s)
+    beautiful.at_screen_connect(s)
 end)
 -- }}}
 
@@ -197,14 +193,13 @@ awful.rules.rules = {
                      keys = keys.clientKeys,
                      buttons = keys.clientButtons,
                      screen = awful.screen.preferred,
-					 size_hints_honor = false,
-                     placement = awful.placement.no_overlap+awful.placement.centered+awful.placement.no_offscreen
-       }
-      },
+                     size_hints_honor = false,
+                     placement = awful.placement.no_overlap+awful.placement.centered+awful.placement.no_offscreen }
+    },
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+    { rule_any = {type = { "normal", "dialog" } },
+      properties = { titlebars_enabled = true }
     },
 }
 -- }}}
@@ -215,19 +210,21 @@ awful.rules.rules = {
 client.connect_signal("manage", function (c)
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         awful.placement.no_overlap(c)
-	-- Prevent clients from being unreachable after screen count changes.
+        -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
 end)
 
 client.connect_signal("request::titlebars", function(c)
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        awful.titlebar(c) : setup {
+        awful.titlebar(c, {
+            size = 18
+        }):setup {
             -- Left
             {
                 awful.titlebar.widget.iconwidget(c),
-                awful.titlebar.widget.stickybutton   (c),
-                awful.titlebar.widget.ontopbutton    (c),
+                awful.titlebar.widget.stickybutton(c),
+                awful.titlebar.widget.ontopbutton(c),
                 buttons = buttons,
                 layout  = wibox.layout.fixed.horizontal
             },
@@ -242,20 +239,20 @@ client.connect_signal("request::titlebars", function(c)
             },
             -- Right
             {
-                awful.titlebar.widget.floatingbutton (c),
+                awful.titlebar.widget.floatingbutton(c),
                 awful.titlebar.widget.maximizedbutton(c),
-                awful.titlebar.widget.closebutton    (c),
+                awful.titlebar.widget.closebutton(c),
                 layout = wibox.layout.fixed.horizontal()
             },
             layout = wibox.layout.align.horizontal
         }
-		awful.titlebar(c, {size=16})
-		if not c.floating then
-			awful.titlebar.hide(c)
-		end
+        if not c.floating then
+            awful.titlebar.hide(c)
+        end
     end
 end)
 
+-- Show titlebar for floating clients
 client.connect_signal("property::floating", function (c)
     if c.floating then
         awful.titlebar.show(c)
@@ -266,8 +263,7 @@ end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
-    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and awful.client.focus.filter(c) then
         client.focus = c
     end
 end)
