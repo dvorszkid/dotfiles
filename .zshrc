@@ -84,6 +84,9 @@ bindkey "^Xm" run-help
 # Do not execute, just add to history
 bindkey "^Xp" push-line-or-edit
 
+# Edit current command in vim
+bindkey "^Xv" edit-command-line
+
 # Custom widget to store a command line in history without executing it
 commit-to-history() {
   print -s ${(z)BUFFER}
