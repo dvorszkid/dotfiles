@@ -18,6 +18,7 @@ tyrannical.tags = {
         layout      = awful.layout.suit.tile.left,
         class = {
             "firefox",
+            "navigator",
             "google-chrome",
             "google-chrome-beta",
             "google-chrome-unstable",

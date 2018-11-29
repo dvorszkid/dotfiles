@@ -5,5 +5,5 @@ SESSION_NAME="$1"
 if [ -z "$(tmux list-sessions | grep "$SESSION_NAME")" ]; then
 	tmux -2u start-server \; source-file ~/.tmux/"$SESSION_NAME"
 else
-	tmux attach -t "$(tmux list-sessions -F "#S" | grep "$SESSION_NAME" | head -n 1)"
+	tmux attach -d -t "$(tmux list-sessions -F "#S" | grep "$SESSION_NAME" | head -n 1)"
 fi

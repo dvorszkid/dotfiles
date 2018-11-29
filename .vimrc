@@ -43,6 +43,7 @@ Plug 'osyo-manga/vim-anzu'
 
 " For file opening
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
@@ -111,7 +112,7 @@ call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('_', 'sorters', ['sorter/sublime'])
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
-nnoremap <silent> <leader>df :Denite file_rec<cr>
+nnoremap <silent> <leader>df :Denite buffer file_rec<cr>
 nnoremap <silent> <leader>do :Denite outline<cr>
 nnoremap <silent> <leader>dy :Denite neoyank<cr>
 nnoremap <silent> <leader>dr :Denite -resume<cr>
@@ -223,6 +224,11 @@ let g:lt_height = 15
 " FSwitch
 noremap <silent> <F4> :FSHere<CR>
 inoremap <silent> <F4> <Esc>:FSHere<CR>
+
+
+" tcomment_vim
+let g:tcomment#options = {'whitespace': 'no'}
+let g:tcomment#filetype#guess_gn = 'python'
 
 
 " vim-autoformat
@@ -465,8 +471,7 @@ function! MaximizeToggle()
 		tabonly
 	endif
 endfunction
-nnoremap <F5> :call MaximizeToggle()<CR>
-nnoremap <C-W>o :call MaximizeToggle()<CR>
+nnoremap <C-W>z :call MaximizeToggle()<CR>
 
 
 " Buffer switching
@@ -479,6 +484,8 @@ inoremap <silent> <F2> <Esc>:bn<CR>
 " More natural line positioning on wrapped lines
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 
 " Clear highlight
