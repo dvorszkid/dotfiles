@@ -77,6 +77,7 @@ config.scr           = {
     sec = screen.count() > 1 and 2 or 1,
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
+naughty.config.defaults.position = "bottom_right"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
