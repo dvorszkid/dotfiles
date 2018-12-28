@@ -84,6 +84,7 @@ tyrannical.tags = {
         layout      = awful.layout.suit.tile.left,
         class       = {
             "okular",
+            "libreoffice",
             "libreoffice-writer",
             "libreoffice-calc",
             "libreoffice-impress",
