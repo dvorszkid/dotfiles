@@ -205,7 +205,7 @@ local mem = lain.widget.mem({
     end
 })
 mem.widget.align = 'right'
-mem.widget.forced_width = 65 * width_scaling
+mem.widget.forced_width = 70 * width_scaling
 local mem_widget = wrap_widget(theme.mem, mem.widget)
 
 -- Net
