@@ -131,6 +131,12 @@ rofi.font:				Mono 10
 rofi.matching:			normal
 rofi.terminal:			urxvtc
 rofi.separator-style:	solid
+rofi.kb-row-first:         Control+Home,Control+KP_Home
+rofi.kb-row-last:          Control+End,Control+KP_End
+rofi.kb-move-front:        Home,KP_Home
+rofi.kb-move-end:          End,KP_End
+rofi.kb-move-word-back:    Control+Left
+rofi.kb-move-word-forward: Control+Right
 ! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
 rofi.color-normal: #242424,  #bbbbbb,  #242424,  #303030,  #dddddd
 rofi.color-urgent: #242424,  S_red,  #242424,  #303030,  #dddddd
