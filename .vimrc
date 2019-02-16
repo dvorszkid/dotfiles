@@ -45,7 +45,7 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'tag': '1.2' }
 Plug 'Shougo/neoyank.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'nixprime/cpsm', {'do': 'PY3=ON ./install.sh'}
