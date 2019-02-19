@@ -17,7 +17,7 @@ local apps_cmd = {
     xrandr_setup    = "xrandr-setup.sh",
     jira            = "jiraworklogger --tracking-time-only",
     jira_current    = "jiraworklogger --tracking",
-    jira_reset      = "jiraworklogger --reset-tracking",
+    jira_adjust     = "jiraworklogger --adjust-tracking",
     translate       = "rofi-translate.sh",
 
     volume_inc      = "amixer set Master 4%+",

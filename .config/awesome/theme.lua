@@ -11,7 +11,7 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 local string = string
-local os = { getenv = os.getenv }
+local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
@@ -131,7 +131,6 @@ theme.layout_centerwork  = theme.lain_icons .. "centerwork.png"
 theme.layout_centerhwork = theme.lain_icons .. "centerworkh.png" -- centerwork.horizontal
 
 local markup = lain.util.markup
-local blue   = "#80CCE6"
 local width_scaling = 1.0
 
 function markup_tooltip(text)
@@ -173,7 +172,6 @@ lain.widget.cal({
 
 -- ALSA volume bar
 local myalsabar = lain.widget.alsabar({
-    notification_preset = { font = theme.tooltip_font },
     --togglechannel = "IEC958,3",
     width = 80, height = 10, border_width = 0,
     followtag = true,
@@ -229,28 +227,57 @@ jira_file_handle = io.open(jira_file)
 theme.has_jira = jira_file_handle ~= nil
 if theme.has_jira then
     jira_file_handle:close()
-    jira = awful.widget.watch('head ' .. jira_file .. ' -n 1', 10,
+
+    --local tracking_cmd = "head " .. jira_file .. " -n 1"
+    local date_cmd = "stat -c %Y " .. jira_file
+    local running_cmd = "pgrep -fc \"jiraworklogger\\/worklog\\.py\""
+
+    local update_worklog = function(widget, stdout)
+        local now = os.time(os.date("*t"))
+        local time = (now - tonumber(stdout)) / 60
+        local worklog = math.floor((time % 60)) .. "m"
+        local c = theme.fg_normal
+        if time >= 60 then
+            time = math.floor(time / 60) -- hours
+            worklog = time .. "h " .. worklog
+
+            -- colorize based on tracking time
+            if time >= 6 then
+                c = theme.c_red
+            end
+        end
+
+        -- colorize based on running jobs
+        f = io.popen(running_cmd)
+        local jobcount = tonumber(f:read("*a"))
+        if jobcount > 0 then
+            c = theme.c_orange
+        end
+        f:close()
+
+        widget:set_markup(markup.fontfg(theme.font, c, worklog))
+    end
+
+    jira = awful.widget.watch(date_cmd, 5,
         function(widget, stdout, stderr, exitreason, exitcode)
-            widget:set_markup(markup.font(theme.font, stdout))
+            update_worklog(widget, stdout)
         end)
     jira_widget = wrap_widget(theme.jira, jira)
     jira_tooltip = awful.tooltip({
         objects = { jira_widget },
         timer_function = function()
-            local file = io.open(jira_file)
-            local issueKey = file:read("*l")
-            jira:set_markup(markup.font(theme.font, issueKey))
-            local issueSummary = file:read("*l") or "N/A"
-
-            local f = io.popen("echo \"(`date +%s` - `stat -c %Y " .. jira_file .. "`) / 60\" | bc")
-            local time = tonumber(f:read("*a")) -- minutes
+            -- tracked issue
+            local f = io.open(jira_file)
+            local issueKey = f:read("*l")
+            local issueSummary = f:read("*l") or "N/A"
             f:close()
-            local worklog = (time % 60) .. "m"
-            if time >= 60 then
-                time = math.floor(time / 60) -- hours
-                worklog = time .. "h " .. worklog
-            end
-            return markup_tooltip(worklog  .. " - " .. issueSummary)
+
+            -- tracked time
+            f = io.popen(date_cmd)
+            update_worklog(jira, f:read("*a"))
+            f:close()
+
+            return markup_tooltip("[" .. issueKey  .. "] " .. issueSummary)
         end,
         })
     theme.jira = jira_widget

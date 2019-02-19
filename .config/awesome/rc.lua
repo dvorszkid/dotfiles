@@ -140,7 +140,7 @@ beautiful.volume.bar:buttons(awful.util.table.join(
 if beautiful.has_jira then
     beautiful.jira:buttons(awful.util.table.join(
         awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
-        awful.button({}, 3, function() awful.spawn(apps.cmd.jira_reset) end)
+        awful.button({}, 3, function() awful.spawn(apps.cmd.jira_adjust) end)
     ))
 end
 
