@@ -60,7 +60,8 @@ fi
 setopt nonomatch # pass the unevaluated argument like bash
 setopt print_exit_value
 unsetopt rm_star_silent
-unsetopt share_history
+setopt inc_append_history       # Appends every command to the history file once it is executed
+setopt share_history            # Reloads the history whenever you use it
 setopt glob_dots                # include dotfiles in globbing
 unsetopt list_beep              # no bell on ambiguous completion
 unsetopt hist_beep              # no bell on error in history
