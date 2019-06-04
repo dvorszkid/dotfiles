@@ -112,10 +112,13 @@ call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('_', 'sorters', ['sorter/sublime'])
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
-nnoremap <silent> <leader>df :Denite buffer file_rec<cr>
+nnoremap <silent> <leader>df :Denite file_rec<cr>
+nnoremap <silent> <leader>db :Denite buffer<cr>
 nnoremap <silent> <leader>do :Denite outline<cr>
 nnoremap <silent> <leader>dy :Denite neoyank<cr>
-nnoremap <silent> <leader>dr :Denite -resume<cr>
+nnoremap <silent> <leader>dj :Denite jump<cr>
+nnoremap <silent> <leader>dr :Denite register<cr>
+nnoremap <silent> <leader>dt :Denite filetype<cr>
 nmap <silent> <C-p> <leader>df
 nmap <silent> <C-t> <leader>do
 
