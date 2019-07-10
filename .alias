@@ -65,9 +65,11 @@ function gcot() {
 function vimplug() {
 	curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	vim -c ":PlugInstall"
+	nvim -c ":PlugInstall" || vi -c ":PlugInstall"
 }
-alias vim-update="vim -c ':PlugUpgrade' -c ':PlugUpdate'"
+function vi-update() {
+    nvim -c ':PlugUpgrade' -c ':PlugUpdate' || vi -c ':PlugUpgrade' -c ':PlugUpdate'
+}
 
 
 ##

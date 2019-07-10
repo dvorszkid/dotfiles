@@ -45,10 +45,14 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/denite.nvim', { 'tag': '1.2' }
+Plug 'Shougo/denite.nvim', {'do': 'python3 -m pip install --user --upgrade pynvim'}
 Plug 'Shougo/neoyank.vim'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'nixprime/cpsm', {'do': 'PY3=ON ./install.sh'}
+Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
+
+" For denite, when using vim8
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 " Tmux
 if !has("gui_running")
@@ -94,6 +98,36 @@ nnoremap <silent> <leader><leader>pU :PlugUpgrade<CR>
 nnoremap <silent> <leader><leader>pc :PlugClean<CR>
 
 " Denite
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+    inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+
+    nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
+
+    nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+    imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+    inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+
+    inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    inoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
+
+    inoremap <silent><buffer> <Up> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+    inoremap <silent><buffer> <Down> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+    inoremap <silent><buffer> <PageUp> <Esc><C-w>p:call cursor(line('.')-10,0)<CR><C-w>pA
+    inoremap <silent><buffer> <PageDown> <Esc><C-w>p:call cursor(line('.')+10,0)<CR><C-w>pA
+endfunction
+
 if executable('ag')
 	call denite#custom#var('grep', 'command', ['ag'])
 	call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -101,26 +135,48 @@ if executable('ag')
 	call denite#custom#var('grep', 'pattern_opt', [])
 	call denite#custom#var('grep', 'separator', ['--'])
 	call denite#custom#var('grep', 'final_opts', [])
-	call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+	call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 endif
 call denite#custom#option('default', 'prompt', '»')
 call denite#custom#option('_', 'highlight_matched_char', 'no')
 call denite#custom#option('_', 'smartcase', 'true')
 call denite#custom#option('_', 'reversed', 'true')
 call denite#custom#option('_', 'auto_resize', 'true')
-call denite#custom#source('_', 'matchers', ['matcher/cpsm'])
+call denite#custom#option('_', 'start_filter', 'true')
+call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
 call denite#custom#source('_', 'sorters', ['sorter/sublime'])
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap')
-nnoremap <silent> <leader>df :Denite file_rec<cr>
+nnoremap <silent> <leader>df :Denite file/rec<cr>
 nnoremap <silent> <leader>db :Denite buffer<cr>
 nnoremap <silent> <leader>do :Denite outline<cr>
 nnoremap <silent> <leader>dy :Denite neoyank<cr>
 nnoremap <silent> <leader>dj :Denite jump<cr>
 nnoremap <silent> <leader>dr :Denite register<cr>
 nnoremap <silent> <leader>dt :Denite filetype<cr>
+nnoremap <silent> <leader>dd :Denite menu:custom_sources<cr>
 nmap <silent> <C-p> <leader>df
 nmap <silent> <C-t> <leader>do
+
+" Add custom menus
+let s:menus = {}
+let s:menus.custom_sources = {
+    \ 'description': 'Custom Denite sources',
+    \ 'command_candidates': [
+    \   ['filetype', 'Denite filetype'],
+    \   ['jump', 'Denite jump'],
+    \   ['buffer', 'Denite buffer'],
+    \   ['neoyank', 'Denite neoyank'],
+    \   ['file/rec', 'Denite file/rec'],
+    \   ['outline', 'Denite outline'],
+    \   ['register', 'Denite register'],
+    \ ]
+    \ }
+call denite#custom#var('menu', 'menus', s:menus)
+
+
+" Fruzzy
+let g:fruzzy#usenative = 1
 
 
 " Fugitive
