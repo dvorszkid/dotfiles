@@ -43,7 +43,6 @@ tyrannical.tags = {
         screen      = config.scr.sec,
         force_screen= true,
         layout      = awful.layout.suit.tile.left,
-        exec_once   = {"spotify"},
         class       = {
             "amarok",
             "spotify",
@@ -215,3 +214,11 @@ client.connect_signal("property::class", function(c)
     end
 end)
 
+
+-- Hack for making Firefox not floating
+-- (somehow it is always floating by default)
+client.connect_signal("property::class", function(c)
+    if c.class == "Firefox" then
+        c.floating = false
+    end
+end)
