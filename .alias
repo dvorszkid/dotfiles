@@ -60,17 +60,19 @@ function gcot() {
 
 
 ##
-# VimPlug
+# Vi / Neovim
 ##
+if [ -x "$(command -v nvim)" ]; then
+    alias vi='nvim'
+fi
 function vimplug() {
 	curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	nvim -c ":PlugInstall" || vi -c ":PlugInstall"
+	vi -c ":PlugInstall"
 }
 function vi-update() {
-    nvim -c ':PlugUpgrade' -c ':PlugUpdate' || vi -c ':PlugUpgrade' -c ':PlugUpdate'
+    vi -c ':PlugUpgrade' -c ':PlugUpdate'
 }
-
 
 ##
 # Create a new directory and enter it
