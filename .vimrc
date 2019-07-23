@@ -128,6 +128,8 @@ function! s:denite_filter_my_settings() abort
     inoremap <silent><buffer> <PageDown> <Esc><C-w>p:call cursor(line('.')+10,0)<CR><C-w>pA
 endfunction
 
+let g:ycm_filetype_blacklist = { 'denite': 1, 'denite-filter': 1 }
+
 if executable('ag')
 	call denite#custom#var('grep', 'command', ['ag'])
 	call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
