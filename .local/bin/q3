@@ -1,3 +1,4 @@
 #!/bin/sh
 X :2 -terminate &
+sleep 3
 DISPLAY=:2 nice -20 xterm -e quake3
