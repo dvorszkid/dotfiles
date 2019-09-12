@@ -108,6 +108,8 @@ for key in "${(s: :)key_info[ControlRight]}"
 ##
 source "$HOME/.alias"
 source "$HOME/.env"
+source_if_available "$HOME/.fzf/shell/completion.zsh"
+source_if_available "$HOME/.fzf/shell/key-bindings.zsh"
 
 
 ##
@@ -129,7 +131,4 @@ fi
 ##
 # Local .zshrc
 ##
-if [ -f "$HOME/.zshrc.local" ]
-then
-	source "$HOME/.zshrc.local"
-fi
+source_if_available "$HOME/.zshrc.local"
