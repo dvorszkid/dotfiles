@@ -40,6 +40,9 @@ Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-surround'
 Plug 'qwertologe/nextval.vim'
 Plug 'osyo-manga/vim-anzu'
+Plug 'svermeulen/vim-yoink'
+Plug 'svermeulen/vim-cutlass'
+Plug 'svermeulen/vim-subversive'
 
 " For file opening
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -83,11 +86,30 @@ call plug#end()
 " Plugin configurations
 "
 
-" VimPlug
-nnoremap <silent> <leader><leader>ps :PlugStatus<CR>
-nnoremap <silent> <leader><leader>pu :PlugUpdate<CR>
-nnoremap <silent> <leader><leader>pU :PlugUpgrade<CR>
-nnoremap <silent> <leader><leader>pc :PlugClean<CR>
+" Yoink
+let g:yoinkMaxItems = 100
+let g:yoinkIncludeDeleteOperations = 1
+nnoremap <silent> <leader>;y :Yanks<cr>
+nmap <C-n> <plug>(YoinkPostPasteSwapBack)
+"nmap <C-p> <plug>(YoinkPostPasteSwapForward)
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+nmap [y <plug>(YoinkRotateBack)
+nmap ]y <plug>(YoinkRotateForward)
+nmap y <plug>(YoinkYankPreserveCursorPosition)
+xmap y <plug>(YoinkYankPreserveCursorPosition)
+
+
+" Cutlass
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
+
+
+" Subversive
+nmap S <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
 
 
 " FZF
@@ -100,9 +122,13 @@ nnoremap <silent> <leader>;b :FzfBuffers<cr>
 nnoremap <silent> <leader>;t :FzfBTags<cr>
 nnoremap <silent> <leader>;T :FzfTags<cr>
 nnoremap <silent> <leader>;<leader> :FzfAg<cr>
-" TODO nnoremap <silent> <leader>;y :Denite neoyank<cr>
-nmap <silent> <C-p> <leader>;f
+"nmap <silent> <C-p> <leader>;f
 nmap <silent> <C-t> <leader>;t
+
+
+" Yoink + FZF + vim-multiple-cursors
+map <expr> <C-p> yoink#isSwapping() ? '<plug>(YoinkPostPasteSwapForward)' : '<leader>;f'
+map <expr> <C-n> yoink#isSwapping() ? '<plug>(YoinkPostPasteSwapForward)' : ':MultipleCursorsFind <C-R>/<CR>'
 
 
 " Fugitive
