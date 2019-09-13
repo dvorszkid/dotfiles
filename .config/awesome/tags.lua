@@ -222,3 +222,27 @@ client.connect_signal("property::class", function(c)
         c.floating = false
     end
 end)
+
+
+client.connect_signal("property::class", function(c)
+    if c.name ~= "Tresorit Core Log Browser" then
+        return
+    end
+
+    --f = awful.screen.focused()
+    --awful.screen.focus(config.scr.sec)
+
+    local tagName = 'corelogs'
+    local t = awful.tag.find_by_name(awful.screen.focused(), tagName)
+    if not t then
+        t = awful.tag.add(tagName, {
+            screen = awful.screen.focused(),
+            layout = awful.layout.suit.max,
+            volatile = true
+        })
+    end
+    t:view_only()
+    c:move_to_tag(t)
+
+    --awful.screen.focus(f)
+end)
