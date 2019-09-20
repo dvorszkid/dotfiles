@@ -32,7 +32,6 @@ tyrannical.tags = {
         screen      = config.scr.pri,
         layout      = awful.layout.suit.max,
         class = {
-            "bcompare",
         }
     },
     {
@@ -153,7 +152,6 @@ tyrannical.properties.below = {
 }
 
 tyrannical.properties.placement = {
-    ["qalculate-gtk"] = awful.placement.centered,
 }
 
 tyrannical.properties.skip_taskbar = {
