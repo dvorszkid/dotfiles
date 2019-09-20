@@ -101,10 +101,10 @@ xmap y <plug>(YoinkYankPreserveCursorPosition)
 
 
 " Cutlass
+nnoremap x x
 nnoremap m d
 xnoremap m d
 nnoremap mm dd
-nnoremap M D
 
 
 " Subversive
