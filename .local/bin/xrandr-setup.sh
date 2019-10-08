@@ -13,4 +13,10 @@ case "$1" in
 	3)
 		xrandr --output $TV --right-of $MONITOR --mode 4096x2160 --noprimary
 		;;
+	5)
+		xrandr --output $TV --off
+		;;
+	6)
+		xrandr --output $TV --right-of "HDMI-2" --auto
+		;;
 esac
