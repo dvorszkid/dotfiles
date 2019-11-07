@@ -41,7 +41,6 @@ Plug 'tpope/vim-surround'
 Plug 'qwertologe/nextval.vim'
 Plug 'osyo-manga/vim-anzu'
 Plug 'svermeulen/vim-yoink'
-Plug 'svermeulen/vim-cutlass'
 Plug 'svermeulen/vim-subversive'
 
 " For file opening
@@ -100,15 +99,8 @@ nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
 
 
-" Cutlass
-nnoremap x x
-nnoremap m d
-xnoremap m d
-nnoremap mm dd
-
-
 " Subversive
-nmap S <plug>(SubversiveSubstitute)
+nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 
 
@@ -181,7 +173,7 @@ endif
 " EasyMotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
-nmap s <Plug>(easymotion-s2)
+nmap S <Plug>(easymotion-s2)
 omap t <Plug>(easymotion-t)
 omap / <Plug>(easymotion-tn)
 " JK motions: Line motions
