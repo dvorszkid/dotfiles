@@ -156,12 +156,12 @@ if s:is_devel
 		endfunction
 		call airline#parts#define_function('gn_target', 'GetGnTarget')
 		call airline#parts#define_condition('gn_target', 'g:in_tresorit_source == 1')
+		let g:airline_section_b = g:airline_section_b . airline#section#create_left(['gn_target'])
 		function! GetAsyncrunStatus()
 			return g:asyncrun_status
 		endfunction
 		call airline#parts#define_function('asyncrun_status', 'GetAsyncrunStatus')
 		call airline#parts#define_condition('asyncrun_status', 'strlen(g:asyncrun_status) > 0')
-		let g:airline_section_b = g:airline_section_b . airline#section#create_left(['gn_target'])
 		let g:airline_section_error = g:airline_section_error . airline#section#create_right(['asyncrun_status'])
 	endfunction
 	augroup airline_init
@@ -261,10 +261,12 @@ let g:tmuxline_preset={
 " AsyncRun
 let g:asyncrun_bell = 1
 let g:asyncrun_exit = "silent call system(\"notify-send \\\"vim asyncrun\\\" \\\"Returned \" . g:asyncrun_code . \" (\" . g:asyncrun_status . \")\\\"\")"
+" term does not auto-close and does not fill quickfix list
+"command! -bang -nargs=* -complete=file Make AsyncRun -program=make -mode=term -rows=15 -focus=0 ++close @ <args>
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 augroup asyncrun
-	autocmd User AsyncRunStart call asyncrun#quickfix_toggle(5, 1)
-	autocmd User AsyncRunStop if (g:asyncrun_code == 0) | call asyncrun#quickfix_toggle(5, 0) | AirlineRefresh | endif
+	autocmd User AsyncRunStart call asyncrun#quickfix_toggle(15, 1)
+	autocmd User AsyncRunStop if (g:asyncrun_code == 0) | call asyncrun#quickfix_toggle(15, 0) | AirlineRefresh | endif
 augroup END
 nnoremap <silent> <F9> :call asyncrun#quickfix_toggle(15)<CR>
 
