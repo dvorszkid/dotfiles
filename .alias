@@ -96,6 +96,7 @@ alias clamupdate="freshclam -v"
 alias sudo="sudo "
 alias justfucking="sudo "
 alias tmd="tmuxs dropdown"
+alias ran="run-and-notify"
 
 
 ##

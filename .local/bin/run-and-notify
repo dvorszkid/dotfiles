@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+media_dir="${HOME}/.local/share/run-and-notify"
+
+function notify() {
+    name="$1"
+    result="$2"
+
+    if [[ $result == 0 ]]; then
+        message="Command Successful"
+        icon=good.svg
+    else
+        message="Command Failed"
+        icon=bad.svg
+    fi
+
+    notify-send \
+        --expire-time=10000 \
+        --icon="${media_dir}/${icon}" \
+        "$message" "$name
+<i>$PWD</i>"
+}
+
+"$@"
+result=$?
+notify "$*" "$result"
+exit "$result"
