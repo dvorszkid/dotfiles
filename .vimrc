@@ -262,6 +262,7 @@ nnoremap <silent> <F9> :Copen<CR>
 " Building the source
 let g:buildcmd = ":Make "
 let g:buildbackgroundcmd = ":Make! -k 0 "
+let g:buildcmd_proxy = "run-and-notify"
 nnoremap [tbuild] <Nop>
 nmap <leader>b [tbuild]
 nnoremap <silent> [tbuild]s :AbortDispatch<CR>
