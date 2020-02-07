@@ -1,6 +1,5 @@
 source ~/.local/share/gdb/gdb-dashboard/.gdbinit
 source ~/.local/share/gdb/colors.py
-source ~/.gdbinit.local
 
 set disassembly-flavor intel
 set disable-randomization off
