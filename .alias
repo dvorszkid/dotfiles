@@ -12,14 +12,17 @@ fi
 alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
-alias -g A="| awk"
-alias -g G="| grep"
-alias -g GI="| grep -i"
-alias -g GV="| grep -v"
-alias -g H="| head"
-alias -g P="| $PAGER"
-alias -g S="| sed"
-alias -g T="| tail"
+if [[ $SHELL == *"/zsh" ]]
+then
+    alias -g A="| awk"
+    alias -g G="| grep"
+    alias -g GI="| grep -i"
+    alias -g GV="| grep -v"
+    alias -g H="| head"
+    alias -g P="| $PAGER"
+    alias -g S="| sed"
+    alias -g T="| tail"
+fi
 
 
 ##

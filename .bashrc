@@ -6,6 +6,13 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+
+##
+# Imported scripts depend on this
+##
+export SHELL="/bin/bash"
+
+
 ##
 # Bash completion
 ##
