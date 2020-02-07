@@ -215,7 +215,7 @@ noremap <Leader>n :NERDTreeToggle<CR>
 " ListToggle
 "
 let g:lt_location_list_toggle_map = '<leader>l'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_quickfix_list_toggle_map = '<F9>'
 let g:lt_height = 15
 
 
@@ -251,9 +251,6 @@ let g:tmuxline_preset={
 		\'z':'#H',
 		\'options':{'status-justify':'left'}
 	\}
-
-" Vim Dispatch
-nnoremap <silent> <F9> :Copen<CR>
 
 "
 " VimTresorit
