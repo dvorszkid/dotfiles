@@ -5,4 +5,4 @@ LICENSE.md skip
 .config recurse
 .local recurse
 .tmux recurse
-
+.urxvt recurse
