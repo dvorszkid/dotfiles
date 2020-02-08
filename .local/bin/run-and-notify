@@ -10,7 +10,7 @@ function notify() {
         message="Command Successful"
         icon=good.svg
     else
-        message="Command Failed"
+        message="Command Failed (returned $result)"
         icon=bad.svg
     fi
 
