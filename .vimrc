@@ -43,6 +43,10 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 
+" Org Mode
+Plug 'tpope/vim-speeddating'
+Plug 'jceb/vim-orgmode'
+
 " For file opening
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
