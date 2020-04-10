@@ -121,14 +121,14 @@ WATCHFMT="%n from %M has %a tty%l at %T %W"
 
 
 ##
+# Local .zshrc
+##
+source_if_available "$HOME/.zshrc.local"
+
+
+##
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     tmd
 fi
-
-
-##
-# Local .zshrc
-##
-source_if_available "$HOME/.zshrc.local"
