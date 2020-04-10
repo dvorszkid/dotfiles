@@ -122,18 +122,9 @@ beautiful.volume.bar:buttons(awful.util.table.join(
     awful.button({}, 1, function() -- left click
         awful.spawn(string.format("%s -e alsamixer", terminal))
     end),
-    awful.button({}, 3, function() -- right click
-        awful.spawn(string.format("%s set %s toggle", beautiful.volume.cmd, beautiful.volume.togglechannel or beautiful.volume.channel))
-        beautiful.volume.update()
-    end),
-    awful.button({}, 4, function() -- scroll up
-        awful.spawn(string.format("%s set %s 2%%+", beautiful.volume.cmd, beautiful.volume.channel))
-        beautiful.volume.update()
-    end),
-    awful.button({}, 5, function() -- scroll down
-        awful.spawn(string.format("%s set %s 2%%-", beautiful.volume.cmd, beautiful.volume.channel))
-        beautiful.volume.update()
-    end)
+    awful.button({}, 3, apps.func.volume_toggle), -- right click
+    awful.button({}, 4, apps.func.volume_increase), -- scroll up
+    awful.button({}, 5, apps.func.volume_decrease) -- scroll down
 ))
 
 -- JIRA widget settings
@@ -143,15 +134,6 @@ if beautiful.has_jira then
         awful.button({}, 3, function() awful.spawn(apps.cmd.jira_adjust) end)
     ))
 end
-
-keys.globalKeys = awful.util.table.join(awful.util.table.join(
-    awful.key({ }, "XF86AudioRaiseVolume", function () beautiful.volume.update() end),
-    awful.key({ }, "XF86AudioLowerVolume", function () beautiful.volume.update() end),
-    awful.key({ }, "XF86AudioMute", function ()
-        os.execute("sleep 0.1")
-        beautiful.volume.update()
-    end)
-), keys.globalKeys)
 
 awful.util.taglist_buttons = keys.taglistButtons
 awful.util.tasklist_buttons = keys.tasklistButtons

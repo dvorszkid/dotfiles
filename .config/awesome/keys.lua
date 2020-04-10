@@ -236,10 +236,10 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
     awful.key({ modkey, "Control" }, "s", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
 
-    -- ALSA control
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn(apps.cmd.volume_inc) end, {description="increase volume", group="alsa"}),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn(apps.cmd.volume_dec) end, {description="decrease volume", group="alsa"}),
-    awful.key({ }, "XF86AudioMute", function () awful.spawn(apps.cmd.volume_mute) end, {description="mute / unmute", group="alsa"}),
+    -- Volume control
+    awful.key({ }, "XF86AudioRaiseVolume", apps.func.volume_increase, {description="increase volume", group="volume"}),
+    awful.key({ }, "XF86AudioLowerVolume", apps.func.volume_decrease, {description="decrease volume", group="volume"}),
+    awful.key({ }, "XF86AudioMute", apps.func.volume_toggle, {description="mute / unmute", group="volume"}),
 
     -- Spotify control
     awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell(apps.cmd.music_play) end, {description="play / pause", group="spotify"}),

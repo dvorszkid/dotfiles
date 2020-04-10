@@ -1,6 +1,8 @@
 --
 -- Apps used in Awesome WM
 --
+local awful = require("awful")
+local beautiful = require("beautiful")
 
 -- app collection for shortcuts and widgets
 local apps_cmd = {
@@ -19,10 +21,6 @@ local apps_cmd = {
     jira_current    = "jiraworklogger --tracking",
     jira_adjust     = "jiraworklogger --adjust-tracking",
     translate       = "rofi-translate.sh",
-
-    volume_inc      = "amixer set Master 4%+",
-    volume_dec      = "amixer set Master 4%-",
-    volume_mute     = "amixer set Master toggle",
 
     music           = "spotify",
     music_play      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
@@ -43,8 +41,28 @@ for k, a in pairs(apps_cmd) do
     apps_tmux["" .. k] = apps_cmd.terminal .. " -e " .. "tmux new-session '" .. a .. "'"
 end
 
+-- Functions
+local funcs = {
+    volume_toggle = function()
+            awful.spawn.easy_async(string.format("%s set %s toggle", beautiful.volume.cmd, beautiful.volume.togglechannel or beautiful.volume.channel), function(out)
+                beautiful.volume.update()
+            end)
+        end,
+    volume_increase = function()
+            awful.spawn.easy_async(string.format("%s set %s 2%%+", beautiful.volume.cmd, beautiful.volume.channel), function(out)
+                beautiful.volume.update()
+            end)
+        end,
+    volume_decrease = function()
+            awful.spawn.easy_async(string.format("%s set %s 2%%-", beautiful.volume.cmd, beautiful.volume.channel), function(out)
+                beautiful.volume.update()
+            end)
+        end
+}
+
 return {
     cmd = apps_cmd,
     term = apps_term,
     tmux = apps_tmux,
+    func = funcs,
 }
