@@ -13,6 +13,7 @@ local apps_cmd = {
 
     browser         = "firefox-bin",
     calculator      = "qalculate-gtk",
+    termcalculator  = "urxvtc -geometry 60x30 -e qalc",
     procmon         = "htop",
     runcmd          = "rofi -show run",
     windowswitch    = "rofi -show window",

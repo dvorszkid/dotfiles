@@ -4,6 +4,7 @@ local tyrannical = require("tyrannical")
 
 tyrannical.settings.block_children_focus_stealing = true
 tyrannical.settings.group_children = true
+tyrannical.settings.force_odd_as_intrusive = true
 
 tyrannical.settings.tag.layout = awful.layout.suit.tile
 tyrannical.settings.tag.master_width_factor = 0.6

@@ -81,7 +81,7 @@ local tasklistButtons = awful.util.table.join(
 local clientKeys = awful.util.table.join(
     awful.key({ modkey,           }, "c"     , function (c) c:kill() end, {description="kill", group="client modifiers"}),
     awful.key({ modkey, "Control" }, "f"     , function (c) c.fullscreen = not c.fullscreen end, {description="toggle fullscreen", group="client modifiers"}),
-    awful.key({ modkey,           }, "f"     , awful.client.floating.toggle, {description="toggle floating", group="client modifiers"}),
+    awful.key({ modkey,           }, "space" , awful.client.floating.toggle, {description="toggle floating", group="client modifiers"}),
     awful.key({ modkey,           }, "o"     , function (c) c:move_to_screen() end, {description="move to next screen", group="client modifiers"}),
     awful.key({ modkey,           }, "t"     , function (c) c.ontop = not c.ontop end, {description="toggle ontop", group="client modifiers"}),
     awful.key({ modkey, "Control" }, "t"     , awful.titlebar.toggle, {description="toggle titlebar", group="client modifiers"}),
@@ -218,13 +218,14 @@ local globalKeys = awful.util.table.join(
     -- awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1) end, {description="increase nmaster", group="layout handling"}),
     -- awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1) end, {description="decrease ncol", group="layout handling"}),
     -- awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1) end, {description="increase ncol", group="layout handling"}),
-    awful.key({ modkey, "Control" }, "space",  function () awful.layout.inc(layouts,  1)  end, {description="select next", group="layout handling"}),
-    awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(layouts, -1)  end, {description="select previous", group="layout handling"}),
+    awful.key({ modkey, "Control" }, "space",  function () awful.layout.inc(awful.layout.layouts,  1)  end, {description="select next", group="layout handling"}),
+    awful.key({ modkey, "Shift", "Control"  }, "space",  function () awful.layout.inc(awful.layout.layouts, -1)  end, {description="select previous", group="layout handling"}),
 
     -- User programs
     awful.key({ modkey,           }, "Return", function () awful.spawn(apps.term.tmux) end, {description="terminal with tmux", group="programs"}),
     awful.key({ modkey, "Shift"   }, "Return", function () awful.spawn(apps.cmd.terminal) end, {description="terminal without tmux", group="programs"}),
-    awful.key({ },                   "XF86Calculator", function () awful.spawn(apps.cmd.calculator) end, {description="calculator", group="programs"}),
+    awful.key({ },                   "XF86Calculator", function () awful.spawn(apps.cmd.calculator, {tag=awful.screen.focused().selected_tag, intrusive=true, floating=true}) end, {description="calculator", group="programs"}),
+    awful.key({ "Shift" },           "XF86Calculator", function () awful.spawn(apps.cmd.termcalculator, {tag=awful.screen.focused().selected_tag, intrusive=true, floating=true}) end, {description="calculator", group="programs"}),
     awful.key({ "Control" },         "Escape", function () awful.spawn(apps.term.procmon) end, {description="process monitor", group="programs"}),
     awful.key({ },                   "Print", function () awful.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
     awful.key({ modkey            }, "Escape", function () awful.spawn("xkill") end, {description="xkill", group="programs"}),

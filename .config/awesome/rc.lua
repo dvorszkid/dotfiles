@@ -177,7 +177,7 @@ awful.rules.rules = {
                      buttons = keys.clientButtons,
                      screen = awful.screen.preferred,
                      size_hints_honor = false,
-                     placement = awful.placement.no_overlap+awful.placement.centered+awful.placement.no_offscreen }
+                     placement = awful.placement.no_overlap+awful.placement.under_mouse+awful.placement.no_offscreen }
     },
 
     -- Add titlebars to normal clients and dialogs
