@@ -50,7 +50,8 @@ Plug 'jceb/vim-orgmode'
 " For file opening
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'vifm/vifm.vim'
+Plug 'justinmk/vim-dirvish'
 
 " Tmux
 if !has("gui_running")
@@ -211,8 +212,8 @@ nnoremap <leader>r :Replace<space>
 let g:tabman_toggle = '<leader>t'
 
 
-" NERDTree
-noremap <Leader>n :NERDTreeToggle<CR>
+" ViFM
+noremap <Leader>fm :Vifm<CR>
 
 
 "
