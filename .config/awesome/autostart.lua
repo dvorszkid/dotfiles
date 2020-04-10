@@ -6,7 +6,7 @@
 local apps = {
     "urxvtd",
     -- vsync fix, test with: https://www.youtube.com/watch?v=5xkNy9gfKOg
-    --"compton -b --backend glx --vsync opengl-swc --paint-on-overlay",
+    "compton -b --backend glx --vsync opengl-swc --paint-on-overlay",
     "unclutter",
     "xss-lock -n /usr/libexec/xsecurelock/dimmer -l -- xsecurelock",
     "parcellite",
