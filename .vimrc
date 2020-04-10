@@ -398,7 +398,7 @@ noremap <silent> <leader>P :set paste<CR>P:set nopaste<CR>
 
 " Share X windows clipboard
 if has('unnamedplus')
-	set clipboard=unnamed,unnamedplus
+	set clipboard^=unnamed,unnamedplus
 endif
 
 
