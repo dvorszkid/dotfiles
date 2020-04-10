@@ -143,8 +143,9 @@ local globalKeys = awful.util.table.join(
     -- Awesome control
     awful.key({ modkey, "Control" }, "r",      awesome.restart, {description="restart", group="awesome"}),
     awful.key({ modkey, "Control" }, "q",      awesome.quit, {description="quit", group="awesome"}),
-    awful.key({ modkey, "Control" }, "h" , hotkeys_popup.show_help, {description="show help", group="awesome"}),
-    awful.key({ }, "F12",      function () quake:toggle() end, {description="dropdown terminal", group="awesome"}),
+    awful.key({ modkey, "Control" }, "h" ,     hotkeys_popup.show_help, {description="show help", group="awesome"}),
+    awful.key({                   }, "F12",    function () quake:toggle() end, {description="dropdown terminal", group="awesome"}),
+    awful.key({ modkey, "Control" }, "n",      apps.func.notifications_toggle, {description="toggle notifications", group="awesome"}),
 
     -- Prompts
     awful.key({ modkey }, "r", function () awful.spawn(apps.cmd.runcmd) end, {description="run command", group="prompts"}),

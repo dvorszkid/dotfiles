@@ -2,6 +2,7 @@
 -- Apps used in Awesome WM
 --
 local awful = require("awful")
+local naughty = require("naughty")
 local beautiful = require("beautiful")
 
 -- app collection for shortcuts and widgets
@@ -57,7 +58,15 @@ local funcs = {
             awful.spawn.easy_async(string.format("%s set %s 2%%-", beautiful.volume.cmd, beautiful.volume.channel), function(out)
                 beautiful.volume.update()
             end)
+        end,
+
+    notifications_toggle = function ()
+        if not naughty.is_suspended() then
+            naughty.destroy_all_notifications()
         end
+        naughty.toggle()
+        beautiful.donotdisturb_widget.visible = naughty.is_suspended()
+    end,
 }
 
 return {

@@ -85,6 +85,7 @@ theme.volume                                    = theme.icon_dir .. "/volume.png
 theme.net_up                                    = theme.icon_dir .. "/net_up.png"
 theme.net_down                                  = theme.icon_dir .. "/net_down.png"
 theme.jira                                      = theme.icon_dir .. "/jira.png"
+theme.do_not_disturb                            = theme.icon_dir .. "/do_not_disturb.png"
 
 theme.layout_tile                               = theme.icon_dir .. "/tile.png"
 theme.layout_tileleft                           = theme.icon_dir .. "/tileleft.png"
@@ -221,6 +222,16 @@ netup.widget.forced_width = 75 * width_scaling
 local netdown_widget = wrap_widget(theme.net_down, netdown)
 local netup_widget = wrap_widget(theme.net_up, netup.widget)
 
+-- Notifications
+theme.donotdisturb_widget = wibox.widget.imagebox(theme.do_not_disturb)
+theme.donotdisturb_widget = wibox.container.background(theme.donotdisturb_widget, theme.bg_focus, gears.shape.rectangle)
+theme.donotdisturb_widget = wibox.container.margin(theme.donotdisturb_widget, 0, 0, 5, 5)
+local donotdisturb_tooltip = awful.tooltip({
+    objects = { theme.donotdisturb_widget },
+    text = "notifications off"
+})
+theme.donotdisturb_widget.visible = false
+
 -- JIRA
 local jira_file = home_dir .. '/.local/share/jiraworklogger/current'
 jira_file_handle = io.open(jira_file)
@@ -340,6 +351,8 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr_right,
+            theme.donotdisturb_widget,
+            bottom_bar,
             theme.has_jira and jira_widget or nil,
             theme.has_jira and bottom_bar or nil,
             netdown_widget,
