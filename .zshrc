@@ -127,6 +127,17 @@ source_if_available "$HOME/.zshrc.local"
 
 
 ##
+# Pre execution hook
+##
+function preexec {
+    # Update DISPLAY
+    if [ -n "$TMUX" ]; then
+        export $(tmux show-environment | grep "^DISPLAY")
+    fi
+}
+
+
+##
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
