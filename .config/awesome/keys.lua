@@ -159,6 +159,7 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey, altkey }, "]" , function () awful.screen.focus_relative( 1) end, {description="focus next", group="screen handling"}),
 
     -- Tag browsing
+    awful.key({ modkey }, "`", function() mouse.screen.selected_tag.selected = false end, {description="select none", group="tag handling"}),
     awful.key({ modkey }, "\\", awful.tag.history.restore, {description="select last", group="tag handling"}),
     awful.key({ modkey }, "[" , awful.tag.viewprev, {description="select previous", group="tag handling"}),
     awful.key({ modkey }, "]" , awful.tag.viewnext, {description="select next", group="tag handling"}),
