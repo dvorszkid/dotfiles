@@ -149,7 +149,7 @@ awful.screen.connect_for_each_screen(function(s)
         local function mylabel(c)
             local text, bg_color, bg_image, icon, other_args = label(c)
             text = text:gsub(">" .. c.name .. "<", ">" .. c.index .. ": " .. c.name .. "<")
-            return text, bg_color, bg_image, icon, other_args
+            return text:lower(), bg_color, bg_image, icon, other_args
         end
         return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
     end
