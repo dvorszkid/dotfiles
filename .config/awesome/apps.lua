@@ -62,9 +62,12 @@ local funcs = {
         end,
 
     notifications_toggle = function ()
+        new_state = "ON"
         if not naughty.is_suspended() then
             naughty.destroy_all_notifications()
+            new_state = "OFF"
         end
+        naughty.notify({preset = naughty.config.presets.system, text = "Notifications " .. new_state})
         naughty.toggle()
         beautiful.donotdisturb_widget.visible = naughty.is_suspended()
     end,

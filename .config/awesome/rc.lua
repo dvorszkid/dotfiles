@@ -25,7 +25,7 @@ local keys       = require("keys")
 if awesome.startup_errors then
     naughty.notify({
         preset = naughty.config.presets.critical,
-        title = "Oops, there were errors during startup!",
+        title = "AwesomeWM: startup_errors",
         text = awesome.startup_errors
     })
 end
@@ -48,7 +48,7 @@ do
 
             naughty.notify({
                 preset = naughty.config.presets.critical,
-                title = "Oops, an error happened!",
+                title = "AwesomeWM: debug::error signal",
                 text = err
             })
             in_error = false
@@ -78,6 +78,10 @@ config.scr           = {
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
 naughty.config.defaults.position = "bottom_right"
+naughty.config.presets.system = {
+    title = "AwesomeWM",
+    position = "top_right",
+}
 
 -- lain
 lain.layout.termfair.nmaster   = 3

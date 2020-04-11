@@ -138,6 +138,12 @@ function markup_tooltip(text)
     return markup.fontfg(theme.tooltip_font, theme.tooltip_fg, text)
 end
 
+function wrap_icon(icon_path)
+    local icon = wibox.widget.imagebox(icon_path)
+    local background = wibox.container.background(icon, theme.bg_focus, gears.shape.rectangle)
+    return wibox.container.margin(background, 0, 0, 5, 5)
+end
+
 function wrap_widget(icon_path, widget)
     local icon = wibox.widget.imagebox(icon_path)
     local background = wibox.container.background(widget, theme.bg_focus, gears.shape.rectangle)
@@ -223,14 +229,15 @@ local netdown_widget = wrap_widget(theme.net_down, netdown)
 local netup_widget = wrap_widget(theme.net_up, netup.widget)
 
 -- Notifications
-theme.donotdisturb_widget = wibox.widget.imagebox(theme.do_not_disturb)
-theme.donotdisturb_widget = wibox.container.background(theme.donotdisturb_widget, theme.bg_focus, gears.shape.rectangle)
-theme.donotdisturb_widget = wibox.container.margin(theme.donotdisturb_widget, 0, 0, 5, 5)
-local donotdisturb_tooltip = awful.tooltip({
-    objects = { theme.donotdisturb_widget },
-    text = "notifications off"
-})
-theme.donotdisturb_widget.visible = false
+do
+    theme.donotdisturb_widget = wrap_icon(theme.do_not_disturb)
+    theme.donotdisturb_widget.visible = false
+
+    local donotdisturb_tooltip = awful.tooltip({
+        objects = { theme.donotdisturb_widget },
+        text = "Notifications OFF"
+    })
+end
 
 -- JIRA
 local jira_file = home_dir .. '/.local/share/jiraworklogger/current'
