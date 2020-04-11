@@ -86,6 +86,7 @@ theme.net_up                                    = theme.icon_dir .. "/net_up.png
 theme.net_down                                  = theme.icon_dir .. "/net_down.png"
 theme.jira                                      = theme.icon_dir .. "/jira.png"
 theme.do_not_disturb                            = theme.icon_dir .. "/do_not_disturb.png"
+theme.vpn                                       = theme.icon_dir .. "/vpn.png"
 
 theme.layout_tile                               = theme.icon_dir .. "/tile.png"
 theme.layout_tileleft                           = theme.icon_dir .. "/tileleft.png"
@@ -140,8 +141,10 @@ end
 
 function wrap_icon(icon_path)
     local icon = wibox.widget.imagebox(icon_path)
-    local background = wibox.container.background(icon, theme.bg_focus, gears.shape.rectangle)
-    return wibox.container.margin(background, 0, 0, 5, 5)
+    local padding_background = wibox.container.background(icon, theme.bg_focus, gears.shape.rectangle)
+    local padding = wibox.container.margin(padding_background, 2, 2, 0, 0)
+    local margin_background = wibox.container.background(padding, theme.bg_focus, gears.shape.rectangle)
+    return wibox.container.margin(margin_background, 0, 0, 5, 5)
 end
 
 function wrap_widget(icon_path, widget)
@@ -237,6 +240,32 @@ do
         objects = { theme.donotdisturb_widget },
         text = "Notifications OFF"
     })
+end
+
+-- VPN
+do
+    local pidfile = home_dir .. '/.vpn/work/openconnect.pid'
+    theme.vpn_widget = wrap_icon(theme.vpn)
+    theme.vpn_widget.visible = false
+
+    local vpn_tooltip = awful.tooltip({
+        objects = { theme.vpn_widget },
+        text = "VPN is connected"
+    })
+
+    gears.timer {
+        timeout   = 5,
+        call_now  = true,
+        autostart = true,
+        callback  = function()
+            awful.spawn.easy_async({"sh", "-c", "ps -p `cat \"" .. pidfile .. "\"` -o comm="},
+                function(out)
+                    --print('[vpn timer] out:' .. out)
+                    theme.vpn_widget.visible = (string.match(out, "openconnect") ~= nil)
+                end
+            )
+        end
+    }
 end
 
 -- JIRA
@@ -359,6 +388,7 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             spr_right,
             theme.donotdisturb_widget,
+            theme.vpn_widget,
             bottom_bar,
             theme.has_jira and jira_widget or nil,
             theme.has_jira and bottom_bar or nil,
