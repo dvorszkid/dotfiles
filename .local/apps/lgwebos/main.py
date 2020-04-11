@@ -2,7 +2,6 @@
 ##
 # Using https://github.com/supersaiyanmode/PyWebOSTV
 ##
-
 from pywebostv.connection import WebOSClient
 from pywebostv.controls import SystemControl, ApplicationControl, SourceControl
 from sys import exit
