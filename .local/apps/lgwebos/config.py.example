@@ -1,0 +1,7 @@
+# The 'store' gets populated during the registration process. If it is empty, a registration prompt
+# will show up on the TV. You can pass any dictionary-like interface instead -- that when values are
+# set, will persist to a DB, a config file or something similar.
+store = {}
+
+tv_ip = '192.168.0.N'
+tv_mac = 'xx:xx:xx:xx:xx:xx'
