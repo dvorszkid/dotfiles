@@ -12,7 +12,7 @@ exec(open("config.py").read())
 
 if __name__ == "__main__":
     args = ArgumentParser(description='LG WebOS TV Remote Control')
-    args.add_argument('command', nargs=1, choices=['register', 'test', 'on', 'off'])
+    args.add_argument('command', nargs=1, choices=['register', 'test', 'on', 'off', 'forceoff'])
     args = args.parse_args()
     assert len(args.command) == 1
     cmd = args.command[0]
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         if hdmi_source:
             c.notify("Setting " + str(hdmi_source))
             source_control.set_source(hdmi_source)
-    elif cmd == 'off' and is_me_using():
+    elif (cmd == 'forceoff') or (cmd == 'off' and is_me_using()):
         c = SystemControl(client)
         c.notify("Bye-bye TV!")
         c.power_off()
