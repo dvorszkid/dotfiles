@@ -217,7 +217,7 @@ end)
 -- Hack for making Firefox not floating
 -- (somehow it is always floating by default)
 client.connect_signal("property::class", function(c)
-    if c.class == "Firefox" then
+    if c.class == "Firefox" and c.role == "browser" then
         c.floating = false
     end
 end)
