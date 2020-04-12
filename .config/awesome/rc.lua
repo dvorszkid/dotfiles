@@ -66,7 +66,6 @@ hostname    = io.popen("uname -n"):read()
 user        = os.getenv("USER")
 home_dir    = os.getenv("HOME")
 conf_dir    = awful.util.getdir("config")
-local keys  = require("keys")
 
 config = {}
 config.titlebars     = true
@@ -121,6 +120,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- }}}
 
 -- {{{ Wibox
+local keys  = require("keys")
 keys.setupUi(ui)
 
 awful.util.taglist_buttons = keys.taglistButtons

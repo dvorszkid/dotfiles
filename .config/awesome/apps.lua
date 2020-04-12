@@ -4,6 +4,7 @@
 local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
+local ui  = require("ui")
 
 -- app collection for shortcuts and widgets
 local apps_cmd = {
@@ -52,18 +53,18 @@ end
 -- Functions
 local funcs = {
     volume_toggle = function()
-            awful.spawn.easy_async(string.format("%s set %s toggle", beautiful.volume.cmd, beautiful.volume.togglechannel or beautiful.volume.channel), function(out)
-                beautiful.volume.update()
+            awful.spawn.easy_async(string.format("%s set %s toggle", ui.volume.cmd, ui.volume.togglechannel or ui.volume.channel), function(out)
+                ui.volume.update()
             end)
         end,
     volume_increase = function()
-            awful.spawn.easy_async(string.format("%s set %s 2%%+", beautiful.volume.cmd, beautiful.volume.channel), function(out)
-                beautiful.volume.update()
+            awful.spawn.easy_async(string.format("%s set %s 2%%+", ui.volume.cmd, ui.volume.channel), function(out)
+                ui.volume.update()
             end)
         end,
     volume_decrease = function()
-            awful.spawn.easy_async(string.format("%s set %s 2%%-", beautiful.volume.cmd, beautiful.volume.channel), function(out)
-                beautiful.volume.update()
+            awful.spawn.easy_async(string.format("%s set %s 2%%-", ui.volume.cmd, ui.volume.channel), function(out)
+                ui.volume.update()
             end)
         end,
 
@@ -75,7 +76,7 @@ local funcs = {
         end
         naughty.notify({preset = naughty.config.presets.system, text = "Notifications " .. new_state})
         naughty.toggle()
-        beautiful.donotdisturb_widget.visible = naughty.is_suspended()
+        ui.donotdisturb_widget.visible = naughty.is_suspended()
     end,
 }
 
