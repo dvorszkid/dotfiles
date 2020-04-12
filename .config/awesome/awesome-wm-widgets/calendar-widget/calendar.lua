@@ -22,8 +22,8 @@ local function worker(args)
         default = {
             bg = beautiful.bg_normal,
             fg = beautiful.fg_normal,
-            focus_date_bg = beautiful.c_blue,
-            focus_date_fg = beautiful.bg_normal,
+            focus_date_bg = beautiful.bg_urgent,
+            focus_date_fg = beautiful.fg_urgent,
             weekend_day_bg = beautiful.bg_focus,
             weekday_fg = beautiful.fg_dark,
             header_bg = beautiful.bg_focus,
@@ -130,6 +130,7 @@ local function worker(args)
         font = beautiful.get_font(),
         fn_embed = decorate_cell,
         long_weekdays = true,
+        week_numbers = true,
         widget = wibox.widget.calendar.month
     }
 
