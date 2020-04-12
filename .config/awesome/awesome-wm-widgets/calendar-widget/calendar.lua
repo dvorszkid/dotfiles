@@ -19,56 +19,17 @@ local calendar_widget = {}
 local function worker(args)
 
     local calendar_themes = {
-        nord = {
-            bg = '#2E3440',
-            fg = '#D8DEE9',
-            focus_date_bg = '#88C0D0',
-            focus_date_fg = '#000000',
-            weekend_day_bg = '#3B4252',
-            weekday_fg = '#88C0D0',
-            header_fg = '#E5E9F0',
-            border = '#4C566A'
+        default = {
+            bg = beautiful.bg_normal,
+            fg = beautiful.fg_normal,
+            focus_date_bg = beautiful.c_blue,
+            focus_date_fg = beautiful.bg_normal,
+            weekend_day_bg = beautiful.bg_focus,
+            weekday_fg = beautiful.fg_dark,
+            header_bg = beautiful.bg_focus,
+            header_fg = beautiful.fg_normal,
+            border = beautiful.border_focus
         },
-        outrun = {
-            bg = '#0d0221',
-            fg = '#D8DEE9',
-            focus_date_bg = '#650d89',
-            focus_date_fg = '#2de6e2',
-            weekend_day_bg = '#261447',
-            weekday_fg = '#2de6e2',
-            header_fg = '#f6019d',
-            border = '#261447'
-        },
-        dark = {
-            bg = '#000000',
-            fg = '#ffffff',
-            focus_date_bg = '#ffffff',
-            focus_date_fg = '#000000',
-            weekend_day_bg = '#444444',
-            weekday_fg = '#ffffff',
-            header_fg = '#ffffff',
-            border = '#333333'
-        },
-        light = {
-            bg = '#ffffff',
-            fg = '#000000',
-            focus_date_bg = '#000000',
-            focus_date_fg = '#ffffff',
-            weekend_day_bg = '#AAAAAA',
-            weekday_fg = '#000000',
-            header_fg = '#000000',
-            border = '#CCCCCC'
-        },
-        monokai = {
-            bg = '#272822',
-            fg = '#F8F8F2',
-            focus_date_bg = '#AE81FF',
-            focus_date_fg = '#ffffff',
-            weekend_day_bg = '#75715E',
-            weekday_fg = '#FD971F',
-            header_fg = '#F92672',
-            border = '#75715E'
-        }
     }
 
     local args = args or {}
@@ -78,10 +39,10 @@ local function worker(args)
             preset = naughty.config.presets.critical,
             title = 'Calendar Widget',
             text = 'Theme "' .. args.theme .. '" not found, fallback to default'})
-        args.theme = 'nord'
+        args.theme = nil
     end
 
-    local theme = args.theme or 'nord'
+    local theme = args.theme or 'default'
     local placement = args.placement or 'top'
 
 
@@ -112,7 +73,7 @@ local function worker(args)
 
     styles.header = {
         fg_color = calendar_themes[theme].header_fg,
-        bg_color = calendar_themes[theme].bg,
+        bg_color = calendar_themes[theme].header_bg,
         markup = function(t) return '<b>' .. t .. '</b>' end
     }
 
@@ -182,22 +143,26 @@ local function worker(args)
         widget = cal
     }
 
+    function calendar_widget.next()
+        local a = cal:get_date()
+        a.month = a.month + 1
+        cal:set_date(nil)
+        cal:set_date(a)
+        popup:set_widget(cal)
+    end
+
+    function calendar_widget.previous()
+        local a = cal:get_date()
+        a.month = a.month - 1
+        cal:set_date(nil)
+        cal:set_date(a)
+        popup:set_widget(cal)
+    end
+
     popup:buttons(
             awful.util.table.join(
-                    awful.button({}, 4, function()
-                        local a = cal:get_date()
-                        a.month = a.month + 1
-                        cal:set_date(nil)
-                        cal:set_date(a)
-                        popup:set_widget(cal)
-                    end),
-                    awful.button({}, 5, function()
-                        local a = cal:get_date()
-                        a.month = a.month - 1
-                        cal:set_date(nil)
-                        cal:set_date(a)
-                        popup:set_widget(cal)
-                    end)
+                    awful.button({}, 4, calendar_widget.next),
+                    awful.button({}, 5, calendar_widget.previous)
             )
     )
 
@@ -212,13 +177,13 @@ local function worker(args)
             popup.visible = not popup.visible
         else
             if placement == 'top' then
-                awful.placement.top(popup, { margins = { top = 30 }, parent = awful.screen.focused() })
+                awful.placement.top(popup, { margins = { top = 42 }, parent = awful.screen.focused() })
             elseif placement == 'top_right' then
-                awful.placement.top_right(popup, { margins = { top = 30, right = 10}, parent = awful.screen.focused() })
+                awful.placement.top_right(popup, { margins = { top = 42, right = 10}, parent = awful.screen.focused() })
             elseif placement == 'bottom_right' then
-                awful.placement.bottom_right(popup, { margins = { bottom = 30, right = 10}, parent = awful.screen.focused() })
+                awful.placement.bottom_right(popup, { margins = { bottom = 42, right = 10}, parent = awful.screen.focused() })
             else
-                awful.placement.top(popup, { margins = { top = 30 }, parent = awful.screen.focused() })
+                awful.placement.top(popup, { margins = { top = 42 }, parent = awful.screen.focused() })
             end
 
             popup.visible = true
