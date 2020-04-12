@@ -4,9 +4,6 @@ local lain         = require("lain")
 local apps         = require("apps")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
-modkey = "Mod4"
-local altkey = "Mod1"
-
 -- Setup global menu keys
 awful.menu.menu_keys.up    = { "k", "Up"}
 awful.menu.menu_keys.down  = { "j", "Down"}
