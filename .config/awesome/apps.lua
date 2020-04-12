@@ -23,6 +23,8 @@ local apps_cmd = {
     jira_current    = "jiraworklogger --tracking",
     jira_adjust     = "jiraworklogger --adjust-tracking",
     translate       = "rofi-translate.sh",
+    volume          = "alsamixer",
+    calendar        = "xdg-open https://calendar.google.com",
 
     music           = "spotify",
     music_play      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",

@@ -294,6 +294,33 @@ for i = 1, 9 do
             end, {description="toggle tag", group="client handling"}))
 end
 
+local setupUi = function (ui)
+    -- ALSA widget settings
+    ui.volume.bar:buttons(awful.util.table.join(
+        awful.button({}, 1, function() awful.spawn(apps.term.volume) end), -- left click
+        awful.button({}, 3, apps.func.volume_toggle), -- right click
+        awful.button({}, 4, apps.func.volume_increase), -- scroll up
+        awful.button({}, 5, apps.func.volume_decrease) -- scroll down
+    ))
+
+    -- JIRA widget settings
+    if ui.has_jira then
+        ui.jira:buttons(awful.util.table.join(
+            awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
+            awful.button({}, 3, function() awful.spawn(apps.cmd.jira_adjust) end)
+        ))
+    end
+
+    -- Calendar
+    ui.calendar_widget:connect_signal("button::press",
+        function(_, _, _, button)
+            if button == 1 then awful.spawn(apps.cmd.calendar) end
+            if button == 3 then ui.calendar_popup.toggle() end
+            if button == 4 then ui.calendar_popup.next() end
+            if button == 5 then ui.calendar_popup.previous() end
+        end)
+end
+
 return {
     rootButtons = rootButtons,
     layoutButtons = layoutButtons,
@@ -303,4 +330,5 @@ return {
     clientButtons = clientButtons,
     getTitlebarButtons = getTitlebarButtons,
     globalKeys = globalKeys,
+    setupUi = setupUi,
 }

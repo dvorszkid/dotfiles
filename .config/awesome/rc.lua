@@ -66,7 +66,6 @@ hostname    = io.popen("uname -n"):read()
 user        = os.getenv("USER")
 home_dir    = os.getenv("HOME")
 conf_dir    = awful.util.getdir("config")
-local apps  = require("apps")
 local keys  = require("keys")
 
 config = {}
@@ -104,6 +103,9 @@ dofile(conf_dir .. "/tags.lua")
 beautiful.init(conf_dir .. "/theme.lua")
 local titlebars_enabled = beautiful.titlebar_enabled == nil and (config.titlebars == true) or beautiful.titlebar_enabled
 
+-- ui init
+local ui  = require("ui")
+
 -- wallpaper
 local function set_wallpaper(s)
     local wallpaper = config.wallpaperPath .. s.index
@@ -119,25 +121,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 -- }}}
 
 -- {{{ Wibox
-markup = lain.util.markup
-
--- ALSA widget settings
-beautiful.volume.bar:buttons(awful.util.table.join(
-    awful.button({}, 1, function() -- left click
-        awful.spawn(string.format("%s -e alsamixer", apps.cmd.terminal))
-    end),
-    awful.button({}, 3, apps.func.volume_toggle), -- right click
-    awful.button({}, 4, apps.func.volume_increase), -- scroll up
-    awful.button({}, 5, apps.func.volume_decrease) -- scroll down
-))
-
--- JIRA widget settings
-if beautiful.has_jira then
-    beautiful.jira:buttons(awful.util.table.join(
-        awful.button({}, 1, function() awful.spawn(apps.cmd.jira_current) end),
-        awful.button({}, 3, function() awful.spawn(apps.cmd.jira_adjust) end)
-    ))
-end
+keys.setupUi(ui)
 
 awful.util.taglist_buttons = keys.taglistButtons
 awful.util.tasklist_buttons = keys.tasklistButtons
@@ -158,7 +142,7 @@ awful.screen.connect_for_each_screen(function(s)
         return awful.widget.common.list_update(w, buttons, mylabel, data, tags)
     end
 
-    beautiful.at_screen_connect(s)
+    ui.at_screen_connect(s)
 end)
 -- }}}
 
