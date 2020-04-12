@@ -1,3 +1,3 @@
 #!/bin/sh
 cd $(dirname $(realpath $0))
-pipenv run ./toggle.py "$@"
+pipenv run ./main.py "$@"

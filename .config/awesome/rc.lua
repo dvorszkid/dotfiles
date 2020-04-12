@@ -15,8 +15,6 @@ local lain       = require("lain")
 local tyrannical = require("tyrannical")
 -- Configs
 local autostart  = require("autostart")
-local apps       = require("apps")
-local keys       = require("keys")
 -- }}}
 
 
@@ -64,10 +62,12 @@ os.setlocale(os.getenv("LANG"))
 -- common
 modkey      = "Mod4"
 altkey      = "Mod1"
+hostname    = io.popen("uname -n"):read()
 user        = os.getenv("USER")
 home_dir    = os.getenv("HOME")
 conf_dir    = awful.util.getdir("config")
-terminal    = apps.cmd.terminal
+local apps  = require("apps")
+local keys  = require("keys")
 
 config = {}
 config.titlebars     = true
@@ -124,7 +124,7 @@ markup = lain.util.markup
 -- ALSA widget settings
 beautiful.volume.bar:buttons(awful.util.table.join(
     awful.button({}, 1, function() -- left click
-        awful.spawn(string.format("%s -e alsamixer", terminal))
+        awful.spawn(string.format("%s -e alsamixer", apps.cmd.terminal))
     end),
     awful.button({}, 3, apps.func.volume_toggle), -- right click
     awful.button({}, 4, apps.func.volume_increase), -- scroll up

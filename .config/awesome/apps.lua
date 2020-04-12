@@ -33,8 +33,12 @@ local apps_cmd = {
     lock            = "xset s activate",
     shutdown        = "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.PowerOff boolean:true",
     reboot          = "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Reboot boolean:true",
-    suspend         = "xrandr-setup.sh 1 && xset s activate && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
+    suspend         = "xset s activate && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
 }
+
+if hostname == "basestar" then
+    apps_cmd['suspend'] =  "xrandr-setup.sh 1 && yamaha standby && " .. apps_cmd['suspend']
+end
 
 -- combined commands
 local apps_term, apps_tmux = {}, {}
