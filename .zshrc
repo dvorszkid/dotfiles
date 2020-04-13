@@ -138,7 +138,7 @@ source_if_available "$HOME/.zshrc.local"
 function fix_display {
     # Update DISPLAY
     if [ -n "$TMUX" ]; then
-        export $(tmux show-environment | grep "^DISPLAY")
+        export $(tmux show-environment | grep "^DISPLAY") > /dev/null
     fi
 }
 add-zsh-hook preexec fix_display
