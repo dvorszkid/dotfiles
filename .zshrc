@@ -44,7 +44,7 @@ if ! zgen saved; then
 	# Other plugins
 	zgen load radhermit/gentoo-zsh-completions src
 	zgen load t413/zsh-background-notify
-	zgen load ngg/zsh-prompt-cylon
+	zgen load dvorszkid/zsh-prompt-cylon
 
 	# Custom theme
 	zgen prezto prompt theme 'cylon'
@@ -104,6 +104,12 @@ for key in "${(s: :)key_info[ControlRight]}"
 
 
 ##
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+##
+KEYTIMEOUT=1
+
+
+##
 # Shared resources
 ##
 source "$HOME/.alias"
@@ -129,12 +135,13 @@ source_if_available "$HOME/.zshrc.local"
 ##
 # Pre execution hook
 ##
-function preexec {
+function fix_display {
     # Update DISPLAY
     if [ -n "$TMUX" ]; then
         export $(tmux show-environment | grep "^DISPLAY")
     fi
 }
+add-zsh-hook preexec fix_display
 
 
 ##
