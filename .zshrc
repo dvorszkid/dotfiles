@@ -42,7 +42,7 @@ if ! zgen saved; then
 	zgen prezto history-substring-search
 
 	# Other plugins
-	zgen load radhermit/gentoo-zsh-completions src
+	zgen load gentoo/gentoo-zsh-completions src
 	zgen load t413/zsh-background-notify
 	zgen load dvorszkid/zsh-prompt-cylon
 
