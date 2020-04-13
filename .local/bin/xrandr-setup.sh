@@ -7,7 +7,7 @@ case "$1" in
 	1)
 		xrandr --output $MONITOR --auto --primary \
             --output $TV --off
-        lgwebos off
+        lgwebos off &
 		;;
 	2)
         lgwebos on &

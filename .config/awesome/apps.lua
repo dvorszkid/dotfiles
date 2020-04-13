@@ -70,8 +70,8 @@ local funcs = {
 
     notifications_toggle = function ()
         new_state = "ON"
+        naughty.destroy_all_notifications()
         if not naughty.is_suspended() then
-            naughty.destroy_all_notifications()
             new_state = "OFF"
         end
         naughty.notify({preset = naughty.config.presets.system, text = "Notifications " .. new_state})
