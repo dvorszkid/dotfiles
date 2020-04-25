@@ -4,4 +4,4 @@
 [ -f ~/.xprofile ] && source ~/.xprofile
 
 # Preferred session
-/etc/X11/Sessions/awesome
+exec dbus-launch --exit-with-session awesome
