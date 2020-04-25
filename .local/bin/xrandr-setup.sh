@@ -5,7 +5,7 @@ TV="HDMI-3"
 
 case "$1" in
 	1)
-		xrandr --output $MONITOR --auto --primary \
+		xrandr --output $MONITOR --mode 1920x1200 --primary \
             --output $TV --off
         lgwebos off &
 		;;
