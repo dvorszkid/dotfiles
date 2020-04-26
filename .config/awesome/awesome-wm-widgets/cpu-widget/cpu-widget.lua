@@ -47,8 +47,13 @@ local function worker(args)
         step_width = step_width,
         step_spacing = step_spacing,
         widget = wibox.widget.graph,
-        color = "linear:0,0:0,20:0,#FF0000:0.3,#FFFF00:0.6," .. color
+        --color = "linear:0,0:0,20:0,#FF0000:0.3,#FFFF00:0.6," .. color
+        color = color
     }
+
+    local cpugraph_tooltip = awful.tooltip({
+        objects = { cpugraph_widget }
+    })
 
     local cpu_rows = {
         spacing = 4,
@@ -56,6 +61,7 @@ local function worker(args)
     }
 
     local is_update = true
+
     local process_rows = {
         -- spacing = 8,
         layout = wibox.layout.fixed.vertical,
@@ -64,23 +70,23 @@ local function worker(args)
     local process_header = {
         {
             markup = '<b>PID</b>',
-            forced_width = 40,
+            forced_width = 45,
             widget = wibox.widget.textbox
         },
         {
             markup = '<b>Name</b>',
-            forced_width = 40,
+            forced_width = 45,
             widget = wibox.widget.textbox
         },
         {
             {
                 markup = '<b>%CPU</b>',
-                forced_width = 40,
+                forced_width = 45,
                 widget = wibox.widget.textbox
             },
             {
                 markup = '<b>%MEM</b>',
-                forced_width = 40,
+                forced_width = 45,
                 widget = wibox.widget.textbox
             },
             layout = wibox.layout.fixed.horizontal
@@ -93,7 +99,7 @@ local function worker(args)
         visible = false,
         shape = gears.shape.rounded_rect,
         border_width = 1,
-        border_color = beautiful.bg_normal,
+        border_color = beautiful.border_focus,
         maximum_width = 300,
         offset = { y = 5 },
         widget = {}
@@ -102,25 +108,8 @@ local function worker(args)
     popup:connect_signal("mouse::enter", function(c) is_update = false end)
     popup:connect_signal("mouse::leave", function(c) is_update = true end)
 
-    cpugraph_widget:buttons(
-            awful.util.table.join(
-                    awful.button({}, 1, function()
-                        if popup.visible then
-                            --rows = nil
-                            popup.visible = not popup.visible
-                        else
-                            --init_popup()
-                            popup:move_next_to(mouse.current_widget_geometry)
-                        end
-                    end)
-            )
-    )
-
-    --- By default graph widget goes from left to right, so we mirror it and push up a bit
-    local cpu_widget = wibox.container.margin(wibox.container.mirror(cpugraph_widget, { horizontal = true }), 0, 0, 0, 2)
-
     local cpus = {}
-    watch([[bash -c "cat /proc/stat | grep '^cpu.' ; ps -eo '%p|%c|%C|' -o "%mem" -o '|%a' --sort=-%cpu | head -11 | tail -n +2"]], 1,
+    cpugraph_widget, cpugraph_timer = watch([[bash -c "cat /proc/stat | grep '^cpu.' ; ps -eo '%p|%c|%C|' -o "%mem" -o '|%a' --sort=-%cpu | head -11 | tail -n +2"]], 1.5,
             function(widget, stdout)
                 local i = 1
                 local j = 1
@@ -142,44 +131,48 @@ local function worker(args)
                         cpus[i]['idle_prev'] = idle
 
                         if i == 1 then
+                            cpugraph_tooltip.text = "CPU usage is " .. string.format("%d",diff_usage) .. "%"
                             widget:add_value(diff_usage)
                         end
 
-                        local row = wibox.widget
-                        {
+                        if popup.visible then
+                            local row = wibox.widget
                             {
-                                text = name,
-                                forced_width = 40,
-                                widget = wibox.widget.textbox
-                            },
-                            {
-                                text = math.floor(diff_usage) .. '%',
-                                forced_width = 40,
-                                widget = wibox.widget.textbox
-                            },
-                            {
-                                max_value = 100,
-                                value = diff_usage,
-                                forced_height = 20,
-                                forced_width = 150,
-                                paddings = 1,
-                                margins = 4,
-                                border_width = 1,
-                                border_color = beautiful.bg_focus,
-                                background_color = beautiful.bg_normal,
-                                bar_border_width = 1,
-                                bar_border_color = beautiful.bg_focus,
-                                color = "linear:150,0:0,0:0,#D08770:0.3,#BF616A:0.6," .. beautiful.fg_normal,
-                                widget = wibox.widget.progressbar,
+                                {
+                                    text = name,
+                                    forced_width = 40,
+                                    widget = wibox.widget.textbox
+                                },
+                                {
+                                    text = math.floor(diff_usage) .. '%',
+                                    forced_width = 40,
+                                    widget = wibox.widget.textbox
+                                },
+                                {
+                                    max_value = 100,
+                                    value = diff_usage,
+                                    forced_height = 20,
+                                    forced_width = 150,
+                                    paddings = 1,
+                                    margins = 4,
+                                    border_width = 1,
+                                    border_color = beautiful.bg_focus,
+                                    background_color = beautiful.bg_normal,
+                                    bar_border_width = 1,
+                                    bar_border_color = beautiful.border_normal,
+                                    --color = "linear:150,0:0,0:0,#D08770:0.3,#BF616A:0.6," .. beautiful.fg_normal,
+                                    color = beautiful.fg_normal,
+                                    widget = wibox.widget.progressbar,
 
-                            },
-                            layout = wibox.layout.align.horizontal
-                        }
+                                },
+                                layout = wibox.layout.align.horizontal
+                            }
+                            cpu_rows[i] = row
+                        end
 
-                        cpu_rows[i] = row
                         i = i + 1
                     else
-                        if is_update == true then
+                        if is_update == true and popup.visible then
 
                             local columns = split(line, '|')
 
@@ -194,23 +187,25 @@ local function worker(args)
                                     {
                                         {
                                             text = pid,
-                                            forced_width = 40,
+                                            forced_width = 45,
                                             widget = wibox.widget.textbox
                                         },
                                         {
                                             text = comm,
-                                            forced_width = 40,
+                                            forced_width = 45,
                                             widget = wibox.widget.textbox
                                         },
                                         {
                                             {
                                                 text = cpu,
-                                                forced_width = 40,
+                                                forced_width = 45,
+                                                align = 'right',
                                                 widget = wibox.widget.textbox
                                             },
                                             {
                                                 text = mem,
-                                                forced_width = 40,
+                                                forced_width = 45,
+                                                align = 'right',
                                                 widget = wibox.widget.textbox
                                             },
                                             layout = wibox.layout.align.horizontal
@@ -265,6 +260,24 @@ local function worker(args)
             end,
             cpugraph_widget
     )
+
+    cpugraph_widget:buttons(
+            awful.util.table.join(
+                    awful.button({}, 1, function()
+                        if popup.visible then
+                            --rows = nil
+                            popup.visible = not popup.visible
+                        else
+                            --init_popup()
+                            cpugraph_timer:emit_signal("timeout")
+                            popup:move_next_to(mouse.current_widget_geometry)
+                        end
+                    end)
+            )
+    )
+
+    --- By default graph widget goes from left to right, so we mirror it and push up a bit
+    local cpu_widget = wibox.container.margin(wibox.container.mirror(cpugraph_widget, { horizontal = true }), 0, 0, 0, 2)
 
     return cpu_widget
 end

@@ -4,6 +4,9 @@ local lain  = require("lain")
 local awful = require("awful")
 local beautiful = require("beautiful")
 
+local calendar_popup_factory = require("awesome-wm-widgets.calendar-widget.calendar")
+local cpu_widget_factory = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+
 local string = string
 local os = os
 
@@ -43,7 +46,6 @@ local mytextcalendar = wibox.widget.textclock("W%V, %d %b %a ")
 ui.calendar_widget = wrap_widget(beautiful.calendar, mytextcalendar)
 
 -- Calendar popup
-local calendar_popup_factory = require("awesome-wm-widgets.calendar-widget.calendar")
 ui.calendar_popup = calendar_popup_factory({
     placement = 'top_right'
 })
@@ -67,14 +69,12 @@ local volume_widget = wrap_widget(beautiful.volume, myalsabar.bar)
 ui.volume = myalsabar
 
 -- CPU
-local cpu = lain.widget.cpu({
-    settings = function()
-        widget:set_markup(cpu_now.usage .. " %")
-    end
+local cpu_widget = cpu_widget_factory({
+    width = 70,
+    step_width = 2,
+    step_spacing = 1,
 })
-cpu.widget.align = 'right'
-cpu.widget.forced_width = 40 * width_scaling
-local cpu_widget = wrap_widget(beautiful.cpu, cpu.widget)
+cpu_widget = wrap_widget(beautiful.cpu, cpu_widget)
 
 -- MEM
 local mem = lain.widget.mem({
