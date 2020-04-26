@@ -34,9 +34,9 @@ local apps_cmd = {
     music_prev      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
 
     lock            = "xset s activate",
-    shutdown        = "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.PowerOff boolean:true",
-    reboot          = "dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Reboot boolean:true",
-    suspend         = "xset s activate && dbus-send --system --print-reply --dest=\"org.freedesktop.ConsoleKit\" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Suspend boolean:true",
+    shutdown        = "loginctl poweroff",
+    reboot          = "loginctl reboot",
+    suspend         = "xset s activate && loginctl suspend",
 }
 
 if hostname == "basestar" then
