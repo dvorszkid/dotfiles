@@ -303,6 +303,11 @@ local setupUi = function (ui)
         awful.button({}, 5, apps.func.volume_decrease) -- scroll down
     ))
 
+    -- DoNotDisturb
+    ui.donotdisturb_widget:buttons(awful.util.table.join(
+        awful.button({}, 1, apps.func.notifications_toggle)
+    ))
+
     -- JIRA widget settings
     if ui.has_jira then
         ui.jira:buttons(awful.util.table.join(
