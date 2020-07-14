@@ -15,12 +15,16 @@ local width_scaling = 1.0
 
 local ui = {}
 
-function wrap_icon(icon_path)
-    local icon = wibox.widget.imagebox(icon_path)
+function wrap_imagebox(icon)
     local padding_background = wibox.container.background(icon, beautiful.bg_focus, gears.shape.rectangle)
     local padding = wibox.container.margin(padding_background, 2, 2, 0, 0)
     local margin_background = wibox.container.background(padding, beautiful.bg_focus, gears.shape.rectangle)
     return wibox.container.margin(margin_background, 0, 0, 5, 5)
+end
+
+function wrap_icon(icon_path)
+    local icon = wibox.widget.imagebox(icon_path)
+    return wrap_imagebox(icon)
 end
 
 function wrap_widget(icon_path, widget)
@@ -103,24 +107,26 @@ local netup_widget = wrap_widget(beautiful.net_up, netup.widget)
 
 -- Notifications
 do
-    ui.donotdisturb_widget = wrap_icon(beautiful.do_not_disturb)
-    ui.donotdisturb_widget.visible = false
+    ui.donotdisturb_icon = wibox.widget.imagebox(beautiful.do_not_disturb)
+    ui.donotdisturb_widget = wrap_imagebox(ui.donotdisturb_icon)
+    ui.donotdisturb_icon.opacity = 0.2
 
-    local donotdisturb_tooltip = awful.tooltip({
+    ui.donotdisturb_tooltip = awful.tooltip({
         objects = { ui.donotdisturb_widget },
-        text = "Notifications OFF"
+        text = "Do Not Disturb OFF"
     })
 end
 
 -- VPN
 do
     local pidfile = home_dir .. '/.vpn/work/openconnect.pid'
-    ui.vpn_widget = wrap_icon(beautiful.vpn)
-    ui.vpn_widget.visible = false
+    ui.vpn_icon = wibox.widget.imagebox(beautiful.vpn)
+    ui.vpn_widget = wrap_imagebox(ui.vpn_icon)
+    ui.vpn_icon.opacity = 0.2
 
-    local vpn_tooltip = awful.tooltip({
+    ui.vpn_tooltip = awful.tooltip({
         objects = { ui.vpn_widget },
-        text = "VPN is connected"
+        text = "Unknown VPN status"
     })
 
     gears.timer {
@@ -131,7 +137,18 @@ do
             awful.spawn.easy_async({"sh", "-c", "ps -p `cat \"" .. pidfile .. "\"` -o comm="},
                 function(out)
                     --print('[vpn timer] out:' .. out)
-                    ui.vpn_widget.visible = (string.match(out, "openconnect") ~= nil)
+                    local was_connected = ui.vpn_icon.opacity == 1
+                    local is_connected = string.match(out, "openconnect") ~= nil
+                    if is_connected then
+                        ui.vpn_icon.opacity = 1
+                        ui.vpn_tooltip.text = "VPN is connected"
+                    else
+                        ui.vpn_icon.opacity = 0.2
+                        ui.vpn_tooltip.text = "VPN is NOT connected"
+                    end
+                    if is_connected ~= was_connected then
+                        ui.vpn_icon:emit_signal("widget::redraw_needed")
+                    end
                 end
             )
         end

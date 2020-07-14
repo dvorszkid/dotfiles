@@ -36,11 +36,11 @@ local apps_cmd = {
     lock            = "xset s activate",
     shutdown        = "loginctl poweroff",
     reboot          = "loginctl reboot",
-    suspend         = "xset s activate && loginctl suspend",
+    suspend         = "xset s activate && sleep 1 && loginctl suspend",
 }
 
 if hostname == "basestar" then
-    apps_cmd['suspend'] =  "xrandr-setup.sh 1 && yamaha standby && " .. apps_cmd['suspend']
+    apps_cmd['suspend'] =  "yamaha standby && xrandr-setup.sh 1 && " .. apps_cmd['suspend']
 end
 
 -- combined commands
@@ -69,14 +69,19 @@ local funcs = {
         end,
 
     notifications_toggle = function ()
-        new_state = "ON"
-        naughty.destroy_all_notifications()
+        new_state = "Do Not Disturb ON"
         if not naughty.is_suspended() then
-            new_state = "OFF"
+            ui.donotdisturb_icon.opacity = 1
+            naughty.config.notify_callback = function(args) return nil end
+            naughty.destroy_all_notifications()
+        else
+            new_state = "Do Not Disturb OFF"
+            ui.donotdisturb_icon.opacity = 0.2
+            naughty.config.notify_callback = function(args) return args end
         end
-        naughty.notify({preset = naughty.config.presets.system, text = "Notifications " .. new_state})
+        ui.donotdisturb_icon:emit_signal("widget::redraw_needed")
+        ui.donotdisturb_tooltip.text = new_state
         naughty.toggle()
-        ui.donotdisturb_widget.visible = naughty.is_suspended()
     end,
 }
 
