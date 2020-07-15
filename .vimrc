@@ -74,6 +74,7 @@ Plug 'tbastos/vim-lua', {'for': ['lua']}
 " C++ programming
 Plug 'derekwyatt/vim-fswitch', {'for': ['c', 'cpp']}
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+Plug 'peterhoeg/vim-qml', {'for': ['qml']}
 
 " Work related
 if s:is_devel
