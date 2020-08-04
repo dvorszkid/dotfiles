@@ -219,6 +219,7 @@ end)
 client.connect_signal("property::class", function(c)
     if c.class == "Firefox" and c.role == "browser" then
         c.floating = false
+        c.maximized = false
     end
 end)
 

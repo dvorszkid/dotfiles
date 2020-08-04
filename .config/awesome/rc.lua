@@ -75,6 +75,7 @@ config.scr           = {
     sec = screen.count() > 1 and 2 or 1,
 }
 config.wallpaperPath = home_dir .. "/.local/share/wallpapers/"
+naughty.config.defaults.screen = config.scr.pri
 naughty.config.defaults.position = "bottom_right"
 naughty.config.presets.system = {
     title = "AwesomeWM",
