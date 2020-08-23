@@ -53,8 +53,9 @@ tyrannical.tags = {
         init        = false,
         volatile    = true,
         exclusive   = true,
-        screen      = config.scr.sec,
-        force_screen= true,
+        -- TODO: depend on dynamic screen config
+        --screen      = config.scr.sec,
+        --force_screen= true,
         layout      = awful.layout.suit.tile.left,
         class       = {
             "mplayer",
@@ -64,13 +65,13 @@ tyrannical.tags = {
         }
     },
     {
-        name        = "email",
+        name        = "zoom",
         init        = false,
         volatile    = true,
-        exclusive   = true,
         layout      = awful.layout.suit.tile.left,
+        master_width_factor = 0.2,
         class       = {
-            "hiri",
+            "zoom",
         }
     },
     {
