@@ -1,6 +1,7 @@
 --
 -- Apps autostarted by Awesome WM
 --
+local awful = require("awful")
 
 -- common
 local apps = {
