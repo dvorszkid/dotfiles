@@ -65,6 +65,15 @@ tyrannical.tags = {
         }
     },
     {
+        name        = "vnc",
+        init        = false,
+        volatile    = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "vncviewer",
+        }
+    },
+    {
         name        = "zoom",
         init        = false,
         volatile    = true,
