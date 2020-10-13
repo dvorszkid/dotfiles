@@ -24,11 +24,20 @@ then
     alias -g T="| tail"
 fi
 
+source_if_available() {
+    if [ -f "$1" ]; then
+        source "$1"
+    fi
+}
+
 
 ##
 # Make MC exit to current directory
 ##
-alias mc="source /usr/libexec/mc/mc-wrapper.sh"
+if [ -f "/usr/libexec/mc/mc-wrapper.sh" ]
+then
+    alias mc="source /usr/libexec/mc/mc-wrapper.sh"
+fi
 
 
 ##
@@ -126,8 +135,4 @@ alias adepconfig='dpkg --purge `dpkg -l | egrep "^rc" | cut -d" " -f3`'
 ##
 # Local .alias
 ##
-if [ -f "$HOME/.alias.local" ]
-then
-	source "$HOME/.alias.local"
-fi
-
+source_if_available "$HOME/.alias.local"
