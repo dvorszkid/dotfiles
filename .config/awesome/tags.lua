@@ -78,9 +78,20 @@ tyrannical.tags = {
         init        = false,
         volatile    = true,
         layout      = awful.layout.suit.tile.left,
+        screen      = config.scr.sec,
         master_width_factor = 0.2,
         class       = {
             "zoom",
+        }
+    },
+    {
+        name        = "discord",
+        init        = false,
+        volatile    = true,
+        layout      = awful.layout.suit.tile.left,
+        screen      = config.scr.sec,
+        class       = {
+            "discord",
         }
     },
     {
