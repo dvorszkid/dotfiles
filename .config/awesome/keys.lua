@@ -84,10 +84,7 @@ local clientKeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "t"     , awful.titlebar.toggle, {description="toggle titlebar", group="client modifiers"}),
     awful.key({ modkey,           }, "s"     , function (c) c.sticky = not c.sticky end, {description="toggle sticky", group="client modifiers"}),
     awful.key({ modkey,           }, "n"     , function (c) c.minimized = true end, {description="minimize", group="client modifiers"}),
-    awful.key({ modkey,           }, "m"     , function (c)
-        c.maximized_horizontal = not c.maximized_horizontal
-        c.maximized_vertical   = not c.maximized_vertical
-    end, {description="toggle maximixed", group="client modifiers"}),
+    awful.key({ modkey,           }, "m"     , function (c) c.maximized = not c.maximized end, {description="toggle maximixed", group="client modifiers"}),
     awful.key({ modkey, "Control" }, "m", function (c) c:swap(awful.client.getmaster()) end, {description="set as master", group="client modifiers"})
 )
 

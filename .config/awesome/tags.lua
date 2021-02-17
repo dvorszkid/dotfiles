@@ -240,7 +240,7 @@ end)
 client.connect_signal("property::class", function(c)
     if c.class == "Firefox" and c.role == "browser" then
         c.floating = false
-        c.maximized = false
+        c.maximized = false -- better screen resize handling
     end
 end)
 
