@@ -1,4 +1,4 @@
 mc recurse
+mpv recurse
 nvim recurse
 vifm recurse
-
