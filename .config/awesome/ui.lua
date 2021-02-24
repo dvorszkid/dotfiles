@@ -129,7 +129,7 @@ do
         text = "Unknown VPN status"
     })
 
-    gears.timer {
+    ui.vpn_timer = gears.timer {
         timeout   = 5,
         call_now  = true,
         autostart = true,
