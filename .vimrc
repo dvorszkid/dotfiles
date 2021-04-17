@@ -23,10 +23,15 @@ Plug 'tpope/vim-git'
 Plug 'gregsexton/gitv', {'on': 'Gitv'}
 Plug 'airblade/vim-gitgutter'
 
-" Misc
+" Theme
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8' " too blue
+Plug 'rakr/vim-one' " too purple, bad TODO highlight, bad comment readability
+Plug 'jacoborus/tender.vim' " search is just underlined, bad comment readability
+Plug 'sainnhe/sonokai' " too red, bad TODO highlight
+
+" Misc
 Plug 'liuchengxu/vim-which-key'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mbbill/undotree'
@@ -140,7 +145,7 @@ nmap <leader>hp <Plug>(GitGutterPreviewHunk)
 
 
 " AirLine
-let g:airline_theme = 'solarized'
+"let g:airline_theme = '' " automatic
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -284,6 +289,8 @@ let g:tmuxline_preset={
 		\'z':'#H',
 		\'options':{'status-justify':'left'}
 	\}
+" disable auto update when colors change
+let g:airline#extensions#tmuxline#enabled = 0
 
 "
 " VimTresorit
@@ -394,13 +401,16 @@ set undofile
 ""
 " Color scheme
 ""
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 syntax on
 set background=dark
 let g:load_doxygen_syntax=1
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
-call togglebg#map("<Leader>bg")
-colorscheme solarized
+let g:sonokai_disable_italic_comment = 1
+colorscheme tender
 
 
 ""

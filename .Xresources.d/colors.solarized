@@ -1,0 +1,55 @@
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+! Common
+#define ColorYellow #b58900
+#define ColorOrange #cb4b16
+#define ColorRed #dc322f
+#define ColorMagenta #d33682
+#define ColorViolet #6c71c4
+#define ColorBlue #268bd2
+#define ColorCyan #2aa198
+#define ColorGreen #859900
+
+! Dark
+#define ColorBase03 #002b36
+#define ColorBase02 #073642
+#define ColorBase01 #586e75
+#define ColorBase00 #657b83
+#define ColorBase0 #839496
+#define ColorBase1 #93a1a1
+#define ColorBase2 #eee8d5
+#define ColorBase3 #fdf6e3
+
+! Light
+! #define ColorBase03 #fdf6e3
+! #define ColorBase02 #eee8d5
+! #define ColorBase01 #93a1a1
+! #define ColorBase00 #839496
+! #define ColorBase0 #657b83
+! #define ColorBase1 #586e75
+! #define ColorBase2 #073642
+! #define ColorBase3 #002b36
+
+*background: ColorBase03
+*foreground: ColorBase0
+*fadeColor: ColorBase03
+*cursorColor: ColorBase1
+*pointerColorBackground: ColorBase01
+*pointerColorForeground: ColorBase1
+*color0: ColorBase02
+*color1: ColorRed
+*color2: ColorGreen
+*color3: ColorYellow
+*color4: ColorBlue
+*color5: ColorMagenta
+*color6: ColorCyan
+*color7: ColorBase2
+*color8: ColorBase03
+*color9: ColorOrange
+*color10: ColorBase01
+*color11: ColorBase00
+*color12: ColorBase0
+*color13: ColorViolet
+*color14: ColorBase1
+*color15: ColorBase3
