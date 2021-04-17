@@ -69,8 +69,8 @@ Xft.lcdfilter:	lcddefault
 ! ------------------------------------------------------------------------------
 ! --- XTerm
 !
-xterm*faceName:			Source Code Pro for Powerline
-xterm*faceSize:			10
+xterm*faceName:			Fira Code
+xterm*faceSize:			9
 xterm*utf8:				2
 xterm*termName:			xterm-256color
 xterm*boldColors:		false
@@ -92,8 +92,8 @@ xterm*toolBar:			false
 
 ! size and look
 URxvt.geometry:				120x35
-URxvt.font:					xft:Source Code Pro for Powerline:style=Regular:pixelsize=13
-URxvt.boldFont:				xft:Source Code Pro for Powerline:style=SemiBold:pixelsize=13
+URxvt.font:					xft:Fira Code:style=Regular:size=9
+URxvt.boldFont:				xft:Fira Code:style=SemiBold:size=9
 URxvt.fading:				20
 URxvt.intensityStyles:		false
 
