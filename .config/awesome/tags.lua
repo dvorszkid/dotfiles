@@ -17,7 +17,7 @@ tyrannical.tags = {
         init        = true,
         exclusive   = true,
         screen      = config.scr.pri,
-        layout      = awful.layout.suit.tile.left,
+        layout      = awful.layout.suit.max,
         class = {
             "firefox",
             "navigator",
@@ -268,7 +268,7 @@ end)
 -- Hack for making Firefox not floating
 -- (somehow it is always floating by default)
 client.connect_signal("property::class", function(c)
-    if c.class == "Firefox" and c.role == "browser" then
+    if (c.class == "Firefox" or string.find(c.class, "chrom")) and c.role == "browser" then
         c.floating = false
         c.maximized = false -- better screen resize handling
     end
