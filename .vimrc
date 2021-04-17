@@ -27,6 +27,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'liuchengxu/vim-which-key'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'kien/tabman.vim'
@@ -112,20 +113,12 @@ nmap ss <plug>(SubversiveSubstituteLine)
 
 " FZF
 let g:fzf_command_prefix = 'Fzf'
-nnoremap <silent> <leader>;f :FzfFiles<cr>
-nnoremap <silent> <leader>;F :FzfHistory<cr>
-nnoremap <silent> <leader>;g :FzfGFiles<cr>
-nnoremap <silent> <leader>;G :FzfGFiles?<cr>
-nnoremap <silent> <leader>;b :FzfBuffers<cr>
-nnoremap <silent> <leader>;t :FzfBTags<cr>
-nnoremap <silent> <leader>;T :FzfTags<cr>
-nnoremap <silent> <leader>;<leader> :FzfAg<cr>
 "nmap <silent> <C-p> <leader>;f
-nmap <silent> <C-t> <leader>;t
+nmap <silent> <C-t> <leader>st
 
 
 " Yoink + FZF + vim-multiple-cursors
-map <expr> <C-p> yoink#isSwapping() ? '<plug>(YoinkPostPasteSwapForward)' : '<leader>;f'
+map <expr> <C-p> yoink#isSwapping() ? '<plug>(YoinkPostPasteSwapForward)' : '<leader>sf'
 map <expr> <C-n> yoink#isSwapping() ? '<plug>(YoinkPostPasteSwapForward)' : ':MultipleCursorsFind <C-R>/<CR>'
 
 
@@ -169,6 +162,38 @@ if s:is_devel
 	augroup END
 endif
 
+
+" Vim Which Key
+highlight default link WhichKeyGroup Operator
+nnoremap <silent> <leader> :silent WhichKey '\'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '\'<CR>
+let g:which_key_vertical = 1
+let g:which_key_use_floating_win = 1
+let g:which_key_map = {}
+let g:which_key_map.a = {
+      \ 'name' : '+admin' ,
+      \ }
+let g:which_key_map.s = {
+      \ 'name' : '+search' ,
+      \ '/' : [':FzfHistory/'     , 'history'],
+      \ ';' : [':FzfCommands'     , 'commands'],
+      \ 'a' : [':FzfAg'           , 'text Ag'],
+      \ 'l' : [':FzfLines'        , 'lines'] ,
+      \ 'h' : [':FzfHistory'      , 'file history'],
+      \ 'b' : [':FzfBuffers'      , 'open buffers'],
+      \ 'w' : [':FzfWindows'      , 'search windows'],
+      \ 'f' : [':FzfFiles'        , 'files'],
+      \ 'g' : [':FzfGFiles'       , 'git files'],
+      \ 'G' : [':FzfGFiles?'      , 'modified git files'],
+      \ 'H' : [':FzfHelptags'     , 'help tags'] ,
+      \ 'm' : [':FzfMaps'         , 'normal maps'] ,
+      \ 'M' : [':FzfMarks'        , 'marks'] ,
+      \ 'c' : [':FzfColors'       , 'color schemes'],
+      \ 't' : [':FzfBTags'        , 'buffer tags'],
+      \ 'T' : [':FzfTags'         , 'project tags'],
+      \ 'y' : [':FzfFiletypes'    , 'file types'],
+      \ }
+call which_key#register('\', "g:which_key_map")
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -352,6 +377,7 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
+set timeoutlen=200      " also used by vim-which-key plugin
 set ttimeoutlen=0       " timeout of keycode sequences - faster Esc in insert mode
 set display+=lastline   " try to show as much as possible of the last line in the window (rather than a column of "@")
 
@@ -521,10 +547,13 @@ vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
 " vnoremap / /\v
 
 
-" <leader>v brings up .vimrc
-" <leader>V reloads it and makes all changes active (file has to be saved first)
-noremap <leader>v :tabedit $MYVIMRC<CR>
-noremap <leader>V :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" Admin features
+nnoremap <Plug>(open-vimrc) :tabedit $MYVIMRC<CR>
+nmap <leader>ae <Plug>(open-vimrc)
+nnoremap <Plug>(reload-vimrc) :source $MYVIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nmap <leader>ar <Plug>(reload-vimrc)
+nnoremap <Plug>(plugin-install) :PlugClean<CR>:PlugInstall<CR>
+nmap <leader>ap <Plug>(plugin-install)
 
 
 " Save as root
