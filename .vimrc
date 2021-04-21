@@ -71,7 +71,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
 if s:is_devel
-	Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --system-boost --system-libclang', 'for': ['c', 'cpp', 'python']}
+	Plug 'ycm-core/YouCompleteMe', {'do': './install.py', 'for': ['c', 'cpp', 'python']}
 endif
 
 " Lua programming
@@ -214,7 +214,6 @@ map <Leader>k <Plug>(easymotion-k)
 " map n <Plug>(easymotion-next)
 " map N <Plug>(easymotion-prev)
 
-
 " YouCompleteMe
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
 let g:ycm_autoclose_preview_window_after_completion = 0
@@ -226,6 +225,9 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_auto_hover = ''
+if executable("clangd")
+    let g:ycm_clangd_binary_path = 'clangd'
+endif
 nnoremap <silent> <leader>yg :YcmCompleter GoTo<CR>
 nnoremap <silent> <leader>yf :YcmCompleter FixIt<CR>
 nmap <leader>yh <Plug>(YCMHover)
