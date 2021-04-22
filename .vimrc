@@ -71,6 +71,8 @@ endif
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 if s:is_devel
 	Plug 'ycm-core/YouCompleteMe', {'do': './install.py', 'for': ['c', 'cpp', 'python']}
 endif
@@ -214,6 +216,13 @@ map <Leader>k <Plug>(easymotion-k)
 " map / <Plug>(easymotion-sn)
 " map n <Plug>(easymotion-next)
 " map N <Plug>(easymotion-prev)
+
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
 
 " YouCompleteMe
 let g:ycm_extra_conf_globlist = ['~/projects/*','!~/*']
