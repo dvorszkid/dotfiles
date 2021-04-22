@@ -28,8 +28,9 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8' " too blue
 Plug 'rakr/vim-one' " too purple, bad TODO highlight, bad comment readability
-Plug 'jacoborus/tender.vim' " search is just underlined, bad comment readability
 Plug 'sainnhe/sonokai' " too red, bad TODO highlight
+Plug 'morhetz/gruvbox' " too retro
+Plug 'dvorszkid/tender.vim'
 
 " Misc
 Plug 'liuchengxu/vim-which-key'
@@ -450,8 +451,10 @@ if exists('+termguicolors')
 endif
 syntax on
 set background=dark
-let g:load_doxygen_syntax=1
+let g:load_doxygen_syntax = 1
 let g:sonokai_disable_italic_comment = 1
+let g:gruvbox_italicize_comments = 0
+let g:gruvbox_contrast_dark = "hard"
 colorscheme tender
 
 

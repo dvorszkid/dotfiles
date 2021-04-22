@@ -2,7 +2,7 @@
 ! adapted by Jose Esparza
 
 ! special
-URxvt.foreground:   #eeeeee
+URxvt.foreground:   #dddddd
 URxvt.background:   #282828
 URxvt.cursorColor:  #eeeeee
 
