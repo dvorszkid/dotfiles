@@ -48,6 +48,7 @@ Plug 'qwertologe/nextval.vim'
 Plug 'osyo-manga/vim-anzu'
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
+Plug 'machakann/vim-highlightedyank'
 
 " Org Mode
 Plug 'tpope/vim-speeddating'
