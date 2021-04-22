@@ -74,7 +74,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 if s:is_devel
-	Plug 'ycm-core/YouCompleteMe', {'do': './install.py', 'for': ['c', 'cpp', 'python']}
+	Plug 'ycm-core/YouCompleteMe', {'do': './install.py', 'for': ['c', 'cpp', 'python', 'typescript', 'javascript']}
 endif
 
 " Lua programming
@@ -234,13 +234,43 @@ let g:ycm_warning_symbol = 'W>'
 let g:ycm_complete_in_comments = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
 let g:ycm_auto_hover = ''
+if s:is_devel
+    nmap <silent> gh <Plug>(YCMHover)
+    nnoremap <silent> gd :YcmCompleter GoToDefinition<CR>
+    nnoremap <silent> gD :YcmCompleter GoToDeclaration<CR>
+    nnoremap <silent> gr :YcmCompleter GoToReferences<CR>
+    nnoremap <silent> gf :YcmCompleter FixIt<CR>
+    nnoremap gR :YcmCompleter RefactorRename 
+endif
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 if executable("clangd")
     let g:ycm_clangd_binary_path = 'clangd'
+    let g:ycm_clangd_args = [ '--header-insertion=never' ]
 endif
-nnoremap <silent> <leader>yg :YcmCompleter GoTo<CR>
-nnoremap <silent> <leader>yf :YcmCompleter FixIt<CR>
-nmap <leader>yh <Plug>(YCMHover)
+let g:ycm_language_server = []
+if executable("ccls")
+    let g:ycm_language_server = g:ycm_language_server +
+                \ [{
+                \   'name': 'ccls',
+                \   'cmdline': [ 'ccls' ],
+                \   'filetypes': [ 'c', 'cpp', 'cuda', 'objc', 'objcpp' ],
+                \   'project_root_files': [ '.ccls-root', 'compile_commands.json' ]
+                \ }]
+endif
+" Run: npm install -g javascript-typescript-langserver
+if executable("tsserver")
+    let g:ycm_language_server = g:ycm_language_server +
+                \ [
+                \   {
+                \     'name': 'typescript-language-server',
+                \     'cmdline': [ 'tsserver', '--stdio' ],
+                \     'filetypes': [ 'typescript' ],
+                \     'project_root_files': [ 'tsconfig.json' ]
+                \   }
+                \ ]
+endif
 
 
 " UndoTree
