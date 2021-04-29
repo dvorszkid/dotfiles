@@ -10,6 +10,7 @@
 	uncommit = reset HEAD^
 	unstage = reset HEAD --
 	cam = commit -a -m
+	cav = commit -a -v
 
 	br = branch
 	co = checkout
