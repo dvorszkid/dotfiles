@@ -237,6 +237,7 @@ local globalKeys = awful.util.table.join(
     awful.key({ }, "XF86AudioRaiseVolume", apps.func.volume_increase, {description="increase volume", group="volume"}),
     awful.key({ }, "XF86AudioLowerVolume", apps.func.volume_decrease, {description="decrease volume", group="volume"}),
     awful.key({ }, "XF86AudioMute", apps.func.volume_toggle, {description="mute / unmute", group="volume"}),
+    awful.key({ "Control" }, "XF86AudioMute", function () awful.spawn(apps.cmd.speakers) end, {description="toggle speakers on / off", group="volume"}),
 
     -- Spotify control
     awful.key({ }, "XF86AudioPlay", function () awful.spawn.with_shell(apps.cmd.music_play) end, {description="play / pause", group="spotify"}),
