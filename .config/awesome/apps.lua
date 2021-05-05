@@ -26,7 +26,10 @@ local apps_cmd = {
     translate       = "rofi-translate.sh",
     volume          = "alsamixer",
     calendar        = "xdg-open https://calendar.google.com",
-    speakers        = "yamaha toggle",
+
+    amplifier_toggle      = "yamaha toggle",
+    amplifier_volume_up   = "yamaha volume_up",
+    amplifier_volume_down = "yamaha volume_down",
 
     music           = "spotify",
     music_play      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
