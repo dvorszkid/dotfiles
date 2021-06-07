@@ -74,6 +74,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+"Plug 'dense-analysis/ale'
 
 " Language Server Protocol
 Plug 'prabirshrestha/async.vim'
@@ -243,17 +244,35 @@ imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 
+" ALE
+" lint on save, insert leave
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_linters_explicit = 1
+
+let g:ale_linters = {'javascript': ['eslint'], 'typescript': ['eslint']}
+let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'javascript': ['eslint'],
+            \   'typescript': ['eslint'],
+            \}
+
+
 " LSP
+"let g:lsp_settings_filetype_typescript = ['typescript-language-server', 'eslint-language-server']
 let g:lsp_settings = {
             \ 'clangd': {
             \     'cmd': [
             \         'clangd',
             \         '--background-index',
             \         '--clang-tidy-checks=-*',
+            \         '--header-insertion=never',
             \     ],
             \ },
             \ }
-if executable('ccls')
+if executable('ccls-disabled')
     au User lsp_setup call lsp#register_server({
                 \ 'name': 'ccls',
                 \ 'cmd': {server_info->['ccls']},
@@ -265,8 +284,9 @@ if executable('ccls')
                 \ })
 endif
 
-
+let g:lsp_work_done_progress_enabled = 1
 let g:lsp_diagnostics_float_cursor = 1
+
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=yes
@@ -283,7 +303,7 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
-    nnoremap <buffer><silent> <F4> :LspDocumentSwitchSourceHeader<CR>
+    "nnoremap <buffer><silent> <F4> :LspDocumentSwitchSourceHeader<CR> " does not work
     inoremap <buffer><silent> <F4> <Esc>:LspDocumentSwitchSourceHeader<CR>
     nnoremap <buffer><silent> <leader>ld :LspDocumentDiagnostics<CR>
     nnoremap <buffer><silent> <leader>la :LspCodeAction<CR>
@@ -470,7 +490,7 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
-set timeoutlen=200      " also used by vim-which-key plugin
+set timeoutlen=400      " also used by vim-which-key plugin
 set ttimeoutlen=0       " timeout of keycode sequences - faster Esc in insert mode
 set display+=lastline   " try to show as much as possible of the last line in the window (rather than a column of "@")
 
