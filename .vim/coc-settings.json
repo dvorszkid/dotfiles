@@ -1,0 +1,7 @@
+{
+    "clangd.arguments": [
+        "--background-index",
+        "--clang-tidy-checks=-*",
+        "--header-insertion=never"
+    ]
+}
