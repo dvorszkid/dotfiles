@@ -6,3 +6,4 @@ LICENSE.md skip
 .local recurse
 .tmux recurse
 .urxvt recurse
+.vim recurse
