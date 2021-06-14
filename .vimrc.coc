@@ -217,7 +217,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 " CoC extensions
 let g:coc_global_extensions = []
-if executable("ccls")
+if executable("ccls-disabled")
     call coc#config('languageserver', {
                 \ 'ccls': {
                 \   "command": "ccls",
@@ -434,7 +434,7 @@ set listchars=tab:▸\ ,eol:¬	" This changes the default display of tab and CR 
 set foldlevelstart=99	" all folds open by default
 set spelllang=en		" mostly the only needed
 set nospell				" and its on
-set timeoutlen=200      " also used by vim-which-key plugin
+set timeoutlen=400      " also used by vim-which-key plugin
 set ttimeoutlen=0       " timeout of keycode sequences - faster Esc in insert mode
 set display+=lastline   " try to show as much as possible of the last line in the window (rather than a column of "@")
 

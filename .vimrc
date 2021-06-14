@@ -1,1 +1,1 @@
-.vimrc.lsp
+.vimrc.coc
