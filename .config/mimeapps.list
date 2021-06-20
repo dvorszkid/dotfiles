@@ -26,15 +26,15 @@ video/x-matroska=smplayer.desktop;
 video/x-msvideo=smplayer.desktop;
 
 # Images
-image/png=nomacs.desktop
-image/gif=nomacs.desktop
-image/jpeg=nomacs.desktop
-image/bmp=nomacs.desktop
-image/tiff=nomacs.desktop
-image/x-eps=nomacs.desktop
-image/x-ico=nomacs.desktop
-image/x-portable-bitmap=nomacs.desktop
-image/x-portable-graymap=nomacs.desktop
-image/x-portable-pixmap=nomacs.desktop
-image/x-xbitmap=nomacs.desktop
-image/x-xpixmap=nomacs.desktop
+image/png=org.nomacs.ImageLounge.desktop
+image/gif=org.nomacs.ImageLounge.desktop
+image/jpeg=org.nomacs.ImageLounge.desktop
+image/bmp=org.nomacs.ImageLounge.desktop
+image/tiff=org.nomacs.ImageLounge.desktop
+image/x-eps=org.nomacs.ImageLounge.desktop
+image/x-ico=org.nomacs.ImageLounge.desktop
+image/x-portable-bitmap=org.nomacs.ImageLounge.desktop
+image/x-portable-graymap=org.nomacs.ImageLounge.desktop
+image/x-portable-pixmap=org.nomacs.ImageLounge.desktop
+image/x-xbitmap=org.nomacs.ImageLounge.desktop
+image/x-xpixmap=org.nomacs.ImageLounge.desktop
