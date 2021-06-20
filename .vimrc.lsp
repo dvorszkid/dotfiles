@@ -9,12 +9,19 @@ filetype off                  " required
 " Hostname for host specific configuration
 "
 let s:hostname = substitute(system('hostname'), '\n', '', '')
-let s:is_devel = s:hostname =~ "basestar" || s:hostname =~ "bp1-dsklin"
+let s:is_devel = s:hostname =~ "bp1-dsklin"
 
 
 "
 " Plugin list (using VimPlug)
 "
+let vimplug_path = '~/.vim/autoload/plug.vim'
+if empty(glob(vimplug_path))
+    silent execute '!curl -fLo ' . vimplug_path . ' --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " For Git
