@@ -9,6 +9,7 @@ local apps = {
     "unclutter",
     "parcellite",
     "tresorit --hidden",
+    "redshift-gtk",
 }
 
 if not os.getenv("VNCDESKTOP") then
