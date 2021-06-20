@@ -44,7 +44,7 @@ local apps_cmd = {
 }
 
 if hostname == "basestar" then
-    apps_cmd['suspend'] =  "yamaha standby && xrandr-setup.sh 1 && " .. apps_cmd['suspend']
+    apps_cmd['suspend'] =  "yamaha standby & xrandr-setup.sh 1 & sleep 3 && " .. apps_cmd['suspend']
 end
 
 -- combined commands
