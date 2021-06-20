@@ -79,7 +79,9 @@ endif
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-dispatch'
 Plug 'Chiel92/vim-autoformat'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+if executable("node")
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 
 " Lua programming
 Plug 'tbastos/vim-lua', {'for': ['lua']}
@@ -223,6 +225,7 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 " CoC extensions
+if executable("node")
 let g:coc_global_extensions = []
 if executable("ccls-disabled")
     call coc#config('languageserver', {
@@ -286,6 +289,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+endif " for executable("node")
 
 
 " UndoTree
