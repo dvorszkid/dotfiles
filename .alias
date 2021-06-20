@@ -120,12 +120,14 @@ alias eupdate='sudo emerge -uDU --keep-going @world'
 alias eupdate_time='sudo emerge -uDUp world | genlop -p'
 alias edep='sudo emerge --depclean'
 alias eremove='sudo CONFIG_PROTECT="-*" sudo emerge -C'
-alias etc-update='sudo etc-update'
+alias eetc='sudo cfg-update'
 
 
 ##
 # Debian commands
 ##
+# uber update command                                                                                                                                                                                                                
+alias aupdate='sudo sh -xc "apt-get update && apt-get upgrade && apt-get dist-upgrade && apt-get autoclean && apt-get autoremove && apt-get purge `deborphan`"' 
 # edep for packages (invoke multiple times)
 alias adep='apt-get purge `deborphan`'
 # edep for config files
