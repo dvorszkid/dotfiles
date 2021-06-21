@@ -78,7 +78,7 @@ tyrannical.tags = {
         name        = "zoom",
         init        = false,
         volatile    = true,
-        layout      = awful.layout.suit.tile.left,
+        layout      = awful.layout.suit.max,
         screen      = config.scr.sec,
         master_width_factor = 0.2,
         class       = {
@@ -102,7 +102,7 @@ tyrannical.tags = {
         exclusive   = true,
         screen      = config.scr.sec,
         force_screen= true,
-        layout      = awful.layout.suit.tile.left,
+        layout      = awful.layout.suit.max,
         class       = {
             "okular",
             "libreoffice",
