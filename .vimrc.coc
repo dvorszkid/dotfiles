@@ -57,6 +57,8 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'machakann/vim-highlightedyank'
+Plug 'vim-scripts/PushPop.vim'
+Plug 'vim-scripts/genutils' " for PushPop
 
 " Org Mode
 Plug 'tpope/vim-speeddating'
