@@ -666,6 +666,26 @@ nnoremap <silent> <leader>fw :botright copen 15<CR>/warning:<CR>
 " map <right> <nop>
 
 
+" DISPLAY update function and command (similar to .zshrc)
+function! s:update_display_env(force)
+    if !exists('$TMUX')
+        return
+    endif
+    let l:new_display = system("tmux show-environment DISPLAY")
+    if v:shell_error
+        return
+    endif
+    let l:new_display = split(split(l:new_display, '\n')[0], '=')[1]
+    if !a:force && $DISPLAY == l:new_display
+        return
+    endif
+
+    let $DISPLAY=l:new_display
+    xrestore
+endfunction
+command! DISPLAY :call s:update_display_env(1)
+
+
 " My custom autocmds
 augroup my_commands
 	" Clear commands first for multiple vimrc reloads
@@ -679,6 +699,10 @@ augroup my_commands
 
 	" Re-adjust windows on window resize
 	autocmd VimResized * wincmd =
+
+	" Try to update $DISPLAY when window is resized, which usually happens
+	" when attaching from local or over ssh.
+	autocmd VimResized * call s:update_display_env(0)
 
 	" Auto-detect file changes
 	autocmd CursorHold,CursorHoldI,WinEnter,BufWinEnter * silent! checktime
