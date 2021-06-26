@@ -129,6 +129,7 @@ nmap ss <plug>(SubversiveSubstituteLine)
 
 " FZF
 let g:fzf_command_prefix = 'Fzf'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 "nmap <silent> <C-p> <leader>;f
 nmap <silent> <C-t> <leader>st
 
