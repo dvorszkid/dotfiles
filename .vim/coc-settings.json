@@ -3,5 +3,9 @@
         "--background-index",
         "--clang-tidy-checks=-*",
         "--header-insertion=never"
-    ]
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pep8Enabled": true,
+    "python.linting.enabled": true
 }
