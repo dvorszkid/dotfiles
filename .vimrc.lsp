@@ -352,7 +352,7 @@ nnoremap <silent> <leader>u :UndotreeToggle<CR>
 
 " EasyGrep
 let g:EasyGrepCommand=1
-nnoremap <leader>/ :Grep<space>
+nnoremap <leader>/ :FzfAg
 nnoremap <leader>r :Replace<space>
 
 
