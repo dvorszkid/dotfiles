@@ -68,6 +68,7 @@ home_dir    = os.getenv("HOME")
 conf_dir    = awful.util.getdir("config")
 
 config = {}
+config.dpi_scaling   = screen.primary.dpi / 96
 config.titlebars     = true
 config.sloppyFocus   = true
 config.scr           = {
@@ -190,7 +191,7 @@ end)
 client.connect_signal("request::titlebars", function(c)
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
         awful.titlebar(c, {
-            size = 18
+            size = 18*config.dpi_scaling
         }):setup {
             -- Left
             {

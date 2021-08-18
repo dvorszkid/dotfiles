@@ -6,8 +6,13 @@
 local theme                                     = {}
 theme.icon_dir                                  = conf_dir .. "/icons"
 theme.titlebar_dir                              = conf_dir .. "/titlebar"
-theme.font                                      = "Roboto Condensed Medium 10"
-theme.mono_font                                 = "Roboto Mono Medium For Powerline 10"
+if config.dpi_scaling > 1.1 then
+    theme.font                                  = "Roboto Condensed Medium 9"
+    theme.mono_font                             = "Roboto Mono Medium For Powerline 9"
+else
+    theme.font                                  = "Roboto Condensed Medium 10"
+    theme.mono_font                             = "Roboto Mono Medium For Powerline 10"
+end
 theme.taglist_font                              = "Roboto Condensed Medium 7"
 theme.tooltip_font                              = theme.font
 
@@ -39,8 +44,8 @@ theme.taglist_fg_focus                          = "#FFFFFF"
 theme.tasklist_bg_normal                        = "#222222"
 theme.tasklist_fg_focus                         = "#4CB7DB"
 theme.bg_systray                                = theme.bg_focus
-theme.menu_height                               = 20
-theme.menu_width                                = 160
+theme.menu_height                               = 20*config.dpi_scaling
+theme.menu_width                                = 300*config.dpi_scaling
 theme.menu_icon_size                            = 32
 
 theme.tooltip_bg                                = theme.bg_normal

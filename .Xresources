@@ -1,9 +1,18 @@
 #include ".Xresources.d/colors.tender"
 
+!
+! Override anything using "xrdb -merge ~/.Xresources.d/<xy>.local" in "~/.xprofile.local"
+!
+
 ! ------------------------------------------------------------------------------
-! --- Xft settings
-!  
-Xft.dpi:		96
+! --- General
+!
+*.dpi:		    96
+
+
+! ------------------------------------------------------------------------------
+! --- Xft
+!
 Xft.antialias:	true
 Xft.rgba:		rgb
 Xft.autohint:	false

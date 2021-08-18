@@ -11,7 +11,6 @@ local string = string
 local os = os
 
 local markup = lain.util.markup
-local width_scaling = 1.0
 
 local ui = {}
 
@@ -19,7 +18,7 @@ function wrap_imagebox(icon)
     local padding_background = wibox.container.background(icon, beautiful.bg_focus, gears.shape.rectangle)
     local padding = wibox.container.margin(padding_background, 2, 2, 0, 0)
     local margin_background = wibox.container.background(padding, beautiful.bg_focus, gears.shape.rectangle)
-    return wibox.container.margin(margin_background, 0, 0, 5, 5)
+    return wibox.container.margin(margin_background, 0, 0, 5*config.dpi_scaling, 5*config.dpi_scaling)
 end
 
 function wrap_icon(icon_path)
@@ -30,7 +29,7 @@ end
 function wrap_widget(icon_path, widget)
     local icon = wibox.widget.imagebox(icon_path)
     local background = wibox.container.background(widget, beautiful.bg_focus, gears.shape.rectangle)
-    local margin = wibox.container.margin(background, 0, 0, 5, 5)
+    local margin = wibox.container.margin(background, 0, 0, 5*config.dpi_scaling, 5*config.dpi_scaling)
     return wibox.widget {
         icon,
         nil,
@@ -41,7 +40,7 @@ end
 
 -- Clock
 local mytextclock = wibox.widget.textclock("%H:%M:%S", 1)
--- mytextclock.forced_width = 60 * width_scaling
+-- mytextclock.forced_width = 60 * config.dpi_scaling
 mytextclock.align = 'center'
 local clock_widget = wrap_widget(beautiful.clock, mytextclock)
 
@@ -59,7 +58,7 @@ ui.calendar_widget:connect_signal("mouse::leave", ui.calendar_popup.toggle)
 -- ALSA volume bar
 local myalsabar = lain.widget.alsabar({
     --togglechannel = "IEC958,3",
-    width = 80, height = 10, border_width = 0,
+    width = 80 * config.dpi_scaling, height = 10, border_width = 0,
     followtag = true,
     colors = {
         background = "#383838",
@@ -67,14 +66,18 @@ local myalsabar = lain.widget.alsabar({
         mute       = "#FF9F9F"
     },
 })
-myalsabar.bar.paddings = 0
+if config.dpi_scaling > 1.1 then
+    myalsabar.bar.paddings = 4
+else
+    myalsabar.bar.paddings = 0
+end
 myalsabar.bar.margins = 7
 local volume_widget = wrap_widget(beautiful.volume, myalsabar.bar)
 ui.volume = myalsabar
 
 -- CPU
 local cpu_widget = cpu_widget_factory({
-    width = 70,
+    width = 70 * config.dpi_scaling,
     step_width = 2,
     step_spacing = 1,
 })
@@ -87,13 +90,13 @@ local mem = lain.widget.mem({
     end
 })
 mem.widget.align = 'right'
-mem.widget.forced_width = 70 * width_scaling
+mem.widget.forced_width = 70 * config.dpi_scaling
 local mem_widget = wrap_widget(beautiful.mem, mem.widget)
 
 -- Net
 local netdown = wibox.widget.textbox()
 netdown.align = 'right'
-netdown.forced_width = 75 * width_scaling
+netdown.forced_width = 75 * config.dpi_scaling
 local netup = lain.widget.net({
     settings = function()
         netdown:set_markup(net_now.received .. " kB/s")
@@ -101,7 +104,7 @@ local netup = lain.widget.net({
     end
 })
 netup.widget.align = 'right'
-netup.widget.forced_width = 75 * width_scaling
+netup.widget.forced_width = 75 * config.dpi_scaling
 local netdown_widget = wrap_widget(beautiful.net_down, netdown)
 local netup_widget = wrap_widget(beautiful.net_up, netup.widget)
 
@@ -245,18 +248,18 @@ function ui.at_screen_connect(s)
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons, { bg_focus = barcolor }, s.mytaglist_func)
 
     mytaglistcont = wibox.container.background(s.mytaglist, beautiful.bg_focus, gears.shape.rectangle)
-    s.mytag = wibox.container.margin(mytaglistcont, 0, 0, 5, 5)
+    s.mytag = wibox.container.margin(mytaglistcont, 0, 0, 5*config.dpi_scaling, 5*config.dpi_scaling)
 
     -- Systray with margin
     s.mysystray = wibox.widget.systray()
-    s.mysystraycont = wibox.container.margin(wibox.container.background(s.mysystray, beautiful.bg_focus, gears.shape.rectangle), 0, 0, 5, 5)
+    s.mysystraycont = wibox.container.margin(wibox.container.background(s.mysystray, beautiful.bg_focus, gears.shape.rectangle), 0, 0, 5*config.dpi_scaling, 5*config.dpi_scaling)
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, { shape = gears.shape.rectangle, shape_border_width = 5, shape_border_color = beautiful.tasklist_bg_normal, align = "center" })
+    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, { shape = gears.shape.rectangle, shape_border_width = 5*config.dpi_scaling, shape_border_color = beautiful.tasklist_bg_normal, align = "center" })
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 })
-    s.mywiboxborder = awful.wibar({ position = "top", screen = s, height = 1, bg = beautiful.fg_focus, x = 0, y = 33})
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 * config.dpi_scaling })
+    s.mywiboxborder = awful.wibar({ position = "top", screen = s, height = 1, bg = beautiful.fg_focus, x = 0, y = (32 * config.dpi_scaling + 1)})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -297,8 +300,8 @@ function ui.at_screen_connect(s)
     }
 
     -- Create the bottom wibox
-    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = 32 })
-    s.mybottomwiboxborder = awful.wibar({ position = "bottom", screen = s, height = 1, bg = beautiful.fg_focus, x = 0, y = 33})
+    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = 32 * config.dpi_scaling })
+    s.mybottomwiboxborder = awful.wibar({ position = "bottom", screen = s, height = 1, bg = beautiful.fg_focus, x = 0, y = (32 * config.dpi_scaling + 1)})
 
     -- Add widgets to the bottom wibox
     s.mybottomwibox:setup {
