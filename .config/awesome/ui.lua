@@ -230,8 +230,8 @@ local bottom_bar = wibox.widget.imagebox(beautiful.bottom_bar)
 
 local barcolor  = gears.color({
     type  = "linear",
-    from  = { 32, 0 },
-    to    = { 32, 32 },
+    from  = { 23*config.dpi_scaling, 0 },
+    to    = { 23*config.dpi_scaling, 23*config.dpi_scaling },
     stops = { {0, beautiful.bg_focus}, {0.8, "#505050"}, {1, beautiful.bg_urgent} }
 })
 
