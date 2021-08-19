@@ -1,8 +1,8 @@
 #!/bin/sh
 
-[ -f ~/.env ] && source ~/.env
+[ -f "$HOME/.env" ] && source "$HOME/.env"
 xset r rate 200 40
 xset s 180 10
 
 # Machine specific
-[ -f ~/.xprofile.local ] && source ~/.xprofile.local
+[ -f "$HOME/.xprofile.local" ] && source "$HOME/.xprofile.local"
