@@ -15,7 +15,7 @@ local apps = {
 if not os.getenv("VNCDESKTOP") then
     apps = awful.util.table.join(apps, {
         -- vsync fix, test with: https://www.youtube.com/watch?v=5xkNy9gfKOg
-        "compton -b --backend glx --vsync opengl-swc --paint-on-overlay",
+        "picom -b --backend glx --vsync",
         "xss-lock -n /usr/libexec/xsecurelock/dimmer -l -- xsecurelock",
     })
 end
