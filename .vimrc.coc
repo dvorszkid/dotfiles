@@ -57,8 +57,7 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'machakann/vim-highlightedyank'
-Plug 'vim-scripts/PushPop.vim'
-Plug 'vim-scripts/genutils' " for PushPop
+Plug 'Yggdroot/indentLine'
 
 " Org Mode
 Plug 'tpope/vim-speeddating'
@@ -484,7 +483,7 @@ colorscheme tender
 ""
 if has('gui_running')
 	set guioptions-=T  " no toolbar
-	set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
+	set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
 endif
 
 
