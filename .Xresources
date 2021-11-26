@@ -87,29 +87,6 @@ URxvt.keysym.C-KP_Multiply: resize-font:show
 
 
 ! ------------------------------------------------------------------------------
-! --- Rofi
-!
-rofi.font:				Mono 10
-rofi.matching:			normal
-rofi.terminal:			urxvtc
-rofi.separator-style:	solid
-rofi.kb-row-first:         Control+Home,Control+KP_Home
-rofi.kb-row-last:          Control+End,Control+KP_End
-rofi.kb-move-front:        Home,KP_Home
-rofi.kb-move-end:          End,KP_End
-rofi.kb-move-word-back:    Control+Left
-rofi.kb-move-word-forward: Control+Right
-! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
-rofi.color-normal: #242424,  #bbbbbb,  #242424,  #303030,  #dddddd
-!                            Red
-rofi.color-urgent: #242424,  #f43753,  #242424,  #303030,  #dddddd
-!                            Blue
-rofi.color-active: #242424,  #b3deef,  #242424,  #303030,  #dddddd
-!                  ´background´, ´border´, ´separator´
-rofi.color-window: #242424,      #0099cc,  #0099cc
-
-
-! ------------------------------------------------------------------------------
 ! --- xscreensaver
 !
 !font settings
