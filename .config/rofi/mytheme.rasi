@@ -22,7 +22,7 @@
   alternate-active-background: @background;
   alternate-normal-foreground: @foreground;
   normal-background:           @background;
-  selected-normal-background:  #303030;
+  selected-normal-background:  @border-color;
   urgent-background:           @background;
   selected-urgent-background:  @selected-normal-background;
   alternate-urgent-foreground: @urgent-foreground;
@@ -39,7 +39,7 @@
 #mainbox {
   border:  0;
   padding: 0;
-  children: [inputbar, message, mode-switcher, listview];
+  children: [inputbar, message, listview];
 }
 #message {
   border:       1px solid 0px 0px ;
@@ -59,7 +59,7 @@
 }
 #element {
   border:  0;
-  padding: 1px ;
+  padding: 1px;
 }
 #element.normal.normal {
   background-color: @normal-background;
