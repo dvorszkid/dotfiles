@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+ACCEPT=(
+)
+ACCEPT_TCP=("${ACCEPT[@]}"
+	22			# ssh
+#	80			# http
+#	443			# https
+#	5900:5901	# vnc
+#	6891:6900	# msn
+#	9512		# unified remote
+	61881	    # torrent
+)
+ACCEPT_UDP=("${ACCEPT[@]}"
+#	9511:9512	# unified remote
+)
+BURST_LIMITED=(
+	22			# ssh
+)
+ACCEPT_LOCAL_TCP=(
+#	631			# cups
+#	111			# nfs
+#	2049		# nfs
+#	32767		# nfs
+    8200        # MiniDLNA
+	8080		# qbittorrent web ui
+)
+ACCEPT_LOCAL_UDP=(
+    1900        # MiniDLNA
+)
+LOCAL_SUBNET='192.168.50.0/24'

@@ -76,11 +76,17 @@ firewall_start()
 		iptables -A openports -p udp --dport $i -j ACCEPT
 	done
 	echo
-	echo -n " - TCP and UDP ports (from $LOCAL_SUBNET):"
-	for i in "${ACCEPT_LOCAL[@]}";
+	echo -n " - TCP ports (from $LOCAL_SUBNET):"
+	for i in "${ACCEPT_LOCAL_TCP[@]}";
 	do
 		echo -n " $i"
 		iptables -A openports -p tcp --dport $i -s $LOCAL_SUBNET -m conntrack --ctstate NEW -j ACCEPT
+	done
+	echo
+	echo -n " - UDP ports (from $LOCAL_SUBNET):"
+	for i in "${ACCEPT_LOCAL_UDP[@]}";
+	do
+		echo -n " $i"
 		iptables -A openports -p udp --dport $i -s $LOCAL_SUBNET -j ACCEPT
 	done
 	echo
@@ -96,7 +102,7 @@ firewall_start()
 
 	# filter bad guys against nmap like port scans
 	iptables -A tcp_security -p tcp -m conntrack --ctstate NEW -m recent --name portscan --set
-	iptables -A tcp_security -p tcp -m conntrack --ctstate NEW -m recent --name portscan --update --seconds 30 --hitcount 10 -j REJECT_DEFAULT
+	iptables -A tcp_security -p tcp -m conntrack --ctstate NEW -m recent --name portscan --update --seconds 60 --hitcount 100 -j REJECT_DEFAULT
 
 	# null scan
 	iptables -A tcp_security -p tcp --tcp-flags ALL NONE -j REJECT_DEFAULT
@@ -121,9 +127,9 @@ firewall_start()
 	iptables -A tcp_security -p tcp --syn -m conntrack ! --ctstate NEW -j REJECT_DEFAULT
 	iptables -A tcp_security -p tcp ! --syn -m conntrack --ctstate NEW -j REJECT_DEFAULT
 
-	# limit new connection requests
-	iptables -A tcp_security -p tcp --syn -m limit --limit 3/s -j RETURN
-	iptables -A tcp_security -p tcp --syn -j REJECT_DEFAULT
+	# limit new connection requests (off: does not work for server-like use cases)
+	#iptables -A tcp_security -p tcp --syn -m limit --limit 3/s -j RETURN
+	#iptables -A tcp_security -p tcp --syn -j REJECT_DEFAULT
 
 	echo "compiling INPUT chain"
 	echo " - adding ICMP security"
