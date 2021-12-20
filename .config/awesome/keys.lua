@@ -113,7 +113,7 @@ end
 
 -- Dropdown terminal
 local quake = lain.util.quake({
-    app = "urxvtc",
+    app = "urxvt",
     extra = "-e " .. apps.cmd.tmuxs .. "dropdown",
     onlyone = true,
     followtag = true,

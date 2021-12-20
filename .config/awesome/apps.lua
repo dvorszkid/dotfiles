@@ -8,13 +8,13 @@ local ui  = require("ui")
 
 -- app collection for shortcuts and widgets
 local apps_cmd = {
-    terminal        = "urxvtc",
+    terminal        = "urxvt",
     tmux            = "tmux",
     tmuxs           = "tmuxs ",
 
     browser         = "firefox-bin",
     calculator      = "qalculate-gtk",
-    termcalculator  = "urxvtc -geometry 60x30 -e qalc",
+    termcalculator  = "urxvt -geometry 60x30 -e qalc",
     procmon         = "htop",
     runcmd          = "rofi -show run",
     windowswitch    = "rofi -show window",
