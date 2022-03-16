@@ -312,6 +312,11 @@ let g:tabman_toggle = '<leader>t'
 noremap <Leader>fm :Vifm<CR>
 
 
+" HighlightedYank
+let g:highlightedyank_max_lines = 100
+let g:highlightedyank_highlight_duration = 200
+
+
 "
 " ListToggle
 "
