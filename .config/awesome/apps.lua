@@ -37,7 +37,7 @@ local apps_cmd = {
     music_next      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
     music_prev      = "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
 
-    lock            = "xset s activate",
+    lock            = "xset s activate && sleep 10 && xset dpms force standby",
     shutdown        = "loginctl poweroff",
     reboot          = "loginctl reboot",
     suspend         = "xset s activate && sleep 1 && loginctl suspend",

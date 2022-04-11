@@ -227,7 +227,7 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey, altkey    }, "t", function () awful.spawn(apps.cmd.translate) end, {description="translator", group="programs"}),
 
     -- Lock and shutdown
-    awful.key({ modkey, "Control" }, "l",      function () awful.spawn(apps.cmd.lock) end, {description="lock", group="session"}),
+    awful.key({ modkey, "Control" }, "l",      function () awful.spawn.with_shell(apps.cmd.lock) end, {description="lock", group="session"}),
     awful.key({ modkey, "Control" }, "Prior", function () awful.spawn(apps.cmd.reboot) end, {description="reboot", group="session"}),
     awful.key({ modkey, "Control" }, "Next", function () awful.spawn(apps.cmd.shutdown) end, {description="shutdown", group="session"}),
     awful.key({ modkey, "Control" }, "End", function () awful.spawn.with_shell(apps.cmd.suspend) end, {description="suspend", group="session"}),
