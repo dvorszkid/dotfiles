@@ -38,7 +38,7 @@
 	default = simple
 	recursesubmodules = check
 [pull]
-	rebase = preserve
+	rebase = merges
 [rebase]
 	autostash = true
 [stash]
