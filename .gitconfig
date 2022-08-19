@@ -74,3 +74,5 @@
 [merge "releasenotesmerger"]
     name = release notes merger
     driver = python \"$HOME/projects/coretools/merge_release_notes.py\" %O %A %B
+[include]
+    path = .gitconfig.local
