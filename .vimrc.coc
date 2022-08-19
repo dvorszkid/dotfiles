@@ -406,6 +406,7 @@ set autoindent smartindent
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4
 set smarttab
 let g:leave_my_textwidth_alone = 1 " to ignore gentoo specific global vimrc
+let g:vim_json_conceal=0 " Disable quote concealing in JSON files
 
 
 ""
@@ -426,6 +427,7 @@ set number				" line numbers
 " set relativenumber	" relative line numbers
 set cursorline			" highlight cursor line
 set wildmenu			" for better completion
+set wildoptions=pum     " to show completions in a popup (since vim9)
 set ch=1				" command line height
 set mouse=a				" enable mouse scrolling
 set scrolloff=8			" show more lines before and after cursor
