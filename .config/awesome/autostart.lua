@@ -5,6 +5,7 @@ local awful = require("awful")
 
 -- common
 local apps = {
+    "urxvtd",
     "unclutter",
     "parcellite",
     "tresorit --hidden",
