@@ -243,6 +243,15 @@ endif
 if executable("tsserver")
     let g:coc_global_extensions += ['coc-tsserver']
 endif
+if executable("csharp-ls")
+    call coc#config('languageserver', {
+                \ 'csharp-ls': {
+                \   "command": "csharp-ls",
+                \   "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"],
+                \   "filetypes": ["cs"]
+                \ }
+                \})
+endif
 
 
 " Add CoC Prettier if prettier is installed
@@ -322,6 +331,8 @@ endif
 
 " Add command for organize imports of the current buffer.
 command! -nargs=0 CocOrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+nnoremap <silent> <leader>. :CocCommand<CR>
 
 endif " for executable("node")
 
@@ -733,7 +744,7 @@ augroup my_commands
 	autocmd!
 
 	" Trim whitespaces
-	autocmd FileType c,cpp,python,ruby,java,proto,lua,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+	autocmd FileType c,cpp,cs,python,ruby,java,proto,lua,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 	" Fix tab settings for python
 	autocmd FileType python setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=4
