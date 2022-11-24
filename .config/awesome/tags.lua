@@ -224,11 +224,20 @@ client.connect_signal("property::class", function (c)
 end)
 
 
--- Zoom meeting should prevent screensaver
+-- Zoom
+--  * meeting should prevent screensaver
+--  * floating popups
 client.connect_signal("manage", function (c)
+    if c.class ~=  "zoom" then
+        return
+    end
+
+    -- floating popups
+    c.floating = c.name == "zoom"
+
     -- WM_CLASS is "zoom" for both main window and meeting window
     -- WM_NAME is "Zoom" in the beginning, then it gets updated to "Zoom Meeting"
-    if not (c.class == "zoom" and (c.name == "Zoom" or c.name == "Zoom Meeting")) then
+    if not (c.name == "Zoom" or c.name == "Zoom Meeting") then
         return
     end
 
