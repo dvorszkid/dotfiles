@@ -1,8 +1,11 @@
 #!/bin/sh
 
-[ -f "$HOME/.env" ] && source "$HOME/.env"
+# Mouse and Keyboard
 xset r rate 200 40
 xset s 180 10
+
+# Same environment for desktop
+[ -f "$HOME/.env" ] && source "$HOME/.env"
 
 # Machine specific
 [ -f "$HOME/.xprofile.local" ] && source "$HOME/.xprofile.local"
