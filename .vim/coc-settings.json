@@ -1,12 +1,15 @@
 {
-    "clangd.arguments": [
-        "--background-index",
-        "--clang-tidy=false",
-        "--header-insertion=never"
-    ],
-    "python.linting.pylintEnabled": false,
-    "python.linting.mypyEnabled": true,
-    "python.linting.pep8Enabled": true,
-    "python.linting.enabled": true,
-    "coc.preferences.formatOnSaveFiletypes":  ["typescript"]
+  "clangd.arguments": [
+    "--background-index",
+    "--clang-tidy=false",
+    "--header-insertion=never"
+  ],
+  "python.linting.pylintEnabled": false,
+  "python.linting.mypyEnabled": true,
+  "python.linting.pep8Enabled": true,
+  "python.linting.enabled": true,
+  "coc.preferences.formatOnSave": true,
+  "rust-analyzer.diagnostics.disabled": ["unresolved-proc-macro"],
+  "typescript.format.enable": true,
+  "inlayHint.enable": false
 }
