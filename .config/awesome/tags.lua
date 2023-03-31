@@ -228,12 +228,13 @@ end)
 --  * meeting should prevent screensaver
 --  * floating popups
 client.connect_signal("manage", function (c)
-    if c.class ~=  "zoom" then
+    if c.class ~= "zoom" then
         return
     end
 
     -- floating popups
     c.floating = c.name == "zoom"
+    awful.titlebar.hide(c)
 
     -- WM_CLASS is "zoom" for both main window and meeting window
     -- WM_NAME is "Zoom" in the beginning, then it gets updated to "Zoom Meeting"
