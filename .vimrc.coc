@@ -267,6 +267,11 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
     let g:coc_global_extensions += ['coc-eslint']
 endif
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -280,16 +285,25 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Symbol renaming.
 nmap gR <Plug>(coc-rename)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Formatting selected code
+xmap <leader>fs  <Plug>(coc-format-selected)
+nmap <leader>fs  <Plug>(coc-format-selected)
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+nmap <leader>ff :Format<CR>
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
@@ -302,6 +316,8 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
@@ -322,6 +338,17 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -336,6 +363,11 @@ endif
 command! -nargs=0 CocOrganizeImports   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 nnoremap <silent> <leader>. :CocCommand<CR>
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 endif " for executable("node")
 
@@ -379,10 +411,6 @@ inoremap <silent> <F4> <Esc>:FSHere<CR>
 " tcomment_vim
 let g:tcomment#options = {'whitespace': 'no'}
 let g:tcomment#filetype#guess_gn = 'python'
-
-
-" vim-autoformat
-noremap <silent> <leader>ff :Autoformat<CR>
 
 
 " nextval
@@ -429,10 +457,6 @@ nnoremap <silent> [tbuild]bp :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProje
 nnoremap <silent> [tbuild]ba :wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>
 nmap <silent> <F7> [tbuild]a
 nmap <silent> <F8> [tbuild]f
-
-" Code formatting
-noremap <silent> <leader>ft :ToggleAutoFormatCode<CR>
-
 
 "
 " Put your non-plugin stuff after this line
@@ -757,7 +781,7 @@ augroup my_commands
 
 	" Try to update $DISPLAY when window is resized, which usually happens
 	" when attaching from local or over ssh.
-	autocmd VimResized * call s:update_display_env(0)
+	autocmd VimResized * silent! call s:update_display_env(0)
 
 	" Auto-detect file changes
 	autocmd CursorHold,CursorHoldI,WinEnter,BufWinEnter * silent! checktime
