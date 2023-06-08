@@ -20,3 +20,6 @@
 [submodule ".local/share/gdb/gdb-dashboard"]
 	path = .local/share/gdb/gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard.git
+[submodule ".local/share/autoenv"]
+	path = .local/share/autoenv
+	url = https://github.com/hyperupcall/autoenv.git
