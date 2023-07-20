@@ -57,6 +57,8 @@
 	prompt = false
 [difftool "bc4"]
 	cmd = bcompare \"$LOCAL\" \"$REMOTE\"
+[difftool "bc4w"]
+	cmd = \"/mnt/c/Program Files/Beyond Compare 4/BCompare.exe\" \"$(wslpath -w $LOCAL)\" \"`wslpath -w $REMOTE`\"
 [difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
 
@@ -68,6 +70,8 @@
 	trustExitCode = true
 [mergetool "bc4"]
 	cmd = bcompare \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+[mergetool "bc4w"]
+	cmd = \"/mnt/c/Program Files/Beyond Compare 4/BCompare.exe\" \"`wslpath -w $LOCAL`\" \"`wslpath -w $REMOTE`\" \"`wslpath -w $BASE`\" \"`wslpath -w $MERGED`\"
 [mergetool "vimdiff3"]
 	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
