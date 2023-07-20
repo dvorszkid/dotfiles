@@ -145,12 +145,6 @@ add-zsh-hook preexec fix_display
 
 
 ##
-# Auto load '.env' project files
-##
-source $HOME/.local/share/autoenv/activate.sh
-
-
-##
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
