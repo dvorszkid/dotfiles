@@ -145,6 +145,16 @@ add-zsh-hook preexec fix_display
 
 
 ##
+# Auto load '.envrc' project files
+# DirEnv install:
+#   `curl -sfL https://direnv.net/install.sh | bash`
+##
+if command -v direnv &> /dev/null
+then
+    eval "$(direnv hook zsh)"
+fi
+
+
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
