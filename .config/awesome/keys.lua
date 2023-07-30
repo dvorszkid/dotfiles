@@ -113,7 +113,8 @@ end
 
 -- Dropdown terminal
 local quake = lain.util.quake({
-    app = "urxvt",
+    app = "alacritty",
+    argname = "--class %s",
     extra = "-e " .. apps.cmd.tmuxs .. "dropdown",
     onlyone = true,
     followtag = true,
@@ -219,7 +220,6 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.spawn(apps.term.tmux) end, {description="terminal with tmux", group="programs"}),
     awful.key({ modkey, "Shift"   }, "Return", function () awful.spawn(apps.cmd.terminal) end, {description="terminal without tmux", group="programs"}),
     awful.key({ },                   "XF86Calculator", function () awful.spawn(apps.cmd.calculator, {tag=awful.screen.focused().selected_tag, intrusive=true, floating=true}) end, {description="calculator", group="programs"}),
-    awful.key({ "Shift" },           "XF86Calculator", function () awful.spawn(apps.cmd.termcalculator, {tag=awful.screen.focused().selected_tag, intrusive=true, floating=true}) end, {description="calculator", group="programs"}),
     awful.key({ "Control" },         "Escape", function () awful.spawn(apps.term.procmon) end, {description="process monitor", group="programs"}),
     awful.key({ },                   "Print", function () awful.spawn(apps.cmd.screenshot) end, {description="screenshot", group="programs"}),
     awful.key({ modkey            }, "Escape", function () awful.spawn("xkill") end, {description="xkill", group="programs"}),
