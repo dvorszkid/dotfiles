@@ -155,6 +155,16 @@ then
 fi
 
 
+##
+# Zoxide zsh integration
+##
+if command -v zoxide &> /dev/null
+then
+    eval "$(zoxide init zsh)"
+fi
+
+
+##
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then

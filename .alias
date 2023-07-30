@@ -43,6 +43,7 @@ fi
 ##
 # Shortcuts for common Git commands
 ##
+alias lg='lazygit'
 alias cg='cd $(for dir in $(ls -d $HOME/git/* $HOME/projects/*); do echo -e "$dir \e[1;31m($(git -C $dir branch --show-current 2>/dev/null))\e[0m"; done | fzf --ansi | cut -d " " -f 1)'
 alias gs='git status'
 alias ga='git add'
