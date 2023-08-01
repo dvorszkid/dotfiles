@@ -67,8 +67,8 @@ alias gga='git graph --all'
 alias ggc='git graph --first-parent'
 alias gmaster='git fetch && git branch -f master origin/master && git checkout master'
 alias gdevel='git fetch && git branch -f devel origin/devel && git checkout devel'
-alias gmm='git branch -f master origin/master && git merge origin/master'
-alias gmd='git branch -f devel origin/devel && git merge origin/devel'
+alias gmm='git branch -f master origin/master; git merge origin/master'
+alias gmd='git branch -f devel origin/devel; git merge origin/devel'
 
 function gcot() {
 	git tag | grep "$@" | xargs git checkout
