@@ -40,10 +40,10 @@ local plugins = {
 
   -- Install a plugin
   {
-    "max397574/better-escape.nvim",
-    event = "InsertEnter",
+    "alexghergh/nvim-tmux-navigation",
+    event = "VeryLazy",
     config = function()
-      require("better_escape").setup()
+      require "custom.configs.tmux-navigation"
     end,
   },
 
