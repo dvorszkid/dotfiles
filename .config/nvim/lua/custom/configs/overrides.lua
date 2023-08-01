@@ -46,6 +46,12 @@ M.mason = {
     "lua-language-server",
     "stylua",
 
+    -- python
+    "pyright",
+    "mypy",
+    "ruff",
+    "black",
+
     -- native
     -- "clangd",
     -- "clang-format",
@@ -54,7 +60,6 @@ M.mason = {
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
-    "deno",
     "prettier",
   },
 }
