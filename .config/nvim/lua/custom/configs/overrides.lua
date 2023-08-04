@@ -11,9 +11,9 @@ M.treesitter = {
     "python",
 
     -- native
-    "c",
-    "cpp",
-    "rust",
+    -- "c",
+    -- "cpp",
+    -- "rust",
 
     -- other
     "c_sharp",

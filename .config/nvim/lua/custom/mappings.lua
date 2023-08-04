@@ -18,12 +18,38 @@ M.general = {
 M.telescope = {
   n = {
     ["<C-p>"] = {":Telescope find_files <CR>", "Find Files"},
-    ["<C-t>"] = {":Telescope lsp_document_symbols <CR>", "Tags in in current buffer"},
+    ["<C-t>"] = {":Telescope lsp_document_symbols <CR>", "Tags in in current buffer (LSP)"},
     ["<leader>fg"] = {":Telescope live_grep <CR>", "Live Grep (rg)"},
     ["<leader>f/"] = {":Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer"},
-    ["<leader>ft"] = {":Telescope lsp_document_symbols <CR>", "Tags in in current buffer"},
+    ["<leader>ft"] = {":Telescope treesitter <CR>", "Tags in in current buffer (treesitter)"},
+    ["<leader>fk"] = {":Telescope keymaps <CR>", "Key mappings"},
     ["<leader>fr"] = {":Telescope resume <CR>", "Resume last Telescope session"},
   },
+}
+
+M.lspconfig = {
+  n = {
+    ["<F4>"] = {":ClangdSwitchSourceHeader <CR>", "Switch to header/source"},
+  },
+}
+
+M.vimtresorit = {
+  n = {
+    ["<leader>bc"] = {":CreateOutDir<space>", "Create out dir"},
+    ["<leader>be"] = {":Gn args <CR>", "Edit args.gn"},
+    ["<leader>bo"] = {":GnOut <CR>", "Select out dir"},
+    ["<leader>bt"] = {":GnTarget <CR>", "Select build target"},
+
+    ["<leader>bs"] = {":AbortDispatch <CR>", "Abort build"},
+    ["<leader>bf"] = {":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>", "Build file"},
+    ["<leader>bp"] = {":wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>", "Build project"},
+    ["<leader>ba"] = {":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", "Build all"},
+    ["<leader>bfb"] = {":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>", "Build file in background"},
+    ["<leader>bpb"] = {":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>", "Build project in background"},
+    ["<leader>bab"] = {":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>", "Build all in background"},
+    ["<F7>"] = {":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", "Build all"},
+    ["<F8>"] = {":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>", "Build file"},
+  }
 }
 
 -- more keybinds!
