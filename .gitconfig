@@ -27,7 +27,7 @@
 
 	clang-format-ls = "!sh -c 'git ls-files *.c *.h *.cpp *.hpp *.mm *.m -z \"$0\" \"$@\" | xargs -r0 clang-format -i'"
 [core]
-	editor = vim
+	editor = vi
 	filemode = true
 	autocrlf = input
 [branch]
