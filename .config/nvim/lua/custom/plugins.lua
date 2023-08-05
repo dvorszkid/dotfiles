@@ -1,4 +1,5 @@
 local overrides = require("custom.configs.overrides")
+local env = require("custom.env")
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -53,28 +54,6 @@ local plugins = {
 	{ "tpope/vim-fugitive", cmd = "Git" },
 	{ "tpope/vim-git" },
 
-	{
-		"rust-lang/rust.vim",
-		ft = "rust",
-		init = function()
-			vim.g.rustfmt_autosave = 1
-		end,
-	},
-
-	-- Work
-	{
-		"git@bitbucket.org:tresorit/vimtresorit.git",
-		lazy = false,
-		dependencies = {
-			{
-				"tpope/vim-dispatch",
-			},
-		},
-		init = function()
-			require("custom.configs.vimtresorit")
-		end,
-	},
-
 	-- To make a plugin not be loaded
 	-- {
 	--   "NvChad/nvim-colorizer.lua",
@@ -89,5 +68,27 @@ local plugins = {
 	--   lazy = false,
 	-- }
 }
+
+if env.is_devel then
+	table.insert(plugins, {
+		"rust-lang/rust.vim",
+		ft = "rust",
+		init = function()
+			vim.g.rustfmt_autosave = 1
+		end,
+	})
+	table.insert(plugins, {
+		"git@bitbucket.org:tresorit/vimtresorit.git",
+		lazy = false,
+		dependencies = {
+			{
+				"tpope/vim-dispatch",
+			},
+		},
+		init = function()
+			require("custom.configs.vimtresorit")
+		end,
+	})
+end
 
 return plugins
