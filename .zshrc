@@ -102,6 +102,10 @@ for key in "${(s: :)key_info[ControlLeft]}"
 for key in "${(s: :)key_info[ControlRight]}"
 	bindkey -M viins "$key" forward-word
 
+# Alt + arrows to navigate words (Mac)
+bindkey -M viins "^[[1;3D" backward-word
+bindkey -M viins "^[[1;3C" forward-word
+
 
 ##
 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)

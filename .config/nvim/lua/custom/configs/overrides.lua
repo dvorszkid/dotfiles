@@ -1,83 +1,84 @@
 local M = {}
 
 M.treesitter = {
-  ensure_installed = {
-    -- vim
-    "vim",
-    "lua",
+	ensure_installed = {
+		-- vim
+		"vim",
+		"lua",
 
-    -- script
-    "bash",
-    "python",
+		-- script
+		"bash",
+		"python",
 
-    -- native
-    -- "c",
-    -- "cpp",
-    -- "rust",
+		-- native
+		-- "c",
+		-- "cpp",
+		-- "rust",
 
-    -- other
-    "c_sharp",
-    "objc",
+		-- other
+		"c_sharp",
+		"objc",
 
-    -- web
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "tsx",
+		-- web
+		"html",
+		"css",
+		"javascript",
+		"typescript",
+		"tsx",
 
-    -- misc
-    "markdown",
-    "markdown_inline",
-    "json",
-    "toml",
-  },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
-  },
+		-- misc
+		"markdown",
+		"markdown_inline",
+		"json",
+		"toml",
+	},
+	indent = {
+		enable = true,
+		-- disable = {
+		--   "python"
+		-- },
+	},
 }
 
 M.mason = {
-  ensure_installed = {
-    -- lua
-    "lua-language-server",
-    "stylua",
+	ensure_installed = {
+		-- lua
+		"lua-language-server",
+		"stylua",
 
-    -- python
-    "pyright",
-    "mypy",
-    "ruff",
-    "black",
+		-- python
+		"pyright",
+		"mypy",
+		"ruff",
+		"black",
 
-    -- native
-    -- "clangd",
-    -- "clang-format",
+		-- native
+		-- "clangd",
+		-- "clang-format",
+		"rust-analyzer",
 
-    -- web
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    "prettier",
-  },
+		-- web
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		"prettier",
+	},
 }
 
 -- git support in nvimtree
 M.nvimtree = {
-  git = {
-    enable = true,
-  },
+	git = {
+		enable = true,
+	},
 
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
+	renderer = {
+		highlight_git = true,
+		icons = {
+			show = {
+				git = true,
+			},
+		},
+	},
 }
 
 return M

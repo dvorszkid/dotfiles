@@ -1,3 +1,4 @@
 *.pyc
 .gdb_history
 .uuid
+.DS_Store
