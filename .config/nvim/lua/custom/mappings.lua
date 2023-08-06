@@ -65,6 +65,7 @@ M.telescope = {
 		["<leader>ft"] = { ":Telescope treesitter <CR>", "Tags in in current buffer (treesitter)" },
 		["<leader>fk"] = { ":Telescope keymaps <CR>", "Key mappings" },
 		["<leader>fr"] = { ":Telescope resume <CR>", "Resume last Telescope session" },
+		["<leader>sw"] = { 'yiw:Telescope live_grep <CR><C-r>"', "[S]earch for current [w]ord" },
 	},
 }
 
