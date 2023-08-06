@@ -49,6 +49,40 @@ local plugins = {
 			require("custom.configs.tmux-navigation")
 		end,
 	},
+	{
+		"Lokaltog/vim-easymotion",
+		lazy = false,
+		init = function()
+			require("custom.configs.easymotion")
+		end,
+	},
+	{ "tpope/vim-repeat", lazy = false },
+	{ "tpope/vim-unimpaired", lazy = false },
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+	{ "qwertologe/nextval.vim", lazy = false },
+	{ "svermeulen/vim-subversive" },
+	{
+		"machakann/vim-highlightedyank",
+		lazy = false,
+		init = function()
+			require("custom.configs.highlightedyank")
+		end,
+	},
+	{
+		"Valloric/ListToggle",
+		lazy = false,
+		init = function()
+			require("custom.configs.listtoggle")
+		end,
+	},
 
 	-- Git
 	{ "tpope/vim-fugitive", cmd = "Git" },
@@ -70,6 +104,8 @@ local plugins = {
 }
 
 if env.is_devel then
+	table.insert(plugins, { "ngg/vim-gn", ft = "gn" })
+	table.insert(plugins, { "uarun/vim-protobuf", ft = "proto" })
 	table.insert(plugins, {
 		"rust-lang/rust.vim",
 		ft = "rust",
@@ -79,7 +115,8 @@ if env.is_devel then
 	})
 	table.insert(plugins, {
 		"git@bitbucket.org:tresorit/vimtresorit.git",
-		lazy = false,
+		event = "BufEnter *tresoritcore*",
+		-- ft = "c, cpp",
 		dependencies = {
 			{
 				"tpope/vim-dispatch",
