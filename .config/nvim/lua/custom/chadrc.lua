@@ -5,18 +5,19 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "decay",
-	theme_toggle = { "decay", "one_light" },
+	theme = "vscode_dark",
+	theme_toggle = { "vscode_dark", "one_light" },
 
 	changed_themes = {
-		decay = {
+		vscode_dark = {
 			base_16 = {
-				base00 = "#282828",
+				-- base00 = "#1e1e1e",
 			},
 			base_30 = {
-				black = "#282828",
-				statusline_bg = "#282828",
-				light_grey = "#707479",
+				-- black = "#1e1e1e",
+				grey = "#555555",
+				-- statusline_bg = "#202020",
+				light_grey = "#909090",
 			},
 		},
 	},
