@@ -1,13 +1,18 @@
 ##
 # Convenience
 ##
-if [[ `uname` == "Darwin" ]]
-then
+if [ -x "$(command -v exa)" ]; then
+    alias l="exa --time-style long-iso -g --group-directories-first"
+    alias l="exa -hal --icons --git --time-style long-iso -g --group-directories-first"
+elif [[ `uname` == "Darwin" ]]; then
 	alias ls="ls -G -F -h"
 	alias l="ls -G -F -h -a -l"
 else
 	alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
 	alias l="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
+fi
+if [ -x "$(command -v bat)" ]; then
+    alias cat="bat"
 fi
 alias df="df -h"
 alias ..='cd ..'
