@@ -2,24 +2,37 @@
 local M = {}
 
 -- Path to overriding theme and highlights files
-local highlights = require "custom.highlights"
+local highlights = require("custom.highlights")
 
 M.ui = {
-  theme = "decay",
-  theme_toggle = { "decay", "one_light" },
+	theme = "decay",
+	theme_toggle = { "decay", "one_light" },
 
-  hl_override = highlights.override,
-  hl_add = highlights.add,
+	changed_themes = {
+		decay = {
+			base_16 = {
+				base00 = "#282828",
+			},
+			base_30 = {
+				black = "#282828",
+				statusline_bg = "#282828",
+				light_grey = "#707479",
+			},
+		},
+	},
 
-  statusline = {
-    theme = "default",
-    separator_style = "block",
-  }
+	hl_override = highlights.override,
+	hl_add = highlights.add,
+
+	statusline = {
+		theme = "default",
+		separator_style = "block",
+	},
 }
 
 M.plugins = "custom.plugins"
 
 -- check core.mappings for table structure
-M.mappings = require "custom.mappings"
+M.mappings = require("custom.mappings")
 
 return M
