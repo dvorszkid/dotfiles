@@ -27,9 +27,10 @@
 
 	clang-format-ls = "!sh -c 'git ls-files *.c *.h *.cpp *.hpp *.mm *.m -z \"$0\" \"$@\" | xargs -r0 clang-format -i'"
 [core]
-	editor = vi
+	editor = nvim
 	filemode = true
 	autocrlf = input
+    pager = delta
 [branch]
 	autosetuprebase = always
 [fetch]
@@ -48,7 +49,14 @@
 [credential]
 	helper = store
 [interactive]
-	diffFilter = "diff-highlight"
+	; diffFilter = "diff-highlight"
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
+    line-numbers = true
 
 [diff]
 	compactionHeuristic = true
