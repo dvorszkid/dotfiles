@@ -30,12 +30,18 @@ M.subversive = {
 
 M.gitsigns = {
 	n = {
-		["<leader>gb"] = { ":Gitsigns toggle_current_line_blam<CR>", "Toggle current line blame" },
+		["<leader>gb"] = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle current line blame" },
 		["<leader>hp"] = { ":Gitsigns preview_hunk<CR>", "Preview hunk" },
 		["<leader>hs"] = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
 		["<leader>hr"] = { ":Gitsigns reset_hunk<CR>", "Reset hunk" },
 		["[h"] = { ":Gitsigns prev_hunk<CR>", "Jump to prev hunk" },
 		["]h"] = { ":Gitsigns next_hunk<CR>", "Jump to next hunk" },
+	},
+}
+
+M.lazygit = {
+	n = {
+		["<leader>gg"] = { ":LazyGit<CR>", "Open LazyGit" },
 	},
 }
 

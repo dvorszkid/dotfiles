@@ -87,6 +87,7 @@ local plugins = {
 	-- Git
 	{ "tpope/vim-fugitive", cmd = "Git" },
 	{ "tpope/vim-git" },
+	{ "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 
 	-- To make a plugin not be loaded
 	-- {
@@ -115,7 +116,8 @@ if env.is_devel then
 	})
 	table.insert(plugins, {
 		"git@bitbucket.org:tresorit/vimtresorit.git",
-		event = "BufEnter *tresoritcore*",
+		event = "VeryLazy",
+		-- event = "BufEnter *tresoritcore*",
 		-- ft = "c, cpp",
 		dependencies = {
 			{
