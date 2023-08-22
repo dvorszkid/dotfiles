@@ -65,7 +65,10 @@ M.nextval = {
 M.telescope = {
 	n = {
 		["<C-p>"] = { ":Telescope find_files <CR>", "Find Files" },
-		["<C-t>"] = { ":Telescope lsp_document_symbols <CR>", "Tags in in current buffer (LSP)" },
+		["<C-t>"] = {
+			":Telescope lsp_document_symbols symbol_width=70 symbol_type_width=10 <CR>",
+			"Tags in in current buffer (LSP)",
+		},
 		["<leader>fg"] = { ":Telescope live_grep <CR>", "Live Grep (rg)" },
 		["<leader>f/"] = { ":Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 		["<leader>ft"] = { ":Telescope treesitter <CR>", "Tags in in current buffer (treesitter)" },
