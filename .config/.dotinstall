@@ -2,3 +2,4 @@ mc recurse
 mpv recurse
 nvim recurse
 vifm recurse
+lazygit recurse
