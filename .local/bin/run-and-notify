@@ -14,11 +14,15 @@ function notify() {
         icon=bad.svg
     fi
 
-    notify-send \
-        --expire-time=10000 \
-        --icon="${media_dir}/${icon}" \
-        "$message" "$name
+    if [[ $(uname -s) == "Darwin" ]]; then
+        notify-send "$message" "$name\n(in $(basename $PWD))"
+    else
+        notify-send \
+            --expire-time=10000 \
+            --icon="${media_dir}/${icon}" \
+            "$message" "$name
 <i>$PWD</i>"
+    fi
 }
 
 "$@"

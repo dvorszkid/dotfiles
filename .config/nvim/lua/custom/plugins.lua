@@ -122,6 +122,8 @@ if env.is_devel then
 		dependencies = {
 			{
 				"tpope/vim-dispatch",
+				"junegunn/fzf",
+				"junegunn/fzf.vim",
 			},
 		},
 		init = function()
