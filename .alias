@@ -1,9 +1,9 @@
 ##
 # Convenience
 ##
-if [ -x "$(command -v exa)" ]; then
-    alias ls="exa --time-style long-iso -g --group-directories-first"
-    alias l="exa -hal --icons --time-style long-iso -g --group-directories-first"
+if [ -x "$(command -v eza)" ]; then
+    alias ls="eza --time-style long-iso -g --group-directories-first"
+    alias l="eza -hal --icons --time-style long-iso -g --group-directories-first"
 elif [[ `uname` == "Darwin" ]]; then
 	alias ls="ls -G -F -h"
 	alias l="ls -G -F -h -a -l"
