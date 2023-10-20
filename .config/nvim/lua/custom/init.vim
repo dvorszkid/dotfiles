@@ -219,7 +219,7 @@ augroup my_commands
 	autocmd!
 
 	" Trim whitespaces
-	autocmd FileType c,cpp,cs,python,ruby,java,proto,lua,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+	autocmd FileType c,cpp,cs,python,ruby,java,proto,lua,php,gn,rust autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 	" Fix tab settings for python
 	autocmd FileType python setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=4
