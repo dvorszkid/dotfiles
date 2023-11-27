@@ -169,6 +169,39 @@ fi
 
 
 ##
+# Automatic session name for git repos
+##
+function update_tmux_session
+{
+	tmux_session=$(tmux display-message -p '#S')
+	if [ "$(echo $tmux_session | cut -d ' ' -f 1)" != "git" ]; then
+		return
+	fi
+
+	discard=$(git rev-parse --abbrev-ref HEAD 2>&1)
+	if [ $? -ne 0 ]; then
+		 return
+	fi
+
+	git_head=$(git-branch-current 2>&1)
+	if [ -z "$git_head" ]; then
+		git_head=$(git name-rev --tags --name-only $(git rev-parse HEAD) 2>&1)
+	fi
+	if [ -z "$git_head" ]; then
+		return
+	fi
+
+    git_repo=$(pwd | awk -F '/git/' '{ print $2 }' | cut -d '/' -f 1)
+	git_head=$(echo $git_head | sed 's/\./-/g')
+    tmux rename-session -t "$tmux_session" "$(echo git - $git_repo \($git_head\))"
+}
+
+if [ -z "$MC_SID" ] && [ -n "$TMUX" ]; then
+    add-zsh-hook precmd update_tmux_session
+fi
+
+
+##
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
