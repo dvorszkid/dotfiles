@@ -156,12 +156,6 @@ vnoremap <C-r> "hy:%s/<C-r>h//c<left><left>
 " vnoremap / /\v
 
 
-" Save as root
-command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-command! Wq :execute ':W' | :q
-command! WQ :execute ':Wq'
-
-
 " Now we don't have to move our fingers so far when we want to scroll through
 " the command history; also, don't forget the q: command (see :h q: for more
 " info)

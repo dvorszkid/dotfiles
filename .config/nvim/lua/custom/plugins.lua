@@ -83,6 +83,13 @@ local plugins = {
 			require("custom.configs.listtoggle")
 		end,
 	},
+	{
+		"lambdalisue/suda.vim",
+		lazy = false,
+		init = function()
+			require("custom.configs.suda")
+		end,
+	},
 
 	-- Git
 	{ "tpope/vim-fugitive", cmd = "Git" },
