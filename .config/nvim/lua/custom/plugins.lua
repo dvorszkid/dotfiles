@@ -112,31 +112,56 @@ local plugins = {
 }
 
 if env.is_devel then
-	table.insert(plugins, { "ngg/vim-gn", ft = "gn" })
-	table.insert(plugins, { "uarun/vim-protobuf", ft = "proto" })
-	table.insert(plugins, {
-		"rust-lang/rust.vim",
-		ft = "rust",
-		init = function()
-			vim.g.rustfmt_autosave = 1
-		end,
-	})
-	table.insert(plugins, {
-		"git@bitbucket.org:tresorit/vimtresorit.git",
-		event = "VeryLazy",
-		-- event = "BufEnter *tresoritcore*",
-		-- ft = "c, cpp",
-		dependencies = {
-			{
-				"tpope/vim-dispatch",
-				"junegunn/fzf",
-				"junegunn/fzf.vim",
-			},
+	local plugins_devel = {
+		{ "ngg/vim-gn", ft = "gn" },
+		{ "uarun/vim-protobuf", ft = "proto" },
+
+		{ "mfussenegger/nvim-dap" },
+		{
+			"rcarriga/nvim-dap-ui",
+			event = "BufRead",
+			dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+			config = function()
+				require("custom.configs.dap-ui")
+			end,
 		},
-		init = function()
-			require("custom.configs.vimtresorit")
-		end,
-	})
+		{
+			"ldelossa/nvim-dap-projects",
+			cmd = "DapProjectSearch",
+			config = function()
+				require("custom.configs.dap-projects")
+			end,
+		},
+		{ "jay-babu/mason-nvim-dap.nvim" },
+
+		{
+			"rust-lang/rust.vim",
+			ft = "rust",
+			init = function()
+				vim.g.rustfmt_autosave = 1
+			end,
+		},
+		{
+			"git@bitbucket.org:tresorit/vimtresorit.git",
+			event = "VeryLazy",
+			-- event = "BufEnter *tresoritcore*",
+			-- ft = "c, cpp",
+			dependencies = {
+				{
+					"tpope/vim-dispatch",
+					"junegunn/fzf",
+					"junegunn/fzf.vim",
+				},
+			},
+			init = function()
+				require("custom.configs.vimtresorit")
+			end,
+		},
+	}
+
+	for _, v in pairs(plugins_devel) do
+		table.insert(plugins, v)
+	end
 end
 
 return plugins
