@@ -54,7 +54,7 @@ yabai -m rule --add app="Beyond Compare" grid=100:100:0:0:100:100 manage=off
 yabai -m rule --add app="System Settings" manage=off
 yabai -m rule --add app="Calculator" manage=off
 yabai -m rule --add app="Cisco Secure Client" manage=off
-yabai -m rule --add title="AlacrittyCentered" grid=100:100:25:25:75:75 manage=off
+yabai -m rule --add title="AlacrittyCentered" grid=100:100:25:25:50:50 manage=off
 # yabai -m rule --add app="zoom.us" manage=off
 
 echo "yabai configuration loaded.."
