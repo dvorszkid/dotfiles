@@ -115,7 +115,7 @@ sketchybar --add item clock right                              \
            --set server_env  script="$PLUGIN_DIR/server_env.sh" \
                          icon=󰆧                                \
                          update_freq=60                        \
-                         click_script="alacritty --title AlacrittyCentered --command ~/.local/bin/tcp" \
+                         click_script="$PLUGIN_DIR/server_env_select.sh" \
            --subscribe server_env server_env_updated           \
                                                                \
            --add item jira right                               \
