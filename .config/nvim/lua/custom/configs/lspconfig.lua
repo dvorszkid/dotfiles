@@ -37,3 +37,22 @@ lspconfig.rust_analyzer.setup({
 		},
 	},
 })
+
+lspconfig.lua_ls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim", "hs" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					["/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/"] = true,
+				},
+			},
+		},
+	},
+})
