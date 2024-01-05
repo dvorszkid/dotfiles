@@ -7,15 +7,22 @@ function notify() {
     result="$2"
 
     if [[ $result == 0 ]]; then
-        message="Command Successful"
+        message="✅ Success"
         icon=good.svg
     else
-        message="Command Failed (returned $result)"
+        message="❌ Returned: $result"
         icon=bad.svg
     fi
 
     if [[ $(uname -s) == "Darwin" ]]; then
-        notify-send "$message" "$name\n(in $(basename $PWD))"
+        terminal-notifier \
+            -title "\"$name\"" \
+            -subtitle "\"(in $(basename $PWD))\"" \
+            -group "\"$PWD\"" \
+            -message "\"$message\"" \
+            -appIcon "\"${media_dir}/${icon}\"" \
+            -sender "org.alacritty" \
+            -activate "org.alacritty"
     else
         notify-send \
             --expire-time=10000 \
