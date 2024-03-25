@@ -5,4 +5,4 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
-vim.cmd("source ~/.config/nvim/lua/custom/init.vim")
+vim.cmd("source ~/.config/nvim/lua/init.vim")
