@@ -18,7 +18,6 @@ function notify() {
         terminal-notifier \
             -title "\"$name\"" \
             -subtitle "\"(in $(basename $PWD))\"" \
-            -group "\"$PWD\"" \
             -message "\"$message\"" \
             -appIcon "\"${media_dir}/${icon}\"" \
             -sender "org.alacritty" \
