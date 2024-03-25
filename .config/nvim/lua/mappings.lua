@@ -6,9 +6,11 @@ local map = vim.keymap.set
 map("n", ";", ":")
 map("i", "jk", "<ESC>")
 
--- Subversive
-map("n", "s", "<plug>(SubversiveSubstitute)", { desc = "Substitute (+ motion)" })
-map("n", "ss", "<plug>(SubversiveSubstituteLine)", { desc = "Substitute line" })
+-- Substitute
+map("n", "s", require("substitute").operator, { noremap = true })
+map("n", "ss", require("substitute").line, { noremap = true })
+map("n", "S", require("substitute").eol, { noremap = true })
+map("x", "s", require("substitute").visual, { noremap = true })
 
 -- Git
 map("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", { desc = "Git Toggle current line blame" })
@@ -31,10 +33,10 @@ map("n", "+", "<Plug>nextvalInc", { desc = "Nextval Increase number" })
 -- Telescope
 map("n", "<C-p>", ":Telescope find_files <CR>", { desc = "Telescope Find Files" })
 map(
-    "n",
-    "<C-t>",
-    ":Telescope lsp_document_symbols symbol_width=70 symbol_type_width=10 <CR>",
-    { desc = "Telescope [T]ags in current buffer (LSP)" }
+  "n",
+  "<C-t>",
+  ":Telescope lsp_document_symbols symbol_width=70 symbol_type_width=10 <CR>",
+  { desc = "Telescope [T]ags in current buffer (LSP)" }
 )
 map("n", "<leader>fg", ":Telescope live_grep <CR>", { desc = "Telescope Live [G]rep (rg)" })
 map("n", "<leader>f/", ":Telescope current_buffer_fuzzy_find <CR>", { desc = "Telescope [F]ind in current buffer" })
@@ -55,29 +57,29 @@ map("n", "<leader>bt", ":GnTarget <CR>", { desc = "VimTresorit Select build targ
 map("n", "<leader>bs", ":AbortDispatch <CR>", { desc = "VimTresorit Abort build" })
 map("n", "<leader>bf", ":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>", { desc = "VimTresorit Build file" })
 map(
-    "n",
-    "<leader>bp",
-    ":wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>",
-    { desc = "VimTresorit Build project" }
+  "n",
+  "<leader>bp",
+  ":wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>",
+  { desc = "VimTresorit Build project" }
 )
 map("n", "<leader>ba", ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", { desc = "VimTresorit Build all" })
 map(
-    "n",
-    "<leader>bfb",
-    ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>",
-    { desc = "VimTresorit Build file in background" }
+  "n",
+  "<leader>bfb",
+  ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>",
+  { desc = "VimTresorit Build file in background" }
 )
 map(
-    "n",
-    "<leader>bpb",
-    ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>",
-    { desc = "VimTresorit Build project in background" }
+  "n",
+  "<leader>bpb",
+  ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>",
+  { desc = "VimTresorit Build project in background" }
 )
 map(
-    "n",
-    "<leader>bab",
-    ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>",
-    { desc = "VimTresorit Build all in background" }
+  "n",
+  "<leader>bab",
+  ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>",
+  { desc = "VimTresorit Build all in background" }
 )
 map("n", "<F7>", ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", { desc = "VimTresorit Build all" })
 map("n", "<F8>", ":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>", { desc = "VimTresorit Build file" })

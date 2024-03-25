@@ -1,39 +1,39 @@
 return {
-    ensure_installed = {
-        -- vim
-        "vim",
-        "lua",
+  ensure_installed = {
+    -- vim
+    "vim",
+    "lua",
 
-        -- script
-        "bash",
-        "python",
+    -- script
+    "bash",
+    "python",
 
-        -- native
-        "c",
-        "cpp",
-        "rust",
+    -- native
+    "c",
+    "cpp",
+    "rust",
 
-        -- other
-        "c_sharp",
-        "objc",
+    -- other
+    "c_sharp",
+    "objc",
 
-        -- web
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "tsx",
+    -- web
+    "html",
+    "css",
+    "javascript",
+    "typescript",
+    "tsx",
 
-        -- misc
-        "markdown",
-        "markdown_inline",
-        "json",
-        "toml",
-    },
-    indent = {
-        enable = true,
-        -- disable = {
-        --   "python"
-        -- },
-    },
+    -- misc
+    "markdown",
+    "markdown_inline",
+    "json",
+    "toml",
+  },
+  indent = {
+    enable = true,
+    -- disable = {
+    --   "python"
+    -- },
+  },
 }
