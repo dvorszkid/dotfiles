@@ -1,10 +1,22 @@
 require("nvchad.mappings")
 
 local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 -- Basic
 map("n", ";", ":")
 map("i", "jk", "<ESC>")
+
+-- Buffer navigation
+unmap("n", "<tab>")
+unmap("n", "<S-tab>")
+map("n", "<F2>", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Buffer Goto next" })
+
+map("n", "<F1>", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Buffer Goto prev" })
 
 -- Substitute
 map("n", "s", require("substitute").operator, { noremap = true })
