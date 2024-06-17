@@ -23,6 +23,7 @@ local sources = {
 
   -- web
   b.formatting.prettier.with({ filetypes = { "html", "markdown", "css", "javascript", "typescript" } }),
+  b.diagnostics.eslint,
 }
 
 null_ls.setup({
