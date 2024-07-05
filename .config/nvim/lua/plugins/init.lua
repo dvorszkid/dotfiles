@@ -96,6 +96,20 @@ local plugins = {
       require("configs.suda")
     end,
   },
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+    opts = {
+      padding = false,
+    },
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+    init = function()
+      require("telescope").load_extension("fzf")
+    end,
+  },
 
   -- Git
   { "tpope/vim-fugitive", cmd = "Git" },
