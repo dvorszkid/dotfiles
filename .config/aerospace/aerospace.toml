@@ -14,6 +14,10 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
+exec-on-workspace-change = ['/bin/bash', '-c',
+    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change AEROSPACE_FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE AEROSPACE_PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
 # Start AeroSpace at login
 start-at-login = true
 
@@ -209,12 +213,12 @@ m = ['exec-and-forget open /Applications/Spotify.app', 'mode main']
 z = ['exec-and-forget open /Applications/zoom.us.app', 'mode main']
 
 [workspace-to-monitor-force-assignment]
-1 = ['DELL U2415 \(2\)', 'LG HDR 4K \(1\)', 'built-in', 2]
-2 = ['DELL U2415 \(2\)', 'LG HDR 4K \(1\)', 'built-in', 2]
-3 = ['DELL U2415 \(2\)', 'LG HDR 4K \(1\)', 'built-in', 2]
-4 = ['DELL U2415 \(1\)', 'LG HDR 4K \(2\)', 'built-in', 3]
-5 = ['DELL U2415 \(1\)', 'LG HDR 4K \(2\)', 'built-in', 3]
-6 = ['DELL U2415 \(1\)', 'LG HDR 4K \(2\)', 'built-in', 3]
+1 = ['DELL U2415 \(2\)', 'DELL U2415', 'LG HDR 4K \(1\)', 'LG HDR 4K', 'built-in', 2]
+2 = ['DELL U2415 \(2\)', 'DELL U2415', 'LG HDR 4K \(1\)', 'LG HDR 4K', 'built-in', 2]
+3 = ['DELL U2415 \(2\)', 'DELL U2415', 'LG HDR 4K \(1\)', 'LG HDR 4K', 'built-in', 2]
+4 = ['DELL U2415 \(1\)', 'DELL U2415', 'LG HDR 4K \(2\)', 'LG HDR 4K', 'built-in', 3]
+5 = ['DELL U2415 \(1\)', 'DELL U2415', 'LG HDR 4K \(2\)', 'LG HDR 4K', 'built-in', 3]
+6 = ['DELL U2415 \(1\)', 'DELL U2415', 'LG HDR 4K \(2\)', 'LG HDR 4K', 'built-in', 3]
 7 = ['built-in']
 #8 = -> reserved for adhoc external dispalys
 #9 = -> reserved for adhoc external dispalys

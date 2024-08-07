@@ -10,6 +10,10 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 FONT="FiraCode Nerd Font"
 
+# aerospace setting
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar, these are only some of the
 # options available. For all options see:
@@ -96,15 +100,12 @@ sketchybar --add item space_separator left                         \
 # volume is registered. More info about the event system can be found here:
 # https://felixkratz.github.io/SketchyBar/config/events
 
+source "$ITEM_DIR/cpu.sh"
+
 sketchybar --add item clock right                              \
            --set clock   update_freq=120                       \
                          icon=󰨳                                \
                          script="$PLUGIN_DIR/clock.sh"         \
-                                                               \
-           --add item wifi right                               \
-           --set wifi    script="$PLUGIN_DIR/wifi.sh"          \
-                         icon=                                \
-           --subscribe wifi wifi_change                        \
                                                                \
            --add item volume right                             \
            --set volume  script="$PLUGIN_DIR/volume.sh"        \
@@ -124,7 +125,7 @@ sketchybar --add item clock right                              \
                          update_freq=60                        \
            --subscribe jira jira_updated
 
-source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/spaces.sh"
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
