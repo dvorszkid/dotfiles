@@ -71,7 +71,6 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 # Application shortcuts
 cmd-alt-j = 'exec-and-forget ~/.local/bin/jiraworklogger --tracking-time-only'
 cmd-alt-k = 'exec-and-forget ~/.local/bin/jiraworklogger --adjust-tracking'
-alt-enter = 'exec-and-forget alacritty'
 
 
 # All possible keys:
