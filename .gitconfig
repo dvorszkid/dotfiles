@@ -69,6 +69,8 @@
 	cmd = \"/mnt/c/Program Files/Beyond Compare 4/BCompare.exe\" \"$(wslpath -w $LOCAL)\" \"`wslpath -w $REMOTE`\"
 [difftool "vimdiff"]
 	cmd = vimdiff \"$LOCAL\" \"$REMOTE\"
+[difftool "vscode"]
+    cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
 
 [merge]
 	tool = bc4
@@ -82,6 +84,11 @@
 	cmd = \"/mnt/c/Program Files/Beyond Compare 4/BCompare.exe\" \"`wslpath -w $LOCAL`\" \"`wslpath -w $REMOTE`\" \"`wslpath -w $BASE`\" \"`wslpath -w $MERGED`\"
 [mergetool "vimdiff3"]
 	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool "vscode"]
+# Original way before three-way merge shown commented out
+#    cmd = code --wait $MERGED
+# For "Three-way merge"
+    cmd = code --wait --merge \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\"
 
 [merge "releasenotesmerger"]
     name = release notes merger
