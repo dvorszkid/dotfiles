@@ -13,6 +13,15 @@ map("n", "k", "gk")
 map("n", "J", "gJ")
 map("n", "K", "gK")
 
+-- Insert blank lines
+map("n", "]<Space>", ":call append(line('.'), '')<CR>", { desc = "Insert blank line after current one", silent = true })
+map(
+  "n",
+  "[<Space>",
+  ":call append(line('.')-1, '')<CR>",
+  { desc = "Insert blank line before current one", silent = true }
+)
+
 -- Scroll slightly faster
 map("", "<c-e>", "<c-e><c-e><c-e>")
 map("", "<c-y>", "<c-y><c-y><c-y>")
@@ -58,6 +67,7 @@ map("n", "<leader>fe", ":botright copen 15<CR>/error:<CR>", { silent = true })
 map("n", "<leader>fw", ":botright copen 15<CR>/warning:<CR>", { silent = true })
 
 -- Plugins
-require("config.keymaps.plugins.nvim-tmux-navigator")
 require("config.keymaps.plugins.lsp")
+require("config.keymaps.plugins.nvim-tmux-navigator")
+require("config.keymaps.plugins.substitute")
 require("config.keymaps.plugins.telescope")

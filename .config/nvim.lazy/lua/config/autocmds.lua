@@ -3,9 +3,9 @@
 -- Add any additional autocmds here
 
 -- Disable autoformat for some files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "cs" },
-  callback = function()
-    vim.b.autoformat = false
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+--   pattern = { "cs" },
+--   callback = function()
+--     vim.b.autoformat = false
+--   end,
+-- })
