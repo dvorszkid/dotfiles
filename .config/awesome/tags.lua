@@ -19,6 +19,8 @@ tyrannical.tags = {
         screen      = config.scr.pri,
         layout      = awful.layout.suit.max,
         class = {
+            "brave-browser",
+            "opera",
             "firefox",
             "navigator",
             "google-chrome",
