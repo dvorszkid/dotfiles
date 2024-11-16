@@ -57,7 +57,8 @@ ui.calendar_widget:connect_signal("mouse::leave", ui.calendar_popup.toggle)
 
 -- ALSA volume bar
 local myalsabar = lain.widget.alsabar({
-    --togglechannel = "IEC958,3",
+    cmd = "amixer -c 1",
+    -- togglechannel = "IEC958,3",
     width = 80 * config.dpi_scaling, height = 10, border_width = 0,
     followtag = true,
     colors = {
