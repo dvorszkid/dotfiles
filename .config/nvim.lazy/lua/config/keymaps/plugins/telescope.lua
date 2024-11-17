@@ -1,5 +1,6 @@
 require("config.keymaps.helpers")
 
+map("n", "<leader><leader>", ":Telescope <CR>", { desc = "Telescope all sources" })
 map("n", "<C-p>", ":Telescope find_files <CR>", { desc = "Telescope Find Files" })
 map(
   "n",
