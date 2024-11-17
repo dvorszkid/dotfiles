@@ -39,5 +39,8 @@ return {
         end
       end, { "i", "s" }),
     })
+
+    -- Disable showing "ghost" (inlay like) text of the possible autocompletions
+    opts.experimental.ghost_text = false
   end,
 }
