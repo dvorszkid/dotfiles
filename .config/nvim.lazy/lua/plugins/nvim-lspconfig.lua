@@ -49,6 +49,36 @@ return {
         })
         return true
       end,
+      powershell_es = function(_, _)
+        require("lspconfig").powershell_es.setup({
+          settings = {
+            powershell = {
+              codeFormatting = {
+                -- Preset = "Custom", -- based on Visual Studio Code default settings
+                AddWhitespaceAroundPipe = true,
+                AlignPropertyValuePairs = true,
+                AutoCorrectAliases = false,
+                AvoidSemicolonsAsLineTerminators = false,
+                IgnoreOneLineBlock = true,
+                NewLineAfterCloseBrace = true,
+                NewLineAfterOpenBrace = true,
+                OpenBraceOnSameLine = true,
+                PipelineIndentationStyle = "NoIndentation",
+                TrimWhitespaceAroundPipe = false,
+                UseConstantStrings = false,
+                UseCorrectCasing = false,
+                WhitespaceAfterSeparator = true,
+                WhitespaceAroundOperator = true,
+                WhitespaceBeforeOpenBrace = true,
+                WhitespaceBeforeOpenParen = true,
+                WhitespaceBetweenParameters = false,
+                WhitespaceInsideBrace = false,
+              },
+            },
+          },
+        })
+        return true
+      end,
     },
   },
 }
