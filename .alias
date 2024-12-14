@@ -126,7 +126,7 @@ alias ran="run-and-notify"
 ##
 alias esync='sudo eix-sync -C --ask -C n'
 alias em='sudo emerge'
-alias eupdate='sudo emerge -uDU --keep-going @world'
+alias eupdate='sudo emerge -uDU --keep-going --autounmask-keep-masks @world'
 alias eupdate_time='sudo emerge -uDUp world | genlop -p'
 alias edep='sudo emerge --depclean'
 alias eremove='sudo CONFIG_PROTECT="-*" sudo emerge -C'
