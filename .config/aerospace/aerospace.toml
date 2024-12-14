@@ -223,7 +223,7 @@ z = ['exec-and-forget open /Applications/zoom.us.app', 'mode main']
 #9 = -> reserved for adhoc external dispalys
 
 [[on-window-detected]]
-if.window-title-regex-substring = 'AlacrittyCentered'
+if.window-title-regex-substring = '(AlacrittyCentered|Tresorit)'
 check-further-callbacks = false
 run = ['layout floating']
 
