@@ -1,7 +1,13 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-require("config.keymaps.helpers")
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
+end
 
 -- Buffer switch
 map("n", "<F1>", ":bp<CR>", { desc = "Buffer Goto prev", silent = true })
@@ -62,12 +68,5 @@ map("v", ";", ":")
 map("v", ":", ";")
 
 -- C++ shortcuts
-map("n", "<leader>sm", "ysiw)istd::move<Esc>", { noremap = false })
 map("n", "<leader>fe", ":botright copen 15<CR>/error:<CR>", { silent = true })
 map("n", "<leader>fw", ":botright copen 15<CR>/warning:<CR>", { silent = true })
-
--- Plugins
-require("config.keymaps.plugins.lsp")
-require("config.keymaps.plugins.nvim-tmux-navigator")
-require("config.keymaps.plugins.substitute")
-require("config.keymaps.plugins.fzf-lua")

@@ -81,4 +81,7 @@ return {
       end,
     },
   },
+  keys = {
+    { "<F4>", ":ClangdSwitchSourceHeader <CR>", silent = true, desc = "Navigation Switch to header/source" },
+  },
 }

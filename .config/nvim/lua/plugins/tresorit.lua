@@ -21,45 +21,59 @@ return {
     vim.g.buildbackgroundcmd = ":Make! -k 0 "
     vim.g.buildcmd_proxy = "run-and-notify"
 
-    require("config.keymaps.helpers")
-    map("n", "<leader>bc", ":CreateOutDir<space>", { desc = "VimTresorit Create out dir" })
-    map("n", "<leader>be", ":Gn args <CR>", { desc = "VimTresorit Edit args.gn" })
-    map("n", "<leader>bo", ":GnOut <CR>", { desc = "VimTresorit Select out dir" })
-    map("n", "<leader>bt", ":GnTarget <CR>", { desc = "VimTresorit Select build target" })
+    vim.keymap.set("n", "<leader>bc", ":CreateOutDir<space>", { desc = "VimTresorit Create out dir" })
+    vim.keymap.set("n", "<leader>be", ":Gn args <CR>", { desc = "VimTresorit Edit args.gn" })
+    vim.keymap.set("n", "<leader>bo", ":GnOut <CR>", { desc = "VimTresorit Select out dir" })
+    vim.keymap.set("n", "<leader>bt", ":GnTarget <CR>", { desc = "VimTresorit Select build target" })
 
-    map("n", "<leader>bs", ":AbortDispatch <CR>", { desc = "VimTresorit Abort build" })
-    map(
+    vim.keymap.set("n", "<leader>bs", ":AbortDispatch <CR>", { desc = "VimTresorit Abort build" })
+    vim.keymap.set(
       "n",
       "<leader>bf",
       ":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>",
       { desc = "VimTresorit Build file" }
     )
-    map(
+    vim.keymap.set(
       "n",
       "<leader>bp",
       ":wa<CR>:exec g:buildcmd . g:GetBuildProjectParams(@%)<CR>",
       { desc = "VimTresorit Build project" }
     )
-    map("n", "<leader>ba", ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", { desc = "VimTresorit Build all" })
-    map(
+    vim.keymap.set(
+      "n",
+      "<leader>ba",
+      ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>",
+      { desc = "VimTresorit Build all" }
+    )
+    vim.keymap.set(
       "n",
       "<leader>bfb",
       ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildFileParams(@%)<CR>",
       { desc = "VimTresorit Build file in background" }
     )
-    map(
+    vim.keymap.set(
       "n",
       "<leader>bpb",
       ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildProjectParams(@%)<CR>",
       { desc = "VimTresorit Build project in background" }
     )
-    map(
+    vim.keymap.set(
       "n",
       "<leader>bab",
       ":wa<CR>:exec g:buildbackgroundcmd . g:GetBuildAllParams(@%)<CR>",
       { desc = "VimTresorit Build all in background" }
     )
-    map("n", "<F7>", ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>", { desc = "VimTresorit Build all" })
-    map("n", "<F8>", ":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>", { desc = "VimTresorit Build file" })
+    vim.keymap.set(
+      "n",
+      "<F7>",
+      ":wa<CR>:exec g:buildcmd . g:GetBuildAllParams(@%)<CR>",
+      { desc = "VimTresorit Build all" }
+    )
+    vim.keymap.set(
+      "n",
+      "<F8>",
+      ":wa<CR>:exec g:buildcmd . g:GetBuildFileParams(@%)<CR>",
+      { desc = "VimTresorit Build file" }
+    )
   end,
 }
