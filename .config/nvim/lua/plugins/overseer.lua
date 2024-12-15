@@ -6,7 +6,7 @@ return {
     },
   },
   keys = {
-    { "<F7>", "<cmd>OverseerOpen!<CR><cmd>OverseerRun<CR>" },
+    { "<F7>", "<cmd>OverseerRun<CR>" },
     { "<F8>", "<cmd>OverseerToggle<CR>" },
   },
 }
