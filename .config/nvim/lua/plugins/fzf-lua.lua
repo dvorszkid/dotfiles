@@ -1,5 +1,13 @@
 return {
   "ibhagwan/fzf-lua",
+  opts = {
+    files = {
+      git_icons = false,
+    },
+    grep = {
+      git_icons = false,
+    },
+  },
   keys = {
     -- Generic
     { "<leader><leader>", ":FzfLua <CR>", desc = "Fzf all sources" },
