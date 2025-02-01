@@ -118,8 +118,19 @@ KEYTIMEOUT=1
 ##
 source "$HOME/.alias"
 source "$HOME/.env"
-source_if_available "$HOME/.fzf/shell/completion.zsh"
-source_if_available "$HOME/.fzf/shell/key-bindings.zsh"
+
+
+##
+# FZF integration
+##
+if [ -d "$HOME/.fzf" ]
+then
+  source_if_available "$HOME/.fzf/shell/completion.zsh"
+  source_if_available "$HOME/.fzf/shell/key-bindings.zsh"
+else
+  source_if_available "/usr/share/fzf/key-bindings.zsh"
+  source_if_available "/usr/share/zsh/site-functions/_fzf"
+fi
 
 
 ##
