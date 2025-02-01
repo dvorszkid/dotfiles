@@ -130,7 +130,7 @@ alias eupdate='sudo emerge -uDU --keep-going --autounmask-keep-masks @world'
 alias eupdate_time='sudo emerge -uDUp world | genlop -p'
 alias edep='sudo emerge --depclean'
 alias eremove='sudo CONFIG_PROTECT="-*" sudo emerge -C'
-alias eetc='sudo cfg-update'
+alias eetc='sudo dispatch-conf'
 
 
 ##
