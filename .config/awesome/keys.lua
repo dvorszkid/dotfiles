@@ -1,5 +1,4 @@
 local awful = require("awful")
-local beautiful = require("beautiful")
 local lain = require("lain")
 local apps = require("apps")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
@@ -180,9 +179,9 @@ end
 -- Global keys
 local globalKeys = awful.util.table.join(
 	-- Awesome control
-	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "restart", group = "awesome" }),
-	awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit", group = "awesome" }),
-	awful.key({ modkey, "Control" }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+	awful.key({ altkey, "Control" }, "r", awesome.restart, { description = "restart", group = "awesome" }),
+	awful.key({ altkey, "Control" }, "q", awesome.quit, { description = "quit", group = "awesome" }),
+	awful.key({ altkey, "Control" }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({}, "F12", function()
 		quake:toggle()
 	end, { description = "dropdown terminal", group = "awesome" }),
@@ -351,18 +350,9 @@ local globalKeys = awful.util.table.join(
 	awful.key({ modkey, "Control" }, "l", function()
 		awful.spawn.with_shell(apps.cmd.lock)
 	end, { description = "lock", group = "session" }),
-	awful.key({ modkey, "Control" }, "Prior", function()
-		awful.spawn(apps.cmd.reboot)
-	end, { description = "reboot", group = "session" }),
-	awful.key({ modkey, "Control" }, "Next", function()
-		awful.spawn(apps.cmd.shutdown)
-	end, { description = "shutdown", group = "session" }),
-	awful.key({ modkey, "Control" }, "End", function()
-		awful.spawn.with_shell(apps.cmd.suspend)
-	end, { description = "suspend", group = "session" }),
-	awful.key({ modkey, "Control" }, "s", function()
-		awful.spawn.with_shell(apps.cmd.suspend)
-	end, { description = "suspend", group = "session" }),
+	awful.key({ modkey, "Control" }, "q", function()
+		awful.spawn(apps.cmd.systemctl)
+	end, { description = "lock", group = "session" }),
 
 	-- Volume control
 	awful.key(
