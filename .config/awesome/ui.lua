@@ -56,8 +56,9 @@ ui.calendar_widget:connect_signal("mouse::enter", ui.calendar_popup.toggle)
 ui.calendar_widget:connect_signal("mouse::leave", ui.calendar_popup.toggle)
 
 -- ALSA volume bar
+local alsa_channel = io.popen('(alsactl info 0 | grep "id: PCH" && echo 0) || echo 1'):read()
 local myalsabar = lain.widget.alsabar({
-	cmd = "amixer -c 0",
+	cmd = "amixer -c " .. alsa_channel,
 	-- togglechannel = "IEC958,3",
 	width = 80 * config.dpi_scaling,
 	height = 10,
@@ -267,17 +268,12 @@ function ui.at_screen_connect(s)
 	)
 
 	-- Create a tasklist widget
-	s.mytasklist = awful.widget.tasklist(
-		s,
-		awful.widget.tasklist.filter.currenttags,
-		awful.util.tasklist_buttons,
-		{
-			shape = gears.shape.rectangle,
-			shape_border_width = 5 * config.dpi_scaling,
-			shape_border_color = beautiful.tasklist_bg_normal,
-			align = "center",
-		}
-	)
+	s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, {
+		shape = gears.shape.rectangle,
+		shape_border_width = 5 * config.dpi_scaling,
+		shape_border_color = beautiful.tasklist_bg_normal,
+		align = "center",
+	})
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({ position = "top", screen = s, height = 32 * config.dpi_scaling })
