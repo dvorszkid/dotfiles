@@ -13,6 +13,8 @@ return {
             "--clang-tidy",
             "--header-insertion=never",
             "--completion-style=detailed",
+            "--all-scopes-completion",
+            "--function-arg-placeholders",
             "--background-index",
           },
         })
