@@ -1,6 +1,6 @@
 return {
-  { "Mofiqul/vscode.nvim" },
-  -- { "dvorszkid/tender.vim" },
+  --{ "Mofiqul/vscode.nvim" },
+  --{ "dvorszkid/tender.vim" },
   { "sainnhe/sonokai" },
 
   {

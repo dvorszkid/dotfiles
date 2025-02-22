@@ -10,20 +10,20 @@ return {
   },
   keys = {
     -- Generic
-    { "<leader><leader>", ":FzfLua <CR>", desc = "Fzf all sources" },
+    { "<leader><leader>", "<cmd>FzfLua<CR>", desc = "Fzf all sources" },
 
     -- Main
-    { "<C-p>", ":Fzf files <CR>", desc = "Fzf Files" },
+    { "<C-p>", "<cmd>Fzf files<CR>", desc = "Fzf Files" },
     {
       "<C-t>",
-      ":FzfLua lsp_document_symbols symbol_width=70 symbol_type_width=10 <CR>",
+      "<cmd>FzfLua lsp_document_symbols symbol_width=70 symbol_type_width=10<CR>",
       desc = "Fzf [T]ags in current buffer (LSP)",
     },
 
     -- Others
-    { "<leader>ft", ":FzfLua treesitter <CR>", desc = "Fzf [T]ags in current buffer (treesitter)" },
-    { "<leader>fk", ":FzfLua keymaps <CR>", desc = "Fzf [K]ey mappings" },
-    { "<leader>fr", ":FzfLua resume <CR>", desc = "Fzf [R]esume last session" },
-    { "<leader>sw", ':FzfLua grep_cword <CR>"', desc = "Fzf [S]earch for current [w]ord" },
+    { "<leader>ft", "<cmd>FzfLua treesitter<CR>", desc = "Fzf [T]ags in current buffer (treesitter)" },
+    { "<leader>fk", "<cmd>FzfLua keymaps<CR>", desc = "Fzf [K]ey mappings" },
+    { "<leader>fr", "<cmd>FzfLua resume<CR>", desc = "Fzf [R]esume last session" },
+    { "<leader>sw", '<cmd>FzfLua grep_cword<CR>"', desc = "Fzf [S]earch for current [w]ord" },
   },
 }

@@ -37,7 +37,6 @@ map("v", ">", ">gv")
 map("v", "<", "<gv")
 
 -- Visually select the text that was last edited/pasted
---
 map("n", "gV", "`[v`]", { noremap = false })
 
 -- With this map, we can select some text in visual mode and by invoking the map,
