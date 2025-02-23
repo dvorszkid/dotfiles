@@ -56,7 +56,8 @@ ui.calendar_widget:connect_signal("mouse::enter", ui.calendar_popup.toggle)
 ui.calendar_widget:connect_signal("mouse::leave", ui.calendar_popup.toggle)
 
 -- ALSA volume bar
-local alsa_channel = io.popen('(alsactl info 0 | grep "id: PCH" && echo 0) || echo 1'):read()
+local alsa_channel = io.popen('(alsactl info 0 | grep "id: PCH" > /dev/null && echo 0) || echo 1'):read()
+print("Using ALSA Channel: " .. alsa_channel)
 local myalsabar = lain.widget.alsabar({
 	cmd = "amixer -c " .. alsa_channel,
 	-- togglechannel = "IEC958,3",
