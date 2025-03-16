@@ -7,7 +7,7 @@ local ui = require("ui")
 
 -- app collection for shortcuts and widgets
 local apps_cmd = {
-	terminal = "alacritty",
+	terminal = "kitty",
 	tmux = "tmux",
 	tmuxs = "tmuxs ",
 

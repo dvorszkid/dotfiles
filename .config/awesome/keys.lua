@@ -156,9 +156,9 @@ end
 
 -- Dropdown terminal
 local quake = lain.util.quake({
-	app = "alacritty",
+	app = "kitty",
 	argname = "--class %s",
-	extra = "-e " .. apps.cmd.tmuxs .. "dropdown",
+	extra = apps.cmd.tmuxs .. "dropdown",
 	onlyone = true,
 	followtag = true,
 	height = 0.7,
