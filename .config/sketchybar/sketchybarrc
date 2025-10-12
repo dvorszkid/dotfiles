@@ -125,7 +125,8 @@ sketchybar --add item clock right                              \
                          update_freq=60                        \
            --subscribe jira jira_updated
 
-source "$ITEM_DIR/spaces.sh"
+# AeroSpace
+#source "$ITEM_DIR/spaces.sh"
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
