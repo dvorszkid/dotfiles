@@ -2,7 +2,6 @@ local awful = require("awful")
 local tyrannical = require("tyrannical")
 local gears = require("gears")
 
-
 tyrannical.settings.block_children_focus_stealing = true
 tyrannical.settings.group_children = true
 tyrannical.settings.force_odd_as_intrusive = true
@@ -10,14 +9,13 @@ tyrannical.settings.force_odd_as_intrusive = true
 tyrannical.settings.tag.layout = awful.layout.suit.tile
 tyrannical.settings.tag.master_width_factor = 0.6
 
-
 tyrannical.tags = {
     {
-        name        = "www",
-        init        = true,
-        exclusive   = true,
-        screen      = config.scr.pri,
-        layout      = awful.layout.suit.max,
+        name = "www",
+        init = true,
+        exclusive = true,
+        screen = config.scr.pri,
+        layout = awful.layout.suit.max,
         class = {
             "brave-browser",
             "opera",
@@ -26,86 +24,85 @@ tyrannical.tags = {
             "google-chrome",
             "google-chrome-beta",
             "google-chrome-unstable",
-        }
+        },
     },
     {
-        name        = "dev",
-        init        = true,
-        exclusive   = true,
-        selected    = true,
-        screen      = config.scr.pri,
-        layout      = awful.layout.suit.max,
+        name = "dev",
+        init = true,
+        exclusive = true,
+        selected = true,
+        screen = config.scr.pri,
+        layout = awful.layout.suit.max,
+        class = {},
+    },
+    {
+        name = "music",
+        init = true,
+        position = 1,
+        exclusive = true,
+        screen = config.scr.sec,
+        force_screen = true,
+        layout = awful.layout.suit.tile.left,
         class = {
-        }
-    },
-    {
-        name        = "music",
-        init        = true,
-        position    = 1,
-        exclusive   = true,
-        screen      = config.scr.sec,
-        force_screen= true,
-        layout      = awful.layout.suit.tile.left,
-        class       = {
             "amarok",
             "spotify",
-        }
+        },
     },
     {
-        name        = "video",
-        init        = false,
-        volatile    = true,
-        exclusive   = true,
+        name = "video",
+        init = false,
+        volatile = true,
+        exclusive = true,
         -- TODO: depend on dynamic screen config
         --screen      = config.scr.sec,
         --force_screen= true,
-        layout      = awful.layout.suit.tile.left,
-        class       = {
+        layout = awful.layout.suit.tile.left,
+        class = {
             "mplayer",
             "mpv",
             "smplayer",
             "vlc",
-        }
+        },
     },
     {
-        name        = "vnc",
-        init        = false,
-        volatile    = true,
-        layout      = awful.layout.suit.max,
-        class       = {
+        name = "vnc",
+        init = false,
+        volatile = true,
+        layout = awful.layout.suit.max,
+        class = {
             "vncviewer",
-        }
+        },
     },
     {
-        name        = "zoom",
-        init        = false,
-        volatile    = true,
-        layout      = awful.layout.suit.max,
-        screen      = config.scr.sec,
+        name = "zoom",
+        init = false,
+        volatile = true,
+        layout = awful.layout.suit.max,
+        screen = config.scr.sec,
         master_width_factor = 0.2,
-        class       = {
+        class = {
             "zoom",
-        }
+        },
     },
     {
-        name        = "discord",
-        init        = false,
-        volatile    = true,
-        layout      = awful.layout.suit.tile.left,
-        screen      = config.scr.sec,
-        class       = {
+        name = "discord",
+        init = false,
+        volatile = true,
+        layout = awful.layout.suit.tile.left,
+        screen = config.scr.sec,
+        class = {
             "discord",
-        }
+        },
     },
     {
-        name        = "doc",
-        init        = false,
-        volatile    = true,
-        exclusive   = true,
-        screen      = config.scr.sec,
-        force_screen= true,
-        layout      = awful.layout.suit.max,
-        class       = {
+        name = "doc",
+        init = false,
+        volatile = true,
+        exclusive = true,
+        screen = config.scr.sec,
+        force_screen = true,
+        layout = awful.layout.suit.max,
+        class = {
             "okular",
             "libreoffice",
             "libreoffice-writer",
@@ -115,7 +112,7 @@ tyrannical.tags = {
             "gimp",
             "nomacs",
             "image lounge",
-        }
+        },
     },
 }
 
@@ -176,8 +173,7 @@ tyrannical.properties.below = {
     "conky",
 }
 
-tyrannical.properties.placement = {
-}
+tyrannical.properties.placement = {}
 
 tyrannical.properties.skip_taskbar = {
     "yakuake",
@@ -201,14 +197,13 @@ tyrannical.properties.size_hints_honor = {
     ["spotify"] = false,
 }
 
-
 -- Make URxvt instances run on tag found by original WM_NAME
 awful.client.property.persist("original_name", "string")
-client.connect_signal("property::class", function (c)
+client.connect_signal("property::class", function(c)
     if c.class ~= "URxvt" or c.floating then
         return
     end
-    if c.original_name == '' then
+    if c.original_name == "" then
         c.original_name = c.name
     end
     -- print('[callback] C:' .. c.class .. ', N:' .. c.name .. ', ON:' .. c.original_name)
@@ -218,18 +213,17 @@ client.connect_signal("property::class", function (c)
         t = awful.tag.add(c.original_name, {
             screen = awful.screen.focused(),
             layout = awful.layout.suit.tile.left,
-            volatile = true
+            volatile = true,
         })
     end
     t:view_only()
     c:move_to_tag(t)
 end)
 
-
 -- Zoom
 --  * meeting should prevent screensaver
 --  * floating popups
-client.connect_signal("manage", function (c)
+client.connect_signal("manage", function(c)
     if c.class ~= "zoom" then
         return
     end
@@ -245,17 +239,17 @@ client.connect_signal("manage", function (c)
     end
 
     --print('[Zoom] Starting timer for C:' .. c.class .. ', N:' .. c.name)
-    c.heartbeat_timer = gears.timer {
-        timeout   = 60,
-        call_now  = false,
+    c.heartbeat_timer = gears.timer({
+        timeout = 60,
+        call_now = false,
         autostart = true,
-        callback  = function()
+        callback = function()
             --print('[Zoom] Resetting screensaver')
             awful.spawn("xset s reset")
-        end
-    }
+        end,
+    })
 end)
-client.connect_signal("unmanage", function (c)
+client.connect_signal("unmanage", function(c)
     if c.heartbeat_timer == nil then
         return
     end
@@ -263,7 +257,6 @@ client.connect_signal("unmanage", function (c)
     c.heartbeat_timer:stop()
     c.heartbeat_timer = nil
 end)
-
 
 -- Hack for making Spotify run on 'music' tag
 -- (it sets the WM_CLASS property after displaying the application window)
@@ -276,16 +269,20 @@ client.connect_signal("property::class", function(c)
     end
 end)
 
-
 -- Hack for making Firefox not floating
 -- (somehow it is always floating by default)
-client.connect_signal("property::class", function(c)
-    if (c.class == "Firefox" or string.find(c.class, "chrom")) and c.role == "browser" then
+local browser_fix = function(c)
+    if
+        (c.class == "Firefox" or string.find(c.class, "chrom") or string.find(c.class, "brave"))
+        and c.role == "browser"
+    then
         c.floating = false
         c.maximized = false -- better screen resize handling
+        awful.titlebar.hide(c)
     end
-end)
-
+end
+client.connect_signal("manage", browser_fix)
+client.connect_signal("property::class", browser_fix)
 
 client.connect_signal("property::class", function(c)
     if c.name ~= "Tresorit Core Log Browser" then
@@ -295,13 +292,13 @@ client.connect_signal("property::class", function(c)
     --f = awful.screen.focused()
     --awful.screen.focus(config.scr.sec)
 
-    local tagName = 'corelogs'
+    local tagName = "corelogs"
     local t = awful.tag.find_by_name(awful.screen.focused(), tagName)
     if not t then
         t = awful.tag.add(tagName, {
             screen = awful.screen.focused(),
             layout = awful.layout.suit.max,
-            volatile = true
+            volatile = true,
         })
     end
     t:view_only()
