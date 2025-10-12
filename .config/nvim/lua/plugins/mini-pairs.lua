@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.pairs",
+  "nvim-mini/mini.pairs",
   -- use "windwp/nvim-autopairs" instead
   enabled = false,
 }
