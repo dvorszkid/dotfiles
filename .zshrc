@@ -123,11 +123,11 @@ source "$HOME/.env"
 ##
 # FZF integration
 ##
-if [ -d "$HOME/.fzf" ]
+if [ -x "$(command -v fzf)" ]
 then
-  source_if_available "$HOME/.fzf/shell/completion.zsh"
-  source_if_available "$HOME/.fzf/shell/key-bindings.zsh"
-else
+  HOMEBREW_INSTALL_PATH=$(dirname $(dirname $(readlink -f $(which fzf))))
+  source_if_available "$HOMEBREW_INSTALL_PATH/shell/completion.zsh"
+  source_if_available "$HOMEBREW_INSTALL_PATH/shell/key-bindings.zsh"
   source_if_available "/usr/share/fzf/key-bindings.zsh"
   source_if_available "/usr/share/zsh/site-functions/_fzf"
 fi
