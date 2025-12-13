@@ -198,29 +198,6 @@ tyrannical.properties.size_hints_honor = {
     ["spotify"] = false,
 }
 
--- Make URxvt instances run on tag found by original WM_NAME
-awful.client.property.persist("original_name", "string")
-client.connect_signal("property::class", function(c)
-    if c.class ~= "URxvt" or c.floating then
-        return
-    end
-    if c.original_name == "" then
-        c.original_name = c.name
-    end
-    -- print('[callback] C:' .. c.class .. ', N:' .. c.name .. ', ON:' .. c.original_name)
-
-    local t = awful.tag.find_by_name(awful.screen.focused(), c.original_name)
-    if not t then
-        t = awful.tag.add(c.original_name, {
-            screen = awful.screen.focused(),
-            layout = awful.layout.suit.tile.left,
-            volatile = true,
-        })
-    end
-    t:view_only()
-    c:move_to_tag(t)
-end)
-
 -- Zoom
 --  * meeting should prevent screensaver
 --  * floating popups
