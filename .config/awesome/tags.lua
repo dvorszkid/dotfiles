@@ -74,17 +74,6 @@ tyrannical.tags = {
         },
     },
     {
-        name = "zoom",
-        init = false,
-        volatile = true,
-        layout = awful.layout.suit.max,
-        screen = config.scr.sec,
-        master_width_factor = 0.2,
-        class = {
-            "zoom",
-        },
-    },
-    {
         name = "discord",
         init = false,
         volatile = true,
@@ -197,44 +186,6 @@ tyrannical.properties.size_hints_honor = {
     ["urxvt"] = false,
     ["spotify"] = false,
 }
-
--- Zoom
---  * meeting should prevent screensaver
---  * floating popups
-client.connect_signal("manage", function(c)
-    if c.class ~= "zoom" then
-        return
-    end
-
-    -- floating popups
-    c.floating = c.name == "zoom"
-    awful.titlebar.hide(c)
-
-    -- WM_CLASS is "zoom" for both main window and meeting window
-    -- WM_NAME is "Zoom" in the beginning, then it gets updated to "Zoom Meeting"
-    if not (c.name == "Zoom" or c.name == "Zoom Meeting") then
-        return
-    end
-
-    --print('[Zoom] Starting timer for C:' .. c.class .. ', N:' .. c.name)
-    c.heartbeat_timer = gears.timer({
-        timeout = 60,
-        call_now = false,
-        autostart = true,
-        callback = function()
-            --print('[Zoom] Resetting screensaver')
-            awful.spawn("xset s reset")
-        end,
-    })
-end)
-client.connect_signal("unmanage", function(c)
-    if c.heartbeat_timer == nil then
-        return
-    end
-    --print('[Zoom] Stopping timer for C:' .. c.class .. ', N:' .. c.name)
-    c.heartbeat_timer:stop()
-    c.heartbeat_timer = nil
-end)
 
 -- Hack for making Spotify run on 'music' tag
 -- (it sets the WM_CLASS property after displaying the application window)
