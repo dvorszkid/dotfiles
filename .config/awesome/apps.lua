@@ -22,7 +22,6 @@ local apps_cmd = {
     jira = "jiraworklogger --tracking-time-only",
     jira_current = "jiraworklogger --tracking",
     jira_adjust = "jiraworklogger --adjust-tracking",
-    translate = "rofi-translate.sh",
     volume = "alsamixer",
     calendar = "xdg-open https://calendar.google.com",
 

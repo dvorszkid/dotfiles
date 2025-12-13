@@ -332,9 +332,6 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey, altkey }, "j", function()
         awful.spawn(apps.cmd.jira)
     end, { description = "jira work logger", group = "programs" }),
-    awful.key({ modkey, altkey }, "t", function()
-        awful.spawn(apps.cmd.translate)
-    end, { description = "translator", group = "programs" }),
 
     -- Lock and shutdown
     awful.key({ modkey, "Control" }, "l", function()
