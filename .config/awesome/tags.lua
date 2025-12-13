@@ -65,25 +65,6 @@ tyrannical.tags = {
         },
     },
     {
-        name = "vnc",
-        init = false,
-        volatile = true,
-        layout = awful.layout.suit.max,
-        class = {
-            "vncviewer",
-        },
-    },
-    {
-        name = "discord",
-        init = false,
-        volatile = true,
-        layout = awful.layout.suit.tile.left,
-        screen = config.scr.sec,
-        class = {
-            "discord",
-        },
-    },
-    {
         name = "doc",
         init = false,
         volatile = true,
