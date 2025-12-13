@@ -125,67 +125,6 @@ do
     })
 end
 
--- JIRA
-local jira_file = home_dir .. "/.local/share/jiraworklogger/current"
-jira_file_handle = io.open(jira_file)
-ui.has_jira = jira_file_handle ~= nil
-if ui.has_jira then
-    jira_file_handle:close()
-
-    --local tracking_cmd = "head " .. jira_file .. " -n 1"
-    local date_cmd = "stat -c %Y " .. jira_file
-    local running_cmd = 'pgrep -fc "jiraworklogger\\/worklog\\.py"'
-
-    local update_worklog = function(widget, stdout)
-        local now = os.time(os.date("*t"))
-        local time = (now - tonumber(stdout)) / 60
-        local worklog = math.floor((time % 60)) .. "m"
-        local c = beautiful.fg_normal
-        if time >= 60 then
-            time = math.floor(time / 60) -- hours
-            worklog = time .. "h " .. worklog
-
-            -- colorize based on tracking time
-            if time >= 6 then
-                c = beautiful.c_red
-            end
-        end
-
-        -- colorize based on running jobs
-        f = io.popen(running_cmd)
-        local jobcount = tonumber(f:read("*a"))
-        if jobcount > 0 then
-            c = beautiful.c_orange
-        end
-        f:close()
-
-        widget:set_markup(markup.fg(c, worklog))
-    end
-
-    jira = awful.widget.watch(date_cmd, 5, function(widget, stdout, stderr, exitreason, exitcode)
-        update_worklog(widget, stdout)
-    end)
-    jira_widget = wrap_widget(ui.jira, jira)
-    jira_tooltip = awful.tooltip({
-        objects = { jira_widget },
-        timer_function = function()
-            -- tracked issue
-            local f = io.open(jira_file)
-            local issueKey = f:read("*l")
-            local issueSummary = f:read("*l") or "N/A"
-            f:close()
-
-            -- tracked time
-            f = io.popen(date_cmd)
-            update_worklog(jira, f:read("*a"))
-            f:close()
-
-            return "[" .. issueKey .. "] " .. issueSummary
-        end,
-    })
-    ui.jira = jira_widget
-end
-
 -- Separators
 local spr_small = wibox.widget.imagebox(beautiful.spr_small)
 local spr_very_small = wibox.widget.imagebox(beautiful.spr_very_small)
@@ -269,8 +208,6 @@ function ui.at_screen_connect(s)
             spr_right,
             ui.donotdisturb_widget,
             bottom_bar,
-            ui.has_jira and jira_widget or nil,
-            ui.has_jira and bottom_bar or nil,
             netdown_widget,
             bottom_bar,
             netup_widget,

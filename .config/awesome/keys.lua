@@ -329,9 +329,6 @@ local globalKeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "Escape", function()
         awful.spawn("xkill")
     end, { description = "xkill", group = "programs" }),
-    awful.key({ modkey, altkey }, "j", function()
-        awful.spawn(apps.cmd.jira)
-    end, { description = "jira work logger", group = "programs" }),
 
     -- Lock and shutdown
     awful.key({ modkey, "Control" }, "l", function()
@@ -444,18 +441,6 @@ local setupUi = function(ui)
 
     -- DoNotDisturb
     ui.donotdisturb_widget:buttons(awful.util.table.join(awful.button({}, 1, apps.func.notifications_toggle)))
-
-    -- JIRA widget settings
-    if ui.has_jira then
-        ui.jira:buttons(awful.util.table.join(
-            awful.button({}, 1, function()
-                awful.spawn(apps.cmd.jira_current)
-            end),
-            awful.button({}, 3, function()
-                awful.spawn(apps.cmd.jira_adjust)
-            end)
-        ))
-    end
 
     -- Calendar
     ui.calendar_widget:connect_signal("button::press", function(_, _, _, button)

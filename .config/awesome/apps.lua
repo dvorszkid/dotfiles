@@ -19,9 +19,6 @@ local apps_cmd = {
     windowswitch = "rofi -show window",
     screenshot = "spectacle",
     xrandr_setup = "xrandr-setup.sh",
-    jira = "jiraworklogger --tracking-time-only",
-    jira_current = "jiraworklogger --tracking",
-    jira_adjust = "jiraworklogger --adjust-tracking",
     volume = "alsamixer",
     calendar = "xdg-open https://calendar.google.com",
 

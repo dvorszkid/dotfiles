@@ -78,7 +78,6 @@ theme.mem = theme.icon_dir .. "/mem.png"
 theme.volume = theme.icon_dir .. "/volume.png"
 theme.net_up = theme.icon_dir .. "/net_up.png"
 theme.net_down = theme.icon_dir .. "/net_down.png"
-theme.jira = theme.icon_dir .. "/jira.png"
 theme.do_not_disturb = theme.icon_dir .. "/do_not_disturb.png"
 
 theme.layout_tile = theme.icon_dir .. "/tile.png"
