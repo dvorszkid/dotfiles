@@ -8,6 +8,7 @@ local ui = require("ui")
 -- app collection for shortcuts and widgets
 local apps_cmd = {
     terminal = "kitty",
+    terminal_dropdown = 'kitten quick-access-terminal zsh -c "tmuxs dropdown"',
     tmux = "tmux",
     tmuxs = "tmuxs ",
 

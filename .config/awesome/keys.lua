@@ -154,16 +154,6 @@ local getTitlebarButtons = function(c)
     )
 end
 
--- Dropdown terminal
-local quake = lain.util.quake({
-    app = "kitty",
-    argname = "--class %s",
-    extra = apps.cmd.tmuxs .. "dropdown",
-    onlyone = true,
-    followtag = true,
-    height = 0.7,
-})
-
 local move_tag_to_screen = function(dir)
     local tag = awful.screen.focused().selected_tag
     local s = awful.screen.focused():get_next_in_direction(dir)
@@ -183,7 +173,7 @@ local globalKeys = awful.util.table.join(
     awful.key({ altkey, "Control" }, "q", awesome.quit, { description = "quit", group = "awesome" }),
     awful.key({ altkey, "Control" }, "h", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
     awful.key({}, "F12", function()
-        quake:toggle()
+        awful.spawn(apps.cmd.terminal_dropdown, { tag = awful.screen.focused().selected_tag, intrusive = true })
     end, { description = "dropdown terminal", group = "awesome" }),
     awful.key(
         { modkey, "Control" },

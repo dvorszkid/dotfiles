@@ -126,6 +126,7 @@ tyrannical.properties.intrusive = {
     "Paste Special",
     "Background color",
     "kcolorchooser",
+    "kitty-quick-access",
     "plasmoidviewer",
     "plasmaengineexplorer",
     "Xephyr",
@@ -283,6 +284,14 @@ local browser_fix = function(c)
 end
 client.connect_signal("manage", browser_fix)
 client.connect_signal("property::class", browser_fix)
+
+-- Hack for making kitty quick access kitten appear on current tag
+local kitty_quick_access_fix = function(c)
+    if c.class == "kitty-quick-access" then
+        c:move_to_tag(awful.screen.focused().selected_tag)
+    end
+end
+client.connect_signal("property::class", kitty_quick_access_fix)
 
 client.connect_signal("property::class", function(c)
     if c.name ~= "Tresorit Core Log Browser" then
