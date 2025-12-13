@@ -125,42 +125,6 @@ do
     })
 end
 
--- VPN
-do
-    local pidfile = home_dir .. "/.vpn/work/openconnect.pid"
-    ui.vpn_icon = wibox.widget.imagebox(beautiful.vpn)
-    ui.vpn_widget = wrap_imagebox(ui.vpn_icon)
-    ui.vpn_icon.opacity = 0.2
-
-    ui.vpn_tooltip = awful.tooltip({
-        objects = { ui.vpn_widget },
-        text = "Unknown VPN status",
-    })
-
-    ui.vpn_timer = gears.timer({
-        timeout = 5,
-        call_now = true,
-        autostart = true,
-        callback = function()
-            awful.spawn.easy_async({ "sh", "-c", 'ps -p `cat "' .. pidfile .. '"` -o comm=' }, function(out)
-                --print('[vpn timer] out:' .. out)
-                local was_connected = ui.vpn_icon.opacity == 1
-                local is_connected = string.match(out, "openconnect") ~= nil
-                if is_connected then
-                    ui.vpn_icon.opacity = 1
-                    ui.vpn_tooltip.text = "VPN is connected"
-                else
-                    ui.vpn_icon.opacity = 0.2
-                    ui.vpn_tooltip.text = "VPN is NOT connected"
-                end
-                if is_connected ~= was_connected then
-                    ui.vpn_icon:emit_signal("widget::redraw_needed")
-                end
-            end)
-        end,
-    })
-end
-
 -- JIRA
 local jira_file = home_dir .. "/.local/share/jiraworklogger/current"
 jira_file_handle = io.open(jira_file)
@@ -304,7 +268,6 @@ function ui.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             spr_right,
             ui.donotdisturb_widget,
-            ui.vpn_widget,
             bottom_bar,
             ui.has_jira and jira_widget or nil,
             ui.has_jira and bottom_bar or nil,
