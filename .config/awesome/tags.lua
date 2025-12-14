@@ -33,7 +33,9 @@ tyrannical.tags = {
         selected = true,
         screen = config.scr.pri,
         layout = awful.layout.suit.max,
-        class = {},
+        class = {
+            "kitty",
+        },
     },
     {
         name = "music",
@@ -96,6 +98,7 @@ tyrannical.properties.intrusive = {
     "Paste Special",
     "Background color",
     "kcolorchooser",
+    "kitty-centered",
     "kitty-quick-access",
     "plasmoidviewer",
     "plasmaengineexplorer",
@@ -118,6 +121,7 @@ tyrannical.properties.floating = {
     "Select Color$",
     "kruler",
     "kcolorchooser",
+    "kitty-centered",
     "New Form",
     "Insert Picture",
     "kcharselect",
@@ -127,6 +131,7 @@ tyrannical.properties.floating = {
 }
 
 tyrannical.properties.ontop = {
+    "kitty-centered",
     "ksnapshot",
     "spectacle",
     "kruler",
@@ -147,6 +152,7 @@ tyrannical.properties.below = {
 tyrannical.properties.placement = {}
 
 tyrannical.properties.skip_taskbar = {
+    "kitty-centered",
     "yakuake",
 }
 
@@ -201,3 +207,23 @@ local kitty_quick_access_fix = function(c)
     end
 end
 client.connect_signal("property::class", kitty_quick_access_fix)
+
+local center_window = function(c)
+    local screen = awful.screen.focused()
+    local w = screen.geometry.width - c.width
+    local h = screen.geometry.height - c.height
+    c.x = w / 2
+    c.y = h / 2
+end
+
+local kitty_centered = function(c)
+    if c.class == "kitty-centered" then
+        c.floating = true
+        c.border_width = 0
+        awful.titlebar.hide(c)
+        c:move_to_tag(awful.screen.focused().selected_tag)
+        center_window(c)
+    end
+end
+client.connect_signal("manage", kitty_centered)
+client.connect_signal("property::class", kitty_centered)

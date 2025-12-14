@@ -17,6 +17,7 @@ fi
 if [ -x "$(command -v kitten)" ]; then
     alias icat="kitten icat"
     alias ssh="kitten ssh"
+    alias kitty-centered="kitty --app-id=kitty-centered --config=\"$HOME/.config/kitty/kitty-centered.conf\""
 fi
 alias df="df -h"
 alias ..='cd ..'
