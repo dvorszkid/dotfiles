@@ -1,56 +1,62 @@
-##
-# Zgen and Prezto
-##
-source "${HOME}/.local/share/zgen/zgen.zsh"
+# zgenom plugin manager
+#   https://github.com/jandamm/zgenom
+source "${HOME}/.local/share/zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
 
 # Autoreload if .zshrc has changed
-ZGEN_RESET_ON_CHANGE=("$(realpath ~/.zshrc)")
+ZGEN_RESET_ON_CHANGE=("$(realpath ~/.zshrc)" "$(realpath ~/.alias)" "$(realpath ~/.env)")
 
-# Load zgen
-if ! zgen saved; then
+# Load zgenom
+if ! zgenom saved; then
 	# Set case-sensitivity for completion, history lookup, etc.
-	zgen prezto '*:*' case-sensitive 'no'
+	zgenom prezto '*:*' case-sensitive 'no'
 
 	# Color output (auto set to 'no' on dumb terminals)
-	zgen prezto '*:*' color 'yes'
+	zgenom prezto '*:*' color 'yes'
 
 	# Set the key mapping style to 'emacs' or 'vi'
-	zgen prezto editor key-bindings 'vi'
+	zgenom prezto editor key-bindings 'vi'
 
 	# Do not auto convert .... to ../..
-	zgen prezto editor dot-expansion 'no'
+	zgenom prezto editor dot-expansion 'no'
 
 	# Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'
-	zgen prezto git:status:ignore submodules 'all'
+	zgenom prezto git:status:ignore submodules 'all'
 
 	# Auto set the tab and window titles
-	zgen prezto terminal auto-title 'yes'
+	zgenom prezto terminal auto-title 'yes'
 
 	# Set the Prezto modules to load (the order matters)
 	ZGEN_PREZTO_LOAD_DEFAULT=0
-	zgen prezto
-	zgen prezto archive
-	zgen prezto environment
-	zgen prezto terminal
-	zgen prezto editor
-	zgen prezto history
-	zgen prezto directory
-	zgen prezto completion
-	zgen prezto prompt
-	zgen prezto git
-	zgen prezto syntax-highlighting
-	zgen prezto history-substring-search
+	zgenom prezto
+	zgenom prezto archive
+	zgenom prezto environment
+	zgenom prezto terminal
+	zgenom prezto editor
+	zgenom prezto history
+	zgenom prezto directory
+	zgenom prezto completion
+	zgenom prezto prompt
+	zgenom prezto git
+	zgenom prezto syntax-highlighting
+	zgenom prezto history-substring-search
 
 	# Other plugins
-	zgen load gentoo/gentoo-zsh-completions src
-	zgen load t413/zsh-background-notify
-	zgen load dvorszkid/zsh-prompt-cylon
+	zgenom load gentoo/gentoo-zsh-completions src
+	zgenom load t413/zsh-background-notify
+	zgenom load dvorszkid/zsh-prompt-cylon
 
 	# Custom theme
-	zgen prezto prompt theme 'cylon'
+	zgenom prezto prompt theme 'cylon'
 
 	# Save all to init script
-	zgen save
+	zgenom save
+
+	# Compile your zsh files
+	zgenom compile "$HOME/.zshrc"
 fi
 
 
