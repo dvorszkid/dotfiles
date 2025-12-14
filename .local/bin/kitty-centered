@@ -1,0 +1,8 @@
+#!/bin/sh
+
+kitty="kitty"
+if [ "$(uname)" = "Linux" ]; then
+  kitty="$kitty --app-id=kitty-centered"
+fi
+
+$kitty --config="$HOME/.config/kitty/kitty-centered.conf" --title="KittyCentered" "$@"
