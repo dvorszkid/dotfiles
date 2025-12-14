@@ -1,3 +1,8 @@
+# MacOS auto completion fix
+if command -v brew > /dev/null; then
+    fpath+=$(brew --prefix)/share/zsh/site-functions
+fi
+
 # zgenom plugin manager
 #   https://github.com/jandamm/zgenom
 source "${HOME}/.local/share/zgenom/zgenom.zsh"
@@ -48,6 +53,7 @@ if ! zgenom saved; then
 	zgenom load gentoo/gentoo-zsh-completions src
 	zgenom load t413/zsh-background-notify
 	zgenom load dvorszkid/zsh-prompt-cylon
+	zgenom load zsh-users/zsh-completions
 
 	# Custom theme
 	zgenom prezto prompt theme 'cylon'
