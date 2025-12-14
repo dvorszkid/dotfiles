@@ -1,6 +1,3 @@
-#source ~/.local/share/gdb/gdb-dashboard/.gdbinit
-#source ~/.local/share/gdb/colors.py
-
 set disassembly-flavor intel
 set disable-randomization off
 set demangle-style gnu-v3

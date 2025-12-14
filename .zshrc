@@ -160,9 +160,7 @@ add-zsh-hook preexec fix_display
 
 
 ##
-# Auto load '.envrc' project files
-# DirEnv install:
-#   `curl -sfL https://direnv.net/install.sh | bash`
+# DirEnv: auto load '.envrc' project files
 ##
 if command -v direnv &> /dev/null
 then
