@@ -1,6 +1,8 @@
 ##
 # Convenience
 ##
+
+# ls, l -> eza
 if [ -x "$(command -v eza)" ]; then
     alias ls="eza --time-style long-iso -g --group-directories-first"
     alias l="eza -hal --icons --time-style long-iso -g --group-directories-first"
@@ -11,16 +13,30 @@ else
     alias ls="ls --color=auto --group-directories-first -F -h --time-style=long-iso"
     alias l="ls --color=auto --group-directories-first -F -h -a -l --time-style=long-iso"
 fi
+
+# top -> btop / htop
+if [ -x "$(command -v btop)" ]; then
+    alias top="btop"
+elif [ -x "$(command -v htop)" ]; then
+    alias top="htop"
+fi
+
+# cat -> bat
 if [ -x "$(command -v bat)" ]; then
     alias cat="bat"
 fi
+
+# kitty kittens (image cat, ssh)
 if [ -x "$(command -v kitten)" ]; then
     alias icat="kitten icat"
     alias ssh="kitten ssh"
 fi
+
+# others..
 alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
+
 if [[ $SHELL == *"/zsh" ]]
 then
     alias -g A="| awk"
