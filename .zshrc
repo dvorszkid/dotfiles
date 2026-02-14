@@ -226,5 +226,5 @@ fi
 # Auto start default tmux session on ssh
 ##
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-    tmd
+    tmuxs dropdown
 fi
