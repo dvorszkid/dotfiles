@@ -6,12 +6,14 @@
 
   foreground:                  #bbbbbb;
   background:                  #242424;
-  border-color:                #0099cc;
-  separator-color:             #0077aa;
-  scrollbar-color:             #303030;
+  //border-color:                #0099cc;
+  border-color:                #999999;
+  //separator-color:             #0077aa;
+  separator-color:             #777777;
+  scrollbar-color:             #606060;
 
   text-color:                  @foreground;
-  selected-normal-foreground:  #dddddd;
+  selected-normal-foreground:  @foreground;
   normal-foreground:           @foreground;
   alternate-normal-background: @background;
   selected-urgent-foreground:  @selected-normal-foreground;
@@ -33,8 +35,8 @@
 }
 #window {
   background-color: @background;
-  border:           1;
-  padding:          5;
+  border:           0;
+  padding:          10;
 }
 #mainbox {
   border:  0;
@@ -51,15 +53,16 @@
 }
 #listview {
   fixed-height: 0;
-  border:       1px solid 0px 0px ;
+  border:       1px solid 0px 0px 0px;
   border-color: @separator-color;
-  spacing:      2px;
+  spacing:      0px;
   scrollbar:    true;
-  padding:      2px 0px 0px ;
+  padding:      5px;
 }
 #element {
-  border:  0;
-  padding: 1px;
+  border:  1px;
+  border-color: @normal-background;
+  padding: 2px;
 }
 #element.normal.normal {
   background-color: @normal-background;
@@ -74,16 +77,19 @@
   text-color:       @active-foreground;
 }
 #element.selected.normal {
-  background-color: @selected-normal-background;
+  //background-color: @selected-normal-background;
   text-color:       @selected-normal-foreground;
+  border-color:     @separator-color;
 }
 #element.selected.urgent {
-  background-color: @selected-urgent-background;
+  //background-color: @selected-urgent-background;
   text-color:       @selected-urgent-foreground;
+  border-color:     @separator-color;
 }
 #element.selected.active {
-  background-color: @selected-active-background;
+  //background-color: @selected-active-background;
   text-color:       @selected-active-foreground;
+  border-color:     @separator-color;
 }
 #element.alternate.normal {
   background-color: @alternate-normal-background;
