@@ -267,11 +267,10 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "move-hyprland-run",
+	name = "disable-float",
 	match = {
-		class = "hyprland-run",
+		class = "(hyprland-run|qalculate-gtk)",
 	},
-	move = "20 monitor_h-120",
 	float = true,
 })
 
