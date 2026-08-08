@@ -6,16 +6,20 @@
 --###############
 
 -- See https://wiki.hypr.land/Configuring/Monitors/
+local monitor_left_desc = "Dell Inc. DELL U2724DE 1DMQD34"
+local monitor_right_desc = "Dell Inc. DELL U2724DE 7583G34"
+local monitor_left = "desc:" .. monitor_left_desc
+local monitor_right = "desc:" .. monitor_right_desc
 
 hl.monitor({
-	output = "desc:Dell Inc. DELL U2724DE 1DMQD34",
+	output = monitor_left,
 	mode = "2560x1440",
 	position = "0x0",
 	scale = "1",
 })
 
 hl.monitor({
-	output = "desc:Dell Inc. DELL U2724DE 7583G34",
+	output = monitor_right,
 	mode = "2560x1440",
 	position = "2560x0",
 	scale = "1",
@@ -174,44 +178,86 @@ hl.gesture({
 })
 
 --###################
+--## WORKSPACES #####
+--###################
+
+-- Bind Workspaces 1-10 to Left Monitor
+for i = 1, 10 do
+	hl.workspace_rule({ workspace = tostring(i), monitor = monitor_left, persistent = true, default = (i == 1) })
+end
+
+-- Bind Workspaces 11-20 to Right Monitor
+for i = 1, 10 do
+	hl.workspace_rule({ workspace = tostring(i + 10), monitor = monitor_right, persistent = true, default = (i == 1) })
+end
+
+--###################
 --## KEY BINDINGS ###
 --###################
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-
-hl.bind("F12", hl.dsp.exec_cmd("kitten quick-access-terminal tmuxs dropdown"))
-hl.bind("SUPER_L + CONTROL_L + Q", hl.dsp.exec_cmd("wlogout"))
-hl.bind("SUPER_L + CONTROL_L + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + Escape", hl.dsp.window.close())
+-- MAIN
+-- {
+hl.bind("SUPER + CONTROL + Q", hl.dsp.exec_cmd("wlogout"))
+hl.bind("SUPER + CONTROL + L", function()
+	hl.dispatch(hl.dsp.exec_cmd("hyprlock"))
+	hl.dispatch(hl.dsp.dpms("off"))
+end)
 hl.bind("Print", hl.dsp.exec_cmd("flameshot gui"))
-hl.bind(mainMod .. " + Space", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("rofi -show run"))
+hl.bind("SUPER + R", hl.dsp.exec_cmd("rofi -show run"))
 hl.bind(
-	mainMod .. " + V",
+	"SUPER + V",
 	hl.dsp.exec_cmd("rofi -modi clipboard:~/.config/rofi/modules/cliphist-img -show clipboard -show-icons")
 )
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+-- }
 
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
+-- WINDOWS
+-- {
+hl.bind("SUPER + Escape", hl.dsp.window.close())
+hl.bind("SUPER + P", hl.dsp.window.pseudo())
+hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))
+hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind("SUPER + Space", hl.dsp.window.float({ action = "toggle" }))
 
-hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("rofi -show window"))
+hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
+hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
+hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
+hl.bind("SUPER + j", hl.dsp.focus({ direction = "down" }))
+
+hl.bind("SUPER + Tab", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind("ALT_L + Tab", hl.dsp.window.cycle_next({ next = true }))
 hl.bind("ALT_L + Tab", hl.dsp.window.bring_to_top())
 
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
+-- }
 
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+-- WORKSPACES
+-- {
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind("SUPER + bracketright", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind("SUPER + bracketleft", hl.dsp.focus({ workspace = "e-1" }))
 
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag())
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
+for i = 1, 10 do
+	local key = tostring(i)
+	if key == "10" then
+		key = "0"
+	end
 
+	hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = "m~" .. i }))
+	hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = "m~" .. i, follow = true }))
+end
+
+hl.bind("SUPER + backslash", hl.dsp.focus({ workspace = "previous_per_monitor" }))
+hl.bind("SUPER + SHIFT + H", hl.dsp.window.move({ monitor = "l", follow = true }))
+hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ monitor = "r", follow = true }))
+
+--hl.bind("F12", hl.dsp.exec_cmd("kitten quick-access-terminal tmuxs dropdown"))
+hl.bind("F12", hl.dsp.workspace.toggle_special("dropdown"))
+-- }
+
+-- SPECIAL
+-- {
 hl.bind(
 	"XF86AudioRaiseVolume",
 	hl.dsp.exec_cmd("swayosd-client --output-volume raise"),
@@ -232,12 +278,14 @@ hl.bind(
 	hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),
 	{ locked = true, repeating = true }
 )
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("hyprctl hyprsunset gamma -10"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("hyprctl hyprsunset gamma +10"), { locked = true, repeating = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client --playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("swayosd-client --playerctl prev"), { locked = true })
+
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("hyprctl hyprsunset gamma -10"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("hyprctl hyprsunset gamma +10"), { locked = true, repeating = true })
+-- }
 
 --###################
 --## WINDOW RULES ###
@@ -271,6 +319,17 @@ hl.window_rule({
 	match = {
 		class = "(hyprland-run|qalculate-gtk)",
 	},
+	float = true,
+})
+
+hl.window_rule({
+	name = "kitty-dropdown",
+	match = {
+		class = "kitty-dropdown",
+	},
+	workspace = "special:dropdown silent",
+	move = { "3", "30" },
+	size = { "monitor_w - 6", "monitor_h * 0.6" },
 	float = true,
 })
 
@@ -379,25 +438,7 @@ hl.config({
 --## PLUGINS ###
 --##############
 
-package.path = package.path .. ";./?.lua;./?/init.lua"
-local smw = require("plugins.split-monitor-workspaces")
-
-smw.setup({
-	workspace_count = 10,
-})
-
-for i = 1, smw.get_amount_of_workspaces() do
-	local n = tostring(i)
-	if n == "10" then
-		n = "0"
-	end -- Optional if you configured 10 workspaces: bind workspace 10 to SUPER + 0
-
-	-- Switch to the Nth workspace on the currently focused monitor.
-	hl.bind(mainMod .. " +" .. n, smw.workspace(n))
-
-	-- Move the active window to the Nth workspace on the currently focused monitor silently (no focus change).
-	hl.bind(mainMod .. " + SHIFT +" .. n, smw.move_to_workspace_silent(n))
-end
+--package.path = package.path .. ";./?.lua;./?/init.lua"
 
 --################
 --## AUTOSTART ###
@@ -414,6 +455,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("swayosd-server")
 	hl.exec_cmd("udiskie")
 	hl.exec_cmd("flameshot")
+	hl.exec_cmd(
+		'kitty --class=kitty-dropdown --config="$HOME/.config/kitty/kitty-dropdown.conf" zsh -c "tmuxs dropdown"'
+	)
 	hl.exec_cmd("tresorit --hidden")
 	hl.exec_cmd("wl-paste --type text --watch cliphist store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist store")

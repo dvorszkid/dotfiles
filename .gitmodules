@@ -17,6 +17,3 @@
 [submodule ".local/share/zgenom"]
 	path = .local/share/zgenom
 	url = git@github.com:jandamm/zgenom.git
-[submodule ".config/hypr/plugins/split-monitor-workspaces"]
-	path = .config/hypr/plugins/split-monitor-workspaces
-	url = https://github.com/zjeffer/split-monitor-workspaces
