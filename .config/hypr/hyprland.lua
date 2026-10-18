@@ -40,6 +40,8 @@ hl.monitor({
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Adwaita")
+hl.env("HYPRCURSOR_THEME", "Adwaita")
 
 --##################
 --## PERMISSIONS ###
@@ -211,21 +213,20 @@ hl.bind(
 -- {
 hl.bind("SUPER + Escape", hl.dsp.window.close())
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
-hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))
 hl.bind("SUPER + M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind("SUPER + Space", hl.dsp.window.float({ action = "toggle" }))
 
 hl.bind("SUPER + H", hl.dsp.focus({ direction = "left" }))
 hl.bind("SUPER + L", hl.dsp.focus({ direction = "right" }))
 hl.bind("SUPER + K", hl.dsp.focus({ direction = "up" }))
-hl.bind("SUPER + j", hl.dsp.focus({ direction = "down" }))
+hl.bind("SUPER + J", hl.dsp.focus({ direction = "down" }))
 
 hl.bind("SUPER + Tab", hl.dsp.exec_cmd("rofi -show window"))
 hl.bind("ALT_L + Tab", hl.dsp.window.cycle_next({ next = true }))
 hl.bind("ALT_L + Tab", hl.dsp.window.bring_to_top())
 
-hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
-hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- }
 
 -- WORKSPACES
@@ -268,12 +269,12 @@ hl.bind(
 hl.bind(
 	"XF86AudioMute",
 	hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),
-	{ locked = true, repeating = true }
+	{ locked = true }
 )
 hl.bind(
 	"XF86AudioMicMute",
 	hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),
-	{ locked = true, repeating = true }
+	{ locked = true }
 )
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client --playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
@@ -312,7 +313,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "disable-float",
+	name = "float-hyprland-run-qalculate",
 	match = {
 		class = "(hyprland-run|qalculate-gtk)",
 	},
@@ -370,33 +371,7 @@ hl.config({
 	-- https://wiki.hypr.land/Configuring/Variables/#animations
 	animations = {
 		enabled = true,
-		-- Default curves, see https://wiki.hypr.land/Configuring/Animations/#curves
-		--        NAME,           X0,   Y0,   X1,   Y1
-		-- Default animations, see https://wiki.hypr.land/Configuring/Animations/
-		--           NAME,          ONOFF, SPEED, CURVE,        [STYLE]
 	},
-	-- Ref https://wiki.hypr.land/Configuring/Workspace-Rules/
-	-- "Smart gaps" / "No gaps when only"
-	-- uncomment all if you wish to use that.
-	-- workspace = w[tv1], gapsout:0, gapsin:0
-	-- workspace = f[1], gapsout:0, gapsin:0
-	-- windowrule {
-	--     name = no-gaps-wtv1
-	--     match:float = false
-	--     match:workspace = w[tv1]
-	--
-	--     border_size = 0
-	--     rounding = 0
-	-- }
-	--
-	-- windowrule {
-	--     name = no-gaps-f1
-	--     match:float = false
-	--     match:workspace = f[1]
-	--
-	--     border_size = 0
-	--     rounding = 0
-	-- }
 	-- See https://wiki.hypr.land/Configuring/Dwindle-Layout/ for more
 	dwindle = {
 		preserve_split = true, -- You probably want this
