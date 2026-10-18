@@ -37,7 +37,7 @@ alias df="df -h"
 alias ..='cd ..'
 alias ...='cd ../..'
 
-if [[ $SHELL == *"/zsh" ]]
+if [[ -n $ZSH_VERSION ]]
 then
     alias -g A="| awk"
     alias -g G="| grep"
@@ -69,7 +69,16 @@ fi
 # Shortcuts for common Git commands
 ##
 alias lg='lazygit'
-alias cg='cd $(for dir in $(ls -d $HOME/git/* $HOME/projects/*); do echo -e "$dir \e[1;31m($(git -C $dir branch --show-current 2>/dev/null))\e[0m"; done | fzf --ansi | cut -d " " -f 1)'
+# Pick a project directory (with its current branch) via fzf and cd into it
+function cg() {
+    local d dir
+    dir=$(for d in "$HOME"/git/*/ "$HOME"/projects/*/ "$HOME"/dev/*/; do
+        [ -d "$d" ] || continue
+        d=${d%/}
+        printf '%s\t\033[1;31m(%s)\033[0m\n' "$d" "$(git -C "$d" branch --show-current 2>/dev/null)"
+    done | fzf --ansi --delimiter=$'\t' | cut -f 1)
+    [ -n "$dir" ] && cd -- "$dir"
+}
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add --all'
@@ -90,11 +99,13 @@ alias gco='git checkout'
 alias gg='git graph'
 alias gga='git graph --all'
 alias ggc='git graph --first-parent'
-alias gmaster='git fetch && git branch -f master origin/master && git checkout master'
-alias gmain='git fetch && git branch -f main origin/main && git checkout main'
-alias gdevel='git fetch && git branch -f devel origin/devel && git checkout devel'
-alias gmm='git branch -f master origin/master; git merge origin/master'
-alias gmd='git branch -f devel origin/devel; git merge origin/devel'
+# Fast-forward only: never throws away local commits (unlike `git branch -f`)
+alias gmaster='git fetch && git checkout master && git merge --ff-only origin/master'
+alias gmain='git fetch && git checkout main && git merge --ff-only origin/main'
+alias gdevel='git fetch && git checkout devel && git merge --ff-only origin/devel'
+# Also best-effort fast-forward of the local branch (silently skipped if it is checked out or has diverged)
+alias gmm='git fetch && { git fetch origin master:master 2>/dev/null; git merge origin/master; }'
+alias gmd='git fetch && { git fetch origin devel:devel 2>/dev/null; git merge origin/devel; }'
 
 function gcot() {
 	git tag | grep "$@" | xargs git checkout
@@ -113,7 +124,7 @@ fi
 # Create a new directory and enter it
 ##
 function mkcd() {
-	mkdir -p "$@" && cd "$@"
+	mkdir -p -- "$1" && cd -- "$1"
 }
 
 

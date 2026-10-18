@@ -12,7 +12,7 @@ source "${HOME}/.local/share/zgenom/zgenom.zsh"
 zgenom autoupdate --no-background
 
 # Autoreload if .zshrc has changed
-ZGEN_RESET_ON_CHANGE=("$(realpath ~/.zshrc)" "$(realpath ~/.alias)" "$(realpath ~/.env)")
+ZGEN_RESET_ON_CHANGE=("${${:-$HOME/.zshrc}:A}" "${${:-$HOME/.alias}:A}" "${${:-$HOME/.env}:A}")
 
 # Load zgenom
 if ! zgenom saved; then
@@ -74,13 +74,10 @@ setopt print_exit_value
 unsetopt rm_star_silent
 setopt inc_append_history       # Appends every command to the history file once it is executed
 unsetopt share_history          # Does NOT reload the history whenever you use it
-setopt glob_dots                # include dotfiles in globbing
+#setopt glob_dots                # include dotfiles in globbing
 unsetopt list_beep              # no bell on ambiguous completion
 unsetopt hist_beep              # no bell on error in history
 unsetopt beep                   # no bell on error
-if [ ${TMUX} ]; then
-	unset zle_bracketed_paste   # tmux does not support bracketed paste
-fi
 
 
 ##
@@ -135,9 +132,9 @@ source "$HOME/.env"
 ##
 # FZF integration
 ##
-if [ -x "$(command -v fzf)" ]
+if (( $+commands[fzf] ))
 then
-  HOMEBREW_INSTALL_PATH=$(dirname $(dirname $(readlink -f $(which fzf))))
+  HOMEBREW_INSTALL_PATH=${commands[fzf]:A:h:h} # resolves symlinks without subprocesses
   source_if_available "$HOMEBREW_INSTALL_PATH/shell/completion.zsh"
   source_if_available "$HOMEBREW_INSTALL_PATH/shell/key-bindings.zsh"
   source_if_available "/usr/share/fzf/key-bindings.zsh"
@@ -162,11 +159,18 @@ source_if_available "$HOME/.zshrc.local"
 ##
 # Pre execution hook
 ##
+# tmux keeps the environment of the session it was started in. After a Hyprland restart the
+# panes would keep stale display/Hyprland variables (hyprctl would fail), so refresh them
+# from tmux's session environment (updated on attach via `update-environment`).
 function fix_display {
-    # Update DISPLAY
-    if [ -n "$TMUX" ]; then
-        export $(tmux show-environment | grep "^DISPLAY") > /dev/null
-    fi
+    [[ -n $TMUX ]] || return
+    local line
+    for line in ${(f)"$(tmux show-environment 2>/dev/null)"}; do
+        case $line in
+            DISPLAY=*|WAYLAND_DISPLAY=*|HYPRLAND_INSTANCE_SIGNATURE=*|XDG_CURRENT_DESKTOP=*) export "$line" ;;
+            -DISPLAY|-WAYLAND_DISPLAY|-HYPRLAND_INSTANCE_SIGNATURE) unset "${line#-}" ;;
+        esac
+    done
 }
 add-zsh-hook preexec fix_display
 

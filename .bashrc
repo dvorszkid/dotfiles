@@ -8,12 +8,6 @@ fi
 
 
 ##
-# Imported scripts depend on this
-##
-export SHELL="/bin/bash"
-
-
-##
 # Bash completion
 ##
 [[ -f /etc/profile.d/bash-completion.sh ]] && source /etc/profile.d/bash-completion.sh
@@ -22,6 +16,9 @@ export SHELL="/bin/bash"
 ##
 # History control
 ##
+shopt -s histappend                       # Append to the history file instead of overwriting it
+export HISTSIZE=10000
+export HISTFILESIZE=20000
 export HISTCONTROL=ignorespace:erasedups  # Do not show duplicate lines
 export HISTTIMEFORMAT="[%F %T] "          # Give history timestamps
 
