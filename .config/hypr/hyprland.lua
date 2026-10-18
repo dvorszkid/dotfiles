@@ -198,10 +198,7 @@ end
 -- MAIN
 -- {
 hl.bind("SUPER + CONTROL + Q", hl.dsp.exec_cmd("wlogout"))
-hl.bind("SUPER + CONTROL + L", function()
-	hl.dispatch(hl.dsp.exec_cmd("hyprlock"))
-	hl.dispatch(hl.dsp.dpms("off"))
-end)
+hl.bind("SUPER + CONTROL + L", hl.dsp.exec_cmd("loginctl lock-session")) -- hypridle's lock_cmd starts hyprlock (guarded)
 hl.bind("Print", hl.dsp.exec_cmd("flameshot gui"))
 hl.bind("SUPER + R", hl.dsp.exec_cmd("rofi -show run"))
 hl.bind(
@@ -412,6 +409,8 @@ hl.config({
 	misc = {
 		force_default_wallpaper = 0, -- Set to 0 or 1 to disable the anime mascot wallpapers
 		disable_hyprland_logo = true, -- If true disables the random hyprland logo / anime girl background. :(
+		key_press_enables_dpms = true, -- wake the screens on any key press while DPMS is off
+		mouse_move_enables_dpms = true, -- wake the screens on mouse movement while DPMS is off
 	},
 	--############
 	--## INPUT ###
